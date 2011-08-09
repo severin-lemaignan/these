@@ -1,9 +1,9 @@
 
 PDF=these.pdf
 
-all: $(PDF)
+all: these
 
-$(PDF):
+these: these.tex
 
 	TEXFONTS=:./fonts pdflatex $(PDF:.pdf=.tex)
 
