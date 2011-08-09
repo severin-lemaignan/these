@@ -26,6 +26,8 @@
 \renewcommand{\rmdefault}{Ubuntu}
 
 \usepackage{listings}
+\usepackage{alltt}
+\usepackage{pseudocode}
 \usepackage{framed}
 \usepackage{wrapfig}
 \usepackage{fancyhdr} %headers and footers
@@ -112,6 +114,20 @@
 \end{framed}
 }
 
+%Name of the speaker in a chat
+\newcommand{\chatN}[1]{{\footnotesize \textsf{#1}}}
+\newcommand{\concept}[1]{{\footnotesize \texttt{#1}}}
+
+\newcommand{\stmt}[1]{{\footnotesize $\langle$\stmttt#1\relax$\rangle$}}
+\newcommand{\rawstmt}[1]{{\footnotesize \stmttt#1\relax}}
+\def\stmttt#1 #2 #3\relax{{\tt#1} {\bf{\tt #2}} {\tt #3}}
+
+\newcommand{\setstmt}[1]{{\footnotesize [\setstmttt#1\relax]}}
+\def\setstmttt#1,#2\relax{\rawstmt{#1}, \rawstmt{#2}}
+
+\newcommand{\ie}{{\textit{i.e.~}}}
+\newcommand{\cf}{{\textit{cf~}}}
+\newcommand{\eg}{{\textit{e.g.~}}}
 
 %Met par defaut la taille en scriptsize et la font en sans serif pour les notes dans la marge
 \let\myMargin\marginpar
@@ -195,4 +211,5 @@ Je remercie Claire et Maud.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \end{document}
+
 
