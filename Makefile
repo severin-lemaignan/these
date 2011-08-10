@@ -1,9 +1,9 @@
 
 TARGET=these.tex
 
-SVG=images/*/*.svg
+SVG=$(wildcard images/*/*.svg)
 
-all: these
+all: these 
 
 %.pdf: %.svg
 	inkscape --export-pdf $(@) $(<)
