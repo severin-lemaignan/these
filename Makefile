@@ -1,14 +1,19 @@
 
-PDF=these.pdf
+TARGET=these.tex
 
-all: these
+SVG=images/*/*.svg
+
+all: pdf these
+
+pdf: $(SVG)
+	inkscape --export-pdf $(<:.svg=.pdf) $(<)
 
 these: these.tex
 
-	TEXFONTS=:./fonts TEXINPUTS=:./sty pdflatex $(PDF:.pdf=.tex)
+	TEXINPUTS=:./fonts:./sty pdflatex $(TARGET)
 
 clean:
-	rm -f *.aux *.log *.snm *.out *.toc *.nav *intermediate *~ *.glo *.ist
+	rm -f *.aux *.log *.snm *.out *.toc *.nav *intermediate *~ *.glo *.ist $(SVG:.svg=.pdf)
 
 distclean: clean
-	rm -f $(PDF)
+	rm -f $(TARGET:.tex=.pdf)
