@@ -3,12 +3,12 @@ TARGET=these.tex
 
 SVG=images/*/*.svg
 
-all: pdf these
+all: these
 
-pdf: $(SVG)
-	inkscape --export-pdf $(<:.svg=.pdf) $(<)
+%.pdf: %.svg
+	inkscape --export-pdf $(@) $(<)
 
-these: these.tex
+these: these.tex $(SVG:.svg=.pdf)
 
 	TEXINPUTS=:./fonts:./sty pdflatex $(TARGET)
 
