@@ -10,7 +10,8 @@ all: these
 
 these: these.tex $(SVG:.svg=.pdf)
 
-	TEXINPUTS=:./fonts:./sty pdflatex $(TARGET)
+	TEXFONTS=:./fonts TEXINPUTS=:./fonts:./sty pdflatex $(TARGET)
+	#TEXFONTS=:./fonts TEXINPUTS=:./sty pdflatex $(TARGET)
 
 clean:
 	rm -f *.aux *.log *.snm *.out *.toc *.nav *intermediate *~ *.glo *.ist $(SVG:.svg=.pdf)
