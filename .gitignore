@@ -6,3 +6,6 @@
 *.toc
 *.log
 *.out
+*.bbl
+*.blg
+*.lox
