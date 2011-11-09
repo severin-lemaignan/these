@@ -1,21 +1,16 @@
-\chapter{oro-server, a symbolic knowledge representation system for robotics}
+\chapter{oro-server, design \& use of a symbolic knowledge representation system for robotics}
 \label{chapter|oroserver}
 
-\section{Designing the \textsc{OpenRobots} common-sense ontology}
-\label{sect|commonsense-design}
+\fxnote{This chapter focuses on the \textbf{functional description} of
+oro-server. It does not need to match the actual implementation.}
 
-\section{ Architecture and core services}
-\label{sect|oro-core}
+\section{Functional overview}
+\label{sect|functional-overview}
 
-\subsection{ A server-based implementation}
-\label{sect|oro-serverbased}
+\fxnote{Here, we must present a general block diagram with all main functions.}
 
-\subsection{ Open World reasoning with Pellet}
-\label{sect|oro-serverbased}
-
-
-\section{ Implementation of higher-level cognitive functions}
-\label{sect|high-level-cognition}
+\subsection{ Open World reasoning}
+\label{sect|open-world-reasoning}
 
 \subsection{Classification and discrimination}
 \label{subssect|discrimination}
@@ -23,5 +18,47 @@
 \subsection{Memory}
 \label{subssect|memory}
 
-\subsection{Multiple models, persepective-taking and false beliefs}
+\section{Presupposition accomodation}
+\label{sect|presupposition-accomodation}
+
+\fxerror{TDB: this should show that the system can be enriched with facts that
+are not perceived, but teached to the robot. How to demonstrate that?}
+
+
+\section{Multiple models, persepective-taking and false beliefs}
 \label{subssect|alterite}
+
+\subsection{Perspective taking}
+\label{subssect|perspective-taking}
+
+\subsection{Management of False beliefs and Theory Of Mind}
+\label{sect|theory-of-mind}
+
+\fxnote{Sally and Ann experiment}
+
+\section{A knowledge-centric architecture}
+\label{sect|knowledge-centric-architecture}
+
+\subsection{Semantic events}
+\label{sect|semantic-events}
+
+\subsection{Knowledge producers}
+\label{sect|producers}
+
+\subsubsection{Generalities}
+\label{subssect|producers-generalities}
+
+\subsubsection{SPARK}
+\label{subssect|spark}
+
+\subsection{Knowledge consumers}
+\label{sect|consumers}
+
+\subsubsection{Generalities}
+\label{subssect|consumers-generalities}
+
+\subsubsection{HATP}
+\label{subssect|hatp}
+
+\subsubsection{Executive layer (CRAM, SHARY...)}
+\label{subssect|supervision}
