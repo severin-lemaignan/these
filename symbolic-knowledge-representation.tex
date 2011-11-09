@@ -9,6 +9,18 @@
 \subsection{Specific requirements of robotics}
 \label{subssect|robotics-specifics}
 
+\fxnote{Taken from: \url{http://homepages.laas.fr/slemaign/wiki/doku.php?id=krs_survey}}
+\begin{itemize}
+	\item Run on service robot (robots that interact with objects in a semantic-rich environment),
+	\item Ground their knowledge in the physical world (physically embedded),
+	\begin{itemize}
+		\item Able to \emph{resolve} entities
+		\item Able to automatically create new object instances
+	\end{itemize}
+	\item Are able to merge different knowledge modalities,
+	\item Are endowed with on-line, dynamic reasoning (not just a static dictionary)
+\end{itemize}
+
 \subsection{Benefits of a symbolic knowledge representation system}
 \label{subssect|krs-benefits}
 
@@ -22,3 +34,50 @@ models is required.}
 \section{Evaluation of a symbolic representation }
 \label{sect|krs-evaluation}
 
+\fxnote{Taken from: \url{http://homepages.laas.fr/slemaign/wiki/doku.php?id=krs_survey}}
+
+\subsection{Intrinsic features}
+\label{sect|eval-intrinsic-features}
+
+\begin{itemize}
+	\item Expressiveness
+	\begin{itemize}
+		\item Which logic formalism (DL, 2nd order…)
+		\item OWA/CWA
+		\item Representation of uncertainty
+		\item (non) monotonic reasoning
+		\item General knowledge + exception to this knowledge (blue sky/white sky)
+		\item Microtheories
+		\item Lazy evaluation
+		\item Presupposition accomodation (ability to represent facts that are only verbally hinted, but not grounded into perception)
+	\end{itemize}
+    \item Explicit modeling of context of knowledge / domain of validity
+    \item Representation of change (“The pancake dough disappears into a pancake”)
+    \item Support for learning
+    \item Support for introspection?
+    \item Support for prediction/projection?
+\end{itemize}
+
+\subsection{Integration in robotic architectures}
+\label{sect|eval-integration-robotic-archi}
+
+\begin{itemize}
+	\item Knowledge acquisition possible…
+	\begin{itemize}
+		\item …through interaction? How?
+		\item …through the Web? How?
+		\item …through learning? How?
+		\item …through perception? How?
+	\end{itemize}
+
+	\item Integration with executive layers
+	\item Events
+	\item Relation to task planning
+	\item Scalability and responsiveness
+\end{itemize}
+
+\subsection{Knowledge model}
+\label{sect|eval-knowledge-model}
+
+Which underlying knowledge (common-sense, upper knowledge…)
+top-down approach?
