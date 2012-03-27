@@ -11,88 +11,378 @@ First, we want to represent knowledge and not only information.  Both knowledge
 and information are contextualized. Knowledge also has a \emph{cultural}
 context that enable interpretation. 
 
-
-\section{Which end for knowledge representation?}
-\label{sect|krs-purpose}
-
-\subsection{Limits of traditional representation systems for robotics}
-\label{subssect|limits}
-
-\subsection{Specific requirements of robotics}
-\label{subssect|robotics-specifics}
-
-\fxnote{Taken from: \url{http://homepages.laas.fr/slemaign/wiki/doku.php?id=krs_survey}}
-\begin{itemize}
-	\item Run on service robot (robots that interact with objects in a semantic-rich environment),
-	\item Ground their knowledge in the physical world (physically embedded),
-	\begin{itemize}
-		\item Able to \emph{resolve} entities
-		\item Able to automatically create new object instances
-	\end{itemize}
-	\item Are able to merge different knowledge modalities,
-	\item Are endowed with on-line, dynamic reasoning (not just a static dictionary)
-\end{itemize}
-
-\subsection{Benefits of a symbolic knowledge representation system}
-\label{subssect|krs-benefits}
-
-\fxnote{Note that the origins of AI where in purely symbolic models, that were
+Note that the origins of AI where in purely symbolic models, that were
 not usable either. Rich interleaving between geometric reasoning and symbolic
-models is required.} 
+models is required. 
 
-\section{Formalisms for symbolic representation}
-\label{sect|formalisms}
 
-\section{Evaluation of a symbolic representation }
-\label{sect|krs-evaluation}
+\section{A typology of features of KRS for robotics}
+\label{sect|krs-features}
 
-\fxnote{Taken from: \url{http://homepages.laas.fr/slemaign/wiki/doku.php?id=krs_survey}}
 
-\subsection{Intrinsic features}
-\label{sect|eval-intrinsic-features}
+This section proposes a more formal typology of desirable features for a such a
+system. For each feature, we provide a short definition along with links to
+relevant literature.
+
+\fxnote{Should we also mention the general dynamics of the knowledge
+representation system? ie, the system from the point of view of an on-going
+cognitive process. See \cite{Henderson2011}}
+
+\subsection{Expressiveness: What Can be Represented?}
+\label{sect|expressiveness}
+
+\subsubsection{Introduction: main logic formalisms}
+
+The main role of a knowledge representation system is to provide an adequate
+representation system to store facts and concepts that can be informally
+described in natural language.
+
+Formal logic aims at providing such a representation system with the added
+value of providing a tractable support for inference and reasoning.
+
+Most (but not all) of the systems we survey rely on a particular logic
+formalism. The choice of the formalism has a strong impact, on one side, on the
+range of ideas that can be expressed conveniently (\emph{practical
+expressiveness}) or at all (\emph{theoretical expressiveness}), on the other
+side, on the ability to solve the inference problem (called
+\emph{decidability}: is a given logical sentence true in my model?) in a
+tractable manner.
+
+A large number of logic formalism do exist, we shall summarize below the most
+relevant for systems actually deployed in current robotic architectures.
+
+\emph{Predicate logic} is the family of logic formalisms the most commonly
+found in knowledge representation. It distinguishes itself from the simpler
+\emph{propositional logic} by the use of quantification to increase generality.
+\emph{First-order logic} (FOL) is the subpart of \emph{predicate logic} where the
+objects of \emph{predicates} (or \emph{formulae}) are simple \emph{terms},
+while in \emph{higher-order logics}, predicates can be themselves objects of
+other predicates.
+
+The family of \emph{description logics}~\cite{Baader2008} also play an
+important role. It is a subset of the first-order logic, with some extensions
+in second-order logic. Description logics are notable because most of them are
+known to be decidable. In description logic, axioms are build from
+\emph{concepts}, \emph{roles} (that are unary or binary predicates) and
+\emph{individuals}. The W3C OWL-DL standard is a widely-used language to describe
+domain with the description logic.
+
+\emph{Modal logics}, that allow for statement qualification
+like \emph{possibility} or \emph{necessity}, have been shown to be closely
+related to description logics.
+
+\fxfatal{On modal logics, see the remark of McCarthy, in \cite{McCarthy2007}, section 3}
+
+One last class of logics that is of particular relevance for robotic
+applications is the \emph{probabilistic logics} or \emph{Bayesian logics}.
+These logics provide a formal framework to reason on propositions whose truth
+or falsity is uncertain. We elaborate below on the representation of uncertainty.
+
+
+\paragraph{Some examples}
+
+\emph{The robot knows that a blue bottle is laying on the table.}
+
+\emph{The robot knows that the human knows about the position of the bottle,
+but the robot does not know what the human actually know about it.}
+
+\subsubsection{Open World and Close World Assumptions}
+
+The \emph{close world} (CWA) vs. \emph{open world} (OWA) assumption names a
+modelling choice on the \emph{completeness} of a knowledge domain. In the close
+world assumption, a proposition that can not be proven true is assumed to be
+false (\emph{negation by failure}), while in the open world assumption, a
+proposition may be considered either true, false or unknown.
+
+This distinction is important in robotics were the robot may have to manipulate
+concepts with only partial knowledge on them. For instance, let imagine a robot
+that sees a bottle on a table, whose bottom is hidden by another object. The
+robot can not prove that the bottle is indeed \emph{on} the table. A knowledge
+representation system relying on the closed world assumption would then assume
+the bottle is \emph{not} on the table ($\lnot R^{CWA}_{isOn}(bottle, table)$)
+whereas with the open world assumption, the proposition $R^{OWA}_{isOn}(bottle,
+table)$ would be undecided. Example in table~\ref{table|cwa-owa-example} provides
+a simple, concrete example of consequences of the CWA/OWA choice on reasoning.
+
+\begin{table}
+	\begin{center}
+	\begin{tabular}{ll}
+	{\bf Action} & {\bf Part involved} \\
+	\hline
+	{\tt PickSoftly} & hand \\
+	{\tt PickAndPlace} & arm, hand \\
+	{\tt MoveArm} & arm \\
+	\hline
+	\end{tabular}
+	\end{center}
+	\caption{Assuming the question is: \emph{select actions that do not require
+	to move the arm}, a CWA reasoner would return {\tt PickSoftly} whereas an
+	OWA reasoner would not return anything if the {\tt PickSoftly} action is
+	not explicitly said not to involve the arm.}
+	\label{table|cwa-owa-example}
+\end{table}
+
+Domains constrained with the closed world assumption lead to more tractable
+inference problems, and allow for instance the use of logic languages like
+Prolog. Thus, several approaches exists to \emph{locally close} a domain (\cf
+Levesque~\cite{Levesque2008}, section 24.3.2 for a summary of those).
+
+
+\subsubsection{Representation of uncertainty and likelihood}
+
+Sources of uncertainty for a robot are two-fold: uncertainty \emph{intrinsic}
+to facts (like \emph{``It may rain tomorrow''}), uncertainty caused by
+imperfect perception of the world (\emph{``Is the bottle really on the
+table?''}). Most logics do not account explicitly for uncertainty. It must be
+either relied on specific logics (like Bayesian logics) or on extensions of
+classical logics.
+
+\subsubsection{Meta-cognition: knowledge on the knowledge}
+
+Narrower, more technical dimension of the introspection.
+
+%%%%%%%%%%
+\subsection{How things are represented?}
+\label{sect|higher-level-domain-representation}
+
+\subsubsection{Role Representations}
+
+Spatio-Temporal Representations:
+
+\paragraph{Representation of time}
+
+As an agent acting at human-like time scale and dealing with temporal concepts
+(like actions), a robot may want to represent, and possibly to reason, about
+time. Time representation is split into two distinct abilities: representing
+time points (both in the past -- which is roughly equivalent to assignment of
+timestamps to events the robot perceives -- and in the future), and
+representing \emph{passing time} (durations, timespans) like in \emph{``the
+eggs will be cooked in 10 min''}.
+
+\fxfatal{Discuss time chronicles~\cite{Ghallab1996}}
+
+We call a system that do not account for time (\ie that permanently lives in
+present) \emph{atemporal}.
+
+\paragraph{Representation of space}
+
+\paragraph{Representation of events and actions}
+
+\subsubsection{Context modeling}
+
+\emph{Knowledge is contextualized information}\fxfatal{Find someone respectable
+how said that :-)}: it is essential for the robot to associate the facts it
+represents to a \emph{context}. The context carries the keys for the
+interpretation of the information. It covers the \emph{domain of validity} of
+the facts, the \emph{common-sense} knowledge required to fill the gaps in the
+representation\fxfatal{give an example}, \fxfatal{What more?}.
+
+\subsubsection{Possible-Worlds and representing what others know}
+\label{sect|possible-worlds}
+
+    
+Linked to the context representation, but seen from another angle, knowledge
+representation systems may provide explicit ways to model other point of view
+on the world. This ability is often referred as the \emph{perspective taking}
+ability.
+
+\cite{Levesque2008}, p. 4
+
+\subsubsection{Introspection: Who am I? What can I do?}
+\label{sect|introspection}
+
+\paragraph{The introspective robot}
+
+\paragraph{Modelling of the robot capabilities}
+
+
+%%%%%%%%%%
+\subsection{Reasoning Techniques}
+\label{sect|reasoning}
+
+\subsubsection{Standard reasoning techniques}
+
+Backtracking,...
+
+\paragraph{Decidability}
+
+...
+
+\subsubsection{Lazy evaluation}
+\label{sect|lazy-evaluation}
+
+
+\subsubsection{Reasoning with uncertainty}
+
+
+\subsubsection{(Non) Monotonic Reasoning}
+
+\emph{Monotonic reasoning} means that addition of new assertions to a knowledge base
+can only extend the set of assertions that can be inferred, while a
+\emph{non-monotonic} reasoning scheme may lead to retraction of facts.
+McCarthy coined a famous example to illustrate the need of non-monotonic reasoning:
+
+\begin{quotation}
+Consider putting an axiom in a common sense database asserting that birds can
+fly. Clearly the axiom must be qualified in some way since penguins, dead birds
+and birds whose feet are encased in concrete can't fly. A careful construction
+of the axiom might succeed in including the exceptions of penguins and dead
+birds, but clearly we can think up as many additional exceptions like birds
+with their feet encased in concrete as we like. Formalized non-monotonic
+reasoning provides a way of saying that a bird can fly unless there
+is an abnormal circumstance and reasoning that only the abnormal circumstances
+whose existence follows from the facts being taken into account will be
+considered.
+\end{quotation}
+
+Another important application of non-monotonic reasoning is representation of
+change: for example, to make an omelette, you need to crack eggs and wipe them.
+The eggs disappear and are replaced by an omelette:
+
+$Egg(a) \wedge Egg(b) \wedge MakeOmelette(a, b, c) \to \lnot Egg(a) \wedge
+\lnot Egg(b) \wedge Omelette(c)$
+
+The insertion of the proposition $MakeOmelette(a, b, c)$ leads to retraction of
+other facts. This rule requires non-monotonic reasoning to be applied.
+
+\emph{Default logic} is one of the formal logic that account for representing
+general truth and exceptions to it. However, due to computational complexity of
+these model (most of inferences in default logic are known to be $NP$-complete
+problem), classical logics and most of the existing reasoners do not allow
+non-monotonic reasoning. For instance, the SWRL rule language, usually
+associated to the OWL-DL ontology language, do not allow non-monotonic
+reasoning.
+
+\fxfatal{Make clear 'who does not allow non-monotonic-reasoning': logics? rule
+languages? reasoner?}
+
+One important exception if the \emph{Negation as failure} inference rule, as
+implemented by {\sc Prolog} for instance, that allows for non-monotonicity, but
+only \emph{within the closed world assumption}.
+
+\fxfatal{Give here an example of non-monotonic reasoning with Prolog}
+
+A monotonic system does not theoretically allow for knowledge retractation,
+which is an important issue in the robotic context where the world model is
+likely to be often altered.  However it is a practical issue only if the
+reasoning process is \emph{continuous} during the whole robot's activity
+lifespan. It is often possible to stop the reasoner, alter the knowledge, and
+restart the inference process on a new domain.
+\fxfatal{Rephrase to emphasize that when new evidences appear, it is anyway often a
+good idea to restart the reasoner.}
+
+\fxfatal{Mention that the 'change of world' issue can also be dealt with appropriate
+time representation.}
+\fxfatal{Mention that probabilistic reasoning lead to implicit non-monotonic reasoning}
+
+
+\subsubsection{Presupposition accommodation}
+\label{sect|presupposition-accomodation}
+
+\emph{Presupposition accommodation} is the ability for the system to
+automatically create a context allowing to make sense of a proposition.
+
+For instance, we can imagine a human telling a robot \emph{Please get me the
+bottle that is behind you}. If the robot has not yet see what is behind it, it
+needs to assume (and represents in its knowledge model) that a undefined bottle
+can be found somewhere in the half of space behind it.
+
+A knowledge representation system able to copte with presupposition
+accommodation would be able to take into account this (usually under-defined)
+information that is not grounded into perception for later inferences.
+
+This ability to imagine a physically state of the world that is not actually
+perceived can be seen as the converse of the grounding ability.
+
+Note also that presupposition accommodation implies a bidirectional link of the
+symbolic knowledge model with a geometric (or physical) model of the
+environment. This article focuses on symbolic knowledge representation systems,
+but we shall mention when a KRS explicitly provides support for presupposition
+accommodation.
+
+\subsubsection{Prediction, projection and diagnosis tasks}
+\label{sect|prediction-projection}
+
+Levesque~\cite{Levesque2008} distinguish two main tasks, the \emph{projection
+task} and the \emph{legality task}.
+
+\paragraph{Projection task}: determining whether or not some condition while
+hold after a sequence of actions.
+
+\paragraph{Legality task}: determining whether a sequence of action can be
+performed starting in some initial state.
+
+\paragraph{Diagnosis}: this corresponds to the ability to rewind on past events
+in case of failure to provide possible explanation. This can be seen as the
+temporal reverse of the projection task.
+
+\subsubsection{Physics-based reasoning}
+\label{sect|physics}
+
+\subsubsection{Planning}
+\label{sect|planning}
+
+Making decision based on prediction
+
+\subsubsection{Modifying the knowledge structure}
+
+All systems allow to modify the ABox, not always possible to alter the TBox
+
+
+\subsubsection{Learning}
+\label{sect|learning}
+
+%%%%%%%%%%%%%%%%%
+\subsection{Acquiring Knowledge}
+
+\subsubsection{Knowledge acquisition and modalities merging}
+\label{sect|knowledge-acquisition}
+
+\paragraph{Perception}
+\paragraph{Interaction}
+\paragraph{External sources (Web, upper ontologies, ...)}
+\paragraph{Learning}
+
+\subsubsection{Grounding/anchoring strategies}
+\label{sect|grounding}
+
+\subsubsection{Ability to automatically create new object instances}
+\label{sect|new-instances}
+
+%%%%%%%%%%%%%%%%%
+\subsection{Practical Integration in Robotic Architectures}
+\label{sect|integration-robot}
+
+\subsubsection{Integration with sensori-motor layers}
+\label{sect|integration-sensorimotor}
+
+Ability to ``listen'' to the robot internal structures.
+
+\subsubsection{Integration with executive layers}
+\label{sect|integration-executive-layers}
+
+\paragraph{Language integration}
+
+\paragraph{Events}
+
+\subsubsection{Monitoring and debugging}
+\label{sect|debugging}
+
+\subsubsection{Is it fast enough? Scalability and responsiveness}
+\label{sect|scalability}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Knowledge instanciation}
+
+How much knowledge is available? Which content? How big is the knowledge base?
 
 \begin{itemize}
-	\item Expressiveness
+	\item  Which underlying knowledge (\emph{common-sense}, \emph{upper knowledge}\ldots{})
 	\begin{itemize}
-		\item Which logic formalism (DL, 2nd order…)
-		\item OWA/CWA
-		\item Representation of uncertainty
-		\item (non) monotonic reasoning
-		\item General knowledge + exception to this knowledge (blue sky/white sky)
-		\item Microtheories
-		\item Lazy evaluation
-		\item Presupposition accomodation (ability to represent facts that are only verbally hinted, but not grounded into perception)
-	\end{itemize}
-    \item Explicit modeling of context of knowledge / domain of validity
-    \item Representation of change (“The pancake dough disappears into a pancake”)
-    \item Support for learning
-    \item Support for introspection?
-    \item Support for prediction/projection?
-\end{itemize}
-
-\subsection{Integration in robotic architectures}
-\label{sect|eval-integration-robotic-archi}
-
-\begin{itemize}
-	\item Knowledge acquisition possible…
-	\begin{itemize}
-		\item …through interaction? How?
-		\item …through the Web? How?
-		\item …through learning? How?
-		\item …through perception? How?
+		\item  top-down approach?
 	\end{itemize}
 
-	\item Integration with executive layers
-	\item Events
-	\item Relation to task planning
-	\item Scalability and responsiveness
 \end{itemize}
-
-\subsection{Knowledge model}
-\label{sect|eval-knowledge-model}
-
-Which underlying knowledge (common-sense, upper knowledge…)
-top-down approach?
 
 \section{State of the art in knowledge representation systems for robotics}
 \label{sect|krs-survey}
