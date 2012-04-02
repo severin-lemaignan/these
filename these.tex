@@ -59,69 +59,13 @@
 %		description={Un paramètre d'une fonction est une option que l'on passe à la fonction et que l'on peut modifier.}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\def\appName{SqueakBot}
-%\def\appName{EToys}
-
-\newcommand{\capture}[1]
-{
-\begin{center}
-	\includegraphics[scale=0.5]{#1}
-\end{center}
-}
-
-\newcommand{\brique}[1]{
-\sffamily
-\fcolorbox[RGB]{200,192,144}{200,248,200}{\textbf{#1}}
-\normalfont
-}
-
-%Commande pour la mise en forme du code, comme les noms de scripts
-\newcommand{\code}[1]{\texttt{#1}}
-
-\newcommand{\important}[1]{\textbf{#1}}
-
-\newcommand{\motcle}[2]{\important{\gls{#1}}}
-
-
-\newcommand{\inserticon}[1]
-{
-\includegraphics[scale=0.5]{icons/#1.png}
-}
-%Cette macro peut être utilisée pour facilement insérer les icônes de Squeak dans
-%le document.
-% \icon{nom_de_l_icone_sans_extension} affiche juste l'icône, inline ;
-% \icon[nom]{nom_de_l_icone_sans_extension} affiche "l'icône [image] nom"
-\newcommand{\icon}[2][]
-{
-\ifthenelse {\equal{#1} {}} {\inserticon{#2}} {l'icône \inserticon{#2} \important{#1}}
-}
-
-% A encadrer, avec un p'tit logo
-\newcommand{\afaire}[1]
-{
-#1
-}
-
-\newcommand{\astuce}[1]
-{
-\begin{framed}
-%\marginpar{#1}
-%[RGB]{214,141,0}{251,240,220}
-\begin{wrapfigure}[3]{l}{1.8em}
-	\vspace{-15pt}
-	\includegraphics[width=2.0em]{astuce.png}
-\end{wrapfigure}
-#1
-\end{framed}
-}
-
 %Name of the speaker in a chat
 \newcommand{\chatN}[1]{{\footnotesize \textsf{#1}}}
 \newcommand{\concept}[1]{{\footnotesize \texttt{#1}}}
 
 \newcommand{\stmt}[1]{{\footnotesize \tt $\langle$ #1\relax$\rangle$}}
 %\newcommand{\stmt}[1]{{\footnotesize $\langle$\stmttt#1\relax$\rangle$}}
-%\newcommand{\rawstmt}[1]{{\footnotesize \stmttt#1\relax}}
+\newcommand{\rawstmt}[1]{{\footnotesize \stmttt#1\relax}}
 \def\stmttt#1 #2 #3\relax{{\tt#1} {\bf{\tt #2}} {\tt #3}}
 
 \newcommand{\setstmt}[1]{{\footnotesize [\setstmttt#1\relax]}}
