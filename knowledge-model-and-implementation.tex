@@ -1,41 +1,61 @@
-\chapter{Knowledge model and implementation}
-\label{chapter|implementation}
+\chapter{ORO Implementation and integration in robots}
+\label{chapter|implementation_integration}
 
-\section{Knowledge model}
-\label{sect|knowledge-model}
+\section{Some implementation notes}
 
-\subsection{OWL-DL ontologies}
-\label{sect|owldl-ontologies}
+This section presents some of the main technological choices that have
+been made to implement the knowledge base.
 
-\subsection{Parallel models}
-\label{sect|parallel-models}
+Some of the main algorithms are presented here as well (like the algorithms for clasification and discrimination,~\ref{sect|discrinimation}).
 
-\subsection{Expressiveness}
-\label{sect|expressiveness}
-
-\subsection{Designing the \textsc{OpenRobots} common-sense ontology}
-\label{sect|commonsense-design}
-
-\section{ Architecture and core services}
-\label{sect|oro-core}
-
-\subsection{A server-based implementation}
+\subsection{A centralized server-based implementation}
 \label{sect|oro-serverbased}
 
-\section{Inference techniques}
-\label{sect|inference-techniques}
 
-\subsection{Reasoning and inconsistency handling}
-\label{sect|reasoning}
+\subsection{OWL-DL ontologies and Jena}
+\label{sect|jena}
 
-\fxerror{TDB: we need to trigger events when the human cognitive model diverges
-from the robot one}
+\subsection{Reasoning: the Pellet reasoner}
+\label{sect|pellet}
 
-\subsection{Classification and discrimination}
-\label{subssect|discrimination}
+\subsection{Classification and discrimination algorithms}
+\label{sect|discrimination}
 
-\subsection{Memory}
-\label{subssect|memory}
-
-\section{Interfacing with other components}
+\section{Bindings to other components/languages}
 \label{sect|interfacing}
+
+%%%%%%%%%%%%%%%%%
+\section{Integration in the robot architecture}
+
+\subsection{RPC and events-oriented interactions}
+
+\subsection{Acquiring Knowledge}
+
+\subsubsection{Knowledge acquisition and modalities merging}
+
+\paragraph{Perception}
+\paragraph{Interaction}
+\paragraph{External sources (Web, upper ontologies, ...)}
+\paragraph{Learning}
+
+\subsubsection{Perspective taking}
+\label{sect|perspectivetaking}
+
+\subsubsection{Grounding/anchoring strategies}
+
+\subsubsection{Ability to automatically create new object instances}
+
+%%%%%%%%%%%%%%%%%
+
+\subsection{Integration with symbolic task planning and executive layers}
+
+\fxnote{CRAM, SHARY, pyrobots...}
+
+\subsection{Integration with natural language processors}
+
+
+\subsubsection{Monitoring and debugging}
+
+\subsubsection{Is it fast enough? Scalability and responsiveness}
+
+
