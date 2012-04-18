@@ -16,22 +16,27 @@ not usable either. Rich interleaving between geometric reasoning and symbolic
 models is required. 
 
 
-\section{A typology of knowledge representation requirements for robotics}
-\label{sect|typology}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{A Typology of Knowledge Representation Systems Requirements for Robotics}
+\label{sect|features}
+
+We presented an imaginary cooking scenario where numerous desirable
+features for a knowledge representation system for robotics have been
+identified in no particular order.
 
 This section proposes a more formal typology of desirable features for a such a
 system. For each feature, we provide a short definition along with links to
 relevant literature.
 
-\fxnote{Should we also mention the general dynamics of the knowledge
-representation system? ie, the system from the point of view of an on-going
-cognitive process. See \cite{Henderson2011}}
+Table~\ref{table|contribution-by-systems}, at the end of the article,
+summarizes all these features with the main domain of contribution of each
+surveyed KRS.
 
 \subsection{Expressiveness: What Can be Represented?}
 \label{sect|expressiveness}
 
-\subsubsection{Introduction: main logic formalisms}
+\subsubsection{Introduction: Main Logic Formalisms}
 
 The main role of a knowledge representation system is to provide an adequate
 representation system to store facts and concepts that can be informally
@@ -65,18 +70,35 @@ in second-order logic. Description logics are notable because most of them are
 known to be decidable. In description logic, axioms are build from
 \emph{concepts}, \emph{roles} (that are unary or binary predicates) and
 \emph{individuals}. The W3C OWL-DL standard is a widely-used language to describe
-domain with the description logic.
+domains with the description logic.
 
-\emph{Modal logics}, that allow for statement qualification
-like \emph{possibility} or \emph{necessity}, have been shown to be closely
-related to description logics.
+Because Description Logics have been originally created from the perspective of
+a \emph{knowledge representation language} and not a logic language, their
+terminology (\emph{concept} or \emph{class}, \emph{role} or \emph{property},
+\emph{individual},...) is well-suited to knowledge description and we may use
+it in the remaining of this paper outside of the strict context of  Description
+Logics.
+
+\emph{Modal logic}, that allow for statement qualification like
+\emph{possibility} or \emph{necessity}, have been shown to be closely related
+to description logics. Modal logic allows to represent conveniently parallel
+possible worlds and facts like ``the robot knows \emph{that the human knows}
+how to read a recipe''.
 
 \fxfatal{On modal logics, see the remark of McCarthy, in \cite{McCarthy2007}, section 3}
+
+\emph{Temporal logic} are designed to represent and manipulate assertions whose
+truth value may vary in time.
 
 One last class of logics that is of particular relevance for robotic
 applications is the \emph{probabilistic logics} or \emph{Bayesian logics}.
 These logics provide a formal framework to reason on propositions whose truth
 or falsity is uncertain. We elaborate below on the representation of uncertainty.
+
+Note that most of these logic formalisms are still active research field by
+their own, and practical considerations (especially the availability of
+reasoners performant enough for on-line use on a robot) often constraint the
+choice of a logical formalism and a level of expressive power.
 
 
 \paragraph{Some examples}
@@ -85,6 +107,43 @@ or falsity is uncertain. We elaborate below on the representation of uncertainty
 
 \emph{The robot knows that the human knows about the position of the bottle,
 but the robot does not know what the human actually know about it.}
+
+\subsubsection{Expressive Power}
+
+Logical formalisms each bring a certain level of expressive power. For
+instance, the following classical syllogism can not be represented in
+propositional logic because of the use of \emph{universal quantification}:
+
+\begin{quote}
+\begin{enumerate}
+    \item All men are mortal,
+    \item Socrates is a man,
+    \item Therefore, Socrates is mortal
+\end{enumerate}
+\end{quote}
+
+However, the following weak version of the syllogism can be represented in
+propositional logic:
+
+\begin{quote}
+\begin{enumerate}
+    \item If Socrates is a man, then Socrates is mortal,
+    \item Socrates is a man,
+    \item Therefore, Socrates is mortal
+\end{enumerate}
+\end{quote}
+
+Generally speaking, expressive power comes at the cost of ease of
+\emph{satisfiability} and \emph{consistency}\footnote{We precise these concepts
+at section~\ref{sect|reasoning}.} tests, possibly leading to undecidable formal
+systems, \ie systems where it is proven that a proposition can not be decided
+to be true or false.
+
+The relationship between expressive power and the complexity of reasoning problem that
+follow has been partially formalized for Description Logics.
+Zolin~\cite{ZolinDLComplexityNavigator} maintains a ``complexity navigator''
+for Description Logics that allows to conveniently explore this relationship
+and indexes most of the litterature on that subject.
 
 \subsubsection{Open World and Close World Assumptions}
 
@@ -139,18 +198,26 @@ classical logics.
 
 \subsubsection{Meta-cognition: knowledge on the knowledge}
 
-Narrower, more technical dimension of the introspection.
+As stated by Josyula and Raja, meta-cognition is composed of both
+\emph{``meta-level control of cognitive activities and the introspective
+monitoring of such activities to evaluate and to explain them"}.
+
+A knowledge representation system endowed with \emph{meta-cognition} is not
+only able to manipulate knowledge but also to exhibit and manipulate the
+structure of its knowledge and the reasoning process. For instance, the ability
+to explain a logical inconsistency in a KRS is a meta-cognitive function.
+Sloman~\cite{Sloman2011}
+
+At section~\ref{sect|introspection} below, we discuss the idea of
+introspection.  Meta-cognition can be viewed as the technical facet of the
+introspection in general.
+
 
 %%%%%%%%%%
-\subsection{How Things are Represented?}
+\subsection{How things are represented?}
 \label{sect|higher-level-domain-representation}
 
-\subsubsection{General design}
-
-\fxnote{Mention here the question of TBox/ABox frontier. Actual design of knowledge in
-section on ORO Common sense}
-
-\subsubsection{Spatio-Temporal Role Representations}
+\subsubsection{Role Representations}
 
 Spatio-Temporal Representations:
 
@@ -198,7 +265,61 @@ ability.
 
 \paragraph{The introspective robot}
 
+Introspection is the ability to self-describe: what are my capabilities, what
+is my state (performing some action, idling, etc.), what are my beliefs (\ie my
+knowledge), what are my intentions and my plans?
+
+Introspection must be distinguished from meta-cognition: While introspection
+may require meta-cognition (for instance to be able to expose its internal
+knowledge), it is not always mandatory. The current state of the robot can be
+represented as a simple instanciation of a specific category (for instance, if
+the robot give an object to the human, this state could be represented with the
+triplets \setstmt{robot performs action1, action1 isA Give}.
+
 \paragraph{Modelling of the robot capabilities}
+
+A particularly important aspect of introspection relates to the description of
+its own capabilities: which sensors/actuators/computation services exist and
+are currently available ?  While at a first level, these descriptions can be
+static (\eg the robot has one laser scanner and two arms), at a second level,
+the description is updated and reflect the current (and possibly past and
+future) state of the robot. Note that these description may also invlove
+geometric descriptions (a kinematic chain, the pose of a device, etc.) that may
+be deported outside of the main knowledge base. Efforts trying to formalize,
+maintain and expose the capabilities and state of a robot are not new (and
+ground themselves in work and techniques for self-descriptive remote procedure
+calls in computing science), but take a renewed importance with applications
+for high-level multi-robot cooperation. Recent work in that direction
+include~\cite{Kunze2011}.
+
+\subsubsection{Memory}
+\label{sect|memory}
+
+Memory has been studied at lenght in the cognitive psychology and
+neuropsychology communities: Atkinson and Shiffrin~\cite{Atkinson1968}
+introduce the idea of \emph{short-term} and \emph{long-term} memory,
+Anderson~\cite{Anderson1976} splits memory into \emph{declarative} (explicit)
+and \emph{procedural} (implicit) memories, Tulving~\cite{Tulving1985} organizes
+the concepts of \emph{procedural}, \emph{semantic} and \emph{episodic} memories
+into a hierarchy. Short-term memory is refined with the concept of
+\emph{working memory} by Baddeley~\cite{Baddeley2010}
+(Figure~\ref{fig|memory_models}).
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\columnwidth]{typology/memory_models.pdf}
+    \caption{Overview of the main types of memories}
+    \label{fig|memory_models}
+\end{figure}
+
+Most knowledge representation systems offers some kind of memory as a pool of
+facts that are not forgotten by the robot until it is halted (this memory is
+often refered as a \emph{working memory}, but with a meaning unrelated to
+Baddeley's definition). Some systems may propose persistent storages that allow
+the robot knowledge to grow over time, while other may offer a larger range of
+memory categories, like short term memory (that lasts for a couple of seconds)
+or episodic memory (that allows the robot to selectively remember facts
+associated to specific events).
 
 
 %%%%%%%%%%
@@ -207,11 +328,76 @@ ability.
 
 \subsubsection{Standard reasoning techniques}
 
-Backtracking,...
+Being based on logical languages to represent the knowledge, most of the
+systems we survey allow various forms of \emph{reasoning}.
 
-\paragraph{Decidability}
+We call \emph{standard reasoning techniques} techniques based on logical
+inference, using resolution algorithms like \emph{forward chaining},
+\emph{backward chaining} or \emph{semantic tableaux}.
 
-...
+Main reasoning problems include \emph{concept satisfiability},
+\emph{consistency checking} and \emph{instance checking}.
+
+Concept satisfiability verifies if it is possible to find a non-empty
+\emph{interpretation} of a concept (or an expression defining a concept) in the
+knowledge model. For instance, the formula \concept{Plant} $\land$
+\concept{isRed}, which defines the concept of red plants, is satisfiable in a
+model \concept{KB} iff $\exists a, $ \concept{Plant}$(a) \land$
+\concept{isRed}$(a)$, \ie if we can find at least one red plant $a$ in our
+model.
+
+Checking the consistency of a model is equivalent to checking the
+satisfiability of each of the concept defined in the knowledge model.
+
+Instance checking consists in verifying that an individual $a$ is an
+interpretation of a concept (or concept expression) $C$ in the knowledge model.
+A typical example would be that we are provided with an instance
+\concept{object1} and we want to know if this object is a kind of
+\concept{Bottle} or \concept{Glass}.
+
+Reasoners can then provide other type of inferences, like:
+
+\begin{itemize}
+    \item class subsumption (similar to inheritance)
+
+    \item reasoning on roles properties, including:
+        \begin{itemize}
+        \item entailments based on roles domain and range (for instance, if the
+        domain of the role \concept{thinksOf} is known to be
+        \concept{ThinkingAgent}, then \concept{thinksOf}$(a, b) \to
+        $\concept{ThinkingAgent}$(a)$),
+
+        \item universal, existantial and cardinality constraints (including \concept{allValue}, 
+        \concept{someValue}, \concept{hasValue}),
+
+        \item property characteristics (symmetry, transitivity, etc.)
+
+        \end{itemize}
+
+    \item complex concept expressions like: \par \footnotesize \concept{Bottle}
+    $\equiv$ \concept{Artifact} {\bf that} (\concept{hasShape} {\bf value}
+    \concept{cylinderShape})\footnote{This example uses the \emph{Manchester
+    syntax}, \url{http://www.w3.org/TR/owl2-manchester-syntax/}} \normalsize
+
+    \item set operations like: \par \footnotesize \concept{Color} $\equiv$ {\bf
+    unionOf}(\concept{blue}, \concept{green}, \concept{orange},
+    \concept{black}...) \normalsize
+
+\end{itemize}
+
+\paragraph{Rule Languages}
+\item generic SWRL ({\em Semantic Web Rule Language}) rules like: \par
+        \footnotesize \concept{looksAt(?agt, ?obj)} $\land$
+        \concept{pointsAt(?agt,?obj)} \par $\Rightarrow$ \concept{focusesOn(?agt, ?obj)}
+        \normalsize 
+
+
+\subsubsection{Alteration of the knowledge structure}
+
+In systems
+
+All systems allow to modify the ABox, not always possible to alter the TBox
+
 
 \subsubsection{Lazy evaluation}
 \label{sect|lazy-evaluation}
@@ -244,11 +430,13 @@ Another important application of non-monotonic reasoning is representation of
 change: for example, to make an omelette, you need to crack eggs and wipe them.
 The eggs disappear and are replaced by an omelette:
 
-$Egg(a) \wedge Egg(b) \wedge MakeOmelette(a, b, c) \to \lnot Egg(a) \wedge
-\lnot Egg(b) \wedge Omelette(c)$
+\concept{Egg}$(a) \wedge $ \concept{Egg} $(b) \wedge $
+\concept{MakeOmelette}$(a, b, c) \to \lnot $ \concept{Egg}$(a) \wedge \lnot $
+\concept{Egg}$(b) \wedge $ \concept{Omelette}$(c)$
 
-The insertion of the proposition $MakeOmelette(a, b, c)$ leads to retraction of
-other facts. This rule requires non-monotonic reasoning to be applied.
+The insertion of the proposition \concept{MakeOmelette}$(a, b, c)$ leads to
+retraction of other facts. This rule requires non-monotonic reasoning to be
+applied.
 
 \emph{Default logic} is one of the formal logic that account for representing
 general truth and exceptions to it. However, due to computational complexity of
@@ -324,15 +512,28 @@ temporal reverse of the projection task.
 \subsubsection{Physics-based reasoning}
 \label{sect|physics}
 
+As embodied entities, robots have to interact with physical entities.
+\emph{Naive physics reasoning} covers all the everyday reasoning the humans
+unconsciouly perform, like taking into account gravity (``if I drop a ball, it
+falls down'') or common physical properties of objects (``a glass may break if
+dropped'', etc.). Many of the interactions with our everyday environments are
+ruled by such laws that are difficult to exhaustively encode.
+
+Some systems \cite{Kunze2011a} rely on external dedicated physics engine to
+compute symbolic facts from on-demand physics simulation. This, however,
+requires a tight integration between the symbolic model and a geometric model
+that carries the geometries and physical properties of objects.
+
 \subsubsection{Planning}
 \label{sect|planning}
 
 Making decision based on prediction
 
-\subsubsection{Knowledge Structure Alteration}
+\subsubsection{Alteration of the knowledge structure}
+
+In systems
 
 All systems allow to modify the ABox, not always possible to alter the TBox
-
 
 \subsubsection{Learning}
 \label{sect|learning}
@@ -342,6 +543,38 @@ All systems allow to modify the ABox, not always possible to alter the TBox
 
 \subsubsection{Knowledge acquisition and modalities merging}
 \label{sect|knowledge-acquisition}
+
+In the survey inclusion criteria, we have insisted on only considering robotic
+systems that acquire knowledge by themselves, during their runtime.
+
+\emph{Acquiring knowledge} means in our context building new statements
+(usually as new logical facts) connected to our existing knowledge from
+external sources of information. We consider mainly three of them:
+proprioceptive/exteroceptive sensors, interaction with other agents, humans or
+robots, and remote databases. This process has generally at least two steps:
+the information acquisition by itself, and the \emph{transformation} of the
+information into knowledge, \emph{aligned} with the robot existing model
+(following our terminology for information and knowledge, as discussed in the
+introduction).
+
+Knowledge acquision is generally not done directly in the knowledge
+representation system. On the contrary, several, if not numerous, external
+components are usually required to convert percepts into symbolic facts and to
+ground them.
+
+While we do not review in this article all these systems, the whole process of
+knowledge acquisition is central in cognitive robotic architecture and the
+design of knowledge representation systems can influence or be influenced by
+the approach to knowledge acquisition.
+
+In particular, complex robotic systems often require multi-modal perception
+capabilities (for instance, a robot can only interpret an utterance like ``this
+is a plate'' if it is able to understand gestures, understand natural language
+and merge them in a timely manner). Multi-modal interpretation can take place
+at various levels, but in many cases (especially if the modalities are of very
+different natures, like in the example above) merging will require
+symbolic-level reasoning. The KRS has a direct impact on the feasability and
+ease of such operations.
 
 \paragraph{Perception}
 \paragraph{Interaction}
@@ -388,6 +621,10 @@ How much knowledge is available? Which content? How big is the knowledge base?
 	\end{itemize}
 
 \end{itemize}
+
+
+
+
 
 \section{State of the art in knowledge representation systems for robotics}
 \label{sect|krs-survey}
