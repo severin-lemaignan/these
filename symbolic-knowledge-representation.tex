@@ -630,3 +630,360 @@ How much knowledge is available? Which content? How big is the knowledge base?
 \label{sect|krs-survey}
 
 
+Table \ref{table|surveyed-systems} presents the fifteen knowledge representation systems surveyed
+in this article.
+
+Table \label{table|contribution-by-systems} summarizes the main fields of contribution for each of these systems.
+
+This section briefly presents each of them.
+
+\begin{landscape}
+\begin{table}
+\begin{center}
+%\begin{tabularx}{\textheight}{p{2cm}p{4cm}p{3cm}p{4cm}p{2.3cm}p{2cm}p{2cm}}
+\begin{tabular}{p{2.2cm}p{1.6cm}p{4cm}lp{2.4cm}p{3.4cm}p{2.8cm}p{1.5cm}}
+{\bf Project} & {\bf Category} & {\bf Authors (Institution)} & {\bf Project homepage} & {\bf Programming language} & {\bf Knowledge model/Logical Formalism} & {\bf Reasoner} & Main reference \\
+\hline
+{\sc KnowRob} & KRS & Tenorth, Beetz \par (TU Munich) & \url{http://ias.in.tum.de/kb/wiki} & {\sc Prolog} & {\sc Prolog} + OWL-DL & Custom \par ({\sc Prolog}) & \cite{Tenorth2009a} \\
+ORO & KRS & Lemaignan, Alami \par (LAAS-CNRS) & \url{oro.openrobots.org} & {\sc Java} & OWL-DL ({\sc Jena}) & {\sc Pellet} & \cite{Lemaignan2010} \\
+PEIS KR\&R & KRS & Daoutis, Coradeshi, Loutfi, Saffiotti \par (Örebro Univ.) & \url{www.aass.oru.se/~peis} & {\sc C}, {\sc CycL} & CycL (1st and 2nd order logics, modal logics) & & \cite{Daoutis2009} \\
+CAST Proxies & Ubiquitous & Wyatt, Hawes, Jacobsson, Kruijff (Brimingham Univ., DFKI Saarbrücken) & & & Amodal proxies & & \cite{Jacobsson2008} \\
+Golog & Language & Levesque (Toronto Univ.) & & {\sc Prolog} & & & \\
+NKRL & Language & Zarri et al. \par (Paris Est Créteil Univ.) & & NKRL & & & \cite{Sabri2011} \\
+GSM & & Mavridis, Roy \par (MIT MediaLab) & & & & & \cite{Mavridis2006} \\
+OMRKF & & Suh et al. \par (Hanyang Univ.) & \url{incorl.hanyang.ac.kr/xe/?mid=symbolic_reasoning} & ? & Horn Clauses & ? & \cite{Suh2007} \\
+Ke Jia & & Chen et al. \par (Univ. of Science and Technology of China) & & & & & \cite{Chen2010} \\
+ & & Varadarajan, Vincze \par (TU Wien) & & & & & \cite{Varadarajan2011} \\
+ & & Kaelbling, Lozano-Pérez \par (MIT CSAIL) & & & & & \cite{Kaelbling2011} \\
+ARMAR & & Schmidt-Rohr (Karlsruhe TH) \\
+ & & Hertzberg (Osnabrück Univ.) \\
+ & & (DFKI Bremen) \\
+ (based on {\sc KnowRob} & & (JSK) \\
+
+\hline
+
+%\end{tabularx}
+\end{tabular}
+\end{center}
+\caption{List of surveyed systems. Projects are listed by category (\emph{KRS} for systems that are explicit knowledge representation and reasoning modules, \emph{Ubiquitous} for systems where knowledge processing is fully distributed, \emph{Language} for languages used as KRS on robots), then names.}
+\label{table|surveyed-systems}
+\end{table}
+\end{landscape}
+
+\fxfatal{Bielefeld -> could not find much...}
+\fxfatal{Kollar/Tellex -> really focusing on the natural language grounding}
+
+\subsection{KnowRob}
+\label{sect|knowrob}
+
+\subsection{PEIS KR\&R}
+\label{sect|peis-ecology}
+
+
+{\sc PEIS Ecology}~\cite{Saffiotti2005} is a software \emph{ecosystem} that aim to binds autonomous
+robotics with ambient intelligence (network of sensors). \emph{PEIS} stands for
+\emph{Physically Embedded Intelligent System}: every robots or intelligent
+device in the environment is abstracted as a PEIS.
+
+Each PEIS physical component is running a \emph{PEIS Kernel} instance. Communication
+between instance relies on a custom P2P communication protocol.
+
+The PEIS architecture allows for adding new abilities through software components sharing the common \emph{tuple space}.
+
+We survey here the semantic layer~\cite{Daoutis2009}, referred as \emph{PEIS KR\&R}, that includes symbolic representation and reasoning.
+
+% More in details:
+% - object identification based on viewpoint independent SIFT features
+% - formalized anchoring system that explicitely match percieved attributes to predicates
+% - Cyc predicates
+% - ground 12 colors, based on a paper on color perception. Could be useful for us.
+% - idem, they cite a paper on what spatial relations to compute
+% - location of objects based on a previously provided semantic map (but not much on this semantic map)
+% - two "memories": the robot memory stores the current list of percieved objects ; the archive memory stores what is not percieved anymore
+% - uses directly Cyc (ie, 250 000 common sense concepts...), via CycL language -> 2nd and higher order logics (quantification over predicates, functions, etc)
+% Remark: using 2nd order logic (ie meta statements), it would be easy to store the knowledge of each agent
+% - disambiguation in concept name by asking human to decide amongst all concepts known by Cyc
+% - template based natural language
+% - experiment conducted in a "smart" indoor environmement + simple robot
+
+\paragraph{Knowledge model} The PEIS Knowledge representation system relies on
+the {\sc ResearchCyc} and {\sc CycL} language to represent knowledge. The {\sc CycL} language
+allows to represent first order logic sentences and has extensions for modal logics and higher order logics.
+
+\fxfatal{Is modal logics and higher order logics actually used in PEIS?} 
+
+As a system relying on {\sc CycL}, contexts can be expressed as
+\emph{microtheories}: the truth or falsity of a set of statement depends of the
+\emph{microtheory} in which these statements are evaluated.
+
+\fxfatal{OWA/CWA?}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\columnwidth]{stateofart/peis-architecture.pdf}
+	\caption{The PEIS knowledge representation system, taken from~\cite{Daoutis2009}}
+	\label{fig|peis-archi}
+\end{figure}
+
+The PEIS KR\&R system is deeply integrated to the general PEIS Ecology
+\emph{smart} environment. Figure~\ref{fig|peis-archi} gives an overview of the
+interactions between PEIS knowledge processing layers.
+
+\paragraph{Knowledge Acquisition} The primary source for knowledge acquisition
+is perception.  The PEIS ecosystem provides a SIFT-based object recognizer used
+in conjunction with ceiling cameras for object localization.  Other perceptual
+modalities are available (like human tracking, ambient environment monitoring).
+
+A template-based natural language parsing system may also be used to add new
+assertions to the system.
+
+The system can ask the human for help to disambiguate between concept names.
+
+\paragraph{Anchoring} Daoutis et al. formalize the issue of anchoring as
+finding a \emph{predicate grounding relation} $g \subseteq \mathcal{P} \times
+\Phi \times D(\Phi)$, where $\mathcal{P}$ is a set of predicate symbols, $\Phi$
+a set of percept's attributes, and $D(\Phi)$ the domain of these attributes.
+
+In the current implementation, object category (returned by the SIFT
+classifier), color, location, spatial relations (both topological -- \emph{at},
+\emph{near} -- and relative to the robot -- \emph{left}, \emph{behind}, etc.)
+and visibility are the five classes of extracted attributes.
+
+\paragraph{Integration in the robot architecture}
+\label{sect|peis-integration}
+
+The PEIS framework offers through the \emph{PEIS middleware} a practical way to
+insert a new component into the shared \emph{tuple space}.  Thus, the KR\&R
+module can be seemlessly integrated into the PEIS ecosystem.
+
+\subsubsection{Notable experiments}
+\label{sect|peis-expe}
+
+\subsection{NKRL}
+\label{sect|nkrl}
+
+\emph{NKRL} stands for \emph{Narrative Knowledge Representation Language}.
+While this language is developped since a long time by Zarri~\cite{Zarri1997,
+Zarri2008}, recent research direction include application to the robotic
+field~\cite{Sabri2011}. NKRL is not {\it per-se} a knowledge representation
+system, as it is primarily a language. However, it is used as the
+representation and reasoning mechanism for robots by Sabri et al.
+
+\subsubsection{Intrinsic language features}
+\label{sect|nkrl-intrinsic-features}
+
+\paragraph{Expressiveness}
+
+\subsubsection{Integration with physical world and in the robot architecture}
+\label{sect|nkrl-integration}
+
+...seem to be mostly WIP...
+
+
+\subsection{CAST Knowledge model}
+\label{sect|cast}
+
+CAS (\emph{CoSy Architecture Schema}) Toolkit~\cite{Hawes2007} is a
+comprehensive toolkit aimed at builduing cognitive architectures for robots
+through a set of interconnected SAs (\emph{subarchitectures}). The CAS does not
+expose a central knowledge base as seen in previous works. It instead
+represents knowledge as unrooted \emph{proxies}. Thoses proxies are formally
+defined in \cite{Jacobsson2008} as $p= \langle F_p, u_p \rangle$ where $F_p$ is
+a set of instanciated features (like $\phi^{Colour}_{red}$) and $u_p$ a
+\emph{proxies union} that form an equivalence class corresponding to one
+entity.
+
+A union of proxies forms a global amodal representation of an entity, that can
+be explicitely shared and manipulated. Being not centralized, the knowledge
+model can be qualified of \emph{ubiquitous}. Futhermore, knowledge source in
+the CAS architecture is tightly bound to the on-line grounding process (be it
+grounded in perception or in dialogue). While nothing seems to prevent it, no
+{\it a priori} knowledge (including common-sense knowledge) is used.
+
+Knowledge sharing is ensured by the event mechanism of CAST: modules can
+monitor proxies for alteration by other modules. Jacobsson et al. mention how
+this can apply to reinforcement learning: the vision module creates a proxy for
+an orange object. This proxy get monitored by a learning module. In parallel,
+the proxy is bound to an union by the natural language understanding module
+that add new a feature like \emph{"this object is a fruit"}. The learning
+module is called back, and can add this new information to its model.
+
+In the presented implementation, the CAST knowledge model does no allow for
+effectively representing actions or temporal information.\fxfatal{What about reasoning? can they retrieve for example 'all proxies for colorful objects'?}
+
+\subsection{GSM}
+\label{sect|gsm}
+
+GSM (for \emph{Grounded Situation Model})~\cite{Mavridis2006} is a knowledge
+representation system primarly built to ``facilitate cross-modal
+interoperability'',  especially in the context of verbal interaction with a
+robot.
+
+Unlike most of the previously presented systems, GSM does not rely on any
+formal language but rather on a layered datastructure (Figure~\ref{fig|gsm})
+that organizes the surrounding world into agents and relations between agents.
+Each agent (any animate or inanimate object) is attached to a physical model (made
+of \emph{body parts} that have properties like their position, color, etc.) and
+a mental model (which is a recursively embedded GSM, thus allowing a sort of
+theory of mind).
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\columnwidth]{stateofart/gsm.pdf}
+
+    \caption{Simplified hierachical structure of the Grounded Situation Model,
+    based on~\cite{Mavridis2006}}
+
+    \label{fig|gsm}
+   \end{figure}
+
+Properties are represented in three layers: a stochastic representation, close
+to sensory percepts, a \emph{continous single-valued} encoding of the
+stochastic model, and a discrete, categorical model.
+
+One notable feature of GSM is the \emph{bidirectionality} of the grounding
+process: not only sensor percepts are abstracted into categories suitable for
+human conversation, but human utterance (like ``There is a red ball in the
+center of the table'') can also be turned into property descriptions. This
+basically enable the knowledge representation system of the robot to
+\emph{imagine} entities.
+
+GSM also features several strategies for managing time and events.
+\emph{Moments} are created by storing timestamped snap-shots of GSM, and
+\emph{event classifiers} allow to define and detect events.
+
+\paragraph{Experiments} GSM has mostly been tested on table-top manipulation
+and interaction tasks (a ``conversational helping hand'' as stated by the
+authors) realized on a 7-DOF arm equipped with force feedback, cameras for blob
+tracking and speech recognition (Sphinx4).
+
+\subsection{OMRKF}
+\label{sect|omrkf}
+
+The Ontology-based Multi-layered Robot Knowledge Framework~\cite{Suh2007}
+(OMKRF) is a knowledge representation system based on four inter-related
+\emph{classes} of knowledge (Figure~\ref{fig|omrkf}). It proposes a layered
+approach to knowledge representation that allows to integrate the grounding
+process to the knowledge representation process. OMRKF knowledge model is
+implemented with Horn clauses.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\columnwidth]{stateofart/omrkf.pdf}
+
+    \caption{OMRKF organizes knowledge into four \emph{classes}, each composed
+    of three \emph{levels}. The figure shows some examples of link between
+    knowledge classes and knowledge levels. Based on~\ref{Suh2007}.}
+
+    \label{fig|omrkf}
+\end{figure}
+
+Each level of knowledge is build as three stages of ontological realization: a
+\emph{meta-concept} (the level itself, like ``temporal context'', ``behaviour''
+or ``object feature'', a taxonomy of concepts inside this level (for instance
+$cup : Object \sqsubseteq tableware : Object$) and an instanciation of the
+taxonomy ($cup1 : cup$).
+
+Environment is represented in OMRKF in the $space : Model$ knowledge level as a
+classical three layers mapping (metric, topological and semantic maps). Objects
+(in $object : Model$) are localized in $space : Model$ through Voronoi nodes.
+
+The knowledge class $Context$ proposes an explicit statement of spatial context
+(mostly geometric relations between objects), temporal context and a more
+general \emph{high-level} context, inferred from spatial and temporal contexts.
+
+Finally, the $Activity$ knowledge class store coumpound actions in a HTN-like
+structure, exploited at run-time by a planner.
+
+\paragraph{Experiments} Experiments conducted with OMRKF include finding
+kitchen objects and reporting about their state to a human.  This experiment
+also shows how OMRKF can deal with objects only partially matched by their
+descriptor by introducing a $candidate()$ function.
+
+%%%%%%%%%% Underlying knowledge model table %%%%%%%%
+\begin{table}
+\begin{center}
+
+\begin{tabular}{lp{4cm}}
+\toprule
+{\bf Project} & {\bf Common-sense \par knowledge source} \\
+\midrule
+{\sc KnowRob} & {\sc OpenCyc}, processed web content, custom OWL-DL ontology \\
+ORO & {\sc OpenCyc}, custom OWL-DL ontology \\
+PEIS Ecology & {\sc ResearchCyc} \\
+NKLR &  None \\
+CAST Proxies &  None \\
+GSM &  Predefined categories \\
+OMRKF & {\it A priori} knowledge structure and axioms, custom set of instances\\
+Wrighteagle & \\
+Vincze & \\
+ARMAR &  \\
+Hertzberg & \\
+(DFKI Bremen) & \\
+(JSK) & \\
+
+\bottomrule
+
+\end{tabular}
+\end{center}
+\caption{Underlying knowledge sources for each project}
+\label{table|knowledge-sources}
+\end{table}
+
+
+\begin{landscape}
+\begin{table}
+\begin{center}
+
+\begin{tabular}{cp{4.5cm}ccccccccc}
+\toprule
+\multicolumn{2}{c}{\bf Category} & {\sc KnowRob} & {ORO} & {\sc PEIS} & {\sc CAST} & {\sc Golog} & {\sc NKRL} & {\sc GSM} & {\sc OMRKF} \\
+
+\midrule
+
+\multirow{5}{0.7cm}[-0.2cm]{\turn[1.5cm]{90}{\bf Expressive power}} & Logical formalism & Prolog & OWL-DL & {\sc CycL} &  &  &  & & Horn clauses \\
+ & Expressive power & & & & & & & &  \\
+ & OWA/CWA & CWA & OWA & & & & & & \\
+ & Modeling uncertainty & +++ (extension) & & & & & & ++ (stochastic) & + (\emph{candidate} entities) \\
+ & Meta-cognition & ++ & ++ & & & & & & \\
+\hline
+\multirow{6}{0.2cm}{\turn{90}{\bf Model}} & Representation of space & & & & & & & & ++  \\
+ & Representation of temporality & & & & & & & + (snapshots) & +  \\
+ & Context & & & & & & & & ++  \\
+ & Alternative worlds & & +++ & & & & ++ & &  \\
+ & Introspection & + (SRDF) & & & & & & &  \\
+ & Memory models & & + & & & & & &  \\
+\hline
+\multirow{10}{0.2cm}{\turn{90}{\bf Reasoning}} & Standard FOL reasoning & +++ & +++ & & & & & & +  \\
+ & Knowledge structure alteration & & ++ & & & & & &  \\
+ & Lazy evaluation & +++ & & & & & & &  \\
+ & Reasoning under uncertainty & ++ (extension) & & & & & + & & \\
+ & Non-monotonic reasoning & & & & & & & &  \\
+ & Presupposition accomodation & & & & & & & +++ & \\
+ & Prediction, projection, diagnosis & & & & & & & & \\
+ & Physics-based reasoning & +++ (extension) & & & & & & &  \\
+ & Planning & + & +++ (external) & & & & & & + \\
+ & Learning & & & & & & & &  \\
+\hline
+\multirow{3}{0.7cm}{\turn[1cm]{90}{\bf Knw. acq.}} & Acquisition techniques & & & & & & & & \\
+ & Grounding & & & & & & & ++ & ++ \\
+ & Interaction & & +++ (external) & & & & & +++ & \\
+ & Instanciation & & & & & & & & \\
+\hline
+\multirow{4}{0.2cm}{\turn{90}{\bf Integ.}} & ...with sensori-motor layers & & & & & & & + & + \\
+ & ...with executive layers & & & & & & & + & ++ \\
+ & Monitoring and debugging & & & & & & & & \\
+ & Performances & & & & & & & & \\
+
+\bottomrule
+
+%\end{tabularx}
+\end{tabular}
+\end{center}
+\caption{Main domain of contribution of each surveyed systems. Rating goes from +++ (major focus) to + (secondary interest). An empty cell means that 
+the system does not consider this domain.}
+\label{table|contribution-by-systems}
+\end{table}
+\end{landscape}
+
+
