@@ -7,15 +7,30 @@ Shrobe and Szolovits,
 \section{What do we call "knowledge"?}
 \label{sect|on-knowledge}
 
-First, we want to represent knowledge and not only information.  Both knowledge
-and information are contextualized. Knowledge also has a \emph{cultural}
-context that enable interpretation. 
+
+Since we will discuss at length the concept of knowledge in the context
+of robotics in the coming pages, it is useful to make our terminology explicit.  No general
+agreement on a definition of ``knowledge'' exists. In our context, we call
+``knowledge'' \emph{an explicit set of interrelated logical facts that are
+meaningful to the robot executive controller} (by \emph{meaningful} we mean
+that can possibly be interpreted to lead to a purposeful action).
+
+The relation of \emph{data} and \emph{information} to knowledge is a debated
+epistemology question (the interested reader is invited to refer to the
+Wikipedia page on the ``DIKW'' hierarchy). In this thesis, we will associate
+data to low-level material like raw sensor output, and information to
+uncontextualized symbolic facts.
+
+To give a example, image a human watching at a book and being tracked by a
+Kinect sensor: the pose of the human skeleton in the world would be the data,
+the fact \concept{looksAt(human, book)} as computed by a geometric reasoning
+module would be the information, the fact \concept{looksAt(john,
+war\_and\_peace)}, fully grounded and connected to the whole knowledge base of
+the robot would be proper knowledge.
 
 Note that the origins of AI where in purely symbolic models, that were
 not usable either. Rich interleaving between geometric reasoning and symbolic
-models is required. 
-
-
+models is required.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{A Typology of Knowledge Representation Systems Requirements for Robotics}
