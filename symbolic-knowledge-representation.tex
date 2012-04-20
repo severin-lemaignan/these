@@ -50,7 +50,7 @@ formalism. The choice of the formalism has a strong impact, on one side, on the
 range of ideas that can be expressed conveniently (\emph{practical
 expressiveness}) or at all (\emph{theoretical expressiveness}), on the other
 side, on the ability to solve the inference problem (called
-\emph{decidability}: is a given logical sentence true in my model?) in a
+\emph{satisfiability}: is a given logical sentence true in my model?) in a
 tractable manner.
 
 A large number of logic formalism do exist, we shall summarize below the most
@@ -64,13 +64,20 @@ objects of \emph{predicates} (or \emph{formulae}) are simple \emph{terms},
 while in \emph{higher-order logics}, predicates can be themselves objects of
 other predicates.
 
-The family of \emph{description logics}~\cite{Baader2008} also play an
-important role. It is a subset of the first-order logic, with some extensions
-in second-order logic. Description logics are notable because most of them are
-known to be decidable. In description logic, axioms are build from
+\emph{Horn clauses} are an important subset of FOL because the satisfiability
+of a set of such clauses is a $P$-complete problem. A Horn clause is a
+disjunction of literals (a \emph{clause}) with at most one positive literal:
+$\neg p \vee \neg q \vee \cdots \vee \neg t \vee u$, which can also be
+represented as $(p \wedge q \wedge \cdots \wedge t) \rightarrow u$.  Important
+logic programming languages like Prolog are based on Horn clauses.
+
+The family of \emph{Description Logics}~\cite{Baader2008} also play an
+important role. It is also a subset of the first-order logic, with some
+extensions in second-order logic. Description logics are notable because most
+of them are known to be decidable. In description logic, axioms are build from
 \emph{concepts}, \emph{roles} (that are unary or binary predicates) and
-\emph{individuals}. The W3C OWL-DL standard is a widely-used language to describe
-domains with the description logic.
+\emph{individuals}. The W3C OWL-DL standard is a widely-used language to
+describe domains with the description logic.
 
 Because Description Logics have been originally created from the perspective of
 a \emph{knowledge representation language} and not a logic language, their
@@ -133,17 +140,30 @@ propositional logic:
 \end{enumerate}
 \end{quote}
 
-Generally speaking, expressive power comes at the cost of ease of
+Generally speaking, expressive power comes at the cost of more complex
 \emph{satisfiability} and \emph{consistency}\footnote{We precise these concepts
-at section~\ref{sect|reasoning}.} tests, possibly leading to undecidable formal
-systems, \ie systems where it is proven that a proposition can not be decided
-to be true or false.
+at section~\ref{sect|reasoning}.} computations, possibly leading to
+untractable, if not undecidable (\ie systems where it is proven that a
+proposition can not be decided to be true or false) problems.
 
-The relationship between expressive power and the complexity of reasoning problem that
-follow has been partially formalized for Description Logics.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\columnwidth]{typology/expressive_overlap_dl_horn.pdf}
+    \caption{Expresiveness overlap of Description Logics and logic programs
+    based on Horn clauses, taken from~\cite{Grosof2003}}
+    \label{fig|overlap_dl_horn}
+\end{figure}
+
+Figure~\ref{fig|overlap_dl_horn} shows that the expresive power of description
+logics and Horn clauses partially overlaps. In section~\ref{sect|reasoning} we
+mention extensions to description logics based on rule systems to bring closer
+the two approaches.
+
+The relationships between expressive power and reasoning complexity that follow
+has been extensively studied for Description Logics.
 Zolin~\cite{ZolinDLComplexityNavigator} maintains a ``complexity navigator''
-for Description Logics that allows to conveniently explore this relationship
-and indexes most of the litterature on that subject.
+that allows to conveniently explore these relationships and indexes most of the
+litterature on that subject.
 
 \subsubsection{Open World and Close World Assumptions}
 
@@ -386,7 +406,12 @@ Reasoners can then provide other type of inferences, like:
 \end{itemize}
 
 \paragraph{Rule Languages}
-\item generic SWRL ({\em Semantic Web Rule Language}) rules like: \par
+
+As mentionned earlier, knowledge models based on description logics can be extended through rule languages.
+
+Intersection of properties is an example of expression that can only be represented with rules: for instance, 
+
+generic SWRL ({\em Semantic Web Rule Language}) rules like: \par
         \footnotesize \concept{looksAt(?agt, ?obj)} $\land$
         \concept{pointsAt(?agt,?obj)} \par $\Rightarrow$ \concept{focusesOn(?agt, ?obj)}
         \normalsize 
@@ -439,12 +464,12 @@ retraction of other facts. This rule requires non-monotonic reasoning to be
 applied.
 
 \emph{Default logic} is one of the formal logic that account for representing
-general truth and exceptions to it. However, due to computational complexity of
-these model (most of inferences in default logic are known to be $NP$-complete
-problem), classical logics and most of the existing reasoners do not allow
-non-monotonic reasoning. For instance, the SWRL rule language, usually
-associated to the OWL-DL ontology language, do not allow non-monotonic
-reasoning.
+general truth and exceptions to it (for instance, \emph{tomatoes are red, in
+general}). However, due to computational complexity of these model (most of
+inferences in default logic are known to be $NP$-complete problem), classical
+logics and most of the existing reasoners do not allow non-monotonic reasoning.
+For instance, the SWRL rule language, usually associated to the OWL-DL ontology
+language, do not allow non-monotonic reasoning.
 
 \fxfatal{Make clear 'who does not allow non-monotonic-reasoning': logics? rule
 languages? reasoner?}
@@ -469,7 +494,7 @@ time representation.}
 \fxfatal{Mention that probabilistic reasoning lead to implicit non-monotonic reasoning}
 
 
-\subsubsection{Presupposition accommodation}
+\subsubsection{Presupposition Accommodation}
 \label{sect|presupposition-accomodation}
 
 \emph{Presupposition accommodation} is the ability for the system to
@@ -529,12 +554,6 @@ that carries the geometries and physical properties of objects.
 
 Making decision based on prediction
 
-\subsubsection{Alteration of the knowledge structure}
-
-In systems
-
-All systems allow to modify the ABox, not always possible to alter the TBox
-
 \subsubsection{Learning}
 \label{sect|learning}
 
@@ -576,13 +595,12 @@ different natures, like in the example above) merging will require
 symbolic-level reasoning. The KRS has a direct impact on the feasability and
 ease of such operations.
 
-\paragraph{Perception}
-\paragraph{Interaction}
-\paragraph{External sources (Web, upper ontologies, ...)}
-\paragraph{Learning}
-
 \subsubsection{Grounding/anchoring strategies}
 \label{sect|grounding}
+
+\subsubsection{Interaction with other agents}
+\label{sect|interactions}
+
 
 \subsubsection{Ability to automatically create new object instances}
 \label{sect|new-instances}
@@ -621,8 +639,6 @@ How much knowledge is available? Which content? How big is the knowledge base?
 	\end{itemize}
 
 \end{itemize}
-
-
 
 
 
