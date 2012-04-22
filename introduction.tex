@@ -1,12 +1,60 @@
 \chapter{Introduction: Human-Robot interaction and Knowledge}
 \label{chapter|introduction}
 
-Robotics is moving from technological demos to real world coworkers/companions.
 
 This shift requires ``awareness'' of humans.
 
 To make informed decision, the robot needs knowledge about the \emph{tasks},
 the \emph{environment}, the \emph{situational context}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+List of recent successful \& highly visible robot experiments in human environment:
+\begin{itemize}
+    \item Amener une bierre avec le PR2 (WG)
+    \item Sandwiches/popcorn at TUM
+    \item expe avec Nao
+\end{itemize}
+
+Service robotics is leaving the realm of Sci-Fi, dreams and fanstasms to become
+a reality. \fxwarning{find references of predictions "when robots are in our
+homes}. 
+
+Robotics is moving from technological demos to real world coworkers/companions.
+
+
+Decision making on the robot can not anymore rely on a single or a few
+modalities of interaction.
+
+The perceptual layer has moved up from traditional sensing modalities (camera
+images, laser scans) to synthetic sensing devices like the Kinect-based human
+tracker, face recognition or SLAM-based localization.
+
+Perceiving and understanding the environment is now mainly a matter of
+rebuilding an internal, amodal, model of the environment with to interleaved
+facets: a continuous, geometric world and a discrete, symbolic world.
+
+Because we are now interested in having the robot to not live anymore in
+isolation, but on contrary, in interaction with other intelligent agents, we
+want to endow our systems with \emph{agency} and \emph{social skills}. This
+implies that the robot is able not only to represent inanimate objects but also
+other intelligences, other minds. And not only represent them, but also
+interact with them, which require communication skills, ability to take
+perspectives and a theory of mind.
+
+Note that our robot comes to life in a connected world. It has to interact with
+other agents that may physically exist or may be equally well disembodied.
+
+Figure~\ref{fig|congitive-robots} proposes an organization of research fields
+and projects in robotics along two dimensions, the level of social skills, and
+the level of agency (the ability to \emph{act in the world}).
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\columnwidth]{intro/social_skills.pdf}
+    \caption{Towards the cognitive robot}
+    \label{fig|cognitive-robots}
+\end{figure}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -26,7 +74,7 @@ Interaction for \emph{joint action} in a \emph{situated} environment.
 
 \begin{figure*}
 	\centering
-	\includegraphics[width=0.9\textwidth]{images/introduction/brownie_scenario.jpg}
+	\includegraphics[width=0.9\textwidth]{intro/brownie_scenario.jpg}
 	\caption{A representation of the scenario, in the MORSE simulator}
 	\label{fig|scenario}
 \end{figure*}

@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="664.92932"
+   height="700.22815"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48+devel r"
+   sodipodi:docname="social_skills.svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="207.14727"
+     inkscape:cy="71.472646"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     width="0px"
+     height="0px"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1056"
+     inkscape:window-x="0"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-19.408669,-134.102)">
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 57.142857,150.93361 0,552.85714 602.857143,0"
+       id="path3928"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 78.571429,675.21933 585.71429,168.07647"
+       id="path3930"
+       inkscape:connector-curvature="0" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text3936"
+       y="660.1554"
+       x="70.866112"
+       style="font-size:26.73013878px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#3465a4;fill-opacity:1;stroke:none;font-family:Adelle Basic;-inkscape-font-specification:Adelle Basic Bold"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#3465a4;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+         y="660.1554"
+         x="70.866112"
+         id="tspan3938"
+         sodipodi:role="line">Automaton</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:26.73013878px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#3465a4;fill-opacity:1;stroke:none;font-family:Adelle Basic;-inkscape-font-specification:Adelle Basic Bold"
+       x="276.93719"
+       y="504.5918"
+       id="text3932"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3934"
+         x="276.93719"
+         y="504.5918"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#3465a4;font-family:Ubuntu;-inkscape-font-specification:Ubuntu">Autonomous</tspan><tspan
+         sodipodi:role="line"
+         x="276.93719"
+         y="538.00446"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#3465a4;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+         id="tspan4008">Household Robot</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text3940"
+       y="288.41922"
+       x="124.40418"
+       style="font-size:26.73013878px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#3465a4;fill-opacity:1;stroke:none;font-family:Adelle Basic;-inkscape-font-specification:Adelle Basic Bold"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#3465a4;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+         y="288.41922"
+         x="124.40418"
+         id="tspan3942"
+         sodipodi:role="line">Interactive Robot</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:26.73013878px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#3465a4;fill-opacity:1;stroke:none;font-family:Adelle Basic;-inkscape-font-specification:Adelle Basic Bold"
+       x="391.0845"
+       y="331.8558"
+       id="text3944"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3946"
+         x="391.0845"
+         y="331.8558"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#3465a4;font-family:Ubuntu;-inkscape-font-specification:Ubuntu">Web-enabled Robot</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text3948"
+       y="40.151257"
+       x="-436.42184"
+       style="font-size:26.73013878px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Adelle Basic;-inkscape-font-specification:Adelle Basic Bold"
+       xml:space="preserve"
+       transform="matrix(0,-1,1,0,0,0)"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+         y="40.151257"
+         x="-436.42184"
+         id="tspan3950"
+         sodipodi:role="line">Social skills</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:26.73013878px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Adelle Basic;-inkscape-font-specification:Adelle Basic Bold"
+       x="356.61145"
+       y="737.86285"
+       id="text3952"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3954"
+         x="356.61145"
+         y="737.86285"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:Ubuntu">Agency</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text3956"
+       y="556.22614"
+       x="340.33743"
+       style="font-size:17.76807594px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#3465a4;fill-opacity:1;stroke:none;font-family:Adelle Basic;-inkscape-font-specification:Adelle Basic Bold"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#a40000;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+         y="556.22614"
+         x="340.33743"
+         id="tspan3958"
+         sodipodi:role="line">Roomba</tspan></text>
+    <path
+       style="fill:#2e3436;stroke:#2e3436;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 55.55839,135.14367 -15.782983,27.33693 29.925119,0 z"
+       id="path3960"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <path
+       sodipodi:nodetypes="cccc"
+       inkscape:connector-curvature="0"
+       id="path3962"
+       d="m 683.29629,702.94752 -27.33693,-15.78298 0,29.92512 z"
+       style="fill:#2e3436;stroke:#2e3436;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <text
+       xml:space="preserve"
+       style="font-size:26.73013878px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#3465a4;fill-opacity:1;stroke:none;font-family:Adelle Basic;-inkscape-font-specification:Adelle Basic Bold"
+       x="79.957481"
+       y="429.84061"
+       id="text3970"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3972"
+         x="79.957481"
+         y="429.84061"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#3465a4;font-family:Ubuntu;-inkscape-font-specification:Ubuntu">Conversational</tspan><tspan
+         sodipodi:role="line"
+         x="79.957481"
+         y="463.25327"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#3465a4;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+         id="tspan3974">Agent</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text3980"
+       y="211.64764"
+       x="408.25708"
+       style="font-size:26.73013878px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#3465a4;fill-opacity:1;stroke:none;font-family:Adelle Basic;-inkscape-font-specification:Adelle Basic Bold"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#3465a4;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+         y="211.64764"
+         x="408.25708"
+         id="tspan3982"
+         sodipodi:role="line">Cognitive Robot</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text3984"
+       y="767.15729"
+       x="50.535229"
+       style="font-size:26.73013878px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Adelle Basic;-inkscape-font-specification:Adelle Basic Bold"
+       xml:space="preserve"><tspan
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Italic;font-size:16px"
+         y="767.15729"
+         x="50.535229"
+         id="tspan3986"
+         sodipodi:role="line">Autonomy ?</tspan><tspan
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Italic;font-size:16px"
+         y="800.56995"
+         x="50.535229"
+         sodipodi:role="line"
+         id="tspan4039">Interaction ?</tspan><tspan
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Italic;font-size:16px"
+         y="833.9826"
+         x="50.535229"
+         sodipodi:role="line"
+         id="tspan3988">Communication ?</tspan><tspan
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Italic;font-size:16px"
+         y="867.39532"
+         x="50.535229"
+         sodipodi:role="line"
+         id="tspan4010">Embodiement ?</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:17.76807594px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#3465a4;fill-opacity:1;stroke:none;font-family:Adelle Basic;-inkscape-font-specification:Adelle Basic Bold"
+       x="460.54559"
+       y="356.21591"
+       id="text3990"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3992"
+         x="460.54559"
+         y="356.21591"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#a40000;font-family:Ubuntu;-inkscape-font-specification:Ubuntu">RoboEarth</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text3994"
+       y="311.76923"
+       x="211.0379"
+       style="font-size:17.76807594px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#3465a4;fill-opacity:1;stroke:none;font-family:Adelle Basic;-inkscape-font-specification:Adelle Basic Bold"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#a40000;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+         y="311.76923"
+         x="211.0379"
+         id="tspan3996"
+         sodipodi:role="line">Nao</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text3998"
+       y="623.78979"
+       x="495.13016"
+       style="font-size:26.73013878px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#4e9a06;fill-opacity:1;stroke:none;font-family:Adelle Basic;-inkscape-font-specification:Adelle Basic Bold"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#4e9a06;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+         y="623.78979"
+         x="495.13016"
+         id="tspan4000"
+         sodipodi:role="line">Field Robotics</tspan></text>
+    <path
+       sodipodi:nodetypes="cccc"
+       inkscape:connector-curvature="0"
+       id="path4002"
+       d="m 601.4651,144.08159 -28.56162,13.44039 24.57314,17.07846 z"
+       style="fill:#2e3436;stroke:#2e3436;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       inkscape:transform-center-x="3.8494862"
+       inkscape:transform-center-y="-1.0290684" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text4004"
+       y="529.88293"
+       x="-115.82221"
+       style="font-size:26.73013878px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Adelle Basic;-inkscape-font-specification:Adelle Basic Bold"
+       xml:space="preserve"
+       transform="matrix(0.71854678,-0.69547863,0.69547863,0.71854678,0,0)"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
+         y="529.88293"
+         x="-115.82221"
+         id="tspan4006"
+         sodipodi:role="line">Knowledge</tspan></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4012"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Adelle Basic;-inkscape-font-specification:Adelle Basic Bold"><flowRegion
+         id="flowRegion4014"><rect
+           id="rect4016"
+           width="1010.1525"
+           height="971.76672"
+           x="-125.25892"
+           y="30.087807" /></flowRegion><flowPara
+         id="flowPara4018"></flowPara></flowRoot>  </g>
+</svg>
