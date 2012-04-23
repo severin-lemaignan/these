@@ -35,7 +35,6 @@ models is required.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{A Typology of Knowledge Representation Systems Requirements for Robotics}
 \label{sect|features}
-
 We presented an imaginary cooking scenario where numerous desirable
 features for a knowledge representation system for robotics have been
 identified in no particular order.
@@ -489,11 +488,12 @@ language, do not allow non-monotonic reasoning.
 \fxfatal{Make clear 'who does not allow non-monotonic-reasoning': logics? rule
 languages? reasoner?}
 
-One important exception if the \emph{Negation as failure} inference rule, as
+One important exception is the \emph{negation as failure} inference rule, as
 implemented by {\sc Prolog} for instance, that allows for non-monotonicity, but
 only \emph{within the closed world assumption}.
 
 \fxfatal{Give here an example of non-monotonic reasoning with Prolog}
+\fxwarning{Do we mention here Answer Set Programming?}
 
 A monotonic system does not theoretically allow for knowledge retractation,
 which is an important issue in the robotic context where the world model is
@@ -613,9 +613,30 @@ ease of such operations.
 \subsubsection{Grounding/anchoring strategies}
 \label{sect|grounding}
 
-\subsubsection{Interaction with other agents}
-\label{sect|interactions}
+\emph{Grounding} (also called \emph{anchoring} when specifically refering to
+building links between \emph{percepts} and \emph{physical
+objects}~\cite{Coradeschi2003}) is the task consisting in building and
+maintaining a bi-directional link between sub-symbolic representations (sensors
+data, low-level actuation) and symbolic represtentations that can be
+manipulated and reasoned about~\cite{Harnad1990}.
 
+Being embodied entities with interaction with other embodied entities as a
+fundamental requirement, robots and robotic is deeply concerned by the
+grounding issue.
+
+Being actually implemented on real service robots, all the symbolic knowledge
+representation systems that we review in this study have some kind of grounding
+process. Numerous approaches exist, like amodal
+\emph{proxies}~\cite{Jacobsson2008}, grounded amodal
+representations~\cite{Alami2011, Mavridis2006} or semantic maps
+(Figure~\ref{fig|semanticmap}, \cite{Nuechter2008, Galindo2008,Blodow2011}).
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\columnwidth]{typology/semanticmaps_hertzberg.png}
+    \caption{Example of a semantic map, taken from~\cite{Nuechter2008}.}
+    \label{fig|semanticmap}
+\end{figure}
 
 \subsubsection{Ability to automatically create new object instances}
 \label{sect|new-instances}
@@ -632,9 +653,10 @@ Ability to ``listen'' to the robot internal structures.
 \subsubsection{Integration with executive layers}
 \label{sect|integration-executive-layers}
 
-\paragraph{Language integration}
-
 \paragraph{Events}
+
+\subsubsection{Language Processing}
+\label{sect|nlp}
 
 \subsubsection{Monitoring and debugging}
 \label{sect|debugging}
@@ -656,44 +678,43 @@ How much knowledge is available? Which content? How big is the knowledge base?
 \end{itemize}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{State of the art in knowledge representation systems for robotics}
 \label{sect|krs-survey}
 
-
 Table \ref{table|surveyed-systems} presents the fifteen knowledge representation systems surveyed
 in this article.
-
-Table \label{table|contribution-by-systems} summarizes the main fields of contribution for each of these systems.
 
 This section briefly presents each of them.
 
 \begin{landscape}
-\begin{table}
+\begin{table}\footnotesize
 \begin{center}
-%\begin{tabularx}{\textheight}{p{2cm}p{4cm}p{3cm}p{4cm}p{2.3cm}p{2cm}p{2cm}}
+
 \begin{tabular}{p{2.2cm}p{1.6cm}p{4cm}lp{2.4cm}p{3.4cm}p{2.8cm}p{1.5cm}}
+\toprule
 {\bf Project} & {\bf Category} & {\bf Authors (Institution)} & {\bf Project homepage} & {\bf Programming language} & {\bf Knowledge model/Logical Formalism} & {\bf Reasoner} & Main reference \\
-\hline
-{\sc KnowRob} & KRS & Tenorth, Beetz \par (TU Munich) & \url{http://ias.in.tum.de/kb/wiki} & {\sc Prolog} & {\sc Prolog} + OWL-DL & Custom \par ({\sc Prolog}) & \cite{Tenorth2009a} \\
+\midrule
+{\sc KnowRob} & KRS & Tenorth, Beetz \par (TU Munich) & \url{ias.in.tum.de/kb/wiki} & {\sc Prolog} & {\sc Prolog} + OWL-DL & Custom \par ({\sc Prolog}) & \cite{Tenorth2009a} \\
 ORO & KRS & Lemaignan, Alami \par (LAAS-CNRS) & \url{oro.openrobots.org} & {\sc Java} & OWL-DL ({\sc Jena}) & {\sc Pellet} & \cite{Lemaignan2010} \\
 PEIS KR\&R & KRS & Daoutis, Coradeshi, Loutfi, Saffiotti \par (Örebro Univ.) & \url{www.aass.oru.se/~peis} & {\sc C}, {\sc CycL} & CycL (1st and 2nd order logics, modal logics) & & \cite{Daoutis2009} \\
 CAST Proxies & Ubiquitous & Wyatt, Hawes, Jacobsson, Kruijff (Brimingham Univ., DFKI Saarbrücken) & & & Amodal proxies & & \cite{Jacobsson2008} \\
-Golog & Language & Levesque (Toronto Univ.) & & {\sc Prolog} & & & \\
 NKRL & Language & Zarri et al. \par (Paris Est Créteil Univ.) & & NKRL & & & \cite{Sabri2011} \\
-GSM & & Mavridis, Roy \par (MIT MediaLab) & & & & & \cite{Mavridis2006} \\
-OMRKF & & Suh et al. \par (Hanyang Univ.) & \url{incorl.hanyang.ac.kr/xe/?mid=symbolic_reasoning} & ? & Horn Clauses & ? & \cite{Suh2007} \\
-Ke Jia & & Chen et al. \par (Univ. of Science and Technology of China) & & & & & \cite{Chen2010} \\
+GSM & KRS & Mavridis, Roy \par (MIT MediaLab) & & ? & & & \cite{Mavridis2006} \\
+OMRKF & KRS & Suh et al. \par (Hanyang Univ.) & \url{incorl.hanyang.ac.kr/xe} & ? & Horn Clauses & ? & \cite{Suh2007} \\
+Ke Jia Project & KRS & Chen et al. \par (Univ. of Science and Technology of China) & \url{www.wrighteagle.org/en} & ASP & ASP & ASP & \cite{Chen2010} \\
+ARMAR/Tapas & KRS & Holzapfel, Waible \par (Karlsruhe TH) & & ? & TFS (Typed Feature Structures) & & \cite{Holzapfel2008}\\
+Golog & Language & Levesque (Toronto Univ.) & & {\sc Prolog} & & & \\
  & & Varadarajan, Vincze \par (TU Wien) & & & & & \cite{Varadarajan2011} \\
  & & Kaelbling, Lozano-Pérez \par (MIT CSAIL) & & & & & \cite{Kaelbling2011} \\
-ARMAR & & Schmidt-Rohr (Karlsruhe TH) \\
  & & Hertzberg (Osnabrück Univ.) \\
- & & (DFKI Bremen) \\
  (based on {\sc KnowRob} & & (JSK) \\
+ OBOC & KRS & Mendoza & & & & & \cite{Mendoza2005} \\
 
-\hline
+\bottomrule
 
-%\end{tabularx}
 \end{tabular}
 \end{center}
 \caption{List of surveyed systems. Projects are listed by category (\emph{KRS} for systems that are explicit knowledge representation and reasoning modules, \emph{Ubiquitous} for systems where knowledge processing is fully distributed, \emph{Language} for languages used as KRS on robots), then names.}
@@ -706,6 +727,9 @@ ARMAR & & Schmidt-Rohr (Karlsruhe TH) \\
 
 \subsection{KnowRob}
 \label{sect|knowrob}
+
+\subsection{ORO}
+\label{sect|oro}
 
 \subsection{PEIS KR\&R}
 \label{sect|peis-ecology}
@@ -866,7 +890,7 @@ theory of mind).
     based on~\cite{Mavridis2006}}
 
     \label{fig|gsm}
-   \end{figure}
+\end{figure}
 
 Properties are represented in three layers: a stochastic representation, close
 to sensory percepts, a \emph{continous single-valued} encoding of the
@@ -931,6 +955,53 @@ kitchen objects and reporting about their state to a human.  This experiment
 also shows how OMRKF can deal with objects only partially matched by their
 descriptor by introducing a $candidate()$ function.
 
+\subsection{Ke Jia Project}
+\label{sect|kejia}
+
+The Ke Jia project~\cite{Chen2010} integrates on a mobile platform a knowledge
+representation language with natural language processing, task planing and
+motion planing.
+
+Knowledge representation relies on \emph{Action Language C}, itself based on
+\emph{Answer Set Programming} (ASP)~\cite{Gelfond2008}. These languages, that
+are syntactically close to Prolog, are based on \emph{stable models} of logic
+programs, and support non-monotonic reasoning. Default and non-monotonic
+reasoning has been especially researched within the Ke Jia project for symbolic
+task planing~\cite{Ji2011} and underspecified natural language processing.
+
+Amongst other features, the natural language processing capabilities of the
+system support acquisition of new logical rules at run-time.
+
+\paragraph{Experiments} The Ke Jia robot has been demonstrated in several tasks
+involving human-robot interaction with natural language. These tasks include a
+task with multiple \emph{pick \& carry} that are globally optimized, naive
+physics reasoning via teached rules or more complex scenarii with the robot
+delivering drinks, taking into account changing and mutually exclusive
+preferences of users.
+
+\subsection{ARMAR/Tapas}
+
+{\sc Tapas} is the name of the knowledge representation system and dialogue
+manager found on the ARMARIII robot~\cite{Holzapfel2008}.
+
+Knowledge in {\sc Tapas} exists as procedural knowledge (plans) and declarative
+knowledge. The later is split into \emph{lexical knowledge}, \emph{semantic
+knowledge} and a database of identified objects (with their properties). The
+\emph{lexical knowledge} contains lexical and grammatical informations about
+the objects. The \emph{semantic knowledge} is organized into an ontology
+relying on \emph{typed feature structures} (TFS,~\cite{Carpenter1992}, a
+formalism originating from the computational linguistics community, and a
+superset of first-order logic).
+
+{\sc Tapas} has a strong focus on natural language grounding. It proceeds by
+generating grammars from properties represented in the ontology to parse and
+understand dialogue.
+
+Another focus is put on handling unknown words and objects. {\sc Tapas}
+provides routines to recognize unknown entities, and propose and interactive
+and iterative verbal process to categorize (including adding new caterogies)
+those new concepts.
+
 %%%%%%%%%% Underlying knowledge model table %%%%%%%%
 \begin{table}
 \begin{center}
@@ -946,11 +1017,9 @@ NKLR &  None \\
 CAST Proxies &  None \\
 GSM &  Predefined categories \\
 OMRKF & {\it A priori} knowledge structure and axioms, custom set of instances\\
-Wrighteagle & \\
+Ke Jia & None \\
+ARMAR/{\sc Tapas} & Custom ontology related to the kitchen\\
 Vincze & \\
-ARMAR &  \\
-Hertzberg & \\
-(DFKI Bremen) & \\
 (JSK) & \\
 
 \bottomrule
@@ -962,49 +1031,52 @@ Hertzberg & \\
 \end{table}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary of Approaches}
+\label{sect|summary}
+
 \begin{landscape}
-\begin{table}
+\begin{table}\footnotesize
 \begin{center}
 
-\begin{tabular}{cp{4.5cm}ccccccccc}
+\begin{tabular}{cp{4.5cm}p{2.3cm}p{2cm}p{1cm}p{1cm}p{1cm}p{1cm}p{1.5cm}p{2cm}p{1.5cm}p{1.5cm}}
 \toprule
-\multicolumn{2}{c}{\bf Category} & {\sc KnowRob} & {ORO} & {\sc PEIS} & {\sc CAST} & {\sc Golog} & {\sc NKRL} & {\sc GSM} & {\sc OMRKF} \\
+\multicolumn{2}{c}{\bf Category} & {\sc KnowRob} & {ORO} & {\sc PEIS} & {\sc CAST} & {\sc Ke Jia} & {\sc NKRL} & {\sc GSM} & {\sc OMRKF} & {\sc ARMAR} & {\sc Hertzberg} \\
 
 \midrule
 
-\multirow{5}{0.7cm}[-0.2cm]{\turn[1.5cm]{90}{\bf Expressive power}} & Logical formalism & Prolog & OWL-DL & {\sc CycL} &  &  &  & & Horn clauses \\
- & Expressive power & & & & & & & &  \\
- & OWA/CWA & CWA & OWA & & & & & & \\
+\multirow{5}{0.7cm}[0.2cm]{\turn[1.5cm]{90}{\bf Expr. power}} & Logical formalism & Prolog & DL (OWL) & {\sc CycL} &  & ASP &  & & Horn clauses & TFS & \\
+ & OWA/CWA & CWA & OWA & ? & ? & CWA & ? & ? & ? & ? & ? \\
  & Modeling uncertainty & +++ (extension) & & & & & & ++ (stochastic) & + (\emph{candidate} entities) \\
  & Meta-cognition & ++ & ++ & & & & & & \\
 \hline
-\multirow{6}{0.2cm}{\turn{90}{\bf Model}} & Representation of space & & & & & & & & ++  \\
- & Representation of temporality & & & & & & & + (snapshots) & +  \\
+\multirow{6}{0.2cm}{\turn{90}{\bf Model}} & Space Representation & & & & & & & & ++  \\
+ & Time representation & & & & & & & + (snapshots) & +  \\
  & Context & & & & & & & & ++  \\
  & Alternative worlds & & +++ & & & & ++ & &  \\
  & Introspection & + (SRDF) & & & & & & &  \\
  & Memory models & & + & & & & & &  \\
 \hline
-\multirow{10}{0.2cm}{\turn{90}{\bf Reasoning}} & Standard FOL reasoning & +++ & +++ & & & & & & +  \\
- & Knowledge structure alteration & & ++ & & & & & &  \\
+\multirow{10}{0.2cm}{\turn{90}{\bf Reasoning}} & Standard FOL reasoning & +++ & +++ & & & +++ & & & +  \\
+ & Knowledge structure alteration & & ++ & & & ++ & & & & ++ &  \\
  & Lazy evaluation & +++ & & & & & & &  \\
  & Reasoning under uncertainty & ++ (extension) & & & & & + & & \\
- & Non-monotonic reasoning & & & & & & & &  \\
+ & Non-monotonic reasoning & & & & & +++ & & &  \\
  & Presupposition accomodation & & & & & & & +++ & \\
  & Prediction, projection, diagnosis & & & & & & & & \\
  & Physics-based reasoning & +++ (extension) & & & & & & &  \\
- & Planning & + & +++ (external) & & & & & & + \\
- & Learning & & & & & & & &  \\
+ & Planning & + & +++ (external) & & & ++ & & & + \\
+ & Learning & & + & & & & & & & ++ &  \\
 \hline
 \multirow{3}{0.7cm}{\turn[1cm]{90}{\bf Knw. acq.}} & Acquisition techniques & & & & & & & & \\
- & Grounding & & & & & & & ++ & ++ \\
- & Interaction & & +++ (external) & & & & & +++ & \\
+ & Grounding & +++ \par (semantic maps) & ++ (external amodal model) & & & & & ++ & ++ \\
  & Instanciation & & & & & & & & \\
 \hline
 \multirow{4}{0.2cm}{\turn{90}{\bf Integ.}} & ...with sensori-motor layers & & & & & & & + & + \\
  & ...with executive layers & & & & & & & + & ++ \\
+ & NLP & & +++ (external) & & & +++ & & +++ & & +++ & \\
  & Monitoring and debugging & & & & & & & & \\
- & Performances & & & & & & & & \\
+ & Performances & & & & & + & & & \\
 
 \bottomrule
 
