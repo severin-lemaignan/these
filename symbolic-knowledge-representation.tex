@@ -33,13 +33,13 @@ not usable either. Rich interleaving between geometric reasoning and symbolic
 models is required.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{A Typology of Knowledge Representation Systems Requirements for Robotics}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{A Typology of Knowledge Representation Requirements for Robotics}
 \label{sect|features}
 
-We presented an imaginary cooking scenario where numerous desirable
-features for a knowledge representation system for robotics have been
-identified in no particular order.
+We now want to organize requirements from this imaginary cooking scenario where
+numerous desirable features for a knowledge representation system for robotics
+have been identified without any particular order.
 
 This section proposes a more formal typology of desirable features for a such a
 system. For each feature, we provide a short definition along with links to
@@ -49,10 +49,44 @@ Table~\ref{table|contribution-by-systems}, at the end of the article,
 summarizes all these features with the main domain of contribution of each
 surveyed KRS.
 
+As previously mentioned, we propose six main categories.
+
+\begin{scriptsize}
+\begin{center}
+\begin{tikzpicture}[grow=right, level distance = 3cm, level 1/.style={sibling distance=5mm}]
+    %[edge from parent fork east]
+    %every node/.style={fill=black!30,rounded corners},
+    %[parent anchor=east,child anchor=west,grow=east,
+    %edge from parent/.style={thick,draw}]
+    \node {Dimensions}
+        child {node {Instantiation}}
+        child {node {Integration}}
+        child {node {Acquisition}}
+        child {node {Reasoning}}
+        child {node {Representation}}
+        child {node {Expressiveness}};
+\end{tikzpicture}
+\end{center}
+\end{scriptsize}
+
 \subsection{Expressiveness: What Can be Represented?}
 \label{sect|expressiveness}
 
-\subsubsection{Introduction: Main Logic Formalisms}
+\begin{scriptsize}
+\begin{center}
+\begin{tikzpicture}[grow=right, sibling distance=5mm, level distance = 3.5cm]
+    \node {\bf Expressiveness}
+            child {node {Meta-cognition}}
+            child {node {Uncertainty}}
+            child {node {Open/Closed world assumption}}
+            child {node {Expressive power}}
+            child {node {Logic formalism}};
+\end{tikzpicture}
+\end{center}
+\end{scriptsize}
+
+
+\subsubsection{Main Logic Formalisms}
 
 The main role of a knowledge representation system is to provide an adequate
 representation system to store facts and concepts that can be informally
@@ -70,7 +104,7 @@ side, on the ability to solve the inference problem (called
 tractable manner.
 
 A large number of logic formalism do exist, we shall summarize below the most
-relevant for systems actually deployed in current robotic architectures.
+relevant ones for systems actually deployed in current robotic architectures.
 
 \emph{Predicate logic} is the family of logic formalisms the most commonly
 found in knowledge representation. It distinguishes itself from the simpler
@@ -81,30 +115,31 @@ while in \emph{higher-order logics}, predicates can be themselves objects of
 other predicates.
 
 \emph{Horn clauses} are an important subset of FOL because the satisfiability
-of a set of such clauses is a $P$-complete problem. A Horn clause is a
-disjunction of literals (a \emph{clause}) with at most one positive literal:
-$\neg p \vee \neg q \vee \cdots \vee \neg t \vee u$, which can also be
-represented as $(p \wedge q \wedge \cdots \wedge t) \rightarrow u$.  Important
-logic programming languages like Prolog are based on Horn clauses.
+of a set of such clauses is a $P$-complete problem (\ie practically tractable).
+A Horn clause is a disjunction of literals (a \emph{clause}) with at most one
+positive literal: $\neg p \lor \neg q \lor \cdots \lor \neg t \lor u$, which
+can also be represented as $(p \land q \land \cdots \land t) \rightarrow u$.
+Important logic programming languages like Prolog are based on Horn clauses.
 
 The family of \emph{Description Logics}~\cite{Baader2008} also play an
 important role. It is also a subset of the first-order logic, with some
 extensions in second-order logic. Description logics are notable because most
-of them are known to be decidable. In description logic, axioms are build from
-\emph{concepts}, \emph{roles} (that are unary or binary predicates) and
-\emph{individuals}. The W3C OWL-DL standard is a widely-used language to
-describe domains with the description logic.
+of them are known to be decidable (but not always in a practically tractable
+manner). In description logic, axioms are build from \emph{concepts},
+\emph{roles} (that are unary or binary predicates) and \emph{individuals}. The
+W3C OWL-DL standard is a widely-used language to describe domains with the
+description logic.
 
 Because Description Logics have been originally created from the perspective of
 a \emph{knowledge representation language} and not a logic language, their
 terminology (\emph{concept} or \emph{class}, \emph{role} or \emph{property},
-\emph{individual},...) is well-suited to knowledge description and we may use
+\emph{individual},\ldots) is well-suited to knowledge description and we may use
 it in the remaining of this paper outside of the strict context of  Description
 Logics.
 
 \emph{Modal logic}, that allow for statement qualification like
 \emph{possibility} or \emph{necessity}, have been shown to be closely related
-to description logics. Modal logic allows to represent conveniently parallel
+to description logics~\cite{Baader2001}. Modal logic allows to represent conveniently parallel
 possible worlds and facts like ``the robot knows \emph{that the human knows}
 how to read a recipe''.
 
@@ -118,18 +153,10 @@ applications is the \emph{probabilistic logics} or \emph{Bayesian logics}.
 These logics provide a formal framework to reason on propositions whose truth
 or falsity is uncertain. We elaborate below on the representation of uncertainty.
 
-Note that most of these logic formalisms are still active research field by
+Note that most of these logic formalisms are still active research field on
 their own, and practical considerations (especially the availability of
 reasoners efficient enough for on-line use on a robot) often constraint the
 choice of a logical formalism and a level of expressive power.
-
-
-\paragraph{Some examples}
-
-\emph{The robot knows that a blue bottle is laying on the table.}
-
-\emph{The robot knows that the human knows about the position of the bottle,
-but the robot does not know what the human actually know about it.}
 
 \subsubsection{Expressive Power}
 
@@ -197,31 +224,31 @@ representation system relying on the closed world assumption would then assume
 the bottle is \emph{not} on the table ($\lnot R^{CWA}_{isOn}(bottle, table)$)
 whereas with the open world assumption, the proposition $R^{OWA}_{isOn}(bottle,
 table)$ would be undecided. Example in table~\ref{table|cwa-owa-example} provides
-a simple, concrete example of consequences of the CWA/OWA choice on reasoning.
+another example of consequences of the CWA/OWA choice on reasoning.
 
 \begin{table}
-	\begin{center}
-	\begin{tabular}{ll}
-	{\bf Action} & {\bf Part involved} \\
-	\hline
-	{\tt PickSoftly} & hand \\
-	{\tt PickAndPlace} & arm, hand \\
-	{\tt MoveArm} & arm \\
-	\hline
-	\end{tabular}
-	\end{center}
-	\caption{Assuming the question is: \emph{select actions that do not require
-	to move the arm}, a CWA reasoner would return {\tt PickSoftly} whereas an
-	OWA reasoner would not return anything if the {\tt PickSoftly} action is
-	not explicitly said not to involve the arm.}
-	\label{table|cwa-owa-example}
+    \begin{center}
+    \begin{tabular}{ll}
+    {\bf Action} & {\bf Part involved} \\
+    \hline
+    {\tt PickSoftly} & hand \\
+    {\tt PickAndPlace} & arm, hand \\
+    {\tt MoveArm} & arm \\
+    \hline
+    \end{tabular}
+    \end{center}
+    \caption{Assuming the question is: \emph{select actions that do not require
+    to move the arm}, a CWA reasoner would return {\tt PickSoftly} whereas an
+    OWA reasoner would not return anything if the {\tt PickSoftly} action is
+    not explicitly said not to involve the arm.}
+    \label{table|cwa-owa-example}
 \end{table}
 
-Domains constrained with the closed world assumption lead to more tractable
-inference problems, and allow for instance the use of logic languages like
-Prolog. Thus, several approaches exists to \emph{locally close} a domain (\cf
+The OWL language is specifically known to assume an open world.  Domains
+constrained with the closed world assumption lead to more tractable inference
+problems, and allow for instance the use of logic languages like Prolog. Thus,
+several approaches exists to \emph{locally close} a domain (\cf
 Levesque~\cite{Levesque2008}, section 24.3.2 for a summary of those).
-
 
 \subsubsection{Representation of uncertainty and likelihood}
 
@@ -234,7 +261,7 @@ classical logics.
 
 \subsubsection{Meta-cognition: knowledge on the knowledge}
 
-As stated by Josyula and Raja, meta-cognition is composed of both
+As stated by Cox and Raja~\cite{Cox2007}, meta-cognition is composed of both
 \emph{``meta-level control of cognitive activities and the introspective
 monitoring of such activities to evaluate and to explain them"}.
 
@@ -242,7 +269,7 @@ A knowledge representation system endowed with \emph{meta-cognition} is not
 only able to manipulate knowledge but also to exhibit and manipulate the
 structure of its knowledge and the reasoning process. For instance, the ability
 to explain a logical inconsistency in a KRS is a meta-cognitive function.
-Sloman~\cite{Sloman2011}
+Sloman~\cite{Sloman2011} \fxfatal{...Sloman?}
 
 At section~\ref{sect|introspection} below, we discuss the idea of
 introspection.  Meta-cognition can be viewed as the technical facet of the
@@ -253,7 +280,23 @@ introspection in general.
 \subsection{How things are represented?}
 \label{sect|higher-level-domain-representation}
 
+\begin{scriptsize}
+\begin{center}
+\begin{tikzpicture}[grow=right, sibling distance=5mm, level distance = 3cm]
+    \node {\bf Representation}
+            child {node {Memory}}
+            child {node {Introspection}}
+            child {node {Possible Worlds}}
+            child {node {Context}}
+            child {node {Roles}};
+\end{tikzpicture}
+\end{center}
+\end{scriptsize}
+
+
 \subsubsection{Role Representations}
+
+Thematic roles
 
 Spatio-Temporal Representations:
 
@@ -268,6 +311,7 @@ representing \emph{passing time} (durations, timespans) like in \emph{``the
 eggs will be cooked in 10 min''}.
 
 \fxfatal{Discuss time chronicles~\cite{Ghallab1996}}
+\fxfatal{Discuss Allen intervals}
 
 We call a system that do not account for time (\ie that permanently lives in
 present) \emph{atemporal}.
@@ -299,7 +343,7 @@ ability.
 \subsubsection{Introspection: Who am I? What can I do?}
 \label{sect|introspection}
 
-\paragraph{The introspective robot}
+\paragraph{Introspection}
 
 Introspection is the ability to self-describe: what are my capabilities, what
 is my state (performing some action, idling, etc.), what are my beliefs (\ie my
@@ -317,9 +361,9 @@ triplets \setstmt{robot performs action1, action1 isA Give}.
 A particularly important aspect of introspection relates to the description of
 its own capabilities: which sensors/actuators/computation services exist and
 are currently available ?  While at a first level, these descriptions can be
-static (\eg the robot has one laser scanner and two arms), at a second level,
-the description is updated and reflect the current (and possibly past and
-future) state of the robot. Note that these description may also involve
+static (\eg the robot has one laser scanner and two arms), at more advanced
+levels, the description is updated and reflect the current (and possibly past
+and future) state of the robot. Note that these description may also involve
 geometric descriptions (a kinematic chain, the pose of a device, etc.) that may
 be deported outside of the main knowledge base. Efforts trying to formalize,
 maintain and expose the capabilities and state of a robot are not new (and
@@ -365,6 +409,25 @@ human-like memory organization.
 \subsection{Reasoning Techniques}
 \label{sect|reasoning}
 
+\begin{scriptsize}
+\begin{center}
+\begin{tikzpicture}[grow=right, sibling distance=5mm, level distance = 4cm]
+    \node {\bf Reasoning}
+            child {node {Learning}}
+            child {node {Naive physics}}
+            child {node {Planning}}
+            child {node {Prediction}}
+            child {node {Presupposition}}
+            child {node {Non-monotonicity}}
+            child {node {Uncertainty}}
+            child {node {Lazy evaluation}}
+            child {node {Structural alteration}}
+            child {node {Standard reasoning}};
+\end{tikzpicture}
+\end{center}
+\end{scriptsize}
+
+
 \subsubsection{Standard reasoning techniques}
 
 Being based on logical languages to represent the knowledge, most of the
@@ -394,7 +457,7 @@ A typical example would be that we are provided with an instance
 \concept{object1} and we want to know if this object is a kind of
 \concept{Bottle} or \concept{Glass}.
 
-Reasoners can then provide other type of inferences, like:
+Reasoners can often provide other type of inferences, like:
 
 \begin{itemize}
     \item class subsumption (similar to inheritance)
@@ -406,10 +469,9 @@ Reasoners can then provide other type of inferences, like:
         \concept{ThinkingAgent}, then \concept{thinksOf}$(a, b) \to
         $\concept{ThinkingAgent}$(a)$),
 
-        \item universal, existential and cardinality constraints (including \concept{allValue}, 
-        \concept{someValue}, \concept{hasValue}),
+        \item universal, existential and cardinality constraints,
 
-        \item property characteristics (symmetry, transitivity, etc.)
+        \item property characteristics (inverse, symmetry, transitivity, etc.)
 
         \end{itemize}
 
@@ -418,9 +480,8 @@ Reasoners can then provide other type of inferences, like:
     \concept{cylinderShape})\footnote{This example uses the \emph{Manchester
     syntax}, \url{http://www.w3.org/TR/owl2-manchester-syntax/}} \normalsize
 
-    \item set operations like: \par \footnotesize \concept{Color} $\equiv$ {\bf
-    unionOf}(\concept{blue}, \concept{green}, \concept{orange},
-    \concept{black}...) \normalsize
+    \item set operations like: \par \footnotesize \concept{Color} $\equiv \bigcup$ (\concept{blue}, \concept{green}, \concept{orange},
+    \concept{black}, \ldots) \normalsize
 
 \end{itemize}
 
@@ -474,9 +535,9 @@ Another important application of non-monotonic reasoning is representation of
 change: for example, to make an omelette, you need to crack eggs and wipe them.
 The eggs disappear and are replaced by an omelette:
 
-\concept{Egg}$(a) \wedge $ \concept{Egg} $(b) \wedge $
-\concept{MakeOmelette}$(a, b, c) \to \lnot $ \concept{Egg}$(a) \wedge \lnot $
-\concept{Egg}$(b) \wedge $ \concept{Omelette}$(c)$
+\concept{Egg}$(a) \land $ \concept{Egg} $(b) \land $
+\concept{MakeOmelette}$(a, b, c) \to \lnot $ \concept{Egg}$(a) \land \lnot $
+\concept{Egg}$(b) \land $ \concept{Omelette}$(c)$
 
 The insertion of the proposition \concept{MakeOmelette}$(a, b, c)$ leads to
 retraction of other facts. This rule requires non-monotonic reasoning to be
@@ -488,14 +549,15 @@ general}). However, due to computational complexity of these model (most of
 inferences in default logic are known to be $NP$-complete problem), classical
 logics and most of the existing reasoners do not allow non-monotonic reasoning.
 For instance, the SWRL rule language, usually associated to the OWL-DL ontology
-language, do not allow non-monotonic reasoning.
+language, do not allow non-monotonic reasoning (only so-called DL-safe rules
+are allowed).
 
 \fxfatal{Make clear 'who does not allow non-monotonic-reasoning': logics? rule
 languages? reasoner?}
 
 One important exception is the \emph{negation as failure} inference rule, as
-implemented by {\sc Prolog} for instance, that allows for non-monotonicity, but
-only \emph{within the closed world assumption}.
+implemented by {\sc Prolog} for instance, that allows for non-monotonicity
+within the closed world assumption.
 
 \fxfatal{Give here an example of non-monotonic reasoning with Prolog}
 \fxwarning{Do we mention here Answer Set Programming?}
@@ -580,7 +642,18 @@ that carries the geometries and physical properties of objects.
 %%%%%%%%%%%%%%%%%
 \subsection{Acquiring Knowledge}
 
-\subsubsection{Knowledge acquisition and modalities merging}
+\begin{scriptsize}
+\begin{center}
+\begin{tikzpicture}[grow=right, sibling distance=5mm, level distance = 3cm]
+    \node {\bf Acquisition}
+            child {node {Dynamic instantiation}}
+            child {node {Grounding}}
+            child {node {Acquisition and fusion}};
+\end{tikzpicture}
+\end{center}
+\end{scriptsize}
+
+\subsubsection{Knowledge acquisition and modalities fusion}
 \label{sect|knowledge-acquisition}
 
 In the survey inclusion criteria, we have insisted on only considering robotic
@@ -645,12 +718,27 @@ Varadarajan2011}.
     \label{fig|semanticmap}
 \end{figure}
 
-\subsubsection{Ability to automatically create new object instances}
+\subsubsection{Dynamic instantiation}
 \label{sect|new-instances}
+Ability to automatically create new object instances
 
 %%%%%%%%%%%%%%%%%
 \subsection{Practical Integration in Robotic Architectures}
 \label{sect|integration-robot}
+
+\begin{scriptsize}
+\begin{center}
+\begin{tikzpicture}[grow=right, sibling distance=5mm, level distance = 3cm]
+    \node {\bf Integration}
+            child {node {Performances}}
+            child {node {Monitoring}}
+            child {node {Natural Language}}
+            child {node {Executive layers}}
+            child {node {Sensori-motor}};
+\end{tikzpicture}
+\end{center}
+\end{scriptsize}
+
 
 Knowledge representation systems do not mean anything to robots if they are
 considered in isolation. This section proposes categories of features related
@@ -793,6 +881,7 @@ How much knowledge is available? Which content? How big is the knowledge base?
 	\end{itemize}
 
 \end{itemize}
+
 
 
 
