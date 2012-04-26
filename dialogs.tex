@@ -529,12 +529,49 @@ the conclusion). For instance, in the second example, the verb \emph{give} has
 three thematic roles: \concept{performedBy}, \concept{actsOnObject} and
 \concept{receivedBy}.
 
+\begin{table}
+\begin{center}
+\begin{tabular}{lllll}
+\toprule
+{\bf Verb} & {\bf Grammatical Role} & {\bf Thematic Role} & {\bf Predicate} & {\bf Range} \\
+\midrule
+\multirow{2}{0.7cm}{\bf get} & Subject & Agent & \concept{performedBy} & \concept{Agent} \\
+ & Direct object & Theme & \concept{actsOnObject} & \concept{Artifact} \\
+\midrule
+\multirow{3}{0.7cm}{\bf put} & Subject & Agent & \concept{performedBy} & \concept{Agent} \\
+ & Direct object & Theme & \concept{actsOnObject} & \concept{Artifact} \\
+ & Indirect object & Recipient & \concept{receivedBy} & \concept{PhysicalSupport} \\
+\midrule
+\multirow{3}{0.7cm}{\bf give} & Subject & Agent & \concept{performedBy} & \concept{Agent} \\
+ & Direct object & Theme & \concept{actsOnObject} & \concept{Artifact} \\
+ & Indirect object & Recipient & \concept{receivedBy} & \concept{Agent} \\
+\midrule
+\multirow{3}{0.7cm}{\bf move} & Subject & Agent & \concept{performedBy} & \concept{Agent} \\
+ & \emph{Direct object} & \emph{Theme} & \concept{actsOnObject} & \concept{Artifact} \\
+ & Indirect object & Goal & \concept{hasGoal} & \concept{Location} \\
+\midrule
+\multirow{3}{0.7cm}{\bf show} & Subject & Agent & \concept{performedBy} & \concept{Agent} \\
+ & Direct object & Theme & \concept{actsOnObject} & \concept{Location} \\
+ & \emph{Indirect object} & \emph{Recipient} & \concept{receivedBy} & \concept{Agent} \\
+\midrule
+\multirow{2}{0.7cm}{\bf look} & Subject & Agent & \concept{performedBy} & \concept{Agent} \\
+ & Indirect object & Goal & \concept{hasGoal} & \concept{Location} \\
+
+\bottomrule
+
+\end{tabular}
+\end{center}
+\caption{Main action verbs known to {\sc Dialogs} and associated thematic
+roles. Italics denotes optional roles.}
+\label{table|thematic-roles}
+\end{table}
+
 The list of actions the robot can plan for (currently \emph{take},
 \emph{place}, \emph{give}, \emph{show}, \emph{hide} and \emph{move}) along with
-possible synonyms (for example, \emph{to pick} is set as a synonym of \emph{to
-take}) and their associated thematic roles are stored in a predefined library
-of actions (seen on Figure~\ref{fig|dialog}).\fxwarning{Add here the list of
-known verbs} For each action we identify and store: the role of the subject in
+possible synonyms (for example, \emph{to pick} and \emph{to take} are set as synonyms of \emph{to
+get}) and their associated thematic roles are stored in a predefined library
+of actions (table~\ref{table|thematic-roles} and figure~\ref{fig|dialog}).
+For each action we identify and store: the role of the subject in
 the sentence (always \concept{performedBy}); the role of the direct object (for
 instance, \concept{actsOnObject}); and the role of each of the indirect objects
 with their optional prepositions (for instance,
