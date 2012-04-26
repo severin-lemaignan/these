@@ -63,6 +63,91 @@ the level of agency (the ability to \emph{act in the world}).
 \section{The general context of Human-Robot interaction in this work}
 \label{sect|general-context}
 
+{\em Aperitif time. Sitting down in his comfortable armchair, Tom gives a look
+at the empty table. ``{\em Hey robot, put two glasses and this bottle on the
+tray!}''. ``{\em And bring that over there.}''. The robot asks ``{\em The
+Martini or the Porto?}''. ``{\em Bring both!}'' answers Tom. The robot prepares
+the order and smoothly bring the tray to the table.}
+
+\begin{figure}%[!ht] 
+    \centering
+    \includegraphics[width=0.8\columnwidth]{intro/aperitif_time.jpg} 
+
+    \caption{Interacting with the robot in an everyday situation: the human
+    asks for help in vague terms, the robot takes into account the human's {\it
+    a priori} knowledge and spatial perspective to refine its understanding of
+    the question.} 
+
+    \label{fig|vpt} 
+\end{figure}
+
+While the dream of the robot-servant could be questioned, this kind of natural
+interaction is a short-term target for the human-robot interaction community.
+
+This simple scenario belongs to the broad class of \emph{interactive
+manipulation problems}: several agents agree a (more or less implicit) joint
+goal that requires some sort of cooperation to be successfully achieved. These
+problems involve both dialogue and manipulation and are often iterative
+(step-by-step resolution, questions-answers,...).
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\columnwidth]{intro/grounding_robot.pdf}
+    \caption{A robot reasoning about human-robot interaction and anticipation
+    of human activities: sources of in- formation are multi-modal dialogue and
+    observation of the environment and the human activities.}
+    \label{fig|hri-dec}
+\end{figure}
+
+
+Figure~\ref{fig|hri-dec} illustrates some of the aspects of the interaction.
+From the robot perspective, several cognitive skills are involved: dialogue
+processing through verbal and deictic modalities (what does the human say? what
+attitude -- glances, postures, gestures... -- does he express?), acquisition
+and maintainance of one or several models of the environment, not only from the
+robot point of view, but also from the other agents' points of view,
+anticipation (what are the intentions of the human? Can I predict and
+anticipate his/her actions?), planning and control (how would I proceed further
+towards the goal?), monitoring of the other agents' activities (do we have an
+effective cooperation?) and the overall progress of the task. 
+
+What are the prerequisites for such a sentence --``Robot, put two glasses and
+this bottle on the tray''-- to be understood by the robot, correctly
+interpreted in the spatial context of the interaction, and eventually
+transformed into a set of actions? We summarize these challenges in four
+categories:
+
+\begin{enumerate}
+
+    \item how to build and maintain a consistent geometric model of the current
+    situation, acquired through perception or deduction from previous
+    perceptions,
+
+    \item how to build an unambiguous symbolic representation of concepts
+    (objects, agents, actions...) underlying the interaction, and practical for
+    decision-making processes,
+
+    \item how to establish the joint goal(s), how to build and maintain
+    iteratively shared (human-robot) plans, 
+
+    \item how to refine and execute the computed plans, and how to monitor
+    those achieved by its human partner?
+
+\end{enumerate}
+
+
+This chapter focuses on points {\it 1} and {\it 2}. It presents techniques,
+developed and used on several real robots, for the creation of a set of
+environment models suitable for grounded situation interpretation,
+decision-making and control.
+
+The two other items are however important to actually perform the interaction.
+Thus we briefly overview a global architecture of a robot able to cooperate
+with humans before really focusing on the grounding issues.
+
+
+
+
 Interaction for \emph{joint action} in a \emph{situated} environment.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
