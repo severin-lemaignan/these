@@ -38,6 +38,47 @@ oro-view, DOT export...
 %%%%%%%%%%%%%%%%%
 \section{Integration in the robot architecture}
 
+\begin{figure*}[thpb]
+  \centering
+  \includegraphics[width=0.9\columnwidth]{integration/architecture_overview.pdf}
+  \caption {Software architecture for a service robot interacting with humans.}
+  \label{fig|archi}
+\end{figure*}
+
+Figure~\ref{fig|archi} presents the organization of the ``cognitive'' layer of
+the service robots Jido and PR2 as currently in service at LAAS (this
+architecture is described in details in~\cite{Alami2011}). The sensorimotor
+layer (bottom) is abstracted in SPARK, an intermediate amodal 3D model where
+geometric (and some temporal) reasoning take place~\cite{Sisbot2011}.
+
+The outcome of the geometric analysis, as well as the result of the dialogue
+processing module ({\sc Dialogs}, are stored in ORO, that acts as a central
+knowledge base. The symbolic knowledge base triggers events that are captured
+by a top-level execution controller (for instance, SHARY~\cite{Warnier2012}).
+
+The controller can rely on two specialized planners: MHP, the geometric motion
+and manipulation planner~\cite{Sisbot2008, Mainprice2011, Pandey2010} and HATP,
+the symbolic task planner~\cite{Alili2008}.
+
+The dialogue processing module, as well as the symbolic task planner, also use
+the knowledge base to answer questions or initialize the planning domain.
+
+During a typical interaction experiment, the execution controller decides upon
+a plan to execute, requires a plan from the task planner, allocates the actions
+to the human and the robot, communicates the shared plan, and controls and
+monitors its execution. The operation continues until the goal is achieved, is
+declared unachievable or is abandoned by the human.
+
+Only ORO and Dialogs, as components, are actual direct outcomes of this
+doctoral work. It is however important to present them all here since a
+knowledge base only make sense within a larger architecture, with knowledge
+providers and consumers.  Furthermore, the approach to knowledge management
+introduced by this thesis had a strong influence on the design of the
+communication flows between all these components. Thus, this section introduces
+the software components that have been used in conjunction with ORO (mostly,
+but not only, on the LAAS robots), and details how these components produce,
+exchange and consume symbolic knowledge.
+
 \subsection{RPC and events-oriented interactions}
 
 \subsection{Acquiring and Anchoring Knowledge in the physical world: the SPARK module}
