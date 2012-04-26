@@ -1,0 +1,641 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="997.06195"
+   height="322.31857"
+   id="svg3182"
+   version="1.1"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="plan1.svg">
+  <defs
+     id="defs3184">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective3190" />
+    <inkscape:perspective
+       id="perspective3200"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3508"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="518.20921"
+     inkscape:cy="157.39534"
+     inkscape:document-units="px"
+     inkscape:current-layer="g3204"
+     showgrid="false"
+     inkscape:window-width="1242"
+     inkscape:window-height="935"
+     inkscape:window-x="0"
+     inkscape:window-y="51"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata3187">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(155.67381,-268.34573)">
+    <g
+       transform="matrix(1.25,0,0,-1.25,-160.58552,593.21207)"
+       inkscape:label="first_plan"
+       id="g3202">
+      <g
+         id="g3204">
+        <g
+           transform="matrix(1,0,0,-1,0,264)"
+           id="g3206"
+           style="fill:#fcaf3e">
+          <path
+             id="path3208"
+             style="fill:#fcaf3e;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.60000001999999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+             d="m 92.918,68.914 c 0,17.672 -14.324,32 -32,32 -17.672,0 -32,-14.328 -32,-32 0,-17.676 14.328,-32 32,-32 17.676,0 32,14.324 32,32 z" />
+        </g>
+        <g
+           transform="matrix(1,0,0,-1,0.96511958,264)"
+           id="g3210"
+           style="fill:#fcaf3e">
+          <path
+             id="path3212"
+             style="fill:#fcaf3e;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.60000001999999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+             d="m 228.918,68.914 c 0,17.672 -14.324,32 -32,32 -17.672,0 -32,-14.328 -32,-32 0,-17.676 14.328,-32 32,-32 17.676,0 32,14.324 32,32 z" />
+        </g>
+        <g
+           transform="matrix(1,0,0,-1,0,263.50858)"
+           id="g3214"
+           style="fill:#729fcf">
+          <path
+             id="path3216"
+             style="fill:#729fcf;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.60000001999999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+             d="m 92.918,196.914 c 0,17.672 -14.324,32 -32,32 -17.672,0 -32,-14.328 -32,-32 0,-17.676 14.328,-32 32,-32 17.676,0 32,14.324 32,32 z" />
+        </g>
+        <g
+           transform="matrix(1,0,0,-1,3.2658272e-6,263.50858)"
+           id="g3218"
+           style="fill:#729fcf">
+          <path
+             id="path3220"
+             style="fill:#729fcf;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.60000001999999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+             d="m 228.918,196.914 c 0,17.672 -14.324,32 -32,32 -17.672,0 -32,-14.328 -32,-32 0,-17.676 14.328,-32 32,-32 17.676,0 32,14.324 32,32 z" />
+        </g>
+        <g
+           transform="matrix(1,0,0,-1,1.5472858e-5,263.50858)"
+           id="g3222"
+           style="fill:#729fcf">
+          <path
+             id="path3224"
+             style="fill:#729fcf;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.60000001999999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+             d="m 364.918,196.914 c 0,17.672 -14.324,32 -32,32 -17.672,0 -32,-14.328 -32,-32 0,-17.676 14.328,-32 32,-32 17.676,0 32,14.324 32,32 z" />
+        </g>
+        <g
+           transform="matrix(1,0,0,-1,-8.941204e-6,263.50858)"
+           id="g3226"
+           style="fill:#729fcf">
+          <path
+             id="path3228"
+             style="fill:#729fcf;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.60000001999999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+             d="m 500.918,196.914 c 0,17.672 -14.324,32 -32,32 -17.672,0 -32,-14.328 -32,-32 0,-17.676 14.328,-32 32,-32 17.676,0 32,14.324 32,32 z" />
+        </g>
+        <g
+           transform="matrix(1,0,0,-1,-8.941204e-6,263.50858)"
+           id="g3230"
+           style="fill:#729fcf">
+          <path
+             id="path3232"
+             style="fill:#729fcf;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.60000001999999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+             d="m 636.918,196.914 c 0,17.672 -14.324,32 -32,32 -17.672,0 -32,-14.328 -32,-32 0,-17.676 14.328,-32 32,-32 17.676,0 32,14.324 32,32 z" />
+        </g>
+        <g
+           transform="matrix(1,0,0,-1,-8.941204e-6,263.50858)"
+           id="g3234"
+           style="fill:#729fcf">
+          <path
+             id="path3236"
+             style="fill:#729fcf;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.60000001999999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+             d="m 772.918,196.914 c 0,17.672 -14.324,32 -32,32 -17.672,0 -32,-14.328 -32,-32 0,-17.676 14.328,-32 32,-32 17.676,0 32,14.324 32,32 z" />
+        </g>
+        <g
+           transform="matrix(1,0,0,-1,-0.96510503,264)"
+           id="g3274"
+           style="fill:#fcaf3e">
+          <path
+             id="path3276"
+             style="fill:#fcaf3e;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.60000001999999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+             d="m 636.918,68.914 c 0,17.672 -14.324,32 -32,32 -17.672,0 -32,-14.328 -32,-32 0,-17.676 14.328,-32 32,-32 17.676,0 32,14.324 32,32 z" />
+        </g>
+        <g
+           transform="matrix(1,0,0,-1,3.1685322e-5,264)"
+           id="g3278"
+           style="fill:#fcaf3e">
+          <path
+             id="path3280"
+             style="fill:#fcaf3e;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.60000001999999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+             d="m 772.918,68.914 c 0,17.672 -14.324,32 -32,32 -17.672,0 -32,-14.328 -32,-32 0,-17.676 14.328,-32 32,-32 17.676,0 32,14.324 32,32 z" />
+        </g>
+        <g
+           inkscape:export-ydpi="150"
+           inkscape:export-xdpi="150"
+           inkscape:export-filename="/home/slemaign/work/architectures/spark/spark2_proposal2/2.png"
+           id="g9884"
+           transform="matrix(-0.55074032,0.53180641,0.53180641,0.55074032,665.06843,-266.48541)"
+           inkscape:transform-center-x="29.189636"
+           inkscape:transform-center-y="29.794606">
+          <path
+             style="fill:none;stroke:#000000;stroke-width:4.19999981;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+             d="m 478.36502,323.46792 3.40009,-139.37607"
+             id="path9886"
+             inkscape:connector-curvature="0"
+             sodipodi:nodetypes="cc" />
+          <path
+             inkscape:transform-center-x="2.8758941"
+             sodipodi:nodetypes="cccc"
+             inkscape:connector-curvature="0"
+             id="path9890"
+             d="m 478.21524,330.86368 4.73597,-7.45415 -9.16626,-0.18563 4.43029,7.63978 z"
+             style="fill:#000000;stroke:#000000;stroke-width:2.85943055px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+             inkscape:transform-center-y="0.01114576" />
+        </g>
+        <g
+           inkscape:transform-center-y="0.7887533"
+           inkscape:transform-center-x="41.575315"
+           transform="matrix(-0.0133883,0.76547613,0.76547613,0.0133883,320.72204,-175.42201)"
+           id="g3531"
+           inkscape:export-filename="/home/slemaign/work/architectures/spark/spark2_proposal2/2.png"
+           inkscape:export-xdpi="150"
+           inkscape:export-ydpi="150">
+          <path
+             sodipodi:nodetypes="cc"
+             inkscape:connector-curvature="0"
+             id="path3533"
+             d="m 478.36501,323.46792 8.2485,-427.25396"
+             style="fill:none;stroke:#000000;stroke-width:4.19999981;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+          <path
+             inkscape:transform-center-y="0.01114576"
+             style="fill:#000000;stroke:#000000;stroke-width:2.85943055px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+             d="m 478.21524,330.86368 4.73597,-7.45415 -9.16626,-0.18563 4.43029,7.63978 z"
+             id="path3535"
+             inkscape:connector-curvature="0"
+             sodipodi:nodetypes="cccc"
+             inkscape:transform-center-x="2.8758941" />
+        </g>
+        <g
+           inkscape:export-ydpi="150"
+           inkscape:export-xdpi="150"
+           inkscape:export-filename="/home/slemaign/work/architectures/spark/spark2_proposal2/2.png"
+           id="g3539"
+           transform="matrix(-0.0133883,0.76547613,0.76547613,0.0133883,-85.347721,-175.42201)"
+           inkscape:transform-center-x="41.575315"
+           inkscape:transform-center-y="0.7887533">
+          <path
+             style="fill:none;stroke:#000000;stroke-width:4.19999981;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+             d="m 478.36501,323.46792 2.10168,-75.80951"
+             id="path3541"
+             inkscape:connector-curvature="0"
+             sodipodi:nodetypes="cc" />
+          <path
+             inkscape:transform-center-x="2.8758941"
+             sodipodi:nodetypes="cccc"
+             inkscape:connector-curvature="0"
+             id="path3543"
+             d="m 478.21524,330.86368 4.73597,-7.45415 -9.16626,-0.18563 4.43029,7.63978 z"
+             style="fill:#000000;stroke:#000000;stroke-width:2.85943055px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+             inkscape:transform-center-y="0.01114576" />
+        </g>
+        <g
+           inkscape:transform-center-y="0.7887533"
+           inkscape:transform-center-x="41.575315"
+           transform="matrix(-0.0133883,0.76547613,0.76547613,0.0133883,457.68718,-175.42201)"
+           id="g3545"
+           inkscape:export-filename="/home/slemaign/work/architectures/spark/spark2_proposal2/2.png"
+           inkscape:export-xdpi="150"
+           inkscape:export-ydpi="150">
+          <path
+             sodipodi:nodetypes="cc"
+             inkscape:connector-curvature="0"
+             id="path3547"
+             d="m 478.36501,323.46792 2.10168,-75.80951"
+             style="fill:none;stroke:#000000;stroke-width:4.19999981;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+          <path
+             inkscape:transform-center-y="0.01114576"
+             style="fill:#000000;stroke:#000000;stroke-width:2.85943055px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+             d="m 478.21524,330.86368 4.73597,-7.45415 -9.16626,-0.18563 4.43029,7.63978 z"
+             id="path3549"
+             inkscape:connector-curvature="0"
+             sodipodi:nodetypes="cccc"
+             inkscape:transform-center-x="2.8758941" />
+        </g>
+        <g
+           inkscape:transform-center-y="0.7887533"
+           inkscape:transform-center-x="41.575315"
+           transform="matrix(-0.0133883,0.76547613,0.76547613,0.0133883,-85.830281,-303.91342)"
+           id="g3551"
+           inkscape:export-filename="/home/slemaign/work/architectures/spark/spark2_proposal2/2.png"
+           inkscape:export-xdpi="150"
+           inkscape:export-ydpi="150">
+          <path
+             sodipodi:nodetypes="cc"
+             inkscape:connector-curvature="0"
+             id="path3553"
+             d="m 478.36501,323.46792 2.10168,-75.80951"
+             style="fill:none;stroke:#000000;stroke-width:4.19999981;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+          <path
+             inkscape:transform-center-y="0.01114576"
+             style="fill:#000000;stroke:#000000;stroke-width:2.85943055px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+             d="m 478.21524,330.86368 4.73597,-7.45415 -9.16626,-0.18563 4.43029,7.63978 z"
+             id="path3555"
+             inkscape:connector-curvature="0"
+             sodipodi:nodetypes="cccc"
+             inkscape:transform-center-x="2.8758941" />
+        </g>
+        <g
+           inkscape:export-ydpi="150"
+           inkscape:export-xdpi="150"
+           inkscape:export-filename="/home/slemaign/work/architectures/spark/spark2_proposal2/2.png"
+           id="g3557"
+           transform="matrix(-0.0133883,0.76547613,0.76547613,0.0133883,50.169732,-303.91342)"
+           inkscape:transform-center-x="41.575315"
+           inkscape:transform-center-y="0.7887533">
+          <path
+             style="fill:none;stroke:#000000;stroke-width:4.19999981;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+             d="m 478.36501,323.46792 2.10168,-75.80951"
+             id="path3559"
+             inkscape:connector-curvature="0"
+             sodipodi:nodetypes="cc" />
+          <path
+             inkscape:transform-center-x="2.8758941"
+             sodipodi:nodetypes="cccc"
+             inkscape:connector-curvature="0"
+             id="path3561"
+             d="m 478.21524,330.86368 4.73597,-7.45415 -9.16626,-0.18563 4.43029,7.63978 z"
+             style="fill:#000000;stroke:#000000;stroke-width:2.85943055px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+             inkscape:transform-center-y="0.01114576" />
+        </g>
+        <g
+           inkscape:transform-center-y="0.7887533"
+           inkscape:transform-center-x="41.575315"
+           transform="matrix(-0.0133883,0.76547613,0.76547613,0.0133883,186.16973,-303.91342)"
+           id="g3563"
+           inkscape:export-filename="/home/slemaign/work/architectures/spark/spark2_proposal2/2.png"
+           inkscape:export-xdpi="150"
+           inkscape:export-ydpi="150">
+          <path
+             sodipodi:nodetypes="cc"
+             inkscape:connector-curvature="0"
+             id="path3565"
+             d="m 478.36501,323.46792 2.10168,-75.80951"
+             style="fill:none;stroke:#000000;stroke-width:4.19999981;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+          <path
+             inkscape:transform-center-y="0.01114576"
+             style="fill:#000000;stroke:#000000;stroke-width:2.85943055px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+             d="m 478.21524,330.86368 4.73597,-7.45415 -9.16626,-0.18563 4.43029,7.63978 z"
+             id="path3567"
+             inkscape:connector-curvature="0"
+             sodipodi:nodetypes="cccc"
+             inkscape:transform-center-x="2.8758941" />
+        </g>
+        <g
+           inkscape:export-ydpi="150"
+           inkscape:export-xdpi="150"
+           inkscape:export-filename="/home/slemaign/work/architectures/spark/spark2_proposal2/2.png"
+           id="g3569"
+           transform="matrix(-0.0133883,0.76547613,0.76547613,0.0133883,322.16971,-303.91342)"
+           inkscape:transform-center-x="41.575315"
+           inkscape:transform-center-y="0.7887533">
+          <path
+             style="fill:none;stroke:#000000;stroke-width:4.19999981;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+             d="m 478.36501,323.46792 2.10168,-75.80951"
+             id="path3571"
+             inkscape:connector-curvature="0"
+             sodipodi:nodetypes="cc" />
+          <path
+             inkscape:transform-center-x="2.8758941"
+             sodipodi:nodetypes="cccc"
+             inkscape:connector-curvature="0"
+             id="path3573"
+             d="m 478.21524,330.86368 4.73597,-7.45415 -9.16626,-0.18563 4.43029,7.63978 z"
+             style="fill:#000000;stroke:#000000;stroke-width:2.85943055px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+             inkscape:transform-center-y="0.01114576" />
+        </g>
+        <g
+           inkscape:transform-center-y="0.92720463"
+           inkscape:transform-center-x="41.575315"
+           transform="matrix(-0.0133883,0.89983424,0.76547613,0.01573824,458.16971,-368.94583)"
+           id="g3575"
+           inkscape:export-filename="/home/slemaign/work/architectures/spark/spark2_proposal2/2.png"
+           inkscape:export-xdpi="150"
+           inkscape:export-ydpi="150">
+          <path
+             sodipodi:nodetypes="cc"
+             inkscape:connector-curvature="0"
+             id="path3577"
+             d="m 478.36501,323.46792 2.10168,-75.80951"
+             style="fill:none;stroke:#000000;stroke-width:3.87377;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+          <path
+             inkscape:transform-center-y="0.01114576"
+             style="fill:#000000;stroke:#000000;stroke-width:2.63732791px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+             d="m 478.21524,330.86368 4.73597,-7.45415 -9.16626,-0.18563 4.43029,7.63978 z"
+             id="path3579"
+             inkscape:connector-curvature="0"
+             sodipodi:nodetypes="cccc"
+             inkscape:transform-center-x="2.8758941" />
+        </g>
+        <text
+           xml:space="preserve"
+           style="font-size:14.39999962px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Aller;-inkscape-font-specification:Aller"
+           x="24.215084"
+           y="-247.8369"
+           id="text4807"
+           transform="scale(1,-1)"><tspan
+             sodipodi:role="line"
+             x="24.215084"
+             y="-247.8369"
+             style="font-size:9.60000038px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+             id="tspan4819"><tspan
+   id="tspan4835"
+   style="font-size:12.80000019px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans">TAKE </tspan>(<tspan
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436"
+   id="tspan4817">HUMAN1</tspan>, <tspan
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436"
+   id="tspan4815"></tspan></tspan><tspan
+             sodipodi:role="line"
+             x="24.215084"
+             y="-235.02649"
+             style="font-size:9.60000038px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+             id="tspan4837"><tspan
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436"
+   id="tspan4839">GREY_TAPE</tspan>, <tspan
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436"
+   id="tspan4813">TABLE</tspan>)</tspan></text>
+        <text
+           transform="scale(1,-1)"
+           id="text4842"
+           y="-247.75252"
+           x="149.92937"
+           style="font-size:14.39999962px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Aller;-inkscape-font-specification:Aller"
+           xml:space="preserve"><tspan
+             id="tspan4844"
+             style="font-size:9.60000038px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+             y="-247.75252"
+             x="149.92937"
+             sodipodi:role="line"><tspan
+   style="font-size:12.80000019px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+   id="tspan4846">THROW </tspan>(<tspan
+   id="tspan4848"
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436">HUMAN1</tspan>, <tspan
+   id="tspan4850"
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436"></tspan></tspan><tspan
+             id="tspan4852"
+             style="font-size:9.60000038px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+             y="-234.94211"
+             x="149.92937"
+             sodipodi:role="line"><tspan
+   id="tspan4854"
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436">GREY_TAPE</tspan>, <tspan
+   id="tspan4856"
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436">Trash1</tspan>)</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:14.39999962px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Aller;-inkscape-font-specification:Aller"
+           x="556.21509"
+           y="-247.8369"
+           id="text4858"
+           transform="scale(1,-1)"><tspan
+             sodipodi:role="line"
+             x="556.21509"
+             y="-247.8369"
+             style="font-size:9.60000038px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+             id="tspan4860"><tspan
+   id="tspan4862"
+   style="font-size:12.80000019px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans">TAKE </tspan>(<tspan
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436"
+   id="tspan4864">HUMAN1</tspan>, <tspan
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436"
+   id="tspan4866"></tspan></tspan><tspan
+             sodipodi:role="line"
+             x="556.21509"
+             y="-235.02649"
+             style="font-size:9.60000038px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+             id="tspan4868"><tspan
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436"
+   id="tspan4870">WALLE_TAPE</tspan>, <tspan
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436"
+   id="tspan4872">TABLE</tspan>)</tspan></text>
+        <text
+           transform="scale(1,-1)"
+           id="text4874"
+           y="-247.75252"
+           x="684.21515"
+           style="font-size:14.39999962px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Aller;-inkscape-font-specification:Aller"
+           xml:space="preserve"><tspan
+             id="tspan4876"
+             style="font-size:9.60000038px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+             y="-247.75252"
+             x="684.21515"
+             sodipodi:role="line"><tspan
+   style="font-size:12.80000019px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+   id="tspan4878">THROW </tspan>(<tspan
+   id="tspan4880"
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436">HUMAN1</tspan>, <tspan
+   id="tspan4882"
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436"></tspan></tspan><tspan
+             id="tspan4884"
+             style="font-size:9.60000038px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+             y="-234.94212"
+             x="684.21515"
+             sodipodi:role="line"><tspan
+   id="tspan4886"
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436">WALLE_TAPE</tspan>, <tspan
+   id="tspan4888"
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436">Trash1</tspan>)</tspan></text>
+        <text
+           transform="scale(1,-1)"
+           id="text4938"
+           y="-20.341028"
+           x="285.16617"
+           style="font-size:14.39999962px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Aller;-inkscape-font-specification:Aller"
+           xml:space="preserve"><tspan
+             id="tspan4940"
+             style="font-size:9.60000038px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+             y="-20.341028"
+             x="285.16617"
+             sodipodi:role="line"><tspan
+   style="font-size:12.80000019px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+   id="tspan4942">TAKE </tspan>(<tspan
+   id="tspan4944"
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436">ROBOT</tspan>, </tspan><tspan
+             id="tspan4948"
+             style="font-size:9.60000038px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+             y="-7.5306249"
+             x="285.16617"
+             sodipodi:role="line"><tspan
+   id="tspan4950"
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436">WALLE_TAPE</tspan>, <tspan
+   id="tspan4952"
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436">TABLE</tspan>)</tspan></text>
+        <text
+           transform="scale(1,-1)"
+           id="text4970"
+           y="-20.341028"
+           x="16.786539"
+           style="font-size:14.39999962px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Aller;-inkscape-font-specification:Aller"
+           xml:space="preserve"><tspan
+             id="tspan4980"
+             style="font-size:9.60000038px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+             y="-20.341028"
+             x="16.786539"
+             sodipodi:role="line"><tspan
+   style="font-size:12.80000019px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+   id="tspan4974">TAKE </tspan>(<tspan
+   id="tspan4982"
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436">ROBOT, </tspan></tspan><tspan
+             style="font-size:9.60000038px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+             y="-7.5306244"
+             x="16.786539"
+             sodipodi:role="line"
+             id="tspan5022"><tspan
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436"
+   id="tspan5024">BLACK_TAPE</tspan>, <tspan
+   id="tspan4984"
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436">TABLE</tspan>)</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:14.39999962px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Aller;-inkscape-font-specification:Aller"
+           x="148.77322"
+           y="-20.256653"
+           id="text4986"
+           transform="scale(1,-1)"><tspan
+             sodipodi:role="line"
+             x="148.77322"
+             y="-20.256653"
+             style="font-size:9.60000038px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+             id="tspan4996"><tspan
+   id="tspan4990"
+   style="font-size:12.80000019px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans">THROW </tspan>(<tspan
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436"
+   id="tspan4998">ROBOT, </tspan></tspan><tspan
+             sodipodi:role="line"
+             x="148.77322"
+             y="-7.4462495"
+             style="font-size:9.60000038px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+             id="tspan5031"><tspan
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436"
+   id="tspan5033">BLACK_TAPE</tspan>, <tspan
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436"
+   id="tspan5000">Trash2</tspan>)</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:14.39999962px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Aller;-inkscape-font-specification:Aller"
+           x="419.77786"
+           y="-20.341028"
+           id="text5036"
+           transform="scale(1,-1)"><tspan
+             sodipodi:role="line"
+             x="419.77786"
+             y="-20.341028"
+             style="font-size:9.60000038px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+             id="tspan5038"><tspan
+   id="tspan5040"
+   style="font-size:12.80000019px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans">PUTRV </tspan>(<tspan
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436"
+   id="tspan5042">ROBOT</tspan>, </tspan><tspan
+             sodipodi:role="line"
+             x="419.77786"
+             y="-7.5306249"
+             style="font-size:9.60000038px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+             id="tspan5044"><tspan
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436"
+   id="tspan5046">WALLE_TAPE</tspan>, <tspan
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436"
+   id="tspan5048">TABLE</tspan>)</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:14.39999962px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Aller;-inkscape-font-specification:Aller"
+           x="561.58954"
+           y="-20.341028"
+           id="text5050"
+           transform="scale(1,-1)"><tspan
+             sodipodi:role="line"
+             x="561.58954"
+             y="-20.341028"
+             style="font-size:9.60000038px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+             id="tspan5052"><tspan
+   id="tspan5054"
+   style="font-size:12.80000019px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans">TAKE </tspan>(<tspan
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436"
+   id="tspan5056">ROBOT, </tspan></tspan><tspan
+             id="tspan5058"
+             sodipodi:role="line"
+             x="561.58954"
+             y="-7.5306249"
+             style="font-size:9.60000038px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"><tspan
+   id="tspan5060"
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436">LOTR_TAPE</tspan>, <tspan
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436"
+   id="tspan5062">TABLE</tspan>)</tspan></text>
+        <text
+           transform="scale(1,-1)"
+           id="text5064"
+           y="-20.256653"
+           x="689.49658"
+           style="font-size:14.39999962px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Aller;-inkscape-font-specification:Aller"
+           xml:space="preserve"><tspan
+             id="tspan5066"
+             style="font-size:9.60000038px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+             y="-20.256653"
+             x="689.49658"
+             sodipodi:role="line"><tspan
+   style="font-size:12.80000019px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+   id="tspan5068">THROW </tspan>(<tspan
+   id="tspan5070"
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436">ROBOT, </tspan></tspan><tspan
+             id="tspan5072"
+             style="font-size:9.60000038px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+             y="-7.4462495"
+             x="689.49658"
+             sodipodi:role="line"><tspan
+   id="tspan5074"
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436">LOTR_TAPE</tspan>, <tspan
+   id="tspan5076"
+   style="font-size:9.60000038px;font-style:italic;fill:#2e3436">Trash2</tspan>)</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>

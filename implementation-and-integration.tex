@@ -341,7 +341,109 @@ produced and maintained by SPARK related to the general state of the agent.
 \subsection{Integration with symbolic task planning and executive layers}
 
 \subsubsection{Symbolic Task Planning}
-\fxnote{HATP}
+
+Complex human robot interaction may necessitate a strong reasoning about the
+environment and the capabilities of involved agents: How can they achieve a
+specific goal? What are the required actions to achieve this goal? Which
+actions can be performed by each agent? etc.
+
+In the previous sections, we have seen how symbolic knowledge is produced and
+stored from the real physical world. In this section, we present one possible
+way to use these symbolic models of the environment and interacting agents to
+produce a plan of actions for a complex goal.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\columnwidth]{integration/hatp_console.jpg}
+    \caption{Screenshot of the HATP console. On the left panel, we see the
+    results of the requests to ORO, on the bottom right the resulting plan.}
+    \label{fig|hatp_console}
+\end{figure}
+
+In order to devise how a given goal can be accomplished, the robot has to
+elaborate a plan,\ie a set of actions to be achieved by the robot and its human
+partners.  This is the role of HATP \cite{Alili2008} (for Human Aware Task
+Planner, figure~\ref{fig|hatp_console}).  HATP is based on a Hierarchical Task
+Network (HTN) refinement, which performs an iterative task decomposition into
+sub-tasks until reaching atomic actions~\cite{Nau2003}.  The planning domain
+defines a set of methods describing how to decompose a task and can be seen as
+the {\it how-to} knowledge of the robot.  HATP is able to produce plans for the
+robot's actions as well as for the other participants (humans or robots). It
+can be tuned by setting up different costs depending on the actions to apply
+and by taking into account a set of constraints called social rules. This
+tuning aims at adapting the robot's behavior according to the desired level of
+cooperation of the robot.
+
+\paragraph{Agents and action streams} The robot plans not only for itself but
+also for the other agents. The resulting plan, called ``shared plan'' is a set
+of actions that form a stream for each agent involved in the goal achievement.
+Depending on the context, some ``shared plans'' contain causal relations
+between the agents. For example, the second agent needs to wait for the success
+of the first agent's action to be able to start its own action. When the plan
+is performed, causal links induce synchronization between agents.
+Figure~\ref{plan_hatp1} illustrates a plan with two streams.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.8\columnwidth]{integration/hatp_plan1.pdf}
+  \caption{A plan produced by HATP with 2 streams}
+  \label{plan_hatp1}
+\end{figure}
+
+\paragraph{Action costs and social rules} A cost and a duration function is
+associated to each action.  The duration function provides a duration interval
+for the action achievement and is used, in one hand, to schedule the different
+streams and, in the other hand, as an additional cost function.  In addition to
+these costs, HATP also takes into account a set of social rules.  Social rules
+are constraints aiming at leading the plan construction towards the best plan
+according to some human preferences. The social rules we have defined so far
+deal with:
+
+\begin{itemize}
+
+    \item undesirable state: to avoid a state in which the human could feel
+    uncomfortable;
+
+    \item undesirable sequence: to eliminate sequences of actions that can be
+    misinterpreted by the human;
+
+    \item effort balancing: to adjust the work effort of the agents;
+
+    \item wasted time: used to avoid long delays between the actions of the
+    human partner;
+
+    \item intricate links: to limit dependencies between the actions of two or
+    more agents.
+
+\end{itemize}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.8\columnwidth]{integration/hatp_plan2.pdf}
+  \caption{A plan with the wasted time social rule}
+  \label{plan_hatp2}
+\end{figure}
+
+Figure~\ref{plan_hatp2} illustrates an alternative plan to the previous one
+(fig.~\ref{plan_hatp1}) if the wasted time social rule is used.  The obtained
+shared plan is the best plan according to a global evaluation of these multiple
+criteria.
+
+\paragraph{Several levels of cooperation} By tuning its costs and adapting its
+social rules, HATP can be used to compute various alternative plans. These
+plans can be categorized into several levels of cooperation
+
+\begin{itemize}
+
+    \item helping the human to achieve his goal by acting for him
+
+    \item sharing concrete resources by handing some objects
+
+    \item collaboration of the robot and the human by coordinating their
+    actions towards a human-robot joint goal.
+
+\end{itemize}
+
 
 \subsubsection{Execution Control}
 \fxnote{CRAM, SHARY, pyrobots, RAD...}
@@ -360,7 +462,7 @@ queries or via an event system; {\it(2)} {\sc SPARK}, the grounded,
 human-aware, 3D model of the environment that performs all the spatial
 reasoning within this architecture, including reasoning involving motion
 planing (to compute reachability of objects) and perspective taking, {\it(3)}
-{\sc CRAM}, {\sc SHARY}, {\sc pyRobots}, {\sc RAD}, {\sc HATP} as differents
+{\sc CRAM}, {\sc SHARY}, {\sc pyRobots}, {\sc RAD}, {\sc HATP} as different
 examples of execution controllers and symbolic task planners that take
 advantage of semantic abstractions provided by knowledge base and {\it(4)} {\sc
 Dialogs}, a natural language processor that performs simple grammatical parsing
