@@ -253,20 +253,19 @@ the humans own structures and vocabulary).
 This section summarizes the main contributions of the thesis, both from a
 scientific point of view and from a technical point of view.
 
-\section{Scientific contributions}
+\subsection{Scientific contributions}
 \label{sect|scientific-contributions}
 
 The need of a better understanding of the knowledge needs of robotic
 applications in human, \ie complex, dynamic, semantically-rich, environments,
 is the starting point of this thesis. 
 
-During the preparation of the thesis, the extensive review of the literature,
-the formulation of numerous challenging interaction scenarii that led to the
-preparation and conduct of several experiments, helped to iteratively refine
-the ``knowledge for interaction'' problem. The fundamental scientific outcome
-of this work is thus the listing and formal organization of the set of
-desirable characteristics of knowledge representation systems for service
-robotics, supported by several concrete interaction scenarii.
+Building upon an extensive review of the literature and the formulation of
+several interaction scenarii (that themselves led to experiments on real
+robots), we have iteratively refined the ``knowledge for interaction'' problem.
+The formalization of this question is one of the main scientific outcome of
+this work: we have systematically listed and organized of the set of desirable
+characteristics of knowledge representation systems for service robotics.
 
 This typology aims to offer an exhaustive and consistent base to evaluate
 existing systems and to draw new research perspectives. It also enables to
@@ -274,84 +273,106 @@ better assess the progresses of the Service Robot and Human Robot Interaction
 research communities towards the long term goal of \emph{human-level artificial
 intelligence} for robots, as would say McCarthy.
 
-Another important scientific contribution of this thesis is to participate to
+Another important scientific contribution of this thesis is its participation to
 narrow down the gap between research on embodied and disembodied artificial
 agents: we have tried to bridge experiences learned from years of research on
 disembodied cognitive architectures (both from the computing science and
 neuropsychology communities) with the constraints from real-world systems that
-weight on robotic architectures. Notably, we have tried to identify relevant
-theoretical references from the diverse fields of cognitive sciences.
+weight on robotic architectures. Notably, we have tried to identify
+theoretical reference contributions from the diverse fields of cognitive
+sciences that are relevant to \emph{knowledge-enabled} robotics. We have also
+proposed reference implementations on robots for some of them.
 
-At the architectural scale, our work helps to understand the knowledge flows in
-modern cognitive architectures for robots. By making knowledge \emph{explicit}
-in our architectures, it allows the humans that design and program robots to
-\emph{talk about} knowledge: it \emph{materializes} concepts that were
-beforehand diffuse and ubiquitous.
+At the architectural level, our work also helps to better understand the
+knowledge flows in modern cognitive architectures for robots. By introducing
+\emph{explicit} knowledge in our architectures, it allows the humans that
+design and program robots to \emph{talk about} and question this knowledge: it
+singularizes and materializes concepts that were beforehand often
+diffuse and ubiquitous. This leads us to define the idea of
+\emph{knowledge-oriented} architecture.
 
 This work has also several more focused scientific contributions. The
 centralized semantic architecture that we propose is original. While it
-exhibits shortcomings for some cognitive tasks, it also offers new efficient
+exhibits shortcomings for some cognitive tasks, it also proposes novel efficient
 ways to represent and manipulate knowledge. Along with the extensive survey of
 current knowledge systems we have conducted, it effectively completes the
-panorama of existing designs.
+panorama of available designs of knowledge representation systems.
 
-We also have a notable contribution on the grounding of human-robot dialogue in
-natural language. We have algorithmically formalized a novel grounding process that
-takes advantage of multi-modal communication (verbal, deictic and immanent) and
-handles several more complex language features like quantification.
+Amongst the cognitive abilities that our developments have enabled, a
+particular scientific focus was led on the acquisition and modelling of
+multiple, agent-dependent symbolic worlds. This opened new perspectives related
+to \emph{perspective-aware} reasoning or \emph{theories of mind} for robots
+that are detailed in this work.
 
-\section{Technical contributions}
+We also have a notable scientific contribution on the grounding of human-robot
+dialogue in natural language. We have algorithmically formalized a novel
+grounding process that takes advantage of multi-modal communication (verbal,
+deictic and immanent) and handles the semantics of several more complex
+language features like quantification. Our system also has contributions
+related to the semantic validation of thematic roles and interactive
+disambiguation that takes into account human attentional focus.
+
+\subsection{Technical contributions}
 \label{sect|technical-contributions}
 
+
 This thesis has four major technical contributions: the software development of
-\emph{ORO server} as a semantic blackboard dedicated to robotics application,
+\emph{ORO server} as a semantic blackboard dedicated to robotic applications,
 the design of the \emph{ORO ontology} as a domain-specific common-sense
 ontology tailored for service robotic needs, the pervasive integration of a new
 semantic layer into several existing robot architecture, and finally, the
 software development of \emph{Dialogs}, a novel module for natural language
 grounding.
 
-\fxwarning{Mention MORSE? How?}
+The main software contribution of the thesis is the development of an
+open-source, versatile and light-weighted knowledge base that stores in a
+formal framework based on first-order logics both the robot's own beliefs and
+the mental models of every other cognitive agents that the robot interacts
+with. This tool, called \emph{ORO}, is implemented as a
+platform/middleware-agnostic server, and exposes to the robot modules
+several advanced reasoning services (via the integration of external
+reasoners). This software project is now publicly available, used by other
+laboratories, and comes with extensive documentation and bindings for several
+mainstream languages (C++, Python...) and middlewares (ROS, YARP).
 
-Besides proposing a new integration model for sensor data, natural language and
-symbolic knowledge repositories, our work extends these previous contributions
-by tackling more realistic human-robot interactions: less restricted speech
-understanding; ability to deal with complex, partially unknown human
-environments; and fully embodied (with arms, head,...) autonomous robots that
-manipulate a large range of household objects.
+Coming along with the ORO server, we introduce in this thesis the
+\emph{ORO common-sense ontology} which is a proposal of an upper ontology for
+service and interactive robotics. This ontology consists of about two hundred
+classes, relations and rules that are significant for the modelling of the
+robot's beliefs and state, and the interactions with other agents (humans or
+robots). This ontology also tries to stay closely aligned with the standard
+{\sc OpenCyc} upper-ontology to guarantee future interoperability with semantic
+web resources and other robots.
 
-Three specific contributions are presented in this work: first, we introduce a
-versatile and light-weighted knowledge base that models in a formal framework,
-based on first-order logics, not only the robot's own beliefs but also every
-other cognitive agent the robot interacts with.  This explicit modeling of
-other agents' belief states is used for the interaction and eases the
-implementation of various advanced cognitive behaviors like
-False-Beliefs~\cite{Leslie2000} or interactive object discrimination.
+A third technical contribution is the introduction of a new
+\emph{knowledge-oriented, event driven} communication model between high-level
+decisional modules: by supporting a concept of \emph{semantic events}, the ORO
+server enables the development of new executive layers that combine reactive
+behaviour with high-level abstractions: for instance, triggering a behaviour
+when a human looks at the robot while sit, can be expressed in our architecture
+as a single line of code: {\tt subscribe([* type Human, * looksAt myself, *
+isSitting true], behaviour\_callback())}. This highly expressive event model
+opens new ranges of development opportunities for decisional modules.
 
-Second, we have implemented a framework to extract symbolic facts from complex
-real scenes. It is based on a 3D model of the world that the robot builds
-on-line by merging different sensor modalities. It computes spatial relations
-between perceived objects in real-time and it allows for virtually \emph{viewing}
-of the same scene from different points of view, enabling \emph{visual} and
-\emph{spatial agent perspective taking}.
+During the preparation of the thesis, we have also developed a new stand-alone
+natural language processor for English language. It takes advantage of the
+different symbolic models exposed by ORO server to analyse, resolve the
+semantics and ground dialogues. It can process orders, questions and positive
+assertions and translates them into new symbolic facts. It includes a custom
+grammatical parser, a re-verbalization module, several discrimination
+strategies, including interactive ones. The application is developed in Python
+(about 15K lines of code), can be used in real-time on the robot, and is
+accompanied by a speech recognition interface developed as an Android
+application.
 
-Third, the same symbolic knowledge base enables richer language capabilities
-for the robot.  We propose a new approach to natural language grounding that is
-robust, situated and more generic than what can be found in previous work
-on situated language grounding. We present several examples that include
-recognition and semantic validation of thematic roles or disambiguation
-based on attention foci.
-
-Communcation between these components is build as streams of symbolic facts,
-where knowledge manipulated by the robot is made explicit.
-This leads us to the idea of a \emph{knowledge-oriented architecture}, which is
-discussed at the end of the article.
-
-These points highlight some original aspects of a larger cognitive architecture
-that has been deployed and tested on several mobile robotic platforms
-(including both humanoid robots and service robots), demonstrating the
-versatility and hardware-agnosticism of these developments.
-
+A last notable software contribution is our involvement in the MORSE simulator
+for academic robotics. We have played a central role in the original design and
+development of the core functionalities of this open-source simulator which is
+now used by over twenty laboratories world-wide. While this project as a whole
+is not directly related to this thesis, we have led the effort towards
+effective simulation of human-robot interaction in MORSE, which is now the
+current state-of-the-art in this domain.
+\fxwarning{Do we keep the mention to MORSE?}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -370,7 +391,7 @@ interaction:
 	environment by providing more expressive representation system than
 	classical databases or fact repositories,
 
-	\item to improve human-robot interaction by explicitely providing to the
+	\item to improve human-robot interaction by explicitly providing to the
 	machine an interpretation frame, at least partially shared with the human.
 
 \end{itemize}
@@ -383,7 +404,7 @@ answered}
 \subsection{Specific requirements of human-robot interaction}
 \label{sect|pecularities-krs-for-hri}
 
-Pecularities on knowledge representation required by HRI, in the frame of the
+Peculiarities on knowledge representation required by HRI, in the frame of the
 general context defined in section~\ref{sect|general-context}:
 
 \subsubsection{Human communication}
