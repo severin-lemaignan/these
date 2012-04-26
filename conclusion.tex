@@ -4,6 +4,143 @@
 \section{Discussion}
 \label{sect|discussion}
 
+\subsection{Modeling the Real World}
+\label{modeling_real_world}
+
+The main challenge we address in this work can be formulated as \emph{How to
+model real-world interaction in a symbolic way, processable by the robot to
+make decisions}. In the paper we used several times the term \emph{grounding} to
+describe the process of binding percepts to symbols (later organized in a
+first-order logic framework).  We would like to relate it to
+Sloman's~\cite{Sloman2007} stance against the \emph{``Symbol Grounding meme''},
+where he argues that symbolic grounding is bound to the representation of
+somatic concepts (\ie roughly, the sensori-motor relationships that the robot
+learns from its interaction with the world) which in turn severely constraints
+the domain of concepts accessible to the robot. We could call this type of
+grounding \emph{bottom-up} grounding, and Steels~\cite{Steels2007} claims it is
+a solved issue.
+
+For us, \emph{grounding} is on the contrary a \emph{top-down} activity: the
+robot needs to automatically bind a representation (for instance, a word
+uttered by a human, an image taken from a camera, a sentence extracted from
+Wikipedia) to an unambiguous, context-dependent, internal concept. This 
+concept may (or may not) be \textit{a priori} available to the robot as a
+pre-loaded ontology (what we previously called the cultural background of the
+robot).
+
+Note also that perception issues have been solved in our experiments by using a tag-based object identification
+method. In section~\ref{informational_content_extraction} we give an example
+where the human says ``the yellow banana is big''. It is assumed in the example
+that the robot already knows about a banana instance that is yellow. In our
+experiments, this kind of knowledge was either hard coded in scenario-specific
+ontologies (\eg \stmt{banana\_01 type Banana} where \concept{banana\_01}
+is the id of the banana's tag) or taught to the robot with prescriptive
+sentences like ``Learn that this is a banana'' while pointing at the banana's
+tag. It would be interesting to extend this approach with automatic classifiers
+(for colour, size, etc.). If the robot later discovers a yellowish and large
+object, an utterance like ``the yellow banana is big'' could be used to assert
+that this object is a banana.  A similar approach focused on the combination of visual perception and communication modalities to achieve visual learning has been 
+developed by~\cite{Vrecko2009}.
+
+While the examples we develop are all based on symbols that have a physical
+meaning, the system deals equally well with abstract, \emph{exo-somatic},
+concepts like \emph{Time}, \emph{Event} or \emph{Place}. Demonstrating this in
+real experiments would be an interesting development.
+
+Amongst the other shortcomings of our architecture, neither the \emph{domain of
+validity} nor the context of a fact are represented in a satisfying way (we do
+store some kind of context --the agent's mental model for instance). This
+information is meta-information on the knowledge. While the ORO framework
+allows them through \emph{statement reification}, it does not offer yet a
+convenient way to store them. One obvious limitation that derives from the lack
+of efficient meta-knowledge is the absence of knowledge history.  With ORO, the
+robot always lives in the present.
+
+Along the same lines, our current framework lacks a proper management of
+uncertainty which is essential for real world environments. A probabilistic
+layer should be added by attaching truth probabilities to statements, similar
+to~\cite{Jain2009}.
+
+\subsubsection{On Thematic Roles and Action Models}
+
+The current implementation relies on a small, predefined set of action verbs that can
+be recognized from natural language (section~\ref{processing_of_actions}).
+This constraint does not come from the resolution algorithm itself, but
+rather from the difficulty to automatically extract the thematic roles associated
+to a verb. 
+This could be improved by linking a symbolic task
+planner to the \textsc{Dialogs} module to dynamically provide the list of
+actions that the robot can process, \ie actions for which the robot can produce
+a plan. Additionally, we could exploit on-line resources like
+\textsc{VerbNet}~\cite{Kipper2008}, which provides a large machine-processable
+lexicon of English verbs along with their thematic roles.
+
+\subsection{Knowledge and Embodiement}
+
+The three experiments that were presented in the paper all illustrate how the
+robot makes use of its embodied nature to establish a meaningful communication
+with a human. Mainly, because the robot and the human share the same physical
+environment and they perceive each other, we are able to create a mutual
+context.
+
+Sloman, in~\cite{Sloman2009}, argues however that the strong focus on
+embodiment in the robotics community has hindered progress towards natural
+human-robot interaction. Our approach has hopefully made clear that, similar to
+Beetz et al.~\cite{Beetz2010}, we do not consider embodiment \emph{per se} outside of
+a broader symbolic system, \ie our architecture is not bound to the morphology or
+the low-level sensori-motor capabilities of a specific agent. 
+
+However, we can build a model of the ``human point of view'' because the robot
+perceives the human, and is able to estimate, at least partially, what the
+human perceives or not. We infer that a human focuses on some object because
+he/she points at it, looks at it, and besides, the object is visible to him.
+This relies on the embodied nature of the interaction. In turn, this allows us
+to understand the meaning of sentences like ``Give me that''.
+
+We hope that this contribution shows that considering embodiment as the most
+challenging and fruitful characteristic of robotics in regards to the whole AI
+community does not contradict with a formal, highly symbolic approach of the
+representation and decision problems that arise in robotics. 
+
+Let us conclude this article briefly reviewing and linking Roy's list of challenges
+for human-robot dialogue with our current approach: 
+\begin{itemize}
+
+	\item While more modalities (especially, deictic gestures and social gazes)
+	can be added, we have actually proposed a \emph{cross-modal
+	representation system}.
+
+	\item One of the main feature of the \textsc{Dialogs} module is its ability
+	to interactively ground concepts through disambiguation, bringing the
+	ability for the robot to \emph{associate words with perceptual and action
+	categories}.
+
+	\item The ORO knowledge base offers some support for the \emph{modeling of
+	context}, but a lot remains to be done in this respect.
+
+	\item \emph{Figuring out the right granularity of models} is partially
+	solved by supporting both a geometric reasoning level and a purely symbolic
+	level. Generally speaking, it appears that complex robotic systems need
+	to operate with a dynamic granularity, depending on the task to achieve.
+
+	\item \emph{Temporal modeling} is currently missing in our architecture,
+	and symbolic and geometric \emph{planning} is accomplished outside of the
+	knowledge representation loop we presented here. We see planning as an
+	essential tool to build predictive knowledge, and we are looking into this
+	direction.
+
+	\item Since we provide no time management, our system is currently not able
+	to \emph{match past (learned) experiences with the current interaction}.
+	This ability is obviously a key step for general action recognition, and
+	seems of particular importance for the robot to assess the state of the
+	interaction with the human.
+
+	\item Finally, Roy mentions \emph{the ability to take into account the
+	human perspective}: this is probably our main contribution which we are now
+	trying to develop even further towards psychology-inspired experiments.
+
+\end{itemize}
+
 \subsection{Learning}
 \label{sect|discussion-learning}
 
