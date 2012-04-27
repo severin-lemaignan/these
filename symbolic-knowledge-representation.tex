@@ -1312,3 +1312,824 @@ the system does not consider this domain.}
 \end{table}
 \end{landscape}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{The Knowledge API}
+\label{sect|knowledge-api}
+
+During the preparation of the thesis, discussions with several people involved
+in knowledge representation (namely Dominik Jain, Lars Kunze, Michael Beetz)
+have led to the draft of a generic API for knowledge access and exchange.
+
+This section presents this effort of standardisation that is (partially)
+implemented by the ORO server, presented in the next chapter.
+
+\subsection{Rationale and General Considerations}
+
+The original idea comes from the acknowledgement that more and more software
+components for robotics want to store or use symbolic data. Since established
+international efforts at defining standard for inter-component communication
+like ROS have already proved their usefulness, one single API for different
+knowledge representation and management systems could be equally useful.
+
+Two main previous attempts must be noted: the \emph{Knowledge Interchange
+Format} (KIF) and the DIG interface.
+
+\fxfatal{Complete this part}
+The \href{http://dig.sourceforge.net/}{ DIG interface}
+
+The \href{http://logic.stanford.edu/kif/dpans.html}{ Knowledge Interface Format
+(KIF)}. In~\cite{Ginsberg1991}, Ginsberg explains why \emph{knowledge
+interchange formats} are hardly a good idea.
+
+The API is designed for robotics (even if probably useful in other contexts):
+it aims to be simple and practical for clients, it explicitly supports
+uncertain knowledge and multiple models, and it makes clear how knowledge is
+added or retracted with explicit policies.
+
+We have attempted to design it in a way that do not restrict expressiveness
+(any logical sentence that can be expressed in the logic of predicates, with a
+probabilistic extension, can be manipulated by the API), and a simple extension
+mechanism should permit future evolutions in a backward compatible way.
+
+Besides facilitating exchange of knowledge contents between systems by ensuring
+one standard formalism, another outcome of the adoption by several KRS of this
+API is that it allows easy switch between semantic engines (and thus
+benchmarking and sharing of unit-tests).
+
+This API was developed with Prolog-based knowledge systems, Description
+Logics-based knowledge bases and Markov networks in mind, and should cover as
+well other systems related to predicate logics (with or without a probabilistic
+extension).
+
+Besides standard operations on axioms and taxonomy, the API aims to cover:
+
+\begin{itemize}
+    \item  probabilities associated to statements
+    \item  management of several models
+    \item  explicit policies to add, retract or, more generally, alter 
+    knowledge (for instance, to guarantee consistency when adding knowledge)
+    \item  specific, implementation-dependent, extensions through the
+    \texttt{special} method.
+\end{itemize}
+
+Implementations are not always expected to cover to whole API, but must have a
+predicable behaviour when a part of the API is not implemented. In particular,
+the API makes no assumptions on implementations regarding:
+
+\begin{itemize}
+    \item  the actual supported expressiveness (the API allows to express
+    general first-order logics statements, but the underlying implementation
+    may support only a subset, for instance, Description Logics)
+    \item  Closed-world assumption vs Open-world assumption
+    \item  Reasoning capabilities
+\end{itemize}
+
+\paragraph{Conventions}
+
+\begin{itemize}
+
+    \item  \textbf{Service}: we call \emph{service} the set of all methods
+    defined by this API.
+
+    \item  \textbf{Method}: \emph{method} refers to one single remote function
+    offered by the service. The terms function, method, and procedure can be
+    assumed to be interchangeable.
+
+    \item  The \textbf{Service provider} or \textbf{implementation} is a
+    software that implement the API.
+
+    \item  A \textbf{policy} is a (extensible) set of rules that defines in
+    which ways the knowledge must be altered. It is represented as a dictionary
+    of (keys, values). The section~\ref{sect|kbapi-policies} details the
+    content of these policies.
+
+\end{itemize}
+
+\subsection{Statements, partial statements and rules}
+
+
+\subsubsection{Resources and literals}
+
+
+All entities in the knowledge base are either \textbf{resources} or
+\textbf{literals}. Resources can be classes, predicates or instances.
+
+Resources (\ie, not literals) must start with a letter and can be comprised of
+symbols [{\tt a-zA-Z0-9\_}].
+
+They may be prefixed with a namespace prefix (like in \texttt{rdf:type}) or
+come with a complete namespace URI (like
+\texttt{$<$\href{http://www.w3.org/1999/02/22-rdf-syntax-ns\#type}{http://www.w3.org/1999/02/22-rdf-syntax-ns{\textbackslash}\#type}$>$}).
+In this case, the full URI (the namespace and the resource name) must be
+enclosed between $<$ and $>$. If no namespace is provided, it is assumed to be
+defined in the server default namespace.
+
+Literals should follow the SPARQL syntax for
+literals\footnote{\url{http://www.w3.org/TR/rdf-sparql-query/\#QSynLiterals}}.
+Give give below some examples of valid literals:
+
+\begin{itemize}
+
+    \item  The boolean {\bf true} can be represented either as
+    \texttt{"true"\^{ }\^{ }xsd:boolean} or as \texttt{true},
+
+    \item  The integer {\bf 123} can be represented either as \texttt{123\^{
+    }\^{ }xsd:int} or as \texttt{123}. \texttt{"123"\^{ }\^{ }xsd:int} is also
+    acceptable.
+
+    \item  The double {\bf 1.23} can be represented either as \texttt{1.23\^{
+    }\^{ }xsd:double} or as \texttt{1.23}. \texttt{"1.23"\^{ }\^{ }xsd:double}
+    is also acceptable.
+
+    \item  Strings are either single or double quoted: \texttt{"Hello Word"},
+    \texttt{'Hello Word}', \texttt{"Hello Word"\^{ }\^{ }xsd:string} all
+    describe the same literal.
+
+    \item  User-defined dataypes can be represented with \texttt{"xyz"\^{ }\^{
+    }$<$\href{http://example.org/ns/userDatatype}{http://example.org/ns/userDatatype}$>$}
+    or \texttt{"xyz"\^{ }\^{ }ns:userDatatype}.
+
+\end{itemize}
+
+\subsubsection{Statements}
+
+
+\paragraph{General syntax}
+
+Two syntaxes are admissible to represent a \textbf{statement} (or
+\textbf{axiom}).  The general one is a string starting with a predicate
+\texttt{p} followed by a set in brackets of comma-separated arguments:
+
+    \begin{center} \tt p(a1, ..., an) \end{center}
+
+where \texttt{n} is the arity of the predicate. For instance:
+
+    \begin{center}  \tt cutsWith(human0, bred0, knife0) \end{center}
+
+The predicate must be a resource, as well as at least one of the arguments.
+Other arguments may be either resources or literals.
+
+\paragraph{Infix syntax}
+
+As a special case, the infix syntax (\emph{subject predicate object}) is
+acceptable for binary predicates (in this case without commas or brackets):
+
+    \begin{center} \tt s p o \end{center}
+
+For instance:
+
+    \begin{center} \tt sky0 hasColor blue \end{center}
+
+
+Further examples include:
+
+\begin{itemize}
+    \item {\tt Age(EiffelTower, 300)},
+
+    \item {\tt filledWith(my\_cup, coffee)}, which is strictly equivalent to
+    {\tt my\_cup filledWith coffee},
+
+    \item {\tt my\_cup rdf:type opencyc:Cup},
+
+    \item {\tt my\_cup weights 10.5} (assuming that the {\tt weights} predicate
+    defines a unit).
+
+\end{itemize}
+
+\subsubsection{Partial statements}
+
+A \textbf{partial statement} is a statement with a least one unbound member.
+Unbound members are denoted either by a ``*'' (an anonymous variable, for
+instance \texttt{* isVisible true}) or by a string starting with \texttt{?}
+(named variable, for instance \{\texttt{sees(?ag, obj1), ?ag type Human}\}).
+
+Partial statements can often be seen as masks or patterns, and used as such in
+methods like \texttt{find} or \texttt{remove}.
+
+\subsubsection{Rules}
+
+Rules syntax is based on the human-readable form of the SWRL
+syntax\footnote{\url{http://www.w3.org/Submission/SWRL/\#2.2}}, encapuslated
+in a string. Atoms must be separated by either a comma, \texttt{\^{ }} (unicode
+U+005E) or \texttt{{$\land$}} (logical AND, unicode U+2227).
+
+For instance:
+
+\begin{itemize}
+
+    \item {\tt Yogurt(?x)->DairyProduct(?x)} asserts that all instances of type
+    {\tt Yogurt} are also {\tt DairyProduct},
+
+    \item {\tt Tableware(?o), eatsWith(?x, ?o), Yogurt(?x) -> Tablespoon(?o)}
+
+\end{itemize}
+
+\subsubsection{Probabilities}
+
+Statements may have a truth probability attached to them, as a float value
+comprised between 0.0 (impossible fact) and 1.0 (certain fact). If no
+probability is specified, a probability of 1.0 is assumed.
+
+Two syntaxes are possible: either included in the statement string, separated
+with a colon:
+
+\begin{center} \tt predicate(a1, ...,an):p \end{center}
+
+For example: {\tt Age(EiffelTower, 300):0.54}, which means: the fact that the
+Eiffel tower is 300 years old holds with a probability of 54\%.
+
+Or as a independent float value:
+
+\begin{center} \tt [predicate(a1, ...,an), p] \end{center}
+
+For example: \texttt{[Age(EiffelTower, 300), 0.54]}
+
+When using the infix syntax for statements, only the second syntax for
+probabilities is allowed:
+
+\texttt{[human1 holds my\_cup, 0.87]} (which mean that it is believed with 87\%
+of certainty that the human holds the cup).
+
+The type \texttt{statement} \textbf{always} means either a statement alone or a
+statement with a probability.
+
+
+\subsubsection{Sets of statements}
+
+Statements can be grouped inside sets, enclosed in square brackets.
+
+When applicable and except otherwise noted, the comma between statements (or
+partial statements) in a set must be interpreted as a logical AND.
+
+Example:
+
+\begin{itemize}
+    \item {\tt find [* filledWith coffee, * rdf:type Cup]} would return
+    instances that are both cups and filled with coffee,
+
+    \item {\tt find ["* rdf:type TemporalThing", "* rdf:type SpatialThing"]}
+    would not answer anything, assuming \concept{TemporalThing} and
+    \concept{SpatialThing} are disjoint types.
+
+\end{itemize}
+
+\subsection{Policies}
+\label{sect|kbapi-policies}
+
+Knowledge content interacts with the knowledge base through the \texttt{revise}
+method. This method takes as first parameter a set of statements, and as second
+parameter, a \emph{policy} that specifies what must be done with the
+statements.
+
+A policy is represented as a set of \texttt{(key, value)} pairs whose possible
+values are presented in table~\ref{table|knowledge-policies}.
+
+\begin{table}
+\begin{center}
+
+    \begin{tabular}{lp{4cm}p{9cm}}%% 22 | 5 | X | 
+    \toprule
+    Key & Values & Meaning \\
+    
+    \midrule
+
+    { \tt method} & {\tt add} \emph{(default)} & the statements are added to the
+    knowledge base, without ensuring consistency.\\ 
+    
+    \midrule
+
+    & {\tt safe\_add} & the statements are added only if they (individually) do
+    not lead to inconsistencies.\\ 
+
+    \midrule
+    
+    & {\tt retract} & the statements are removed from the model. Associated
+    probabilities are discarded.\\ 
+    
+    \midrule
+    
+    &{\tt update} & Updates objects of one or several statements in the
+    specified model. If the predicate is not inferred to be \emph{functional}
+    (\ie, it accept only one single value), behaves like {\tt add}.\\ 
+    
+    \midrule
+    
+    & {\tt revision} or {\tt safe\_update} & Updates objects of one or several
+    statements in the specified model if it does not (individually) lead to
+    inconsistencies. If the predicate is not inferred to be \emph{functional}
+    (\ie, it accepts only one single value), behaves like {\tt safe\_add}.\\ 
+    
+    \midrule
+    
+    {\tt model} & {\tt all} \emph{(default)} & all existing \emph{models}
+    (section~\ref{sect|kbapi-models}) are impacted by the change.\\
+
+    \midrule
+    
+    & a valid model id or a set of valid model id & only the specified model(s)
+    are impacted\\
+    
+    \bottomrule
+    
+    \end{tabular}
+
+\end{center}
+\caption{Knowledge revision policies.}
+\label{table|knowledge-policies}
+\end{table}
+
+\fxwarning{What to do with: For more background on the knowledge revision
+strategies, please visit \href{http://en.wikipedia.org/wiki/Belief_revision}{
+this Wikipedia page}.}
+
+\subsection{Models}
+\label{sect|kbapi-models}
+
+A model is a knowledge container unit (for instance, a RDF tree, a SQL
+database, etc.). The service provider \textbf{may} support several models
+(for instance, one per agent or one for certain facts, one for uncertain facts,
+etc.). The actual use and semantic of each model is left to the client.
+
+Each model is identified by a unique alphanumeric id. Most of
+the API methods can take as parameter a model id. If omitted ({\tt null}) or
+if the reserved id {\tt all} is used, the method is applied on all models
+(except otherwise noted, this should be strictly equivalent to call the method
+on each model separately). Service provider must offer at least one model
+called {\tt default}, denoting the default robot knowledge storage.
+
+
+\subsection{Core API}
+
+\subsubsection{Service management}
+
+\begin{itemize}
+
+\item  \texttt{\emph{string} \textbf{hello}()}
+    \begin{itemize}
+    \item  Returns the version number of the service provider. Can be used to
+    check connection status.
+    \item  \emph{Params}: None
+    \item  \emph{Return values}:
+        \begin{itemize}
+        \item  version number \emph{(string)}
+        \end{itemize}
+    \end{itemize}
+
+\item  \texttt{\textbf{load}(\emph{string} path, [\emph{string} model])}
+    \begin{itemize}
+    \item  Loads the content of the specified OWL ontology. If
+    $<$owl:imports$>$ are specified, the server is expected to honour them.
+    \item  \emph{Params}:
+        \begin{itemize}
+        \item  [string] the URI of the OWL file. Must be reachable by the
+        server.
+        \item  \emph{opt.} [string] the model ID that receives the OWL content.
+        If omitted, the content is added to all existing models. 
+        \end{itemize}
+
+    \item  \emph{Return values}: None
+    \end{itemize}
+
+\item  \texttt{\textbf{save}([\emph{string} path], [\emph{string} model])}
+\begin{itemize}
+\item  Saves the model content to an OWL ontology. Each models are stored in their own namespace (by appending the model id to the default namespace).
+\item  \emph{Params}:
+\begin{itemize}
+\item  \emph{opt.} [string] the path where to export the OWL file. Must be reachable by the server. If omitted, a default, unique path, is build (the naming scheme is implementation dependent). OWL serialization (XML, turtle, n3\ldots{}) is implementation dependent.
+\item  \emph{opt.} [string] the model ID that should be saved. If omitted, all models are dumped.
+\end{itemize}
+
+\item  \emph{Return values}: None
+\end{itemize}
+
+\item  \texttt{\textbf{reset}([\emph{string} model])}
+\begin{itemize}
+\item  Reset a model to its initial state. Note that the initial state may not be an empty set of facts if the service provider loads some initial content at model initialization.
+\item  \emph{Params}:
+\begin{itemize}
+\item  \emph{opt.} [string] the model ID to reset. If omitted, all models are reset. 
+\end{itemize}
+
+\item  \emph{Return values}: None
+\end{itemize}
+
+\item  \texttt{\textbf{special}(\emph{string} method, [\emph{set$<$string$>$} parameters])}
+\begin{itemize}
+\item  This method enables implementation-dependent extensions.
+\item  \emph{Params}:
+\begin{itemize}
+\item  [string] the name of the method to execute
+\item  \emph{opt.} [set$<$string$>$] method parameters
+\end{itemize}
+
+\item  \emph{Return values}: implementation dependent
+\end{itemize}
+
+\end{itemize}
+
+\subsubsection{Managing knowledge}
+
+
+\begin{itemize}
+\item  \texttt{\textbf{revise}(\emph{set$<$statement$>$} statements, [\emph{policy} policy])}
+\begin{itemize}
+\item  Alter the knowledge base with one or several statements, following the specified \hyperref[94422fa6b0fe23d0ab463703c0022a63]{policy}.
+\item  \emph{Params}:
+\begin{itemize}
+\item  [set$<$statement$>$] the set of statements to add.
+\item  \emph{opt.} [policy] the policy to follow. If omitted, the default policy is applied (all statements are added to all models, without checking for consistency). 
+\end{itemize}
+
+\item  \emph{Return values}: None
+\end{itemize}
+
+\item  \texttt{\textbf{add}(\emph{set$<$statement$>$} statements, [\emph{string} model])}
+\begin{itemize}
+\item  Adds one or several statements to the specified model. Equivalent to \texttt{revise} with the policy \texttt{{"method":"add"}}.
+\item  \emph{Params}:
+\begin{itemize}
+\item  [set$<$statement$>$] the set of statements to add.
+\item  \emph{opt.} [string] the model ID that receives the statements. If omitted, statements are added to all models. 
+\end{itemize}
+
+\item  \emph{Return values}: None
+\end{itemize}
+
+\item  \texttt{\textbf{retract}(\emph{set$<$[statement|partial{\textunderscore}statement]$>$} pattern, [\emph{string} model])}
+\begin{itemize}
+\item  Removes one or several statements to the specified model. Equivalent to \texttt{revise} with the policy \texttt{{"method":"retract"}}.
+\item  \emph{Params}:
+\begin{itemize}
+\item  [set$<$statement|partial{\textunderscore}statement$>$] the set of statements to remove. If a partial statement is encountered, all statements matching this pattern are removed.
+\item  \emph{opt.} [string] the model ID where the statements must be removed from. If omitted, statements are removed from each models. 
+\end{itemize}
+
+\item  \emph{Return values}: None
+\end{itemize}
+
+\item  \texttt{\textbf{update}(\emph{set$<$statement$>$} statements, [\emph{string} model]))}
+\begin{itemize}
+\item  Updates objects of one or several statements in the specified model, and only for \emph{functional} predicates (ie, predicates that accept only one value). Equivalent to \texttt{revise} with the policy \texttt{{"method":"update"}}.
+\item  \emph{Params}:
+\begin{itemize}
+\item  [set$<$statement$>$] the set of statements to update. If a partial statement is encountered, all statements matching this pattern are removed.
+\item  \emph{opt.} [string] the model ID to update. If omitted, statements are updated in all models. 
+\end{itemize}
+
+\item  \emph{Return values}: None
+\item  
+\end{itemize}
+
+\end{itemize}
+
+\subsubsection{Knowledge retrieval}
+
+
+\begin{itemize}
+\item  \texttt{\textbf{lookup}(\emph{string} concept, [\emph{string} model]))}
+\begin{itemize}
+\item  Searches for the given string in the knowledge base, and returns the matching resources, along with their types.
+\item  \emph{Params}:
+\begin{itemize}
+\item  [string] the string to look for.
+\item  \emph{opt.} [string] the model ID to look in. If omitted, the string is looked for in all models. 
+\end{itemize}
+
+\item  \emph{Return values}: A set of pair \texttt{[resource{\textunderscore}id, [class|instance|object{\textunderscore}property|datatype{\textunderscore}property]]}.
+\end{itemize}
+
+\item  \texttt{\textbf{about}(\emph{string} resource, [\emph{string} model]))}
+\begin{itemize}
+\item  Returns the list of asserted (and if available inferred) statements which the resource is part of.
+\item  \emph{Params}:
+\begin{itemize}
+\item  [string] the resource to look for.
+\item  \emph{opt.} [string] the model ID to look in. If omitted, the resource is looked for in all models. 
+\end{itemize}
+
+\item  \emph{Return values}: A set of statements.
+\end{itemize}
+
+\item  \texttt{\textbf{exist}(\emph{set$<$[statement|partial{\textunderscore}statement]$>$} pattern, [\emph{string} model]))}
+\begin{itemize}
+\item  Checks that the given pattern matches content in the ontology. If statements, returns true if all the statements are present in the knowledge base (asserted or inferred), if partial statements, returns true if at least one statement match the conjunction of the partial statements.
+\item  \emph{Params}:
+\begin{itemize}
+\item  [set$<$[statement|partial{\textunderscore}statement]$>$] the pattern to check.
+\item  \emph{opt.} [string] the model ID to look in. If omitted, the resource is looked for in all models. 
+\end{itemize}
+
+\item  \emph{Return values}: A boolean.
+\end{itemize}
+
+\item  \texttt{\textbf{check}(\emph{set$<$statement$>$} statements, [\emph{string} model]))}
+\begin{itemize}
+\item  Checks that the given statements are consistent with the knowledge base. Statements are not added to the knowledge base.
+\item  \emph{Params}:
+\begin{itemize}
+\item  [set$<$statement$>$] the statements to test.
+\item  \emph{opt.} [string] the model ID to look in. If omitted, the resource is looked for in all models. 
+\end{itemize}
+
+\item  \emph{Return values}: A boolean. \texttt{true} if statements do not contradict with the knowledge base.
+\end{itemize}
+
+\item  \texttt{\textbf{find}(\emph{set$<$string$>$} named{\textunderscore}variables, \emph{set$<$partial{\textunderscore}statement$>$} pattern, [\emph{set$<$string$>$} constraints], [\emph{string} model]))}
+\begin{itemize}
+\item  Retrieves ressources given a set of partially defined statements plus optional constraints about this resource. Constraints must follow the \href{http://www.w3.org/TR/rdf-sparql-query/\#tests}{ SPARQL syntax for filters}. \texttt{named{\textunderscore}variables} defines the set of variables whose bindings are looked for. Probabilities can be retrieved as well.
+\item  Examples: 
+\small
+\begin{verbatim}
+
+Assuming the following facts in the knowledge base:
+'default' model -> cup1 type Cup, cup1 hasColor blue, knife0 type Knife, (human1 uses cup1):0.23,
+(human1 uses knife0):0.46
+'human1' model -> cup32 type Cup, cup32 hasColor blue
+
+find (["obj"], ["rdf:type(?obj, Cup)", hasColor(?obj, 'blue')"]) # simple query, in every models
+ -> {["obj"]:["cup1", "cup32"]}
+find (["obj"], ["rdf:type(?obj, Cup)", hasColor(?obj, 'blue')"], [], "default"]) # simple query, in
+the ''default'' model
+ -> {["obj"]:["cup1"]}
+find (["obj", "p1"], ["uses(?obj, human1):p1", hasColor(?obj, 'blue')"]) # retrieving probabilities
+ -> {["obj", "p1"]:[["cup1", 0.23]]}
+find (["t", "p1"], ["uses(?obj, human1):p1", rdf:type(?obj, ?t)"]) # retrieving probabilities
+ -> {["t", "p1"]:[["Cup", 0.23], ["Knife", 0.46]]}
+
+\end{verbatim}
+\normalsize
+
+\item  \emph{Params}:
+\begin{itemize}
+\item  [string] the name of the variable to identify, as used in the statements.
+\item  [set$<$partial{\textunderscore}statement$>$] pattern build from partial statements.
+\item  \emph{opt.} [set$<$partial{\textunderscore}statement$>$] pattern build from partial statements.
+\item  \emph{opt.} [string] the model ID to look in. If omitted, the resource is looked for in all models. 
+\end{itemize}
+
+\item  \emph{Return values}: A set of resources.
+\end{itemize}
+
+\item  \texttt{\textbf{findmpe}(\emph{string} named{\textunderscore}variable, \emph{set$<$partial{\textunderscore}statement$>$} pattern, [\emph{set$<$string$>$} constraints], [\emph{string} model]))}
+\begin{itemize}
+\item  Retrieves ressources within the \emph{Most Probable Explanation} (\emph{ie} the most likely current state of the world in the given model). For implementation not supporting probabilistic reasoning, \texttt{findmpe} is strictly equivalent to \texttt{find}. See \texttt{find} for details about the use of the request.
+\item  \emph{Params}:
+\begin{itemize}
+\item  [string] the name of the variable to identify, as used in the statements.
+\item  [set$<$partial{\textunderscore}statement$>$] pattern build from partial statements.
+\item  \emph{opt.} [set$<$partial{\textunderscore}statement$>$] pattern build from partial statements.
+\item  \emph{opt.} [string] the model ID to look in. If omitted, the resource is looked for in all models. 
+\end{itemize}
+
+\item  \emph{Return values}: A set of resources.
+\end{itemize}
+
+\end{itemize}
+
+\subsubsection{Managing models}
+
+
+\begin{itemize}
+\item  \texttt{\textbf{models}()}
+\begin{itemize}
+\item  Returns the set of current available models. See also \hyperref[ac5552fd6a3c08ad22387efbe42d137d]{models}
+\item  \emph{Params}: None
+\item  \emph{Return values}: a set of all model ids.
+\end{itemize}
+
+\item  \texttt{\textbf{addmodel}(\emph{string} id)}
+\begin{itemize}
+\item  Adds a new knowledge model to the knowledge base.
+\item  \emph{Params}:
+\begin{itemize}
+\item  [string] the model ID to add.
+\end{itemize}
+
+\item  \emph{Return values}: None.
+\end{itemize}
+
+\item  \texttt{\textbf{removemodel}(\emph{string} id)}
+\begin{itemize}
+\item  Removes a knowledge model from the knowledge base.
+\item  \emph{Params}:
+\begin{itemize}
+\item  [string] the model ID to remove.
+\end{itemize}
+
+\item  \emph{Return values}: None.
+\end{itemize}
+
+\item  \texttt{\textbf{isconsistent}([\emph{string} model])}
+\begin{itemize}
+\item  Checks that the knowledge base is globally consistent.
+\item  \emph{Params}:
+\begin{itemize}
+\item  \emph{opt.} [string] the model ID to check. If omitted, all models are checked and \texttt{true} is answered only if all models are consistent. 
+\end{itemize}
+
+\item  \emph{Return values}: A boolean. \texttt{true} if the model is consistent.
+\end{itemize}
+
+\item  \texttt{\textbf{addrules}(\emph{set$<$string$>$} rules, [\emph{string} model])}
+\begin{itemize}
+\item  Add rules to the model. See \hyperref[a4f86f7bfc24194b276c22e0ef158197]{rules} for examples.
+\item  \emph{Params}:
+\begin{itemize}
+\item  [set$<$string$>$] a set of rule to add to the model.
+\item  \emph{opt.} [string] the model ID that receive the rules. If omitted, rules are added to all models. 
+\end{itemize}
+
+\item  \emph{Return values}: None.
+\end{itemize}
+
+\end{itemize}
+
+\subsubsection{Taxonomy walking}
+
+\fxwarning{overlaps with the \texttt{about} method {$\rightarrow$} useful? add property listing?}
+
+
+\begin{itemize}
+\item  \texttt{\textbf{classesof}(\emph{string} instance, [\emph{bool} direct], [\emph{string} model]))}
+\begin{itemize}
+\item  Returns the (asserted and if available, inferred) classes of an instance.
+\item  \emph{Params}:
+\begin{itemize}
+\item  [string] the instance id to look for.
+\item  \emph{opt.} [bool] if true, only direct types are returned. If omitted, \texttt{false} is assumed 
+\item  \emph{opt.} [string] the model ID to look in. If omitted, the classes are searched in all models. 
+\end{itemize}
+
+\item  \emph{Return values}: A set of resource ids.
+\end{itemize}
+
+\item  \texttt{\textbf{instancesof}(\emph{string} class, [\emph{bool} direct], [\emph{string} model]))}
+\begin{itemize}
+\item  Returns the (asserted and if available, inferred) instances of a class.
+\item  \emph{Params}:
+\begin{itemize}
+\item  [string] the class id to look for.
+\item  \emph{opt.} [bool] if true, only direct instances are returned. If omitted, \texttt{false} is assumed 
+\item  \emph{opt.} [string] the model ID to look in. If omitted, the instances are searched in all models. 
+\end{itemize}
+
+\item  \emph{Return values}: A set of resource ids.
+\end{itemize}
+
+\item  \texttt{\textbf{subclassesof}(\emph{string} class, [\emph{bool} direct], [\emph{string} model]))}
+\begin{itemize}
+\item  Returns the (asserted and if available, inferred) sub-classes of a class.
+\item  \emph{Params}:
+\begin{itemize}
+\item  [string] the class id to look for.
+\item  \emph{opt.} [bool] if true, only direct sub-classes are returned. If omitted, \texttt{false} is assumed 
+\item  \emph{opt.} [string] the model ID to look in. If omitted, the sub-classes are searched in all models. 
+\end{itemize}
+
+\item  \emph{Return values}: A set of resource ids.
+\end{itemize}
+
+\item  \texttt{\textbf{superclassesof}(\emph{string} class, [\emph{bool} direct], [\emph{string} model]))}
+\begin{itemize}
+\item  Returns the (asserted and if available, inferred) super-classes of a class.
+\item  \emph{Params}:
+\begin{itemize}
+\item  [string] the class id to look for.
+\item  \emph{opt.} [bool] if true, only direct super-classes are returned. If omitted, \texttt{false} is assumed 
+\item  \emph{opt.} [string] the model ID to look in. If omitted, the super-classes are searched in all models. 
+\end{itemize}
+
+\item  \emph{Return values}: A set of resource ids.
+\end{itemize}
+
+\end{itemize}
+
+\subsection{API Extensions}
+
+
+Implementations are free to provide extensions through the \texttt{special} method.
+
+
+\subsection{Partial implementations}
+
+
+Softwares implementing the API may not support some features (like storage of probabilities, management of different models, etc.).
+
+If a method is not implemented at all, the server is expected to return an error with the JSON-RPC standard error code \texttt{-32601 Method not found}.
+
+If the requested method exists, but the an essential feature that prevent the execution of the method is missing, the implementation should return an error with the code \texttt{-31000 Feature not implemented} and provide details in the error message.
+
+Example of server not supporting several models in a \texttt{addmodel} query with the JSON-RPC protocol:
+
+
+
+\small
+\begin{verbatim}
+
+{"jsonrpc": "2.0", "method": "addmodel", "params": "human_model", "id": 1}
+{"jsonrpc": "2.0", "error": {"code": -31000, "message": "Feature not implemented", "data": "No
+support for several models"}, "id": 1}
+
+\end{verbatim}
+\normalsize
+If a method is partially implemented and does not prevent the processing of the request (like not handling probabilities attached to statements), implementations are advised to return a warning (that may be safely ignored by the client) along with the request result. Implementations are still expected to correctly parse any request and request arguments as described in the API.
+
+For instance, an implementation that does not handles probabilities could treat all probabilities as equal to 1.0, and add a \texttt{{"notsupported": "probabilities"}} to resultsets.
+
+Currently, the following \texttt{notsupported} flags are defined:
+
+\begin{tabular}{ll}
+\hline
+\texttt{notsupported} flag & Meaning \\ 
+\hline
+probabilities & Probabilities are not supported \\ 
+\hline
+\end{tabular}
+
+Example of server not supporting probabilities in a \texttt{add} query with the JSON-RPC protocol:
+
+
+
+\small
+\begin{verbatim}
+
+{"jsonrpc": "2.0", "method": "add", "params": [["my_cup filledWith coffee", 0.45]], "id": 1}
+{"jsonrpc": "2.0", "result": {"notsupported": "probabilities"}, "id": 1}
+
+\end{verbatim}
+\normalsize
+
+\subsection{Notes}
+\subsubsection{TBox alteration}
+
+(for background on the disctinction between ABox and TBox, cf \href{http://en.wikipedia.org/wiki/Description_logic\#Modeling}{ Wikipedia}. In two words, the TBox is the model structure, including the taxonomy, while the ABox is the instances).
+
+While not enforceable at the API level, modification of the TBox through the \texttt{add}, \texttt{remove} and \texttt{update} methods is strongly discouraged, since most of the underlying implementations are likely not to support it.
+
+For instance \texttt{add ["rdfs:subClassOf(Cup, Tableware)"]} is not recommended because it changes the model's taxonomy.
+
+To alter the model's TBox, the method \texttt{addrule} can be used instead. The previous example would translate into: \texttt{addrule "Cup(?x){$\rightarrow$}Tableware(?x)"}.
+
+
+\subsection{Discussion on design issues}
+
+
+\subsubsection{General}
+
+
+\begin{itemize}
+\item  Balance between ease of use/understand and completeness
+\item  Should we specify a communication protocol (for instance JSON-RPC)?
+\item  API = specification only, or as well a "middle-layer" that convert to a common, unique representation?
+\end{itemize}
+
+\subsubsection{Expressiveness}
+
+
+\begin{itemize}
+\item  Should we be more specific on the required expressiveness?
+\item  What are the pros/cons of not having requirements?
+\item  Do we (and how much do we) limit research on knowledge representation system by designing this API?
+\end{itemize}
+
+\subsubsection{Probabilities}
+
+
+\begin{itemize}
+\item  At statement level? At set of statements level? at model level?
+\end{itemize}
+
+\subsubsection{Extensibility}
+
+
+\begin{itemize}
+\item  Policies can easily be extended
+\item  method \texttt{special} allows implementation specific extensions
+\end{itemize}
+-
+
+
+\subsection{Other ideas, out of the API}
+
+
+\begin{itemize}
+\item  events ?
+\begin{itemize}
+\item  registerEvent(String, String, String, List): registers an event. Expected parameters are: type, triggering type, variable, event pattern.
+\item  registerEvent(String, String, List): registers an event. Expected parameters are: type, triggering type, event pattern.
+\end{itemize}
+
+\end{itemize}
+
+\begin{itemize}
+\item  SPARQL ?
+\begin{itemize}
+\item  sparql(String, String): performs one SPARQL query on the ontology
+\end{itemize}
+
+\end{itemize}
+
+
+
