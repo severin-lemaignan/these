@@ -11,6 +11,8 @@
 
 \usepackage{fullpage}
 
+\usepackage{appendix}
+
 \usepackage{graphicx}
 
 \usepackage[table]{xcolor}
@@ -204,7 +206,22 @@ Séverin Lemaignan
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\appendix
+\noappendicestocpagenum
+\addappheadtotoc
+
+% Adjustments headers
+\fancyhead[RO, LE]{Appendix \thechapter --- \bfseries\leftmark}
+
+\include{appendix-kb-api}
+\include{appendix-oro-api}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \backmatter
+
 
 \printglossaries
 

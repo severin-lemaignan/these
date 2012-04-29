@@ -1,0 +1,252 @@
+\chapter{{\tt oro-server} API}
+
+This appendix lists the complete API of {\tt oro-server} as of version 0.8.
+
+\paragraph{Base}
+\begin{itemize}
+
+    \item {\tt {\bf safeAdd}(Set)}: try to add news statements in long term
+    memory, if they don't lead to inconsistencies (return false if at least one
+    stmt wasn't added).
+
+    \item {\tt {\bf safeAdd}(Set, String)}: try to add news statements with a
+    specific memory profile, if they don't lead to inconsistencies (return
+    false if at least one stmt wasn't added).
+
+    \item {\tt {\bf check}(Set)}: checks that one or several statements are
+    asserted or can be inferred from the ontology
+
+    \item {\tt {\bf checkConsistency}()}: checks that the ontology is
+    semantically consistent
+
+    \item {\tt {\bf checkConsistency}(Set)}: checks that a set of statements
+    are consistent with the current model
+
+    \item {\tt {\bf help}()}: returns a human-friendly list of available
+    methods with their signatures and short descriptions.
+
+    \item {\tt {\bf getLabel}(String)}: return the label of a concept, if
+    available.
+
+    \item {\tt {\bf lookup}(String)}: try to identify a concept from its id or
+    label, and return it, along with its type (class, instance,
+    object\_property, datatype\_property).
+
+    \item {\tt {\bf lookup}(String, String)}: try to identify a concept from
+    its id or label and its type (class, instance, object\_property,
+    datatype\_property).
+
+    \item {\tt {\bf revise}(Set, String)}: 
+
+    \item {\tt {\bf add}(Set)}: adds one or several statements (triplets S-P-O)
+    to the robot model, in long term memory.
+
+    \item {\tt {\bf add}(Set, String)}: adds one or several statements
+    (triplets S-P-O) to the robot model associated with a memory profile.
+
+    \item {\tt {\bf clear}(Set)}: removes statements in the given set
+
+    \item {\tt {\bf remove}(Set)}: removes one or several statements (triplets
+    S-P-O) from the ontology.
+
+    \item {\tt {\bf update}(Set)}: update the value of a functional property.
+
+\end{itemize}
+
+\paragraph{Agents}
+\begin{itemize}
+
+    \item {\tt {\bf checkConsistencyForAgent}(String)}: check the consistency
+    of a specific agent model.
+
+    \item {\tt {\bf safeAddForAgent}(String, Set)}: try to add news statements
+    to a specific agent model in long term memory, if they don't lead to
+    inconsistencies (return false if at least one stmt wasn't added).
+
+    \item {\tt {\bf safeAddForAgent}(String, Set, String)}: try to add news
+    statements to a specific agent model with a specific memory profile, if
+    they don't lead to inconsistencies (return false if at least one stmt
+    wasn't added).
+
+    \item {\tt {\bf discriminateForAgent}(String, Set)}: returns a list of
+    properties that helps to differentiate individuals for a specific agent.
+
+    \item {\tt {\bf findForAgent}(String, String, Set)}: tries to identify a
+    resource given a set of partially defined statements in an specific agent
+    model.
+
+    \item {\tt {\bf findForAgent}(String, String, Set, Set)}: tries to identify
+    a resource given a set of partially defined statements and restrictions in
+    an specific agent model.
+
+    \item {\tt {\bf getInfosForAgent}(String, String)}: returns the set of
+    asserted and inferred statements whose the given node is part of. It
+    represents the usages of a resource.
+
+    \item {\tt {\bf listAgents}()}: returns the set of agents I'm aware of (ie,
+    for whom I have a cognitive model).
+
+    \item {\tt {\bf lookupForAgent}(String, String)}: lookup a concept in a
+    specific agent model.
+
+    \item {\tt {\bf addForAgent}(String, Set)}: adds one or several statements
+    (triplets S-P-O) to a specific agent model, in long term memory.
+
+    \item {\tt {\bf addForAgent}(String, Set, String)}: adds one or several
+    statements (triplets S-P-O) to a specific agent model associated with a
+    memory profile.
+
+    \item {\tt {\bf clearForAgent}(String, Set)}: removes statements from a
+    specific agent model.
+
+    \item {\tt {\bf removeForAgent}(String, Set)}: removes one or several
+    statements. Deprecated. Use clearForAgent instead.
+
+    \item {\tt {\bf save}(String, String)}: exports the cognitive model of a
+    given agent to an owl file. The provided path must be writable by the
+    server.
+
+    \item {\tt {\bf updateForAgent}(String, Set)}: updates one or several
+    statements (triplets S-P-O) in a specific agent model, in long term memory.
+\end{itemize}
+
+
+\paragraph{Administration}
+\begin{itemize}
+
+    \item {\tt {\bf makeHtmlDoc}()}: returns a list of available methods in
+    html format for inclusion in documentation.
+
+    \item {\tt {\bf listMethods}()}: returns the list of available methods with
+    their signatures and short descriptions as a map.
+
+    \item {\tt {\bf stats}()}: returns some statistics on the server
+
+    \item {\tt {\bf listSimpleMethods}()}: returns a raw list of available
+    methods.
+
+    \item {\tt {\bf reset}()}: reload the base ontologies, discarding all
+    inserted of removed statements, in every models
+
+    \item {\tt {\bf list}(String)}: lists on the serveur stdout all facts
+    matching a given pattern.
+
+    \item {\tt {\bf save}()}: exports the current ontology model to an owl
+    file. The file will be saved to the current directory with an
+    automaticallygenerated name.
+
+    \item {\tt {\bf save}(String)}: exports the current ontology model to an
+    owl file. The provided path must be writable by the server.
+\end{itemize}
+
+\paragraph{Concepts comparison}
+\begin{itemize}
+
+    \item {\tt {\bf discriminate}(Set)}: returns a list of properties that
+    helps to differentiate individuals.
+
+    \item {\tt {\bf getDifferences}(String, String)}: given two concepts,
+    return the list of relevant differences (types, properties...) between
+    these concepts.
+
+    \item {\tt {\bf getSimilarities}(String, String)}: given two concepts,
+    return the list of relevant similarities (types, properties...) between
+    these concepts.
+\end{itemize}
+
+\paragraph{Events}
+\begin{itemize}
+
+    \item {\tt {\bf registerEventForAgent}(String, String, String, String,
+    List)}: registers an event on a specific agent model. Expected parameters
+    are: agent, type, triggering type, variable, event pattern.
+
+    \item {\tt {\bf registerEventForAgent}(String, String, String, List)}:
+    registers an event on a specific agent model. Expected parameters are:
+    agent, type, triggering type, event pattern.
+
+    \item {\tt {\bf registerEvent}(String, String, String, List)}: registers an
+    event. Expected parameters are: type, triggering type, variable, event
+    pattern.
+
+    \item {\tt {\bf registerEvent}(String, String, List)}: registers an event.
+    Expected parameters are: type, triggering type, event pattern.
+
+    \item {\tt {\bf clearEvent}(String, String)}: remove one specific event
+    from a specific model.
+
+    \item {\tt {\bf clearEventsForAgent}(String)}: remove all events associated
+    to a specific model.
+
+    \item {\tt {\bf clearEvent}(String)}: remove one specific event from the
+    main model.
+
+    \item {\tt {\bf clearEvents}()}: remove all events associated to the main
+    model.
+\end{itemize}
+
+\paragraph{Querying}
+\begin{itemize}
+
+    \item {\tt {\bf find}(String, Set)}: tries to identify a resource given a
+    set of partially defined statements about this resource.
+
+    \item {\tt {\bf find}(String, Set, Set)}: tries to identify a resource
+    given a set of partially defined statements plus restrictions about this
+    resource.
+
+    \item {\tt {\bf getInfos}(String)}: returns the set of asserted and
+    inferred statements whose the given node is part of. It represents the
+    usages of a resource.
+
+    \item {\tt {\bf query}(String, String)}: performs one sparql query on the
+    ontology
+
+    \item {\tt {\bf getResourceDetails}(String)}: returns a serialized
+    ResourceDescription object that describe all the links of this resource
+    with others resources (sub and superclasses, instances, properties, etc.).
+
+    \item {\tt {\bf getResourceDetails}(String, String)}: returns a serialized
+    ResourceDescription object that describe all the links of this resource
+    with others resources (sub and superclasses, instances, properties, etc.).
+    The second parameter specify the desired language (following rfc4646).
+\end{itemize}
+
+\paragraph{Taxonomy}
+\begin{itemize}
+
+    \item {\tt {\bf getClassesOf}(String)}: returns a map of {class name,
+    label} (or {class name, class name without namespace} is no label is
+    available) of asserted and inferred classes of a given individual.
+
+    \item {\tt {\bf getDirectClassesOf}(String)}: returns a map of {class name,
+    label} (or {class name, class name without namespace} is no label is
+    available) of asserted and inferred direct classes of a given individual.
+
+    \item {\tt {\bf getDirectInstancesOf}(String)}: returns a map of {instance
+    name, label} (or {instance name, instance name without namespace} is no
+    label is available) of asserted and inferred direct instances of a given
+    class.
+
+    \item {\tt {\bf getDirectSubclassesOf}(String)}: returns a map of {class
+    name, label} (or {class name, class name without namespace} is no label is
+    available) of all asserted and inferred direct subclasses of a given class.
+
+    \item {\tt {\bf getDirectSuperclassesOf}(String)}: returns a map of {class
+    name, label} (or {class name, class name without namespace} is no label is
+    available) of all asserted and inferred direct superclasses of a given
+    class.
+
+    \item {\tt {\bf getInstancesOf}(String)}: returns a map of {instance name,
+    label} (or {instance name, instance name without namespace} is no label is
+    available) of asserted and inferred instances of a given class.
+
+    \item {\tt {\bf getSubclassesOf}(String)}: returns a map of {class name,
+    label} (or {class name, class name without namespace} is no label is
+    available) of all asserted and inferred subclasses of a given class.
+
+    \item {\tt {\bf getSuperclassesOf}(String)}: returns a map of {class name,
+    label} (or {class name, class name without namespace} is no label is
+    available) of all asserted and inferred superclasses of a given class.
+\end{itemize}
+
