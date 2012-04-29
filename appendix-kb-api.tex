@@ -219,7 +219,7 @@ values are presented in table~\ref{table|knowledge-policies}.
 \begin{table}
 \begin{center}
 
-    \begin{tabular}{lp{4cm}p{9cm}}%% 22 | 5 | X | 
+    \begin{tabular}{lp{4cm}p{9cm}}
     \toprule
     Key & Values & Meaning \\
     
@@ -296,7 +296,7 @@ called {\tt default}, denoting the default robot knowledge storage.
 
 \begin{itemize}
 
-\item  \texttt{\emph{string} \textbf{hello}()}
+\item  \meth{string}{hello}{}
     \begin{itemize}
     \item  Returns the version number of the service provider. Can be used to
     check connection status.
@@ -307,7 +307,7 @@ called {\tt default}, denoting the default robot knowledge storage.
         \end{itemize}
     \end{itemize}
 
-\item  \texttt{\textbf{load}(\emph{string} path, [\emph{string} model])}
+\item  \meth{}{load}{\emph{string} path, [\emph{string} model]}
     \begin{itemize}
     \item  Loads the content of the specified OWL ontology. If
     $<$owl:imports$>$ are specified, the server is expected to honour them.
@@ -322,7 +322,7 @@ called {\tt default}, denoting the default robot knowledge storage.
     \item  \emph{Return values}: None
     \end{itemize}
 
-\item  \texttt{\textbf{save}([\emph{string} path], [\emph{string} model])}
+\item  \meth{}{save}{[\emph{string} path], [\emph{string} model]}
 \begin{itemize}
 \item  Saves the model content to an OWL ontology. Each models are stored in their own namespace (by appending the model id to the default namespace).
 \item  \emph{Params}:
@@ -334,7 +334,7 @@ called {\tt default}, denoting the default robot knowledge storage.
 \item  \emph{Return values}: None
 \end{itemize}
 
-\item  \texttt{\textbf{reset}([\emph{string} model])}
+\item  \meth{}{reset}{[\emph{string} model]}
 \begin{itemize}
 \item  Reset a model to its initial state. Note that the initial state may not be an empty set of facts if the service provider loads some initial content at model initialization.
 \item  \emph{Params}:
@@ -345,7 +345,7 @@ called {\tt default}, denoting the default robot knowledge storage.
 \item  \emph{Return values}: None
 \end{itemize}
 
-\item  \texttt{\textbf{special}(\emph{string} method, [\emph{set$<$string$>$} parameters])}
+\item  \meth{}{special}{\emph{string} method, [\emph{set$<$string$>$} parameters]}
 \begin{itemize}
 \item  This method enables implementation-dependent extensions.
 \item  \emph{Params}:
@@ -363,7 +363,7 @@ called {\tt default}, denoting the default robot knowledge storage.
 
 
 \begin{itemize}
-\item  \texttt{\textbf{revise}(\emph{set$<$statement$>$} statements, [\emph{policy} policy])}
+\item  \meth{}{revise}{\emph{set$<$statement$>$} statements, [\emph{policy} policy]}
 \begin{itemize}
 \item  Alter the knowledge base with one or several statements, following the specified \hyperref[94422fa6b0fe23d0ab463703c0022a63]{policy}.
 \item  \emph{Params}:
@@ -375,7 +375,7 @@ called {\tt default}, denoting the default robot knowledge storage.
 \item  \emph{Return values}: None
 \end{itemize}
 
-\item  \texttt{\textbf{add}(\emph{set$<$statement$>$} statements, [\emph{string} model])}
+\item  \meth{}{add}{\emph{set$<$statement$>$} statements, [\emph{string} model]}
 \begin{itemize}
 \item  Adds one or several statements to the specified model. Equivalent to \texttt{revise} with the policy \texttt{{"method":"add"}}.
 \item  \emph{Params}:
@@ -387,7 +387,7 @@ called {\tt default}, denoting the default robot knowledge storage.
 \item  \emph{Return values}: None
 \end{itemize}
 
-\item  \texttt{\textbf{retract}(\emph{set$<$[statement|partial{\textunderscore}statement]$>$} pattern, [\emph{string} model])}
+\item  \meth{}{retract}{\emph{set$<$[statement|partial{\textunderscore}statement]$>$} pattern, [\emph{string} model]}
 \begin{itemize}
 \item  Removes one or several statements to the specified model. Equivalent to \texttt{revise} with the policy \texttt{{"method":"retract"}}.
 \item  \emph{Params}:
@@ -399,7 +399,7 @@ called {\tt default}, denoting the default robot knowledge storage.
 \item  \emph{Return values}: None
 \end{itemize}
 
-\item  \texttt{\textbf{update}(\emph{set$<$statement$>$} statements, [\emph{string} model]))}
+\item  \meth{}{update}{\emph{set$<$statement$>$} statements, [\emph{string} model])}
 \begin{itemize}
 \item  Updates objects of one or several statements in the specified model, and only for \emph{functional} predicates (ie, predicates that accept only one value). Equivalent to \texttt{revise} with the policy \texttt{{"method":"update"}}.
 \item  \emph{Params}:
@@ -418,7 +418,7 @@ called {\tt default}, denoting the default robot knowledge storage.
 
 
 \begin{itemize}
-\item  \texttt{\textbf{lookup}(\emph{string} concept, [\emph{string} model]))}
+\item  \meth{}{lookup}{\emph{string} concept, [\emph{string} model])}
 \begin{itemize}
 \item  Searches for the given string in the knowledge base, and returns the matching resources, along with their types.
 \item  \emph{Params}:
@@ -430,7 +430,7 @@ called {\tt default}, denoting the default robot knowledge storage.
 \item  \emph{Return values}: A set of pair \texttt{[resource{\textunderscore}id, [class|instance|object{\textunderscore}property|datatype{\textunderscore}property]]}.
 \end{itemize}
 
-\item  \texttt{\textbf{about}(\emph{string} resource, [\emph{string} model]))}
+\item  \meth{}{about}{\emph{string} resource, [\emph{string} model])}
 \begin{itemize}
 \item  Returns the list of asserted (and if available inferred) statements which the resource is part of.
 \item  \emph{Params}:
@@ -442,7 +442,7 @@ called {\tt default}, denoting the default robot knowledge storage.
 \item  \emph{Return values}: A set of statements.
 \end{itemize}
 
-\item  \texttt{\textbf{exist}(\emph{set$<$[statement|partial{\textunderscore}statement]$>$} pattern, [\emph{string} model]))}
+\item  \meth{}{exist}{\emph{set$<$[statement|partial{\textunderscore}statement]$>$} pattern, [\emph{string} model])}
 \begin{itemize}
 \item  Checks that the given pattern matches content in the ontology. If statements, returns true if all the statements are present in the knowledge base (asserted or inferred), if partial statements, returns true if at least one statement match the conjunction of the partial statements.
 \item  \emph{Params}:
@@ -454,7 +454,7 @@ called {\tt default}, denoting the default robot knowledge storage.
 \item  \emph{Return values}: A boolean.
 \end{itemize}
 
-\item  \texttt{\textbf{check}(\emph{set$<$statement$>$} statements, [\emph{string} model]))}
+\item  \meth{}{check}{\emph{set$<$statement$>$} statements, [\emph{string} model])}
 \begin{itemize}
 \item  Checks that the given statements are consistent with the knowledge base. Statements are not added to the knowledge base.
 \item  \emph{Params}:
@@ -466,7 +466,7 @@ called {\tt default}, denoting the default robot knowledge storage.
 \item  \emph{Return values}: A boolean. \texttt{true} if statements do not contradict with the knowledge base.
 \end{itemize}
 
-\item  \texttt{\textbf{find}(\emph{set$<$string$>$} named{\textunderscore}variables, \emph{set$<$partial{\textunderscore}statement$>$} pattern, [\emph{set$<$string$>$} constraints], [\emph{string} model]))}
+\item  \meth{}{find}{\emph{set$<$string$>$} named{\textunderscore}variables, \emph{set$<$partial{\textunderscore}statement$>$} pattern, [\emph{set$<$string$>$} constraints], [\emph{string} model])}
 \begin{itemize}
 \item  Retrieves ressources given a set of partially defined statements plus optional constraints about this resource. Constraints must follow the \href{http://www.w3.org/TR/rdf-sparql-query/\#tests}{ SPARQL syntax for filters}. \texttt{named{\textunderscore}variables} defines the set of variables whose bindings are looked for. Probabilities can be retrieved as well.
 \item  Examples: 
@@ -502,7 +502,7 @@ find (["t", "p1"], ["uses(?obj, human1):p1", rdf:type(?obj, ?t)"]) # retrieving 
 \item  \emph{Return values}: A set of resources.
 \end{itemize}
 
-\item  \texttt{\textbf{findmpe}(\emph{string} named{\textunderscore}variable, \emph{set$<$partial{\textunderscore}statement$>$} pattern, [\emph{set$<$string$>$} constraints], [\emph{string} model]))}
+\item  \meth{}{findmpe}{\emph{string} named{\textunderscore}variable, \emph{set$<$partial{\textunderscore}statement$>$} pattern, [\emph{set$<$string$>$} constraints], [\emph{string} model])}
 \begin{itemize}
 \item  Retrieves ressources within the \emph{Most Probable Explanation} (\emph{ie} the most likely current state of the world in the given model). For implementation not supporting probabilistic reasoning, \texttt{findmpe} is strictly equivalent to \texttt{find}. See \texttt{find} for details about the use of the request.
 \item  \emph{Params}:
@@ -522,14 +522,14 @@ find (["t", "p1"], ["uses(?obj, human1):p1", rdf:type(?obj, ?t)"]) # retrieving 
 
 
 \begin{itemize}
-\item  \texttt{\textbf{models}()}
+\item  \meth{}{models}{}
 \begin{itemize}
 \item  Returns the set of current available models. See also \hyperref[ac5552fd6a3c08ad22387efbe42d137d]{models}
 \item  \emph{Params}: None
 \item  \emph{Return values}: a set of all model ids.
 \end{itemize}
 
-\item  \texttt{\textbf{addmodel}(\emph{string} id)}
+\item  \meth{}{addmodel}{\emph{string} id}
 \begin{itemize}
 \item  Adds a new knowledge model to the knowledge base.
 \item  \emph{Params}:
@@ -540,7 +540,7 @@ find (["t", "p1"], ["uses(?obj, human1):p1", rdf:type(?obj, ?t)"]) # retrieving 
 \item  \emph{Return values}: None.
 \end{itemize}
 
-\item  \texttt{\textbf{removemodel}(\emph{string} id)}
+\item  \meth{}{removemodel}{\emph{string} id}
 \begin{itemize}
 \item  Removes a knowledge model from the knowledge base.
 \item  \emph{Params}:
@@ -551,7 +551,7 @@ find (["t", "p1"], ["uses(?obj, human1):p1", rdf:type(?obj, ?t)"]) # retrieving 
 \item  \emph{Return values}: None.
 \end{itemize}
 
-\item  \texttt{\textbf{isconsistent}([\emph{string} model])}
+\item  \meth{}{isconsistent}{[\emph{string} model]}
 \begin{itemize}
 \item  Checks that the knowledge base is globally consistent.
 \item  \emph{Params}:
@@ -562,7 +562,7 @@ find (["t", "p1"], ["uses(?obj, human1):p1", rdf:type(?obj, ?t)"]) # retrieving 
 \item  \emph{Return values}: A boolean. \texttt{true} if the model is consistent.
 \end{itemize}
 
-\item  \texttt{\textbf{addrules}(\emph{set$<$string$>$} rules, [\emph{string} model])}
+\item  \meth{}{addrules}{\emph{set$<$string$>$} rules, [\emph{string} model]}
 \begin{itemize}
 \item  Add rules to the model. See \hyperref[a4f86f7bfc24194b276c22e0ef158197]{rules} for examples.
 \item  \emph{Params}:
@@ -582,7 +582,7 @@ find (["t", "p1"], ["uses(?obj, human1):p1", rdf:type(?obj, ?t)"]) # retrieving 
 
 
 \begin{itemize}
-\item  \texttt{\textbf{classesof}(\emph{string} instance, [\emph{bool} direct], [\emph{string} model]))}
+\item  \meth{}{classesof}{\emph{string} instance, [\emph{bool} direct], [\emph{string} model])}
 \begin{itemize}
 \item  Returns the (asserted and if available, inferred) classes of an instance.
 \item  \emph{Params}:
@@ -595,7 +595,7 @@ find (["t", "p1"], ["uses(?obj, human1):p1", rdf:type(?obj, ?t)"]) # retrieving 
 \item  \emph{Return values}: A set of resource ids.
 \end{itemize}
 
-\item  \texttt{\textbf{instancesof}(\emph{string} class, [\emph{bool} direct], [\emph{string} model]))}
+\item  \meth{}{instancesof}{\emph{string} class, [\emph{bool} direct], [\emph{string} model])}
 \begin{itemize}
 \item  Returns the (asserted and if available, inferred) instances of a class.
 \item  \emph{Params}:
@@ -608,7 +608,7 @@ find (["t", "p1"], ["uses(?obj, human1):p1", rdf:type(?obj, ?t)"]) # retrieving 
 \item  \emph{Return values}: A set of resource ids.
 \end{itemize}
 
-\item  \texttt{\textbf{subclassesof}(\emph{string} class, [\emph{bool} direct], [\emph{string} model]))}
+\item  \meth{}{subclassesof}{\emph{string} class, [\emph{bool} direct], [\emph{string} model])}
 \begin{itemize}
 \item  Returns the (asserted and if available, inferred) sub-classes of a class.
 \item  \emph{Params}:
@@ -621,7 +621,7 @@ find (["t", "p1"], ["uses(?obj, human1):p1", rdf:type(?obj, ?t)"]) # retrieving 
 \item  \emph{Return values}: A set of resource ids.
 \end{itemize}
 
-\item  \texttt{\textbf{superclassesof}(\emph{string} class, [\emph{bool} direct], [\emph{string} model]))}
+\item  \meth{}{superclassesof}{\emph{string} class, [\emph{bool} direct], [\emph{string} model])}
 \begin{itemize}
 \item  Returns the (asserted and if available, inferred) super-classes of a class.
 \item  \emph{Params}:
