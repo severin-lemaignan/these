@@ -239,18 +239,18 @@ interaction with the users.
 Tom enters the room while carrying a big box (Figure~\ref{fig|vpt}, page 1). He
 approaches the table and asks Jido to handle him the video tape: ``Jido, can
 you give me the video tape''. The \textsc{Dialogs} module queries the ontology to
-identify the object the human is referring to: \stmt{?obj \textbf{type} VideoTape}. 
+identify the object the human is referring to: \stmt{?obj type VideoTape}. 
 
 There are two video tapes in the scene: one on the table, and another one
 inside the cardboard box. Thus, the knowledge base returns both: $\Rightarrow$
-\stmt{?obj = [videoTape1, videoTape2]}. 
+\concept{?obj = [videoTape1, videoTape2]}. 
 
 However, only one is visible for Tom (the one on the
 table). Thus, although there is an ambiguity from the robot's perspective
 (since it can see both video tapes), based on the perspective of its human
 partner it infers that Tom is referring to the video tape on the table, and not
 the one inside the box which is not visible from his view. Therefore,
-non-visible objects are removed obtaining: \stmt{?obj =[videoTape1]}.
+non-visible objects are removed obtaining: \concept{?obj =[videoTape1]}.
 
 Since only one object is available, the robot infers
 that the human refers to it and would eventually execute the command, \ie give
@@ -265,22 +265,22 @@ its human partner involved in this situation.
 \hline
 Robot's beliefs about itself (\emph{robot's model}):\\
 \hline
-  \hspace{0.7cm}\stmt{videoTape1 \textbf{type} VideoTape}\\
-  \hspace{0.7cm}\stmt{videoTape1 \textbf{isOn} table}\\
-  \hspace{0.7cm}\stmt{videoTape1 \textbf{isVisible} \textit{true}}\\
-  \hspace{0.7cm}\stmt{videoTape2 \textbf{type} VideoTape}\\
-  \hspace{0.7cm}\stmt{videoTape2 \textbf{isIn} cardBoardBox}\\
-  \hspace{0.7cm}\stmt{videoTape2 \textbf{isVisible} \textit{true}}\\
+  \hspace{0.7cm}\stmt{videoTape1 type VideoTape}\\
+  \hspace{0.7cm}\stmt{videoTape1 isOn table}\\
+  \hspace{0.7cm}\stmt{videoTape1 isVisible true}\\
+  \hspace{0.7cm}\stmt{videoTape2 type VideoTape}\\
+  \hspace{0.7cm}\stmt{videoTape2 isIn cardBoardBox}\\
+  \hspace{0.7cm}\stmt{videoTape2 isVisible true}\\
 \hline
 \hline
 Robot's beliefs about Tom (\emph{Tom's model}):\\
 \hline
-  \hspace{0.7cm}\stmt{videoTape1 \textbf{type} VideoTape}\\
-  \hspace{0.7cm}\stmt{videoTape1 \textbf{isOn} table}\\
-  \hspace{0.7cm}\stmt{videoTape1 \textbf{isVisible} \textit{true}}\\
-  \hspace{0.7cm}\stmt{videoTape2 \textbf{type} VideoTape}\\
-  \hspace{0.7cm}\stmt{videoTape2 \textbf{isIn} cardBoardBox}\\
-  \hspace{0.7cm}\stmt{videoTape2 \textbf{isVisible} \textit{false}}\\
+  \hspace{0.7cm}\stmt{videoTape1 type VideoTape}\\
+  \hspace{0.7cm}\stmt{videoTape1 isOn table}\\
+  \hspace{0.7cm}\stmt{videoTape1 isVisible true}\\
+  \hspace{0.7cm}\stmt{videoTape2 type VideoTape}\\
+  \hspace{0.7cm}\stmt{videoTape2 isIn cardBoardBox}\\
+  \hspace{0.7cm}\stmt{videoTape2 isVisible false}\\
  \hline
 \end{tabular}
 \end{center}
@@ -304,8 +304,8 @@ situation, there are two available boxes:
 
 \begin{center}
 \begin{tabular}{l}
-\stmt{?obj \textbf{type} box}\\
-\hspace{0.7cm}$\Rightarrow$ \stmt{?obj = [cardBoardBox, toolbox]}
+\stmt{?obj type box}\\
+\hspace{0.7cm}$\Rightarrow$ {\tt ?obj = [cardBoardBox, toolbox]}
 \end{tabular}
 \end{center}
 
@@ -323,10 +323,10 @@ Jerry refers to.
 
 \begin{center}
 \begin{tabular}{l}
-\stmt{Jerry \textbf{pointsAt} carboardBox}\\
-\stmt{Jerry \textbf{looksAt} carboardBox}\\
-$\to$ \stmt{Jerry \textbf{focusesAt} carboardBox}\\
-\hspace{0.7cm}$\Rightarrow$ \stmt{?obj = [cardBoardBox]}
+\stmt{Jerry pointsAt carboardBox}\\
+\stmt{Jerry looksAt carboardBox}\\
+$\to$ \stmt{Jerry focusesAt carboardBox}\\
+\hspace{0.7cm}$\Rightarrow$ {\tt ?obj = [cardBoardBox]}
 \end{tabular}
 \end{center}
 
@@ -337,8 +337,8 @@ given by the users.
 
 \begin{center}
 \begin{tabular}{l}
-\stmt{?obj \textbf{isIn} cardBoardBox}\\
-\hspace{0.7cm}$\Rightarrow$ \stmt{?obj = videoTape2}\\
+\stmt{?obj isIn cardBoardBox}\\
+\hspace{0.7cm}$\Rightarrow$ \concept{?obj = videoTape2}\\
 \end{tabular}
 \end{center}
 
@@ -349,9 +349,9 @@ video which they were just talking about, but to the other one:
 
 \begin{center}
 \begin{tabular}{l}
-\stmt{?obj \textbf{type} VideoTape}\\
-\stmt{?obj \textbf{differentFrom} videoTape2}\\
-\hspace{0.7cm}$\Rightarrow$ \stmt{?obj = [videoTape1]}
+\stmt{?obj type VideoTape}\\
+\stmt{?obj differentFrom videoTape2}\\
+\hspace{0.7cm}$\Rightarrow$ \concept{?obj = [videoTape1]}
 \end{tabular}
 \end{center}
 
@@ -361,8 +361,8 @@ next to the toolbox.''
 
 \begin{center}
 \begin{tabular}{l}
-\stmt{videoTape1 \textbf{isOn} table}\\
-\stmt{videoTape1 \textbf{isNextTo} toolbox}
+\stmt{videoTape1 isOn table}\\
+\stmt{videoTape1 isNextTo toolbox}
 \end{tabular}
 \end{center}
 

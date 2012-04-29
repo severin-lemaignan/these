@@ -14,6 +14,7 @@
 \usepackage{appendix}
 
 \usepackage{graphicx}
+\usepackage{xstring}
 
 \usepackage[table]{xcolor}
 
@@ -88,10 +89,17 @@
 \newcommand{\chatN}[1]{{\footnotesize \textsf{#1}}}
 \newcommand{\concept}[1]{{\footnotesize \texttt{#1}}}
 
-\newcommand{\stmt}[1]{{\footnotesize \tt $\langle$ #1\relax$\rangle$}}
-%\newcommand{\stmt}[1]{{\footnotesize $\langle$\stmttt#1\relax$\rangle$}}
+%\newcommand{\stmt}[1]{{\footnotesize \tt $\langle$ #1\relax$\rangle$}}
+\newcommand{\stmt}[1]{{\footnotesize $\langle$\stmttt#1\relax$\rangle$}}
 \newcommand{\rawstmt}[1]{{\footnotesize \stmttt#1\relax}}
-\def\stmttt#1 #2 #3\relax{{\tt#1} {\bf{\tt #2}} {\tt #3}}
+\def\stmttt#1 #2 #3\relax{
+\texttt{\IfBeginWith{#1}{?}{\textbf{#1}} {#1}
+        \IfBeginWith{#2}{?}{\textbf{#2}} {\emph{#2}}
+        \ifthenelse {\equal{#3}{true} \OR \equal{#3}{false}} {\emph{#3}} {
+            \IfBeginWith{#3}{?}{\textbf{#3}} {#3}
+        }
+    }
+}
 
 \newcommand{\setstmt}[1]{{\footnotesize [\setstmttt#1\relax]}}
 \def\setstmttt#1,#2\relax{\rawstmt{#1}, \rawstmt{#2}}
