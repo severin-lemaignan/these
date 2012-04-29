@@ -5,108 +5,108 @@ This appendix lists the complete API of {\tt oro-server} as of version 0.8.
 \paragraph{Base}
 \begin{itemize}
 
-    \item \meth{}{safeAdd}{Set}: try to add news statements in long term
+    \item \meth{}{safeAdd}{\emph{set<string>} statements}: try to add news statements in long term
     memory, if they don't lead to inconsistencies (return false if at least one
     stmt wasn't added).
 
-    \item \meth{}{safeAdd}{Set, String}: try to add news statements with a
+    \item \meth{}{safeAdd}{\emph{set<string>} statements, string}: try to add news statements with a
     specific memory profile, if they don't lead to inconsistencies (return
     false if at least one stmt wasn't added).
 
-    \item \meth{}{check}{Set}: checks that one or several statements are
+    \item \meth{}{check}{\emph{set<string>} statements}: checks that one or several statements are
     asserted or can be inferred from the ontology
 
     \item \meth{}{checkConsistency}{}: checks that the ontology is
     semantically consistent
 
-    \item \meth{}{checkConsistency}{Set}: checks that a set of statements
+    \item \meth{}{checkConsistency}{\emph{set<string>} statements}: checks that a set of statements
     are consistent with the current model
 
     \item \meth{}{help}{}: returns a human-friendly list of available
     methods with their signatures and short descriptions.
 
-    \item \meth{}{getLabel}{String}: return the label of a concept, if
+    \item \meth{}{getLabel}{string}: return the label of a concept, if
     available.
 
-    \item \meth{}{lookup}{String}: try to identify a concept from its id or
+    \item \meth{}{lookup}{string}: try to identify a concept from its id or
     label, and return it, along with its type (class, instance,
     object\_property, datatype\_property).
 
-    \item \meth{}{lookup}{String, String}: try to identify a concept from
+    \item \meth{}{lookup}{string, string}: try to identify a concept from
     its id or label and its type (class, instance, object\_property,
     datatype\_property).
 
-    \item \meth{}{revise}{Set, String}: 
+    \item \meth{}{revise}{set, string}: 
 
-    \item \meth{}{add}{Set}: adds one or several statements (triplets S-P-O)
+    \item \meth{}{add}{\emph{set<string>} statements}: adds one or several statements (triplets S-P-O)
     to the robot model, in long term memory.
 
-    \item \meth{}{add}{Set, String}: adds one or several statements
+    \item \meth{}{add}{\emph{set<string>} statements, string}: adds one or several statements
     (triplets S-P-O) to the robot model associated with a memory profile.
 
-    \item \meth{}{clear}{Set}: removes statements in the given set
+    \item \meth{}{clear}{\emph{set<string>} statements}: removes statements in the given set
 
-    \item \meth{}{remove}{Set}: removes one or several statements (triplets
+    \item \meth{}{remove}{\emph{set<string>} statements}: removes one or several statements (triplets
     S-P-O) from the ontology.
 
-    \item \meth{}{update}{Set}: update the value of a functional property.
+    \item \meth{}{update}{\emph{set<string>} statements}: update the value of a functional property.
 
 \end{itemize}
 
 \paragraph{Agents}
 \begin{itemize}
 
-    \item \meth{}{checkConsistencyForAgent}{String}: check the consistency
+    \item \meth{}{checkConsistencyForAgent}{string}: check the consistency
     of a specific agent model.
 
-    \item \meth{}{safeAddForAgent}{String, Set}: try to add news statements
+    \item \meth{}{safeAddForAgent}{string, \emph{set<string>} statements}: try to add news statements
     to a specific agent model in long term memory, if they don't lead to
     inconsistencies (return false if at least one stmt wasn't added).
 
-    \item \meth{}{safeAddForAgent}{String, Set, String}: try to add news
+    \item \meth{}{safeAddForAgent}{string, \emph{set<string>} statements, string}: try to add news
     statements to a specific agent model with a specific memory profile, if
     they don't lead to inconsistencies (return false if at least one stmt
     wasn't added).
 
-    \item \meth{}{discriminateForAgent}{String, Set}: returns a list of
+    \item \meth{}{discriminateForAgent}{string, \emph{set<string>} statements}: returns a list of
     properties that helps to differentiate individuals for a specific agent.
 
-    \item \meth{}{findForAgent}{String, String, Set}: tries to identify a
+    \item \meth{}{findForAgent}{string, string, \emph{set<string>} statements}: tries to identify a
     resource given a set of partially defined statements in an specific agent
     model.
 
-    \item \meth{}{findForAgent}{String, String, Set, Set}: tries to identify
+    \item \meth{}{findForAgent}{string, string, set, set}: tries to identify
     a resource given a set of partially defined statements and restrictions in
     an specific agent model.
 
-    \item \meth{}{getInfosForAgent}{String, String}: returns the set of
+    \item \meth{}{getInfosForAgent}{string, string}: returns the set of
     asserted and inferred statements whose the given node is part of. It
     represents the usages of a resource.
 
     \item \meth{}{listAgents}{}: returns the set of agents I'm aware of (ie,
     for whom I have a cognitive model).
 
-    \item \meth{}{lookupForAgent}{String, String}: lookup a concept in a
+    \item \meth{}{lookupForAgent}{string, string}: lookup a concept in a
     specific agent model.
 
-    \item \meth{}{addForAgent}{String, Set}: adds one or several statements
+    \item \meth{}{addForAgent}{string, set}: adds one or several statements
     (triplets S-P-O) to a specific agent model, in long term memory.
 
-    \item \meth{}{addForAgent}{String, Set, String}: adds one or several
+    \item \meth{}{addForAgent}{string, set, string}: adds one or several
     statements (triplets S-P-O) to a specific agent model associated with a
     memory profile.
 
-    \item \meth{}{clearForAgent}{String, Set}: removes statements from a
+    \item \meth{}{clearForAgent}{string, set}: removes statements from a
     specific agent model.
 
-    \item \meth{}{removeForAgent}{String, Set}: removes one or several
+    \item \meth{}{removeForAgent}{string, set}: removes one or several
     statements. Deprecated. Use clearForAgent instead.
 
-    \item \meth{}{save}{String, String}: exports the cognitive model of a
+    \item \meth{}{save}{string, string}: exports the cognitive model of a
     given agent to an owl file. The provided path must be writable by the
     server.
 
-    \item \meth{}{updateForAgent}{String, Set}: updates one or several
+    \item \meth{}{updateForAgent}{string, set}: updates one or several
     statements (triplets S-P-O) in a specific agent model, in long term memory.
 \end{itemize}
 
@@ -128,28 +128,28 @@ This appendix lists the complete API of {\tt oro-server} as of version 0.8.
     \item \meth{}{reset}{}: reload the base ontologies, discarding all
     inserted of removed statements, in every models
 
-    \item \meth{}{list}{String}: lists on the serveur stdout all facts
+    \item \meth{}{list}{string}: lists on the serveur stdout all facts
     matching a given pattern.
 
     \item \meth{}{save}{}: exports the current ontology model to an owl
     file. The file will be saved to the current directory with an
     automaticallygenerated name.
 
-    \item \meth{}{save}{String}: exports the current ontology model to an
+    \item \meth{}{save}{string}: exports the current ontology model to an
     owl file. The provided path must be writable by the server.
 \end{itemize}
 
 \paragraph{Concepts comparison}
 \begin{itemize}
 
-    \item \meth{}{discriminate}{Set}: returns a list of properties that
+    \item \meth{}{discriminate}{set}: returns a list of properties that
     helps to differentiate individuals.
 
-    \item \meth{}{getDifferences}{String, String}: given two concepts,
+    \item \meth{}{getDifferences}{string, string}: given two concepts,
     return the list of relevant differences (types, properties...) between
     these concepts.
 
-    \item \meth{}{getSimilarities}{String, String}: given two concepts,
+    \item \meth{}{getSimilarities}{string, string}: given two concepts,
     return the list of relevant similarities (types, properties...) between
     these concepts.
 \end{itemize}
@@ -157,28 +157,28 @@ This appendix lists the complete API of {\tt oro-server} as of version 0.8.
 \paragraph{Events}
 \begin{itemize}
 
-    \item {\tt {\bf registerEventForAgent}(String, String, String, String,
+    \item {\tt {\bf registerEventForAgent}(string, string, string, string,
     List)}: registers an event on a specific agent model. Expected parameters
     are: agent, type, triggering type, variable, event pattern.
 
-    \item \meth{}{registerEventForAgent}{String, String, String, List}:
+    \item \meth{}{registerEventForAgent}{string, string, string, List}:
     registers an event on a specific agent model. Expected parameters are:
     agent, type, triggering type, event pattern.
 
-    \item \meth{}{registerEvent}{String, String, String, List}: registers an
+    \item \meth{}{registerEvent}{string, string, string, List}: registers an
     event. Expected parameters are: type, triggering type, variable, event
     pattern.
 
-    \item \meth{}{registerEvent}{String, String, List}: registers an event.
+    \item \meth{}{registerEvent}{string, string, List}: registers an event.
     Expected parameters are: type, triggering type, event pattern.
 
-    \item \meth{}{clearEvent}{String, String}: remove one specific event
+    \item \meth{}{clearEvent}{string, string}: remove one specific event
     from a specific model.
 
-    \item \meth{}{clearEventsForAgent}{String}: remove all events associated
+    \item \meth{}{clearEventsForAgent}{string}: remove all events associated
     to a specific model.
 
-    \item \meth{}{clearEvent}{String}: remove one specific event from the
+    \item \meth{}{clearEvent}{string}: remove one specific event from the
     main model.
 
     \item \meth{}{clearEvents}{}: remove all events associated to the main
@@ -188,25 +188,25 @@ This appendix lists the complete API of {\tt oro-server} as of version 0.8.
 \paragraph{Querying}
 \begin{itemize}
 
-    \item \meth{}{find}{String, Set}: tries to identify a resource given a
+    \item \meth{}{find}{string, set}: tries to identify a resource given a
     set of partially defined statements about this resource.
 
-    \item \meth{}{find}{String, Set, Set}: tries to identify a resource
+    \item \meth{}{find}{string, set, set}: tries to identify a resource
     given a set of partially defined statements plus restrictions about this
     resource.
 
-    \item \meth{}{getInfos}{String}: returns the set of asserted and
+    \item \meth{}{getInfos}{string}: returns the set of asserted and
     inferred statements whose the given node is part of. It represents the
     usages of a resource.
 
-    \item \meth{}{query}{String, String}: performs one sparql query on the
+    \item \meth{}{query}{string, string}: performs one sparql query on the
     ontology
 
-    \item \meth{}{getResourceDetails}{String}: returns a serialized
+    \item \meth{}{getResourceDetails}{string}: returns a serialized
     ResourceDescription object that describe all the links of this resource
     with others resources (sub and superclasses, instances, properties, etc.).
 
-    \item \meth{}{getResourceDetails}{String, String}: returns a serialized
+    \item \meth{}{getResourceDetails}{string, string}: returns a serialized
     ResourceDescription object that describe all the links of this resource
     with others resources (sub and superclasses, instances, properties, etc.).
     The second parameter specify the desired language (following rfc4646).
@@ -215,37 +215,37 @@ This appendix lists the complete API of {\tt oro-server} as of version 0.8.
 \paragraph{Taxonomy}
 \begin{itemize}
 
-    \item \meth{}{getClassesOf}{String}: returns a map of {class name,
+    \item \meth{}{getClassesOf}{string}: returns a map of {class name,
     label} (or {class name, class name without namespace} is no label is
     available) of asserted and inferred classes of a given individual.
 
-    \item \meth{}{getDirectClassesOf}{String}: returns a map of {class name,
+    \item \meth{}{getDirectClassesOf}{string}: returns a map of {class name,
     label} (or {class name, class name without namespace} is no label is
     available) of asserted and inferred direct classes of a given individual.
 
-    \item \meth{}{getDirectInstancesOf}{String}: returns a map of {instance
+    \item \meth{}{getDirectInstancesOf}{string}: returns a map of {instance
     name, label} (or {instance name, instance name without namespace} is no
     label is available) of asserted and inferred direct instances of a given
     class.
 
-    \item \meth{}{getDirectSubclassesOf}{String}: returns a map of {class
+    \item \meth{}{getDirectSubclassesOf}{string}: returns a map of {class
     name, label} (or {class name, class name without namespace} is no label is
     available) of all asserted and inferred direct subclasses of a given class.
 
-    \item \meth{}{getDirectSuperclassesOf}{String}: returns a map of {class
+    \item \meth{}{getDirectSuperclassesOf}{string}: returns a map of {class
     name, label} (or {class name, class name without namespace} is no label is
     available) of all asserted and inferred direct superclasses of a given
     class.
 
-    \item \meth{}{getInstancesOf}{String}: returns a map of {instance name,
+    \item \meth{}{getInstancesOf}{string}: returns a map of {instance name,
     label} (or {instance name, instance name without namespace} is no label is
     available) of asserted and inferred instances of a given class.
 
-    \item \meth{}{getSubclassesOf}{String}: returns a map of {class name,
+    \item \meth{}{getSubclassesOf}{string}: returns a map of {class name,
     label} (or {class name, class name without namespace} is no label is
     available) of all asserted and inferred subclasses of a given class.
 
-    \item \meth{}{getSuperclassesOf}{String}: returns a map of {class name,
+    \item \meth{}{getSuperclassesOf}{string}: returns a map of {class name,
     label} (or {class name, class name without namespace} is no label is
     available) of all asserted and inferred superclasses of a given class.
 \end{itemize}
