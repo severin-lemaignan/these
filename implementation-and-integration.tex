@@ -190,15 +190,57 @@ public void add(Set<String> rawStmts, String memProfile)
 \section{Bindings to other components/languages}
 \label{sect|interfacing}
 
+\subsection{Language bindings}
+\label{sect|bindings}
+
+\subsection{Interface with robotic middlewares}
+\label{sect|interfacing-middlewares}
+
 %%%%%%%%%%%%%%%%%
 \section{Monitoring and debugging}
 \label{sect|monitoring}
 
 \subsection{Logging}
 
+The ORO server offers several levels of logging, from ``almost silent'' to very
+verbose. In verbose mode ({\tt debug} level), the server outputs exact incoming
+requests along with millisecond accurate timestamps.
+
+Those logs can then be replayed by a special tool written in Python that
+simulate accurately the original communication with the server: timestamps are
+respected and if multiple clients where connected to the server, the log player
+forks one thread by client to simulate parallel access to the server.
+
 \subsection{Vizualisation}
 
-oro-view, DOT export...
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\columnwidth]{implementation/oroview.jpg}
+    \caption{A snapshot of the {\tt oro-view} vizualisation tool.}
+    \label{fig|oroview}
+\end{figure}
+
+Visualization of ontologies is a difficult task in general because of their
+complex graph structure. In order to present anyway the content of the ontology
+to external observers, we have developed an OpenGL-based dynamic visualizer
+called {\tt oro-view} (figure~\ref{fig|oroview}). This application connects to
+the ORO server and let the user explore the taxonomy by simply selecting
+concepts on the screen. Nodes are expanded and reveal further the structure of
+the ontology. Because {\tt oro-view} takes its input from the server on-demand,
+changes in the ontology (new facts being added, etc.) are reflected in the
+viewer when the user refreshes nodes.
+
+{\tt oro-view} also subscribes at startup to a special event for \emph{active
+concepts} (instances of \concept{ActiveConcept}. Each time an individual is
+asserted to be an \concept{ActiveConcept}, the server triggers back {\tt
+oro-view} that creates a visual focus on the concept (the individual ``pops
+up''). When displayed during experiments, this provides nice-looking visual
+feedback to external observers. In particular, we made use of this feedback
+during the public performance of the \emph{Roboscopie} theater play
+(section~\ref{sect|roboscopie}.
+
+{\tt oro-view} also provides export to GraphViz {\tt dot} format for latter
+reuse of the ontology graph in publications.
 
 %%%%%%%%%%%%%%%%%
 \section{Integration in the robot architecture}
