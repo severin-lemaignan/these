@@ -378,3 +378,169 @@ next to the toolbox.''
 \end{figure}
 
 
+\subsection{Roboscopie}
+\label{sect|roboscopie}
+
+\section{The Performance}
+
+Theatre with robotic actors is an emerging field, with a few previous published
+results~\cite{Breazeal2003, Lin2009, Mavridis2009}.
+
+On the 14th of October 2011, we performed for a general public audience (over
+300 persons) a 18 min long live theatre play, acted by professional actor
+Xavier Brossard and the LAAS/CNRS PR2 robot. The play was created and directed
+by Nicolas Darrot, a mixed-media artist from Paris.
+
+The PR2 has been programmed in a 2-months course, re-using several software
+components developed at LAAS/CNRS, including the 3D environment for situation
+assessment SPARK, the ontology-based knowledge base ORO and the natural-language
+processor {\sc Dialogs}.
+
+This video abstract presents the storyline of the play, and underlines some of
+the significant outcome for the human-robot interaction community.
+
+The full-length version of the video, along with downloads of the open-source
+components, is available from \url{www.laas.fr/roboscopie}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\columnwidth]{experiments/roboscopie.jpg}
+    \caption{The PR2 robot at the beginning of the performance.}
+    \label{fig|pr2-opens-curtains}
+\end{figure}
+
+
+\section{Storyline}
+
+The play discusses how humans and robots can find a common ground for understanding
+each other, by living in a kind of frontier world, where real objects are replaced 
+by abstract, disembodied counterparts.
+
+Xavier and PR2 share a white, almost empty, stage. To get the robot to see his
+world, Xavier must keep being recognized by the human tracking module that lies
+on the wall, and must stick everywhere 2D barcodes, instead of real
+objects. The robot can read and identify these barcodes, and while the stage
+gets covered by the tags, the robot constructs for itself a 3D world with the
+right-looking objects: a phone, a lamp, a hanger...
+
+While Xavier is drawing by hand more and more of these 2D tags, the robot tries
+to offer its help. It brings first a bottle of water, then a fan... which blows
+away all Xavier's code. Angry, Xavier leaves, and PR2 remains alone.
+
+The night comes, and the robot decides to explore the stage, scattered with
+those barcodes on the ground. On the next morning, Xavier discovers that the
+robot's 3D model is a mess, full of random objects: an elephant, a boat, a
+van... Xavier resets the robot model and starts to tidy up the place. The robot
+decides to help with a trash bin, but suddenly gives up and a new program
+starts: a home-training session. Xavier starts the exercises, but as the
+program goes along, the robot looks more and more menacing, up to the point
+that Xavier shouts "Stop!".
+
+Xavier eventually shows one after the other the objects to the robot,
+explaining they are all fake, and like the robot, we realize that everything
+was just an experiment.
+
+\section{Technical overview}
+
+The PR2 robot was running softwares developed at the LAAS/CNRS. While the
+performance tries to picture some of the challenges in the human-robot
+interaction field, including the needed autonomy of a robot working with
+humans, the robot was partially pre-programmed for this theatre performance.
+
+Most of the behaviours were coded in Python, relying both on the PR2 ROS
+middleware and on {\sc GenoM}, the LAAS own middleware.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\columnwidth]{experiments/roboscopie-spark.jpg}
+    \caption{The robot build a coherent 3D model of its environment through the
+    SPARK module}
+    \label{fig|spark}
+\end{figure}
+
+\subsection{What was pre-programmed?}
+
+\paragraph{General behaviour} While the real perception routines were running
+(see next section), the robot did not have any mean of synchronization with the
+human during the play: each sequence was manually started by one of the
+engineers.
+
+Places on the stage were hard-coded: for instance, the position of the table
+was known to the robot from the beginning, so was the position of the entrance
+door, etc.
+
+\paragraph{Postures and manipulation tasks} Manipulation tasks (like grasping
+the fan or the paper bin) were much simplified: the robot would simply open its
+gripper, and wait for \emph{something} to be detected in its hand. It would
+then simply close the gripper. Likewise, the robot special postures to enter or
+leave the stage with an object in hand (required to avoid collision with the
+door) were all pre-defined.
+
+\paragraph{Speech Understanding} At the end of the play, when Xavier talks to
+the robot (\emph{Stop!}, \emph{Look at this phone!}, \emph{Everything is fake},
+etc.), sentences were manually typed in the system. We could have used speech
+recognition as we do in the laboratory, but converting speech to its textual
+version is relatively slow and error prone. So we decided to avoid it on the
+stage.
+
+While what Xavier said was actually processed by the robot (see next section),
+the actions that followed (like looking at the phone, turning the head back to
+the audience,...) were manually triggered.
+
+\subsection{What was autonomously managed by the robot?}
+
+\paragraph{Navigation} All navigation tasks were computed \emph{live} by
+PR2, using the ROS navigation stack. The main script just tells the robot to go
+from the engineer desk to the center of the stage for instance. The robot would
+then find a path that avoid obstacle.  
+
+\paragraph{Modeling of the environment} The 3D world that is displayed above
+the stage during the show (Fig.~\ref{fig|spark}) is a live capture of the
+Move3D and SPARK softwares. These softwares are used daily on the robot to
+compute trajectories, symbolic locations, visibility and reachability of
+objects, etc.
+
+%However, during the performance, we deactivated the computation of symbolic
+%facts (like {\tt xavier looksAt jacket}, {\tt RED\_PHONE isOn table},...) which
+%is not reliable enough to be used on the stage.
+
+The 2D barcodes are actually a key perception mechanism for our PR2. They are
+well identified {\sc ARToolkit} tags used to identify and localize (both for the
+position and the orientation) objects surrounding the robot.
+
+Besides, the robot was able to track the human whole-body posture with a
+Microsoft Kinect sensor and the {\sc OpenNI} human tracker. In several
+occasion, the robot automatically tracks the human head or the human hands with
+this system.
+
+\paragraph{Speech Understanding} At the end, Xavier talks to the robot. The
+textual version of what he said was fed to the system \emph{as it}. Natural
+language understanding is done by the {\tt Dialogs}
+module~\cite{Lemaignan2011a} and used extensively the {\tt oro-server} knowledge
+database to make sense of the word in the current context. The result of the
+language processing was then added back to the knowledge base and automatically
+displayed by the {\tt oro-view} OpenGL ontologies viewer.
+
+Hence, the sentence \emph{``look at this phone''} get translated into symbolic
+facts: {\tt [human desires action1, action1 type Look, action1 receivedBy
+RED\_PHONE]}. The robot is able to know that <this phone> is indeed the {\tt
+RED\_PHONE} by taking into account what the human focuses on.
+
+Since the computation of symbolic facts was deactivated, we had to manually add
+several symbolic facts in a so-called scenario-specific ontology.
+
+\section{Significance for HRI}
+
+A first noteworthy achievement of this project from the human-robot
+interaction point of view is the use and display of the set of research tools
+developed at LAAS in front of a general audience: while the show had been
+precisely scripted and rehearsed, the robot was running the same software
+components we use on a daily basis in the laboratory.
+
+By building the performance storyline on the current, actual state of robotic
+research,  the play also put light on three key questions of today's
+human-robot interaction: how the human and the robot can understand each others
+(the robot tries to help but remains intrusive)? how to share and coexist in a
+common living space? how roles build up between the human and the robot (who
+dominates)?
+
