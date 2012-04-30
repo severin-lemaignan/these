@@ -10,7 +10,20 @@ Some of the main algorithms are presented here as well (like the algorithms for
 clasification and discrimination,~\ref{sect|discrimination}).
 
 \subsection{A centralized server-based implementation}
-\label{sect|oro-serverbased}
+\label{sect|oro-server-impl}
+
+The ORO server is a multi-platform command-line application that starts a
+socket server to which clients can send requests to store or retrieve symbolic
+statements.
+
+Figure~\ref{fig|oro-impl} gives an overview of the ORO server architecture. The
+server is build on three layers: a front-end, in charge of the communication
+with external clients, a set of central modules that either handle incoming
+requests or provide background processing (like the event monitoring or the
+memory management), and a back-end, that stores the knowledge models in several
+parallel pools of RDF triples, one per agent. The back-end provides all the
+knowledge manipulation functionalitites required by the modules, plus the
+inference service.
 
 \begin{figure}
     \centering
@@ -18,6 +31,151 @@ clasification and discrimination,~\ref{sect|discrimination}).
     \caption{The software architecture of the ORO server.}
     \label{fig|oro-impl}
 \end{figure}
+
+The use of a reasoner is completely transparent for the modules: the reasoner
+is automatically called when a model changes to classify the all model. Thus,
+queries to the knowledge models always access both the asserted and infered
+sets of statements. As a consequence, the ORO server can be run with not
+reasoner without any visible API change for the modules. They will simply
+manipulate only asserted facts.
+
+The ORO server is written in the Java 6 programming language. This choice of
+language is due to almost exclusive use of the Java language in the semantic
+Web community that led to the consequence that most of the main RDF/OWL API and
+reasoners are available in Java. As mentionned previously, the ORO server
+relies on the Jena API for OWL manipulation and on the Pellet reasoner for all
+reasoning tasks. Java was thus the best candidate to glue them in a
+robotic-friendly knowledge base. A section below gives more details on the Java
+implementation of the server.
+
+\subsubsection{Front-end}
+
+Communication with external components pass through the server front-end.  It
+was originally build as a YARP node, but was eventually transformed into a
+simpler and more generic socket interface.  The socket connector uses a simple
+ASCII protocol, presented in figure~\ref{fig|oro-protocol}.
+
+\begin{SaveVerbatim}[frame=single, commandchars=\\\{\}]{PostPrtcl}
+\emph{method}
+\emph{[parameter1]}
+\emph{[parameter2]}
+\emph{[parameter n]}
+#end#
+\end{SaveVerbatim}
+
+\begin{SaveVerbatim}[frame=single, commandchars=\\\{\}]{OkPrtcl}
+ok
+\emph{[return value]}
+#end#
+\end{SaveVerbatim}
+
+\begin{SaveVerbatim}[frame=single, commandchars=\\\{\}]{ErrorPrtcl}
+error
+\emph{[exception name]}
+\emph{[human-readable error]}
+#end#
+\end{SaveVerbatim}
+
+\begin{SaveVerbatim}[frame=single, commandchars=\\\{\}]{EventPrtcl}
+event
+\emph{event id}
+#end#
+\end{SaveVerbatim}
+
+\begin{figure}
+\centering
+
+\subfigure[Client requests]{
+\BUseVerbatim{PostPrtcl}
+} \\
+\subfigure[Server answers]{
+\BUseVerbatim{OkPrtcl}
+\BUseVerbatim{ErrorPrtcl}
+\BUseVerbatim{EventPrtcl}
+}
+
+\caption{The ORO server protocol. Elements in square brackets are optional.
+Note that the {\tt ok} and {\tt error} message are server's answers to client
+requests while the {\tt event} message is produced asynchronously.}
+
+\label{fig|oro-protocol}
+
+\end{figure}
+
+Communication with dedicated robotic middlewares like ROS or YARP is provided
+by dedicated clients. Section~\ref{sect|interfacing-middlewares} briefly
+presents them.
+
+\subsubsection{Plugins} The server can be easily extended by the mean of
+\emph{plugins}. These are JAR files that are loaded at run-time and have access
+to the exact same internal APIs as regular modules like the event module or the
+categorization module. The creation of new plugins is documented in a tutorial
+available
+on-line\footnote{\url{http://www.openrobots.org/wiki/oro-server-plugins}}.
+
+\subsubsection{API}
+
+As of version 0.8, the ORO server API exposes about 50 methods (some of them
+are polymorphic) organized into seven categories: \emph{Base}, \emph{Agents},
+\emph{Administration}, \emph{Concept comparison}, \emph{Events}, \emph{Queries}
+and \emph{Taxonomy} walking.
+
+Partial support for the \emph{Knowledge API} (section~\ref{sect|kb-api}) has
+been added to ORO server 0.8: the newly introduced {\tt revise} method that
+takes a \emph{revision policy} is a versatile and generic mechanism that
+deprecates {\it de-facto} several methods currently exposed by the API.
+
+The complete API is provided at appendix~\ref{chapt|oro-api}.
+
+\subsubsection{Java Implementation}
+\label{sect|java-impl}
+
+The ORO server has been developed with modularity in mind, thus most of its
+structure relies on clearly defined Java interfaces.
+Figure~\ref{fig|oro-impl-java} presents the main ones.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\columnwidth]{implementation/oro_impl_java.pdf}
+    \caption{Main Java interfaces and classes of the ORO server.}
+    \label{fig|oro-impl-java}
+\end{figure}
+
+The application entry point is the \jclass{OroServer} class. The class
+instanciate one front-end (\jinterface{IConnector}), one main back-end
+(\jinterface{IOntologyBackend}) and several modules (\jinterface{IModule}),
+including plugins that are loaded at run-time.
+
+Modules that implement the \jinterface{IServiceProvider} interface expose
+\emph{services} (\jclass{IService}), which are actual methods exposed by the
+server. Java method to be exposed are simply marked with the
+\jinterface{@RPCMethod} Java annotation, and automatically added to the server
+API. Extending the server API is thus simply a matter of annotating any Java
+method with \jinterface{@RPCMethod}. Listing~\ref{code|oro-add} shows one
+example of a service annotated in such a way, the {\tt add} method.
+
+\lstset{language=java}
+\begin{lstlisting}[caption=The {\tt add} method from ORO {\tt BaseModule}, label = code|oro-add]
+@RPCMethod(
+        category="base",
+        desc="adds one or several statements (triples S-P-O)."
+)
+public void add(Set<String> rawStmts, String memProfile)
+{
+    Set<IStatement> stmtsToAdd = new HashSet<IStatement>();
+    
+    for (String rawStmt : rawStmts) {
+        if (rawStmt == null)
+            throw new IllegalStatementException("Got a null stmt!");
+        IStatement s = oro.createStatement(rawStmt);
+        stmtsToAdd.add(s);
+    }
+    
+    oro.add(stmtsToAdd, MemoryProfile.fromString(memProfile), false);
+}
+\end{lstlisting}
+
+
 
 \subsection{OWL-DL ontologies and Jena}
 \label{sect|jena}

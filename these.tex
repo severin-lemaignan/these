@@ -31,7 +31,7 @@
 \usepackage{listings}
 \usepackage{alltt}
 \usepackage{pseudocode}
-\usepackage{framed}
+\usepackage{fancyvrb}
 
 %diagrams
 \usepackage{tikz}
@@ -104,6 +104,10 @@
 \newcommand{\setstmt}[1]{{\footnotesize [\setstmttt#1\relax]}}
 \def\setstmttt#1,#2\relax{\rawstmt{#1}, \rawstmt{#2}}
 
+% Java class/interface
+\newcommand{\jclass}[1]{{\texttt{#1}}}
+\newcommand{\jinterface}[1]{{\texttt{#1}}}
+
 \newcommand{\ie}{{\textit{i.e.\ }}}
 \newcommand{\cf}{{\textit{cf\ }}}
 \newcommand{\eg}{{\textit{e.g.\ }}}
@@ -154,8 +158,12 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%       Listings general layout
 
+\lstset{basicstyle=\small, captionpos=b, frame=single}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{
     \vspace{3em}
     \LARGE{\textbf{Grounding the Interaction: Knowledge Management for
