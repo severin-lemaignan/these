@@ -12,6 +12,98 @@
 \subsection{Simulation of HRI interaction}
 \label{sect|simulation}
 
+\subsubsection{The MORSE simulator}
+
+The Modular OpenRobots Simulation Engine (MORSE)~\cite{Echeverria2011}
+(figure~\ref{fig|morse-gui}) is a open-source tool developed for robotics
+research. It is a domain independent simulator, where virtual robots can
+interact with a 3D environment, using sensors and actuators that behave in the
+same way as their counterparts in the real world.  MORSE relies on the advanced
+3D (OpenGL shaders) and physics simulation ({\sc Bullet} physics engine)
+capabilities of the Blender \emph{Game Engine}, a real-time 3D runtime
+integrated to the open-source Blender modeling toolkit.  This allows for
+semi-realistic simulation of complex environments.
+
+\begin{figure}[t]
+      \centering
+      \includegraphics[width=0.7\columnwidth]{experiments/morse-interface.jpg}
+      \caption{Screenshot of the MORSE graphical interface (inside Blender).}
+      \label{fig|morse-gui}
+\end{figure}
+
+
+The MORSE components (sensors and actuators) exchange data with the robotics
+software via middleware bindings, using a \emph{Software In The Loop} (SAIL)
+architecture. Middleware supported in the current version include LAAS'
+Pocolibs library, ROS and YARP, as well as a socket-based raw protocol. This
+design allows in principle to use the same software in both the real robots and
+the simulator. Instructions given to the robot are interpreted in the simulator
+to provide the control of actuators, such as the motion of the robot and its
+arms.  The data from simulated sensors is sent back through the middlewares,
+{\it e.g.}~exporting the images from cameras, or the positions of the robot,
+human and other objects of interest.
+
+MORSE provides support for several classes of robots \textit{out of the box}, and
+allows for easy customization of those, either by composing individual sensors
+and actuators with empty robot structures directly in the MORSE interface, or
+through a Python-based script language that permits to conveniently describe
+robots and simulation scenarii.
+
+Other experiments using simulation have been carried to gather data for HRI
+\cite{Chernova2011}. However, these do not involve the actual robot software,
+and it is another human who takes the role of the robot.
+
+\paragraph{Contribution} While not directly linked to the main topic of this
+thesis, I have been deeply involved in the design and development of MORSE: I'm
+responsible for most of the original software design, and large parts of the
+core foundations of the project.
+
+\subsubsection{HRI specific features}
+\label{sect|morse-hri}
+
+\begin{figure}[t]
+      \centering
+      \includegraphics[width=0.7\columnwidth]{experiments/morse-kinect.jpg}
+      \caption{The experimental setup with the human avatar controlled from a
+      Kinect.}
+      \label{fig|kinect-setup}
+\end{figure}
+
+An interactive \emph{human avatar} is available in MORSE. It provides a
+first-person immersive experience: when started, one can take the role of the
+human and control it via the keyboard, a WiiMote or through a Kinect device
+(Fig.~\ref{fig|kinect-setup}).
+
+When in first-person mode, the user can interact in several ways with the
+environment. He/she can pick and release objects, can open drawers and
+cupboards. As any other object, the avatar physically interacts (collision
+detection) with the surrounding furnitures.  MORSE exports the position
+and posture of the avatar as a global joint state to be used by the real
+software components of the robot.
+
+MORSE also offers a special sensor that exports abstracted informations of
+objects visible to the robot (called the \emph{semantic camera}). This
+sensor typically exports the name, type (glass, table, bottle, etc.), color and
+location of objects. Since human-robot interaction often involves
+semantic-rich environments, this abstract sensor simplifies the
+experiments on such scenarii, by avoiding the added complexity of processing
+camera images to detect the objects of interest and exploiting the inherent
+knowledge of the simulated world.
+
+\subsubsection{An Experimental Framework}
+
+Due to its nature, MORSE offers two main advantages compared to experiments on
+a real robot: light-weight deployment and repeatability. MORSE is already used
+for human-robot interaction both at the LAAS-CNRS and at the Technical
+University of Munich, Germany.
+
+MORSE is integrated to the LAAS architecture.  In particular, both the human
+posture and the object features are integrated with SPARK, a
+module dedicated to geometric and temporal reasoning.  This module is a key
+component providing a base of facts such as objects' relative placements,
+visibility and reachability by the agents present in the scene. It additionally
+provides a stable state of the world to the motion planners.
+
 \subsection{Case Studies}
 \label{sect|casestudies}
 
