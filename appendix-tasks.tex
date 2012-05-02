@@ -1,0 +1,760 @@
+\chapter{Task representation in the ontology}
+
+\emph{First warning}: I'm talking here only of {\bf task} representation in
+robotics. Plans are another matter.
+
+\emph{Second warning}: the current approach for extending the ontology is to
+rely as much as possible on OpenCyc \footnote{OpenCyc online search:
+\href{http://sw.opencyc.org/}{http://sw.opencyc.org/}} (I will prefix all
+OpenCyc concept with {\tt cyc:\ldots{}}). If a concept or a predicate needed in
+the robotics context does not exist in OpenCyc, then we can create it in our
+own namespace (I'll prefix these proposed concepts with {\tt rcs:\ldots{}} for
+RoboticsCommonSense).
+
+\emph{Third warning}: There is few (5) references at the very end of this page.
+Please let me know if you have other papers related to task modelling in
+ontologies!
+
+
+\section{What are tasks for the ontology?}
+
+Before looking at what tasks are, let think for a second why we would want to
+represent them at all in the ontology.
+
+Usually, managing plans and tasks in a robot involve these kind of cognitive
+capacities:
+
+
+\begin{enumerate}
+
+\item  the ability to infer which tasks could be started at any time,
+
+\item  the ability to check that if we do some task, it won't bring the world
+in an inconsistent state,
+
+\item  more generally, the ability to predict the state of the world after some
+task execution,
+
+\item  retrieve tasks that should be started to achieve some result,
+
+\item  knowing how long a task lasts.
+
+\item  \ldots{}[what else?]
+
+\end{enumerate}
+
+Most of these capabilities are bound to complex reasoning systems
+(\ldots{}planners!), that must take into account very different things (like
+time, current activity, agent's desires\ldots{}) to select tasks and build
+plans.
+
+The ontology, as built by the robot during its lifetime, is a model of the
+world that can help the planner.
+
+It efficiently represents some of the knowledge required for planning and task
+execution:
+
+
+\begin{itemize}
+
+\item  Agents state (like, busy, reading, standing, talking\ldots{}), desires
+(short or long term goals)
+
+\item  Agents capacities (technically doable actions)
+
+\item  Physical world state (location of objects,\ldots{})
+
+\item  Common sense knowledge (role, usage of objects\ldots{})
+
+\end{itemize}
+
+Note that this knowledge is mostly declarative. Storing of procedural knowledge
+is more difficult. But we'll come to it later.
+
+Now, what are \emph{tasks}, from the ontology point of view?
+
+
+\begin{enumerate}
+
+\item  Tasks are {\bf instances} of {\bf actions} that have some purpose. As
+it, they are instances of {\tt cyc:PurposefulAction}
+
+\item  The type of action can be further refined by using sub-classes of
+PurposefulAction (like {\tt cyc:Movement-TranslationEvent}, {\tt
+cyc:Reading}\ldots{} the robot is expected to provide - likely at startup - the
+list of actions it can achieve depending on its hardware)
+
+\item  a {\tt cyc:PurposefulAction} is {\tt cyc:performedBy} one (or several)
+{\tt cyc:EmbodiedAgent}.
+
+\end{enumerate}
+
+\section{Different facets of the reality}
+
+Now, let's enter in the difficult part:
+
+A task may have a specific context as prerequisites or on the contrary, may
+imply some new state of the world as post-condition.  Since these two aspects
+are largely symmetric, I will only discuss post-conditions.
+
+Post-conditions are difficult to represent, because the new state of the world
+they represent may contradict with the current state, thus leading to
+inconsistencies.
+
+Let's take an example. Imagine the task: \emph{"cracking an egg"}. To build a
+model of this task, we need somehow to encode the post condition: {\tt the egg
+shell is broken} [stmt1].
+
+We can as well assume that the state of the egg shell before we crack it is:
+{\tt the egg shell is not broken} [stmt2].
+
+If we add both these statements {\tt [stmt1]} and {\tt [stmt2]} in the ontology
+(ie, we assert them), the ontology becomes inconsistent, and no reasoning is
+possible.
+
+For people doing planning, there's no real issue there: that's precisely the
+planner role to {\bf replace} {\tt [stmt2]} by {\tt [stmt1]} when the task is
+achieved. In this case, the two statements wouldn't \emph{hold} (ie, be
+asserted to be true) at the same time, and everything remains consistent.
+
+OpenCyc has another, very powerful way to deal with different "truths" of this
+kind: {\bf micro-theories}. Within a microtheory, a certain set of facts must
+hold. But not necessary outside. To put it in another way, OpenCyc doesn't
+generally requires the set of facts to be consistent. Only facts asserted in a
+specific microtheory must be consistent with each others.
+
+In the egg example, it means that statements 1 and 2 can be asserted at the
+same time. Two microtheories must be created as well (called {\tt
+cyc:TaskState} in this case), one that would describe the world {\bf before}
+the task \emph{"cracking an egg"} (it would be linked to the task by the {\tt
+cyc:taskPrerequisites} predicate), one that would describe the world {\bf
+after} the task completion (linked with {\tt cyc:taskToAchieve} predicate).
+
+So far, so good.
+
+The problem is: such a "microtheory"-based approach doesn't belong to the
+Description Logics (it's not anymore a first order logic system), and thus
+considerably reduce the practical inference capabilities.
+
+Second problem (that is partially a consequence of the first one): OWL, the
+widely-used ontology format we are using, has no notion of microtheory, neither
+have most of the semantic tools like Protege, OWL-API\footnote{Application
+Programming Interface}, Jena or Pellet.
+
+
+\section{A simple case: the Move task}
+
+So in practice, some mitigation must be done.
+
+Since the semantics behind {\tt cyc:TaskState}, {\tt cyc:RealizedTaskState} (an
+effective, realised state of the world), {\tt cyc:taskPrerequisites}, {\tt
+cyc:taskToAchieve} and {\tt cyc:taskConstraints} (that expresses specific
+constraints applied during task execution) is still relevant to us, the
+question is: how to build {\tt cyc:TaskState} without {\tt cyc:Microtheory}?
+
+Let's have a look to a simple yet "real world" example, extracted from the
+LAAS' HATP planner task model:
+
+
+
+\begin{alltt}
+
+action Move(Agent ag1, Place p1, Place p2)
+ {
+   preconditions
+   {
+     p1 != p2;
+     ag1.posTopo == p1;
+   };
+
+   effects
+   { ag1.posTopo == p2; };
+ } 
+
+\end{alltt}
+
+Pre- and post-conditions and the relations between entities (ag1, p1, p2) are
+easy to understand from this model.
+
+How to represent it in the ontology?
+
+Let's start with the pre-condition {\tt P1 != P2}. We want to create a new kind
+of {\tt cyc:TaskState} that says: "Two locations are different".
+
+Mathematically speaking: $ \exists x,y \in Location / x \neq y$. OWL speaking:
+
+
+
+\begin{alltt}
+
+//This class would mean: all locations that are attached with rcs:forLocation predicate must be
+different from each other.
+rcs:DifferentLocationState subClassOf cyc:TaskState
+rcs:forLocation hasDomain rcs:DifferentLocationState
+rcs:forLocation hasRange cyc:SpatialThing-Localized
+
+//One instance:
+precondition1 rdf:type rcs:DifferentLocationState
+precondition1 forLocation p1
+precondition1 forLocation p2
+
+\end{alltt}
+
+Same thing for an rcs:IdenticalLocationState:
+
+
+
+\begin{alltt}
+
+rcs:IdenticalLocationState subClassOf cyc:TaskState
+rcs:forLocation hasDomain rcs:IdenticalLocationState
+
+//Two instances:
+precondition2 rdf:type rcs:IdenticalLocationState
+precondition2 forLocation ag1
+precondition2 forLocation p1
+
+postcondition1 rdf:type rcs:IdenticalLocationState
+postcondition1 forLocation ag1
+postcondition1 forLocation p2
+
+\end{alltt}
+
+Then we can define the task itself:
+
+
+
+\begin{alltt}
+
+//Abstract model of the task
+laas:Move subClassOf cyc:Movement-TranslationEvent
+
+laas:Move subClassOf (cyc:taskPrerequisites some IdenticalLocationState)
+laas:Move subClassOf (cyc:taskPrerequisites some DifferentLocationState)
+
+laas:Move subClassOf (cyc:taskToAchieve some IdenticalLocationState)
+
+//Instanciation:
+move1 type laas:Move
+move1 performedBy ag1
+move1 fromLocation p1
+move1 toLocation p2
+move1 taskPrerequisites precondition1
+move1 taskPrerequisites precondition2
+move1 taskToAchieve postcondition1
+
+\end{alltt}
+
+Two big issues there:
+
+
+\begin{itemize}
+
+\item  DifferentLocationState/IdenticalLocationState conditions, as formalized
+above, lack expressivity: we, as robot designers, "decide" that
+"DifferentLocationState" means that the locations must be disjoint, but there
+no way to actually this rule is actually enforced when reasoning. The only
+explicit constraint is that DifferentLocationState or IdenticalLocationState
+involve locations (instances of {\tt cyc:SpatialThing-Localized}). But we don't
+formally say that these locations must be disjoint or identical.
+
+\item  The abstract model of the task doesn't maintain the semantic: it merely
+says that a "Move" task must have 2 preconditions, one of kind "different
+location", one of kind "identical location" and 1 post-condition of type
+"identical location". But the fact that explicitly the location {\tt p1} and
+{\tt p2} must be different (and not, for instance, {\tt ag1} and {\tt p1} or
+even {\tt the moon} and {\tt the sun}) is not kept. We get it back at
+instanciation time, but it seriously reduces the relevance of such a task
+description for anything useful.
+
+\end{itemize}
+
+As it, it's difficult to me to see the relevance of such a task model for
+robotics. The original task model from HATP is ways simpler and easier to read.
+But let dig a bit futher.
+
+
+\section{Fluent-based approach}
+
+The current TUM approach is based on fluents \footnote{A fluent is a condition
+that can change truth value over time, cf
+\url{http://en.wikipedia.org/wiki/Fluent_artificial_intelligence}} and events.
+
+The idea is to represent the various states of the world with instances of {\tt
+rcs:Holds} and {\tt rcs:Occurs} classes, associated to a fluent and a time (or
+time interval).
+
+Some of the fluents they use:
+
+
+\begin{itemize}
+\item  contains(obj, container)
+\item  supports(obj, support)
+\item  attached(obj1, obj2)
+\item  \ldots{}
+\end{itemize}
+If we take the egg example:
+
+{\tt occurs(breaking(egg), 10.2)} (which means that the egg was broken at time
+10.2s) would be represented in the ontology as:
+
+
+
+\begin{alltt}
+
+event231 rdf:type cyc:BreakingEvent
+event231 hasObject egg
+
+state746 rdf:type tum:Occurs
+state746 fluent event231
+state746 occursAt 10.2
+
+\end{alltt}
+
+or, for situations, {\tt holds(broken(egg), [10.3, +INF])} (which formally
+mean: from time 10.3 until +INF, the statement "the egg is broken" holds) would
+become:
+
+
+
+\begin{alltt}
+
+fluent471 rdf:type tum:BrokenFluent
+fluent471 hasSubject egg
+
+state746 rdf:type tum:Holds
+state746 fluent fluent471
+state746 startsAt 10.3
+state746 finishsAt +INF
+
+\end{alltt}
+
+This representation matches situation calculus (or variants like event/fluent
+calculus) theories [McCarty1969] and takes explicitly into account the time
+(either time points or time intervals).
+
+I don't know well enough temporal reasoning and temporal planning to have any
+insight regarding the relevance of such a model, but it seem potentially very
+powerful to represent plans because of the tight coupling with time.
+
+However, since the causal relations are somehow lost, I don't see how it could
+be used to create a plan.
+
+Another issue is the lack of integration with classical first-order logic
+reasoners: fluents are a kind of statement reification and limit the ability of
+reasoner to further infer the new state of the world after the conclusion of
+some action. To put it another way: when a fluent holds, we can not directly
+infer the consequences of this fluent. Even if the fluent {\tt BrokenEgg}
+holds, the statement {\tt egg rdf:type cyc:Fractured} is not asserted anyhow,
+and we couldn't directly query the ontology for "the list of broken objects"
+for instance.
+
+In any case, I would need more input on fluent-based representations.
+
+
+\section{Introducing rules}
+
+To issue of low expressivity we had with tasks represented as pure OWL
+statement can be improved with rules. The example below, written in
+SWRL\footnote{While not an introduction, a very valuable resource on SWRL is
+the Protege FAQ \url{http://protege.cim3.net/cgi-bin/wiki.pl?SWRLLanguageFAQ}},
+is the formalisation of the conditions for {\tt IdenticalLocationState} to be
+true:
+
+
+
+\begin{alltt}
+
+IdenticalLocationState(?state) \(\land\)
+forLocation(?state, ?p1) \(\land\)
+forLocation(?state, ?p2) \(\land\)
+sameAs(?p1, ?p2)
+\(\Rightarrow\) RealizedTaskState(?state)
+
+\end{alltt}
+
+Same thing for {\tt DifferentLocationState}:
+
+
+
+\begin{alltt}
+
+DifferentLocationState(?state) \(\land\)
+forLocation(?state, ?p1) \(\land\)
+forLocation(?state, ?p2) \(\land\)
+differentFrom(?p1, ?p2)
+\(\Rightarrow\) RealizedTaskState(?state)
+
+\end{alltt}
+
+Let create a new class, {\tt rcs:UndertakeableAction}, that hold all the action
+whose pre-conditions are satisfied. We can complete the example:
+
+
+
+\begin{alltt}
+
+//Define our variables
+EmbodiedAgent(?ag1) \(\land\)
+SpatialThing-Localized(?p1) \(\land\)
+SpatialThing-Localized(?p2) \(\land\)
+
+//Bind the Move action
+Move(?action) \(\land\)
+performedBy(?action, ?ag1) \(\land\)
+fromLocation(?action, ?p1) \(\land\)
+toLocation(?action, ?p2) \(\land\)
+
+//Bind the agent position
+hasLocation(?ag1, ?p3) \(\land\)
+
+//Check precondition 1
+DifferentLocationState(?precondition1) \(\land\)
+forLocation(?precondition1, ?p1) \(\land\)
+forLocation(?precondition1, ?p2) \(\land\)
+RealizedTaskState(?precondition1) \(\land\)
+
+//Check precondition 2
+IdenticalLocationState(?precondition2) \(\land\)
+forLocation(?precondition2, ?p1) \(\land\)
+forLocation(?precondition2, ?p3) \(\land\)
+RealizedTaskState(?precondition2)
+
+\(\Rightarrow\) UndertakeableAction(?action)
+
+\end{alltt}
+
+This rule would be triggered by the reasoner if and only if:
+
+
+\begin{enumerate}
+
+\item  At least one agent is asserted or inferred (it is bound to {\tt ?ag1}),
+
+\item  Two other, different locations have been asserted of inferred ({\tt ?p1}
+and {\tt ?p2})\footnote{Since OWL and SWRL use the Open World Assumption, it
+means that {\tt ?p1} and {\tt ?p2} must be {\bf explicitly} disjoint}
+
+\item  At least on instance of the action {\tt Move} exists ({\tt ?action}),
+performed by {\tt ?ag1} from {\tt ?p1} to {\tt ?p2}.
+
+\item  {\tt ?p3} will be successively bound to every current location of {\tt
+?ag1}
+
+\item  One instance of a {\tt DifferentLocationState} context exists with {\tt
+?p1} and {\tt ?p2} as locations. This context is a \emph{realised context}.
+
+\item  Symmetrically, one instance of a {\tt IdenticalLocationState} context
+exists with {\tt ?p1} and {\tt ?p3} as locations. This context is a
+\emph{realised} as well.
+
+\end{enumerate}
+
+If all these conditions hold, then the {\tt ?action} is an {\tt
+UndertakeableAction}.
+
+{\bf Three important remarks:}
+
+
+\begin{itemize}
+\item  One could suggest to \emph{factor} the code with a rule that would say:
+"For any Action, if all pre-conditions are RealizedState, then the action is
+undertakeable". Somethink like:
+
+
+\begin{alltt}
+
+Move(?action) \(\land\)
+taskPrerequisites(?action, ?state) \(\land\)
+RealizedState(?state)
+\(\Rightarrow\) UndertakeableAction(?action)
+
+\end{alltt}
+
+It's simply not possible in OWL because of the Open World Assumption (OWA):
+there is not way to be certain that {\bf all} states are realised because there
+is no way to know {\bf all} the prerequisite states. The idea is something
+like: "it's not because I don't know it - ie, it is not asserted - that it
+doesn't exist".
+
+
+\item  For post-conditions, it's important to understand that we {\bf cannot}
+\emph{apply} the result of a rule to the ontology.
+
+What does it mean? It means that something like that:
+
+
+
+\begin{alltt}
+
+Move(?action) \(\land\)
+SuccessfullyCompleteAction(?action) \(\land\)
+IdenticalLocationState(?postcondition1) \(\land\)
+forLocation(?postcondition1, ?p2) \(\land\)
+forLocation(?postcondition1, ?p3) \(\land\)
+\(\Rightarrow\) RealizedState(?postcondition1)
+
+\end{alltt}
+
+or even simpler:
+
+
+
+\begin{alltt}
+
+Move(?action) \(\land\)
+SuccessfullyCompleteAction(?action) \(\land\)
+fromLocation(?action, ?p1) \(\land\)
+toLocation(?action, ?p2)
+\(\Rightarrow\) sameAs(?p1, ?p2)
+
+\end{alltt}
+
+will work, but only as long as the action is considered a {\tt
+SuccessfullyCompleteAction}. It means as well that if we do another movement
+({\tt move2}) but {\tt move1} is still a {\tt SuccessfullyCompleteAction}, then
+we are likely to have an inconsistency (or unwanted inferences): the robot will
+be at several places at the same time.
+
+And even if we can \emph{add} somehow new statements, we can not \emph{remove}
+statement because of the monotonic paradigm of OWL\footnote{About monotonicity
+and non-monotonicity, cf Wikipedia:
+\url{http://en.wikipedia.org/wiki/Monotonicity_of_entailment}. About
+non-monotonic reasoning, cf also
+\url{http://www.aaai.org/AITopics/pmwiki/pmwiki.php/AITopics/Nonmonotonicity}}.
+It's not possible for instance to complete the post-condition rule to say that
+the agent is not anymore in {\tt p1}.
+
+
+\item  Finally, one could conversely want to use post-condition with rules to
+know if an action was successful:
+
+
+\begin{alltt}
+
+Move(?action) \(\land\)
+performedBy(?action, ?ag1) \(\land\)
+hasLocation(?ag1, ?p1) \(\land\)
+toLocation(?action, ?p2) \(\land\)
+sameAs(?p1, ?p2)
+\(\Rightarrow\) SuccessfullyCompleteAction(?action)
+
+\end{alltt}
+
+It's doesn't prove that the action was successful - or did even occurred at
+all. It only says that the world is in a state that match the post-conditions
+of the action {\tt Move}. But this remark is not specific to rule reasoning.
+
+\end{itemize}
+
+At the end, what should we think of rule-based representations of pre- and
+post-conditions? I'll come back to this question in the conclusion, but for
+now, it's important to underline the relative complexity of correctly writing
+SWRL rules in the Description Logics safe space. It can however prove useful to
+check that the world state is a context that permit some actions to occur or
+conversely that matches the expected outcome of some other actions.
+
+
+\section{Drawing a conclusion}
+
+Our original questions where:
+
+\begin{enumerate}
+
+\item  How to express \emph{pre- and post-conditions} in the ontology? and how
+the knowledge processing framework could be used to check or enforce them?
+
+\item  What \emph{abstract model} of a task could be formalized in the
+ontology?
+
+\item  How could we rely on the ontology to \emph{instantiate} tasks?
+
+\end{enumerate}
+
+In order to reach some conclusion on these complementary perspectives, we
+should go back to the "big picture" behind task planning. Let's consider a
+simple scenario that would instatiate the {\tt Move} task in a real case:
+
+\emph{A human and a robot are face to face, at breakfast table. The human ask
+the robot to bring on cereals.}
+
+If nothing special prevents the robot to go to the cupboard, it has two moves
+to plan: from the table to the cupboard and back from the cupboard to the
+table.
+
+What is the process involved? Roughly:
+
+
+\begin{enumerate}
+
+\item  We first need to convert the human order from natural language to a
+machine processable representation: something like {\tt human desires cereals}.
+
+\item  Some supervision module receive this order, do an initial grounding
+(\emph{which human? what are cereals? which cereal box do I know?}), add a new
+goal
+
+\item  The supervision ask the task planner to generate a plan to {\tt bring
+cereal\_instance1 to human\_instance1}
+
+\item  the task planner retrieves some more infos (like the location of the
+instances involved) and proposes a list of (instanciated) tasks to the
+supervision.
+
+\item  the supervision decides to start (or not) the execution of the plan,
+starts individual tasks and monitor the global unwinding of the plan.
+
+\end{enumerate}
+
+\subsection{Task instanciation}
+
+So, how can the ontology-based knowledge base help in this process?
+
+
+\begin{itemize}
+
+\item  Obviously by providing common references to objects, agents, locations.
+
+\item  By storing informations related to the concepts (location of an agent,
+of an object). Further, this knowledge can be uniformly accessed, be it
+originally provided by the robot own perception or external datastores (for
+instance web-based).
+
+\item  These references along with inference capabilities can be a corner stone
+for the grounding requirements mandated by supervision or planning.
+
+\end{itemize}
+
+These three aspects are most useful for {\bf task instanciation}, are well
+understood, a already largely implemented. Task representation can and should
+benefit of the symbolic framework offered by ontologies.
+
+
+\subsection{Pre- and post-conditions}
+
+Then, on the reasoning side, can our knowledge processing tool help with
+dealing with pre- and post-condition? Or, are ontologies and associated
+reasoning tool relevant for the \emph{legality task} (are tasks performable?)
+and the \emph{temporal projection task} (what will be the state of the world
+after some tasks are performed?), as called by Levesque [Levesque2007]? (he
+notes by the way that, based on situation calculus and assuming we have access
+to tasks preconditions, the \emph{legality task} can be reduced to the
+\emph{projection task}).
+
+We have seen that standard OWL semantics doesn't allow for a satisfying way to
+represent the complex semantic and logic of pre- and post-conditions, even in
+simple case like the {\tt Move} action.
+
+However, the rule-based approach allows us to effectively represent the full
+expressivity of these constraints. Since rule language like SWRL are actually
+implemented in current reasoners like Pellet, such description of task
+conditions could be actually suitable for checking both that:
+
+
+\begin{itemize}
+
+\item  the robot believes the current world state allows a given action to take
+place,
+
+\item  the robot believes that it reached a state where the intended results of
+an actions are realised (which may mean that either the action was successfully
+complete or that some environment changes lead to an equivalent state of the
+world)
+
+\end{itemize}
+
+\emph{Per se} this knowledge is useful for the supervision. But it can not
+replace the need for the planer to reason itself on pre- and post-conditions
+since the reasoning that the ontology framework provides applies only to the
+{\bf current} state of the world. Indeed, traditional first-order logic
+reasoners don't offer, as far as I know, to build hypothetical world models
+that would come out of some actions (in part because of the monotonic reasoning
+paradigm). This would be necessary to predict future state of the world, as
+required for planning. The fluent paradigm associated to a dedicated reasoner
+could however provide a mean to reason in the future.
+
+Moreover, as we already stated, using such rules for post-condition only allows
+to check if the post-conditions are met. It doesn't prove that the action was
+achieved. {\bf More importantly}, none of the various solutions we presented
+above allow to \emph{apply} post-conditions to the ontology. An external module
+(likely the supervisor) must take care of updating the ontology according to
+the consequences of the action, adding new statements and removing deprecated
+facts. Note however that in many cases these changes are made "on-line", in
+parallel to the action execution (in the example of the human and cereals, we
+can assume for instance that some localization module will update the position
+of the robot in the ontology as soon as the robot move).
+
+At the end of the day, it seems to me that representing certain \emph{states of
+the world} as a set of constraints expressed as rules can be relevant. It would
+allow the robot to be \emph{conscious} that a specific situation occurs. But,
+to be useful, these {\tt cyc:TaskState} or contexts must be easy to create "on
+the fly" by the planner or by the supervisor, either to describe a context
+required by a new task or on the contrary to express an expected situation. It
+could be useful to develop to this end a library dedicated to SWRL content
+generation.
+
+
+\subsection{Task abstract model}
+
+Last aspect: are abstract models of tasks easily and effectively representable
+in our current, OWL-based, knowledge frameworks?
+
+Brandon Ibach, on the pellet-user list, summarize the model of the {\tt Move}
+task this way (well, just the "precondition" part):
+
+\begin{alltt}
+
+Place
+Agent [ hasPosition(Place) ]
+Action
+    UndertakableAction \(\leftarrow\) EligibleMove \(\land\) NonEmptyMove
+    Move [ hasAgent(Agent) hasFrom(Place) hasTo(Place) ]
+        EligibleMove \(\leftarrow\) Move(m) \(\land\) hasAgent(m, a) \(\land\) hasPosition(a, p) \(\land\) hasFrom(m, f) \(\land\)
+sameAs(p, f)
+        NonEmptyMove \(\leftarrow\) Move(m) \(\land\) hasFrom(m, f) \(\land\) hasTo(m, t) \(\land\) differentFrom(f, t)
+
+\end{alltt}
+
+This can be probably considered as an abstract model of the task. This model
+mixes pure OWL statements with SWRL extensions. It's formally sound, but I
+doubt of the practical usability for the planner. Maybe the people from
+planning could precise a bit how they would like to use this kind of abstract
+model (as storage for the list of possible tasks, for instance?)
+
+
+\section{Some previous work \& references}
+
+
+\begin{itemize}
+
+\item  {\bf [McCarthy1969]
+\url{http://centria.di.fct.unl.pt/~jja/agregacao/teaching/assets/paginasCadeiras/rcr/docs/actionPapers/mcchay69.pdf}:
+Some philosophical problems from the standpoint of artificial intelligence -
+\emph{J. McCarthy, P. Hayes - 1969}} This major paper states the issue of How
+it "can be proved that a strategy will achieve a goal". McCarthy introduces
+there the \emph{situation calculus}.
+
+\item  {\bf [Artale1999]
+\url{http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.25.1319&rep=rep1&type=pdf}
+Representing a robotic domain using temporal description logics, \emph{A
+Artale, E Franconi - AI EDAM, 1999}}
+
+\item  {\bf [Gil2005]
+\url{http://ftp.isi.edu/~gil/papers/AImag05.pdf} Description Logics and
+Planning, \emph{Y. Gil - AI Magazine, 2005}}, A survey of previous work on
+combining planning techniques with expressive representations of knowledge in
+description logics to reason about tasks, plans, and goals.
+
+\item  {\bf [Levesque2007]
+\url{http://www-kbsg.informatik.rwth-aachen.de/system/files/CogRobKRHandbook.pdf}
+Cognitive robotics, \emph{ H. Levesque and G. Lakemeyer, in Chapter 24 in
+Handbook of Knowledge Representation, Elsevier, 2007 }}
+
+\item  {\bf [Clark2009]
+\url{http://clarkparsia.com/weblog/2009/02/04/what-is-automated-planning/} 
+What is automated planning?, \emph{K. Clark - 2009}}, from the creator of the
+Pellet reasonner. They use an HTN planner with a task representation based on
+\url{http://en.wikipedia.org/wiki/OWL-S} OWL-S
+
+\end{itemize}
+
