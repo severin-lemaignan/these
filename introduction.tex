@@ -343,57 +343,58 @@ scientific point of view and from a technical point of view.
 
 The need of a better understanding of the knowledge needs of robotic
 applications in human, \ie complex, dynamic, semantically-rich, environments,
-is the starting point of this thesis. 
+is the starting point of my thesis.
 
 Building upon an extensive review of the literature and the formulation of
 several interaction scenarii (that themselves led to experiments on real
-robots), we have iteratively refined the ``knowledge for interaction'' problem.
-The formalization of this question is one of the main scientific outcome of
-this work: we have systematically listed and organized of the set of desirable
+robots), I have iteratively refined the ``knowledge for interaction'' problem.
+The formalization of this question is one of the main scientific outcomes of
+this work: I have listed and organized into a typology a set of desirable
 characteristics of knowledge representation systems for service robotics.
 
-This typology aims to offer an exhaustive and consistent base to evaluate
+This typology aims to offer an comprehensive and consistent base to evaluate
 existing systems and to draw new research perspectives. It also enables to
 better assess the progresses of the Service Robot and Human Robot Interaction
 research communities towards the long term goal of \emph{human-level artificial
 intelligence} for robots, as would say McCarthy.
 
-Another important scientific contribution of this thesis is its participation to
+Another scientific contribution of this thesis is its participation to
 narrow down the gap between research on embodied and disembodied artificial
-agents: we have tried to bridge experiences learned from years of research on
+agents: I have tried to bridge experiences learned from years of research on
 disembodied cognitive architectures (both from the computing science and
 neuropsychology communities) with the constraints from real-world systems that
-weight on robotic architectures. Notably, we have tried to identify
+weigh on robotic architectures. Notably, I have tried to identify
 theoretical reference contributions from the diverse fields of cognitive
-sciences that are relevant to \emph{knowledge-enabled} robotics. We have also
+sciences that are relevant to \emph{knowledge-enabled} robotics. I have also
 proposed reference implementations on robots for some of them.
 
-At the architectural level, our work also helps to better understand the
+At the architectural level, my work also helps to better understand the
 knowledge flows in modern cognitive architectures for robots. By introducing
 \emph{explicit} knowledge in our architectures, it allows the humans that
 design and program robots to \emph{talk about} and question this knowledge: it
 singularizes and materializes concepts that were beforehand often
-diffuse and ubiquitous. This leads us to define the idea of
-\emph{knowledge-oriented} architecture.
+diffuse and ubiquitous. This leads us to define the idea and propose an
+implementation of a \emph{knowledge-oriented} architecture.
 
 This work has also several more focused scientific contributions. The
-centralized semantic architecture that we propose is original. While it
+centralized semantic architecture that I propose is original. While it
 exhibits shortcomings for some cognitive tasks, it also proposes novel efficient
-ways to represent and manipulate knowledge. Along with the extensive survey of
-current knowledge systems we have conducted, it effectively completes the
-panorama of available designs of knowledge representation systems.
+ways to represent and manipulate knowledge simultaneously for multiple agents.
+Along with the survey of current knowledge systems that I have conducted,
+it effectively completes the panorama of available designs of knowledge
+representation systems.
 
-Amongst the cognitive abilities that our developments have enabled, a
+Amongst the cognitive abilities that my developments have enabled, a
 particular scientific focus was led on the acquisition and modelling of
 multiple, agent-dependent symbolic worlds. This opened new perspectives related
 to \emph{perspective-aware} reasoning or \emph{theories of mind} for robots
 that are detailed in this work.
 
-We also have a notable scientific contribution on the grounding of human-robot
+I also have a scientific contribution on the grounding of human-robot
 dialogue in natural language. We have algorithmically formalized a novel
 grounding process that takes advantage of multi-modal communication (verbal,
 deictic and immanent) and handles the semantics of several more complex
-language features like quantification. Our system also has contributions
+language features like quantification. This system also has contributions
 related to the semantic validation of thematic roles and interactive
 disambiguation that takes into account human attentional focus.
 
@@ -410,21 +411,21 @@ software development of \emph{Dialogs}, a novel module for natural language
 grounding.
 
 The main software contribution of the thesis is the development of an
-open-source, versatile and light-weighted knowledge base that stores in a
+open-source, versatile and light-weight knowledge base that stores in a
 formal framework based on first-order logics both the robot's own beliefs and
 the mental models of every other cognitive agents that the robot interacts
 with. This tool, called \emph{ORO}, is implemented as a
-platform/middleware-agnostic server, and exposes to the robot modules
+platform/middleware-agnostic server, and exposes to the robot's modules
 several advanced reasoning services (via the integration of external
 reasoners). This software project is now publicly available, used by other
 laboratories, and comes with extensive documentation and bindings for several
 mainstream languages (C++, Python...) and middlewares (ROS, YARP).
 
 In parallel of this development, and in collaboration with other developpers,
-we have also drafted (and partially implemented) a proposal for a standard API
+I have also drafted (and partially implemented) a proposal for a standard API
 for knowledge interchange between robotic components.
 
-Coming along with the ORO server, we introduce in this thesis the
+Coming along with the ORO server, I introduce in this thesis the
 \emph{ORO common-sense ontology} which is a proposal of an upper ontology for
 service and interactive robotics. This ontology consists of about two hundred
 classes, relations and rules that are significant for the modelling of the
@@ -435,7 +436,7 @@ web resources and other robots.
 
 A third technical contribution is the introduction of a new
 \emph{knowledge-oriented, event driven} communication model between high-level
-decisional modules: by supporting a concept of \emph{semantic events}, the ORO
+decisional modules: by introducing a concept of \emph{semantic events}, the ORO
 server enables the development of new executive layers that combine reactive
 behaviour with high-level abstractions: for instance, triggering a behaviour
 when a human looks at the robot while sit, can be expressed in our architecture
@@ -443,7 +444,7 @@ as a single line of code: {\tt subscribe([* type Human, * looksAt myself, *
 isSitting true], behaviour\_callback())}. This highly expressive event model
 opens new ranges of development opportunities for decisional modules.
 
-During the preparation of the thesis, we have also developed a new stand-alone
+During the preparation of the thesis, I have also developed a new stand-alone
 natural language processor for English language. It takes advantage of the
 different symbolic models exposed by ORO server to analyse, resolve the
 semantics and ground dialogues. It can process orders, questions and positive
@@ -454,14 +455,13 @@ strategies, including interactive ones. The application is developed in Python
 accompanied by a speech recognition interface developed as an Android
 application.
 
-A last notable software contribution is our involvement in the MORSE simulator
-for academic robotics. We have played a central role in the original design and
+A last notable software contribution is my involvement in the MORSE simulator
+for academic robotics. I have played a central role in the original design and
 development of the core functionalities of this open-source simulator which is
 now used by over twenty laboratories world-wide. While this project as a whole
-is not directly related to this thesis, we have led the effort towards
+is not directly related to the thesis main domain, I have led the effort towards
 effective simulation of human-robot interaction in MORSE, which is now the
 current state-of-the-art in this domain.
-\fxwarning{Do we keep the mention to MORSE?}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
