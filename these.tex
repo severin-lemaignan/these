@@ -160,7 +160,22 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%       Listings general layout
 
-\lstset{basicstyle=\small, captionpos=b, frame=single}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\definecolor{molo-identifier}{HTML}{FD971F}
+\definecolor{molo-string}{HTML}{229911}
+\definecolor{molo-comment}{HTML}{75715E}
+
+\lstset{basicstyle=\small, 
+        captionpos=b, 
+        frame=single,
+        %backgroundcolor=\color{black},
+        keywordstyle=\color{molo-identifier}\bf,          % keyword style
+        commentstyle=\color{molo-comment},       % comment style
+        stringstyle=\color{molo-string},         % string literal style
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

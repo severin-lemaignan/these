@@ -49,6 +49,7 @@ robotic-friendly knowledge base. A section below gives more details on the Java
 implementation of the server.
 
 \subsubsection{Front-end}
+\label{sect|frontend}
 
 Communication with external components pass through the server front-end.  It
 was originally build as a YARP node, but was eventually transformed into a
@@ -190,8 +191,221 @@ public void add(Set<String> rawStmts, String memProfile)
 \section{Bindings to other components/languages}
 \label{sect|interfacing}
 
+To ensure the integration of ORO server in existing robotic architectures, we
+have developed several idiomatic language-specific bindings, as well as bridges
+with two widespread robotic middlewares, ROS and YARP.
+
 \subsection{Language bindings}
 \label{sect|bindings}
+
+The main interaction gate with ORO server is its socket interface (as presented
+above, at section~\ref{sect|frontend}). Sockets are light-weight, platform
+independant, and supported by basically every single programming language.
+Developing an interface with ORO server in a new language is thus very doable.
+
+For our own needs, and because they are amongst the most widely used languages,
+bindings for Python and C++ are available by default with ORO server.
+
+The complete Python and C++ API will not be presented here (their
+documentations are available on-line,
+\url{http://www.openrobots.org/wiki/oro-server-bindings}), but we present two
+short example that demonstrate how the knowledge base can be easily and
+pervasively integrated in code.
+
+\subsubsection{Python}
+
+The Python script below (listing~\ref{code|ex-python}) demonstrates several of
+the interaction mechanisms with ORO server: model alteration, queries, events.
+
+\lstset{language=python}
+\begin{lstlisting}[numbers=left,caption=Example of interaction with {\tt oro-server} in Python, label = code|ex-python]
+import time
+from pyoro import Oro, OroServerError
+
+def onevent(evt):
+        print("God save the queen! " + evt + " killed Bond!")
+
+try:
+        oro = Oro()
+
+        oro += ["Spy rdfs:subClassOf Human", 
+                "bond rdf:type Spy", 
+                "bond rdfs:label \"Bond, James Bond\""]
+
+        if "bond rdf:type Human" in oro:
+            print("Alright, Bond is a human")
+
+        oro += "pr2 rdf:type Robot"
+
+        for ag in oro["* rdf:type Agent"]:
+            print("Agent " + ag + " is here.")
+
+        oro.subscribe(["?a kills bond"], onevent)
+        oro += "pr2 kills bond"
+
+        time.sleep(1)
+
+except OroServerError as ose:
+        print('Oups! An error occured!')
+        print(ose)
+
+finally:
+        oro.close()
+\end{lstlisting}
+
+At line 8, we establish the connection to the server. We assume here that the
+server is launched on the default port and on the local machine.
+
+At line 10, three facts are added to the knowledge base. The first one modifies
+the TBox of the ontology (alteration of the knowledge structure) while the two
+other ones modify the ABox (a new instance and a new label). Adding (or
+removing) triples from the ontology is done naturally with the {\tt +=} and
+{\tt -=} operators.
+
+At line 14, we check that a fact holds, either in the asserted model or in the
+inferred model (in this case, Bond is inferred to be a human because we added
+before that spies are types of humans). We can use here also a natural
+idiomatic Python syntax.
+
+Line 19 shows how queries can be executed, with a dictionary-like accessor.
+Both humans and robots are asserted to be agents in the ORO common-sense
+ontology, thus this query returns both {\tt bond} and {\tt pr2}.
+
+Line 22 shows how events are created. We first subscribe to an event by passing
+a pattern ({\tt ?a kills bond}) and a callback (defined at line 4).  Line 23
+triggers the event, and the callback method is then invoked.
+
+We have kept this example simple. The complete Python API allows to describe
+more complex events (when a fact can not be inferred, when a new instance of a
+given class appear, etc.), be manipulate different models, to walk through the
+ontology taxonomy, etc.
+
+\subsubsection{C++}
+
+The C++ bindings are provided as a library called {\tt liboro}. The
+listing~\ref{code|ex-cpp} presents some examples of its usage.
+
+\lstset{language=c++}
+\begin{lstlisting}[numbers=left,caption=Example of interaction with {\tt oro-server} in C++, label = code|ex-cpp]
+#include <iostream>
+#include <iterator>
+#include <set>
+
+#include "liboro/oro.h"
+#include "liboro/oro_library.h"
+#include "liboro/socket_connector.h"
+
+using namespace std;
+using namespace oro;
+
+class EventCallback : public OroEventObserver {
+    void operator()(const OroEvent& evt) {
+    cout << "Event triggered!" << endl;
+    }
+};
+  
+int main(void) {
+  set<Concept> result;
+  set<string> partial_stmts;
+  
+  SocketConnector connector("localhost", "6969");
+  Ontology *oro = Ontology::createWithConnector(connector);
+  
+  //Creation of instances
+  Agent robot1 = Agent::create("Nice Robot", Classes::Robot);
+  Agent human = Agent::create("Young PhD", Classes::Human);
+  
+  //First query
+  partial_stmts.insert("?mysterious rdf:type Agent");
+  oro->find("mysterious", partial_stmts, result);
+  
+  copy(result.begin(), 
+       result.end(), 
+       ostream_iterator<Concept>(cout, "\n"));
+  
+  partial_stmts.clear();
+  result.clear();
+  
+  //More statements are added to the knowledge base
+  Object table = Object::create(Classes::Table);
+
+  Object unknown_object = Object::create();
+  unknown_object.assertThat(Properties::isOnTopOf, table);
+  
+  oro->add(Statement("oro:isOnTopOf rdfs:subClassOf oro:isAt"));
+  
+  Agent myself("myself");
+  
+  myself.sees(unknown_object);
+  myself.sees(human);
+  
+  //A query involving multiple partial statements
+  partial_stmts.insert("?mysterious isAt ?support");
+  partial_stmts.insert("?support rdf:type cyc:Table");
+  partial_stmts.insert("oro:myself sees ?mysterious");
+  
+  oro->find("mysterious", partial_stmts, result);
+  
+  copy(result.begin(), 
+       result.end(), 
+       ostream_iterator<Concept>(cout, "\n"));
+  
+  //Events
+  EventCallback ec;
+  Classes::Human.onNewInstance(ec);
+  Agent superman = Agent::create("Superman", Classes::Human);
+  
+  sleep(1);
+  
+  set<string> event_pattern;
+  Property flyingProp = Property("isFlying");
+  
+  event_pattern.insert( superman.id() + " isFlying true");
+  oro->registerEvent(ec, 
+                     FACT_CHECKING, 
+                     ON_TRUE_ONE_SHOT, 
+                     event_pattern, "");
+  
+  superman.assertThat(flyingProp, "true");
+  
+  sleep(1);
+  
+  return 0;
+}
+
+\end{lstlisting}
+
+At lines 22 and 23, the {\tt oro} object is here built as a singleton. This
+actually connects the application to the ontology server.
+
+At line 26 and 27, we create two new instances of agents labeled \emph{Nice
+Robot} and \emph{Young PhD}. The static types {\tt Robot} and {\tt Human} are
+generated from the ontology itself by a script.
+
+A first, simple query (line 30 and 31) return a {\tt std::set} of concept IDs.
+
+At line 41, a new object is created. No label is defined, but the
+class is set to be a table. On the contrary, at line 43, we create a generic
+object (only asserting it is an instance of {\tt Object}).
+
+At line 44, we assert a property (here also, the list of available properties is
+statically generated from the ORO ontology).
+
+As shown at line 46, we can as well access the ontology at a lower level,
+directly adding (or removing) new triples. In this case, we modify the TBox of
+the knowledge base.
+
+C++ objects can also be created by using directly the concept IDs, as shown
+line 48 for the special concept {\tt myself} (an instance always representing
+the robot itself). Some object properties frequently used in the ontology are
+available as methods, as seen lines 50 and 51.
+
+Lines 54 to 58 show a more complex query, involving several partial statements.
+Named variables (like {\tt ?mysterious} or {\tt support}) are used in the
+statements to reference the same entity.
+
+Lastly, lines 65 to 80 show two ways of defining events with a callback functor
+(defined at lines 12-16).
 
 \subsection{Interface with robotic middlewares}
 \label{sect|interfacing-middlewares}
@@ -211,12 +425,12 @@ simulate accurately the original communication with the server: timestamps are
 respected and if multiple clients where connected to the server, the log player
 forks one thread by client to simulate parallel access to the server.
 
-\subsection{Vizualisation}
+\subsection{Visualisation}
 
 \begin{figure}
     \centering
     \includegraphics[width=0.9\columnwidth]{implementation/oroview.jpg}
-    \caption{A snapshot of the {\tt oro-view} vizualisation tool.}
+    \caption{A snapshot of the {\tt oro-view} visualisation tool.}
     \label{fig|oroview}
 \end{figure}
 
