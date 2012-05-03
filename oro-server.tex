@@ -96,6 +96,10 @@ We present at section~\ref{sect|perspectivetaking}, page~\pageref{sect|perspecti
 %%%%%%%%%%
 \subsection{Reasoning Techniques}
 
+Some of the main algorithms are presented here as well (like the algorithms for
+classification and discrimination,~\ref{sect|discrimination}).
+
+
 \subsubsection{Standard reasoning techniques}
 
 
@@ -132,10 +136,72 @@ and properties to classes and predicates (we can for instance teach the robot
 Animal}).
 
 
+
 \paragraph{Decidability}
 
 ...
 
+\subsubsection{Classification and discrimination algorithms}
+\label{sect|discrimination}
+
+ORO server implements several algorithms to identify similarities and
+differences between concepts (classes or instances). They were presented in
+detail in~\cite{Ros2010b}, an article co-authored with Raquel Ros.
+
+The main algorithms are presented in this section.
+
+\paragraph{Common and first different ancestors} The \emph{Common Ancestors}
+algorithm (algorithm~\ref{algo|common-ancestors}) returns the classes that
+are the ``first'' common superclasses of the two concepts.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\columnwidth]{oroserver/commonancestors.pdf}
+    \caption{Sample taxonomy to illustrate \emph{common ancestors} algorithms.}
+    \label{fig|common-ancestors}
+\end{figure}
+
+\small
+\begin{pseudocode}[ruled]{CommonAncestors}{concept1, concept2}
+\label{algo|common-ancestors}
+
+\BEGIN
+\mathcal{I} \GETS \CALL{Superclasses}{concept1} \cap \CALL{Superclasses}{concept2} \\
+\RETURN {c \in \mathcal{I} | \CALL{Subclasses}{c} \cap \mathcal{I} = \emptyset}\\
+\END
+
+\end{pseudocode}
+\normalsize
+
+Taking the taxonomy in figure~\ref{fig|common-ancestors} as example, the common
+ancestors for the pair \concept{\{white whale, moon\}} are
+\concept{\{spatial thing, white object\}}, \ie the set of classes that belong to
+the intersection of the super-classes of both the concepts that have no
+sub-classes in this intersection.
+
+\small
+\begin{pseudocode}[ruled]{FirstDifferentAncestors}{concept1, concept2}
+\label{algo|first-different-ancestors}
+
+\BEGIN
+\mathcal{C} \GETS \CALL{CommonAncestors}{concept1, concept2} \\
+\mathcal{S} \GETS \CALL{Superclasses}{concept1} \cup \CALL{Superclasses}{concept2} \\
+
+\RETURN{\forall c \in \mathcal{C}, \CALL{DirectSubclasses}{c} \cap \mathcal{S}} \\
+\END
+
+\end{pseudocode}
+\normalsize
+
+The \emph{First Different Ancestors} algorithm
+(algorithm~\ref{algo|first-different-ancestors}) returns the list of direct
+sub-classes of the common ancestors. They are intuitively the most generic
+types that \emph{differenciate} the two concepts. In the taxonomy
+figure~\ref{fig|common-ancestors}, two instances \concept{a} and \concept{b} of
+respectively \concept{white whale} and \concept{moon} have as first different
+ancestors the two sets \concept{\{animal, satellite\}} (subclasses of ancestor
+\concept{spatial thing}) and \concept{\{white whale, moon\}} (subclasses of
+ancestor \concept{white object}).
 
 \subsubsection{Reasoning with uncertainty}
 \subsubsection{(Non) Monotonic Reasoning}
