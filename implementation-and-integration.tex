@@ -415,6 +415,21 @@ Lastly, lines 65 to 80 show two ways of defining events with a callback functor
 \subsection{Interface with robotic middlewares}
 \label{sect|interfacing-middlewares}
 
+While convenient in certain cases, language-level interfaces do not usually
+offer the modularity and loose-coupling required by complex robotic
+architectures where tenth of modules, possibly spread over several CPUs, need
+to talk together. The acknowledgement of this issue has led to the development
+over the last ten years of numerous so-called \emph{robotic middlewares} that
+abstract away inter-module communication (at the transports, protocols and
+programming interfaces levels).
+
+We provide with ORO server wrappers for two of the main middlewares currently
+in use in the robotic community, {\sc Yarp}~\cite{Metta2006} and
+ROS~\cite{Quigley2009}.
+
+These wrappers use the C++ or Python bindings previously presented to expose
+the functionalities of ORO server as a stand-alone node.
+
 %%%%%%%%%%%%%%%%%
 \section{Monitoring and debugging}
 \label{sect|monitoring}
