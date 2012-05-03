@@ -3,8 +3,8 @@
 
 \section{Some implementation notes}
 
-This section presents some of the main technological choices that have
-been made to implement the knowledge base.
+This section presents some of the main technological choices that have been
+made to implement and ease the integration of the knowledge base.
 
 Some of the main algorithms are presented here as well (like the algorithms for
 clasification and discrimination,~\ref{sect|discrimination}).
@@ -22,8 +22,8 @@ with external clients, a set of central modules that either handle incoming
 requests or provide background processing (like the event monitoring or the
 memory management), and a back-end, that stores the knowledge models in several
 parallel pools of RDF triples, one per agent. The back-end provides all the
-knowledge manipulation functionalitites required by the modules, plus the
-inference service.
+knowledge manipulation functionalitites required by the modules including
+reasoning.
 
 \begin{figure}
     \centering
@@ -33,25 +33,25 @@ inference service.
 \end{figure}
 
 The use of a reasoner is completely transparent for the modules: the reasoner
-is automatically called when a model changes to classify the all model. Thus,
-queries to the knowledge models always access both the asserted and infered
-sets of statements. As a consequence, the ORO server can be run with not
-reasoner without any visible API change for the modules. They will simply
-manipulate only asserted facts.
+is automatically called when a model changes and classifies it. Thus, queries
+to the knowledge models always access both the \emph{asserted} and
+\emph{inferred} sets of statements. As a consequence, the ORO server can be run
+with no reasoner without any visible API change for the modules. They will
+simply manipulate only asserted facts.
 
-The ORO server is written in the Java 6 programming language. This choice of
-language is due to almost exclusive use of the Java language in the semantic
-Web community that led to the consequence that most of the main RDF/OWL API and
-reasoners are available in Java. As mentionned previously, the ORO server
-relies on the Jena API for OWL manipulation and on the Pellet reasoner for all
-reasoning tasks. Java was thus the best candidate to glue them in a
-robotic-friendly knowledge base. A section below gives more details on the Java
+The ORO server is written in Java 6. This choice is due to widespread use of
+the Java language in the semantic Web community that leads to the fact that
+most of the RDF/OWL API and reasoners are available as Java libraries. As
+mentionned previously, the ORO server relies on the Jena API for OWL
+manipulation and on the Pellet reasoner for all reasoning tasks. Java was thus
+the best candidate to glue them in a robotic-friendly knowledge base.
+Section~\ref{sect|java-impl} below gives more details on the Java
 implementation of the server.
 
 \subsubsection{Front-end}
 \label{sect|frontend}
 
-Communication with external components pass through the server front-end.  It
+Communication with external components is handled by the server front-end.  It
 was originally build as a YARP node, but was eventually transformed into a
 simpler and more generic socket interface.  The socket connector uses a simple
 ASCII protocol, presented in figure~\ref{fig|oro-protocol}.
@@ -96,16 +96,16 @@ event
 }
 
 \caption{The ORO server protocol. Elements in square brackets are optional.
-Note that the {\tt ok} and {\tt error} message are server's answers to client
-requests while the {\tt event} message is produced asynchronously.}
+Note that the {\tt ok} and {\tt error} message are synchronous server answers
+to client requests while the {\tt event} message is produced asynchronously.}
 
 \label{fig|oro-protocol}
 
 \end{figure}
 
 Communication with dedicated robotic middlewares like ROS or YARP is provided
-by dedicated clients. Section~\ref{sect|interfacing-middlewares} briefly
-presents them.
+by dedicated external clients. Section~\ref{sect|interfacing-middlewares}
+briefly presents them.
 
 \subsubsection{Plugins} The server can be easily extended by the mean of
 \emph{plugins}. These are JAR files that are loaded at run-time and have access
@@ -117,16 +117,17 @@ on-line\footnote{\url{http://www.openrobots.org/wiki/oro-server-plugins}}.
 \subsubsection{API}
 
 As of version 0.8, the ORO server API exposes about 50 methods (some of them
-are polymorphic) organized into seven categories: \emph{Base}, \emph{Agents},
+are besides polymorphic) organized into seven categories: \emph{Base}, \emph{Agents},
 \emph{Administration}, \emph{Concept comparison}, \emph{Events}, \emph{Queries}
-and \emph{Taxonomy} walking.
+and \emph{Taxonomy walking}.
 
 Partial support for the \emph{Knowledge API} (section~\ref{sect|kb-api}) has
 been added to ORO server 0.8: the newly introduced {\tt revise} method that
-takes a \emph{revision policy} is a versatile and generic mechanism that
-deprecates {\it de-facto} several methods currently exposed by the API.
+takes a \emph{revision policy} as parameter is a versatile and generic
+mechanism that deprecates {\it de-facto} several methods currently exposed by
+the API. In future releases, the API could in consequence be shortened.
 
-The complete API is provided at appendix~\ref{chapt|oro-api}.
+The current API is provided in appendix~\ref{chapt|oro-api}.
 
 \subsubsection{Java Implementation}
 \label{sect|java-impl}
@@ -147,12 +148,12 @@ instanciate one front-end (\jinterface{IConnector}), one main back-end
 (\jinterface{IOntologyBackend}) and several modules (\jinterface{IModule}),
 including plugins that are loaded at run-time.
 
-Modules that implement the \jinterface{IServiceProvider} interface expose
-\emph{services} (\jclass{IService}), which are actual methods exposed by the
-server. Java method to be exposed are simply marked with the
-\jinterface{@RPCMethod} Java annotation, and automatically added to the server
-API. Extending the server API is thus simply a matter of annotating any Java
-method with \jinterface{@RPCMethod}. Listing~\ref{code|oro-add} shows one
+Modules commonly also implement the \jinterface{IServiceProvider} interface to
+expose \emph{services} (\jclass{IService}). These are the actual methods found
+in the server API. Java methods that belongs to the API simply need to be
+decorated with a \jinterface{@RPCMethod} Java annotation to automatically
+exported. Extending the server API is thus simply a matter of annotating any
+Java method with \jinterface{@RPCMethod}. Listing~\ref{code|oro-add} shows one
 example of a service annotated in such a way, the {\tt add} method.
 
 \lstset{language=java}
@@ -202,22 +203,22 @@ with two widespread robotic middlewares, ROS and YARP.
 
 The main interaction gate with ORO server is its socket interface (as presented
 above, at section~\ref{sect|frontend}). Sockets are light-weight, platform
-independant, and supported by basically every single programming language.
-Developing an interface with ORO server in a new language is thus very doable.
+independant, and supported by every programming languages.  Developing an
+interface with ORO server in a new language is thus easy.
 
 For our own needs, and because they are amongst the most widely used languages,
 bindings for Python and C++ are available by default with ORO server.
 
 The complete Python and C++ API will not be presented here (their
 documentations are available on-line,
-\url{http://www.openrobots.org/wiki/oro-server-bindings}), but we present two
-short example that demonstrate how the knowledge base can be easily and
-pervasively integrated in code.
+\footnote{\url{http://www.openrobots.org/wiki/oro-server-bindings}}), but we
+present two short example that demonstrate how the knowledge base can be
+integrated in code in a natural way.
 
 \subsubsection{Python}
 
 The Python script below (listing~\ref{code|ex-python}) demonstrates several of
-the interaction mechanisms with ORO server: model alteration, queries, events.
+the interaction mechanisms with ORO server: model alteration, queries and events.
 
 \lstset{language=python}
 \begin{lstlisting}[numbers=left,
@@ -269,20 +270,20 @@ removing) triples from the ontology is done naturally with the {\tt +=} and
 
 At line 14, we check that a fact holds, either in the asserted model or in the
 inferred model (in this case, Bond is inferred to be a human because we added
-before that spies are types of humans). We can use here also a natural
-idiomatic Python syntax.
+before that spies are types of humans). Here as well we use a natural idiomatic
+Python syntax.
 
 Line 19 shows how queries can be executed, with a dictionary-like accessor.
 Both humans and robots are asserted to be agents in the ORO common-sense
-ontology, thus this query returns both {\tt bond} and {\tt pr2}.
+ontology, thus this query returns a list {\tt [bond, pr2]}.
 
 Line 22 shows how events are created. We first subscribe to an event by passing
-a pattern ({\tt ?a kills bond}) and a callback (defined at line 4).  Line 23
-triggers the event, and the callback method is then invoked.
+a pattern ({\tt ?a kills bond}) and a callback (implemented at lines 4-5).
+Line 23 triggers the event, and the callback method is then invoked.
 
 We have kept this example simple. The complete Python API allows to describe
 more complex events (when a fact can not be inferred, when a new instance of a
-given class appear, etc.), be manipulate different models, to walk through the
+given class appears, etc.), to manipulate different models, to walk through the
 ontology taxonomy, etc.
 
 \subsubsection{C++}
@@ -380,12 +381,12 @@ int main(void) {
 
 \end{lstlisting}
 
-At lines 22 and 23, the {\tt oro} object is here built as a singleton. This
+At lines 22 and 23, the {\tt oro} object is built as a singleton. This
 actually connects the application to the ontology server.
 
 At line 26 and 27, we create two new instances of agents labeled \emph{Nice
-Robot} and \emph{Young PhD}. The static types {\tt Robot} and {\tt Human} are
-generated from the ontology itself by a script.
+Robot} and \emph{Young PhD} (the static types {\tt Classes::Robot} and {\tt
+Classes::Human} are generated from the ontology itself by a script).
 
 A first, simple query (line 30 and 31) return a {\tt std::set} of concept IDs.
 
@@ -412,6 +413,11 @@ statements to reference the same entity.
 Lastly, lines 65 to 80 show two ways of defining events with a callback functor
 (defined at lines 12-16).
 
+To deal with real-world constraints, {\tt liboro} also provides mechanisms to
+reconnect to the ontology server when the connection is lost, and has a
+built-in buffering system to increase bandwidth for components that produce a
+large amount of symbolic facts.
+
 \subsection{Interface with robotic middlewares}
 \label{sect|interfacing-middlewares}
 
@@ -424,11 +430,11 @@ abstract away inter-module communication (at the transports, protocols and
 programming interfaces levels).
 
 We provide with ORO server wrappers for two of the main middlewares currently
-in use in the robotic community, {\sc Yarp}~\cite{Metta2006} and
-ROS~\cite{Quigley2009}.
+in use in the robotic community, ROS~\cite{Quigley2009} and
+YARP~\cite{Metta2006}.
 
 These wrappers use the C++ or Python bindings previously presented to expose
-the functionalities of ORO server as a stand-alone node.
+the functionalities of ORO server as a stand-alone ROS/YARP nodes.
 
 %%%%%%%%%%%%%%%%%
 \section{Monitoring and debugging}
@@ -438,40 +444,40 @@ the functionalities of ORO server as a stand-alone node.
 
 The ORO server offers several levels of logging, from ``almost silent'' to very
 verbose. In verbose mode ({\tt debug} level), the server outputs exact incoming
-requests along with millisecond accurate timestamps.
+requests, along with millisecond accurate timestamps.
 
 Those logs can then be replayed by a special tool written in Python that
-simulate accurately the original communication with the server: timestamps are
-respected and if multiple clients where connected to the server, the log player
-forks one thread by client to simulate parallel access to the server.
+simulates the original communication with the server: timestamps are respected
+and if multiple clients where connected to the server, the log player forks one
+thread by client to simulate parallel access to the server.
 
 \subsection{Visualisation}
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.9\columnwidth]{implementation/oroview.jpg}
-    \caption{A snapshot of the {\tt oro-view} visualisation tool.}
+    \includegraphics[width=0.7\columnwidth]{implementation/oroview.jpg}
+    \caption{A screenshot of the {\tt oro-view} visualisation tool.}
     \label{fig|oroview}
 \end{figure}
 
-Visualization of ontologies is a difficult task in general because of their
+Visualisation of ontologies is a difficult task in general because of their
 complex graph structure. In order to present anyway the content of the ontology
-to external observers, we have developed an OpenGL-based dynamic visualizer
+to external observers, we have developed an OpenGL-based dynamic visualiser
 called {\tt oro-view} (figure~\ref{fig|oroview}). This application connects to
-the ORO server and let the user explore the taxonomy by simply selecting
-concepts on the screen. Nodes are expanded and reveal further the structure of
-the ontology. Because {\tt oro-view} takes its input from the server on-demand,
-changes in the ontology (new facts being added, etc.) are reflected in the
-viewer when the user refreshes nodes.
+the ORO server and lets the user explore the taxonomy by simply selecting
+concepts on the screen. Nodes are expanded, distributed in a force-oriented
+graph, and further reveal the structure of the ontology. Because {\tt oro-view}
+takes on-demand its input from the server, changes in the ontology (new facts
+being added, etc.) are reflected in the viewer when the user refreshes nodes.
 
 {\tt oro-view} also subscribes at startup to a special event for \emph{active
-concepts} (instances of \concept{ActiveConcept}. Each time an individual is
-asserted to be an \concept{ActiveConcept}, the server triggers back {\tt
-oro-view} that creates a visual focus on the concept (the individual ``pops
-up''). When displayed during experiments, this provides nice-looking visual
-feedback to external observers. In particular, we made use of this feedback
-during the public performance of the \emph{Roboscopie} theater play
-(section~\ref{sect|roboscopie}.
+concepts} (\ie it monitors ne instances of the \concept{ActiveConcept} class).
+Each time an individual is asserted to be an \concept{ActiveConcept}, the
+server triggers back {\tt oro-view} that creates a visual focus on the concept
+(the individual ``pops up''). When displayed during experiments, this provides
+nice-looking visual feedback to external observers. In particular, we made use
+of this feedback during the public performance of the \emph{Roboscopie} theatre
+play (section~\ref{sect|roboscopie}).
 
 {\tt oro-view} also provides export to GraphViz {\tt dot} format for latter
 reuse of the ontology graph in publications.
