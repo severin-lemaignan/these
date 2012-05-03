@@ -156,7 +156,9 @@ method with \jinterface{@RPCMethod}. Listing~\ref{code|oro-add} shows one
 example of a service annotated in such a way, the {\tt add} method.
 
 \lstset{language=java}
-\begin{lstlisting}[caption=The {\tt add} method from ORO {\tt BaseModule}, label = code|oro-add]
+\begin{lstlisting}[caption=The {\tt add} method from ORO {\tt BaseModule}, 
+                   label = code|oro-add, 
+                   morekeywords={@RPCMethod}]
 @RPCMethod(
         category="base",
         desc="adds one or several statements (triples S-P-O)."
@@ -218,7 +220,10 @@ The Python script below (listing~\ref{code|ex-python}) demonstrates several of
 the interaction mechanisms with ORO server: model alteration, queries, events.
 
 \lstset{language=python}
-\begin{lstlisting}[numbers=left,caption=Example of interaction with {\tt oro-server} in Python, label = code|ex-python]
+\begin{lstlisting}[numbers=left,
+                   caption=Example of interaction with {\tt oro-server} in Python, 
+                   label = code|ex-python,
+                   morekeywords={as}]
 import time
 from pyoro import Oro, OroServerError
 
