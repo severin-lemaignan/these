@@ -210,6 +210,7 @@ present two short example that demonstrate how the knowledge base can be
 integrated in code in a natural way.
 
 \subsubsection{Python}
+\label{sect|python-bindings}
 
 The Python script below (listing~\ref{code|ex-python}) demonstrates several of
 the interaction mechanisms with ORO server: model alteration, queries and events.
@@ -820,9 +821,7 @@ produced and maintained by SPARK related to the general state of the agent.
 
 %%%%%%%%%%%%%%%%%
 
-\subsection{Integration with symbolic task planning and executive layers}
-
-\subsubsection{Symbolic Task Planning}
+\subsection{Symbolic Task Planning}
 
 Complex human robot interaction may necessitate a strong reasoning about the
 environment and the capabilities of involved agents: How can they achieve a
@@ -927,8 +926,67 @@ plans can be categorized into several levels of cooperation
 \end{itemize}
 
 
-\subsubsection{Execution Control}
-\fxnote{CRAM, SHARY, pyrobots, RAD...}
+\subsection{Execution Control}
+
+Depending on experimental setups, the ORO server has been integrated with
+several distinct execution controllers. We briefly present them here, with some
+details regarding the integration knowledge base/controller.
+
+\paragraph{CSLU Toolkit}
+\label{sect|rad}
+
+The CSLU Toolkit is a rapid application development framwork developed at
+Oregon University. It comprise of a suite of tools that enable exploration,
+learning, and research into speech and human-computer interaction via a user
+friendly graphical interface (figure~\ref{fig|rad}). The CSLU toolkit has been
+employed in several experiments of the European FP7 CHRIS project (some are
+presented at section~\ref{sect|casestudies}, others are presented
+in~\cite{Lallee2010, Lallee2011}) to develop scripted verbal interactions with
+robots.
+
+The CSLU Toolkit can be easily extended with the TCL scripting language, for
+which bindings with the ORO server exist. This enable users to graphically
+design interaction experiments that take advantage of the knowledge base and
+its reasoning infrastructure to add and retrieve concepts.
+
+\paragraph{CRAM}
+\label{sect|cram}
+
+{\sc Cram}~\cite{Beetz2010} (Cognitive Robotic Abstract Machine) is a
+RPL-derived framework for rapid development of cognitive robot control programs
+that is developed at the Intelligent Autonomous Systems at TU Munich.
+
+{\sc Cram} automatically updates the ORO server whenever an object enters or
+leaves the field of view with a perception stack based on the \textsc{CoP}
+framework~\cite{Klank2009}.
+
+Therefore, the integration of ORO can be seen as an extension to
+the robot's belief state that not only contains abstract identifiers
+of the internal object representation used in plans, but also the
+semantics and roles of objects in the scenario.
+
+The \emph{Odd One Out} experiment (section~\ref{expe|odd_one_out}) relies on
+{\sc Cram} for the robot control.
+
+\paragraph{SHARY}
+
+\paragraph{pyRobots} {\tt pyRobots} is not a real execution controller: it
+comprise a set of Python scripts that ease the construction of complex scripted
+interaction. {\tt pyRobots} is based on \emph{actions} (high-level tasks like
+{\tt goto}, {\tt pick} or {\tt give}\footnote{The complete list, with
+documentation, is available online:
+\url{http://www.openrobots.org/wiki/wiki/pyrobots}.}) that are combined into
+plans.
+
+ORO server is integrated in {\tt pyRobots} via the ORO Python bindings
+(presented section~\ref{sect|python-bindings}). The currently performed action
+is maintained up-to-date in the server, and actions are free to store or
+retreive facts (for instance, the {\tt pick} task add the fact \stmt{myself
+hasIn{Right|Left}Hand x}, \concept{x} being replaced by the ID of the object
+that is taken.
+
+Events can also be used by the application designer.
+
 
 \subsection{Integration with natural language processors}
 
