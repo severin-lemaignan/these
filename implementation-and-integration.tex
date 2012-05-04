@@ -1,12 +1,7 @@
 \chapter{Implementation and Integration in Robots}
 \label{chapt|implementation-integration}
 
-\section{Some implementation notes}
-
-This section presents some of the main technological choices that have been
-made to implement and ease the integration of the knowledge base.
-
-\subsection{A centralized server-based implementation}
+\section{A centralized server-based implementation}
 \label{sect|oro-server-impl}
 
 The ORO server is a multi-platform command-line application that starts a
@@ -29,12 +24,6 @@ reasoning.
     \label{fig|oro-impl}
 \end{figure}
 
-The use of a reasoner is completely transparent for the modules: the reasoner
-is automatically called when a model changes and classifies it. Thus, queries
-to the knowledge models always access both the \emph{asserted} and
-\emph{inferred} sets of statements. As a consequence, the ORO server can be run
-with no reasoner without any visible API change for the modules. They will
-simply manipulate only asserted facts.
 
 The ORO server is written in Java 6. This choice is due to widespread use of
 the Java language in the semantic Web community that leads to the fact that
@@ -45,13 +34,17 @@ the best candidate to glue them in a robotic-friendly knowledge base.
 Section~\ref{sect|java-impl} below gives more details on the Java
 implementation of the server.
 
-\subsubsection{Front-end}
+\subsection{Front-end}
 \label{sect|frontend}
 
 Communication with external components is handled by the server front-end.  It
 was originally build as a YARP node, but was eventually transformed into a
 simpler and more generic socket interface.  The socket connector uses a simple
-ASCII protocol, presented in figure~\ref{fig|oro-protocol}.
+ASCII protocol, presented in figure~\ref{fig|oro-protocol}.  Communication with
+dedicated robotic middlewares like ROS or YARP is provided by dedicated
+external clients. Section~\ref{sect|interfacing-middlewares} briefly presents
+them.
+
 
 \begin{SaveVerbatim}[frame=single, commandchars=\\\{\}]{PostPrtcl}
 \emph{method}
@@ -100,16 +93,88 @@ to client requests while the {\tt event} message is produced asynchronously.}
 
 \end{figure}
 
-Communication with dedicated robotic middlewares like ROS or YARP is provided
-by dedicated external clients. Section~\ref{sect|interfacing-middlewares}
-briefly presents them.
+When a request is received by the front-end, it is parsed, deserialized and
+dispatched to the module providing the requested service.
 
-\subsubsection{Plugins} The server can be easily extended by the mean of
+\subsection{Modules}
+
+These \emph{modules} are initialized and maintained by the server. They provide
+the actual features of the server as sets of \emph{services} (like \jmeth{add},
+\jmeth{getSubclasses}, etc.).
+
+Some modules do not expose any services. They provide instead other form of
+knowledge management. For instance, the \jclass{MemoryModule} is in charge of
+the application of the memory policies. It discards old statements depending on
+the memory class they belong to (short term memory, long term memory, etc.).
+
+Regular modules' services (that are actual Java methods) are invoked by the
+front-end.  They process the request and interact with the knowledge pool via
+the back-end interface.
+
+\paragraph{Plugins} The server can be easily extended by the mean of
 \emph{plugins}. These are JAR files that are loaded at run-time and have access
 to the exact same internal APIs as regular modules like the event module or the
 categorization module. The creation of new plugins is documented in a tutorial
 available
 on-line\footnote{\url{http://www.openrobots.org/wiki/oro-server-plugins}}.
+
+\subsection{Back-end}
+\label{sect|backend}
+
+The back-end consists in a pair \emph{\{facts storage, reasonner\}}. For ORO,
+we make the choice to rely the open-source {\sc Jena} library to store and
+access the RDF graph, in combination with the {\sc Pellet} reasoner. However,
+due to clean separation, other APIs (like the {\sc Manchester OWL-API} and
+reasoners (like {\sc Fact++} or {\sc HermiT}) could be used with little changes
+in the backend.
+
+\subsubsection{Jena}
+\label{sect|jena}
+
+{\sc Jena}~\cite{McBride2002} is a mature library for the semantic Web,
+originally developed by Helwett-Packard labs, and now under the leadership of
+the Apache foundation.
+
+As stated on its official website\footnote{{\sc Jena} website:
+\url{http://incubator.apache.org/jena/}}, the Jena Framework includes:
+
+\begin{itemize}
+    \item an API for reading, processing and writing RDF data in XML, N-triples
+    and Turtle formats;
+    \item an ontology API for handling OWL and RDFS ontologies;
+    \item a rule-based inference engine for reasoning with RDF and OWL data
+    sources;
+    \item stores to allow large numbers of RDF triples to be efficiently stored
+    on disk;
+    \item a query engine compliant with the latest SPARQL specification
+    \item servers to allow RDF data to be published to other applications using
+    a variety of protocols, including SPARQL
+\end{itemize}
+
+\subsubsection{Pellet}
+\label{sect|pellet}
+
+{\sc Pellet}~\cite{Sirin2007} is a reasoner for Description Logics developed by
+Clark\&Parsia\footnote{{\sc Pellet} website:
+\url{http://clarkparsia.com/pellet}}.
+
+Pellet supports reasoning with the full expressivity of OWL-DL
+($\mathcal{SHOIN(D)}$ in Description Logic jargon) and has been extended to
+support the forthcoming OWL 2 specification ($\mathcal{SROIQ(D)}$).
+
+Pellet provides all the standard inference services that are traditionally
+provided by DL reasoners: consistency checking, concept satisfiability,
+classification and realization (the most specific classes that an individual
+belongs to). It also supports DL-safe SWRL rule.
+
+\fxwarning{Rephrase this copy-paste from pellet website}
+
+The use of a reasoner is completely transparent for the modules: the reasoner
+is automatically called when a model changes and classifies it. Thus, queries
+to the knowledge models always access both the \emph{asserted} and
+\emph{inferred} sets of statements. As a consequence, the ORO server can be run
+with no reasoner without any visible API change for the modules. They will
+simply manipulate only asserted facts.
 
 \subsubsection{API}
 
@@ -176,13 +241,6 @@ public void add(Set<String> rawStmts, String memProfile)
 }
 \end{lstlisting}
 
-
-
-\subsection{OWL-DL ontologies and Jena}
-\label{sect|jena}
-
-\subsection{Reasoning: the Pellet reasoner}
-\label{sect|pellet}
 
 %%%%%%%%%%%%%%%%%
 \section{Bindings to other components/languages}
