@@ -12,6 +12,67 @@ This two evaluation facets will naturally lead to the conclusion at the next
 chapter, where we will draw scientific and technical perspectives that take
 into account strengths and weaknesses of our contribution.
 
+%%%%%%%%%%%%%%%%%
+\section{Limits of {\tt oro-server}}
+\label{sect|limits-oroserver}
+
+\subsection{The left-overs: What ORO does not provide?}
+
+\subsubsection{Representation of time}
+
+In the ORO server, knowledge is mostly atemporal: the set of triples stored in
+the server represents the beliefs of the robot \emph{at the current time}. The
+robot represents knowledge about the \emph{here and now}.
+
+One exception previously mentioned: when a statement is attached to a memory
+profile that is not permanent, the statement is reified and the creation
+timestamp is attached to the statement, thus enabling removal after a period of
+time that depends on the memory profile.
+
+Statement reification to store timestamps of creation for all statements is
+technically very easy to do in ORO server, but has not been actually enabled
+because the performance hit (each reified statement produces four triples
+instead of one) was not justified by any current use case of ORO server.
+
+\subsubsection{Representation of uncertainty and likelihood}
+
+The challenge of representing and reasoning under uncertainty has not been
+tackled in ORO server, at least not \emph{within} the current ORO server
+knowledge model. Two reasons explain this absence: the decisional architecture
+developed at LAAS for the robots has not consistent approach to uncertainty
+representation and management, neither at the \emph{symbol production} level
+(\ie SPARK, section~\ref{sect|spark} or {\sc Dialogs},
+section~\ref{sect|dialogs}) or at the symbol comsumption level (execution
+control). Thus, no strong incentive pushed us in this direction. Then, the
+current tools available from the Semantic Web domain to manipulate and reason
+about knowledge do not provide mature support for uncertainty management. Some
+effort do exist (like the {\sc Pronto} reasoner~\cite{Klinov2008}), but this
+does not appear to be a major focus in the currently available tools.
+
+
+\subsubsection{Presupposition accommodation}
+\subsubsection{Prediction, projection and diagnosis tasks}
+\paragraph{Projection task}: determining whether or not some condition while
+hold after a sequence of actions.
+
+\paragraph{Legality task}: determining whether a sequence of action can be
+performed starting in some initial state.
+
+\paragraph{Diagnosis}: this corresponds to the ability to rewind on past events
+in case of failure to provide possible explanation. This can be seen as the
+temporal reverse of the projection task.
+
+
+\subsubsection{Physics-based reasoning}
+\subsubsection{Planning}
+Making decision based on prediction
+
+\subsubsection{Advanced Memory Models}
+
+\fxwarning{reinforcement, classification not only on the temporality, but also on the semantic content}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Comparison of {\tt oro-server} with other existing systems}
 \label{sect|evaluation-oroserver}
 
