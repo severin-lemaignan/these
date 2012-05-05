@@ -62,17 +62,46 @@ inferred to be true.
 \section{The ORO Knowledge model}
 \label{sect|knowledge-model}
 
-\subsection{Expressiveness: What Can be Represented?}
-\subsubsection{Open World and Close World Assumptions}
-\subsubsection{Meta-cognition: knowledge on the knowledge}
-Narrower, more technical dimension of the introspection.
+\subsection{Expressiveness}
+
+Unlike systems relying on logic programming like {\sc KnowRob}, ORO is purely
+based on Description Logics: the ORO knowledge model is based on RDF triples
+(\ie exclusively binary predicates). Triples \stmt{subject predicate object}
+are the atoms of knowledge for ORO.
+
+\paragraph{Reification} Since RDF triples constraint to binary predicates,
+\emph{reification} is often required to express $n$-ary relations. For
+instance, the relation \emph{A gives object B to C} can not directly be
+represented in RDF. This relation is reified as \{\stmt{act1 type Action},
+\stmt{act1 performedBy A}, \stmt{act1 actsOn B}, \stmt{act1 receivedBy C}\}. As
+long as the instance \concept{act1} exists in the knowledge base, the orignial
+relation \emph{A gives object B to C} is considered to hold. This kind of
+reification is common in the ORO knowledge model.
+
+Reification can also take place at a meta-level (this is the level usually
+intended when knowledge manipulation API mention reification): a triple
+\stmt{subject predicate object} can be itself reified in \{\stmt{stmt1 type
+Statement}, \stmt{stmt1 hasSubject subject}, \stmt{stmt1 hasPredicate
+predicate}, \stmt{stmt1 hasObject object}\}. This level of reification allows
+to characterise to knowledge atoms themselves, for instance to specify when the
+atom was added. The section on memory management in ORO server, below, gives
+examples of usage of this meta-cognition feature.
+
+Note that in traditional logical programming like Prolog, reification is rarely
+strictly required since no constraints hold on the arity of predicates. To
+store the date of creation of a facts, one could simply add it as a
+supplementary argument of the predicate\footnote{In the case of time
+representation, however, reification --- or, in the case of logic programming,
+second order logic --- is commonly found through the \emph{fluents} mechanisms,
+see section~\ref{sect|time-representation}}.
+
+\paragraph{Open World Assumption}
 
 %%%%%%%%%%
 \subsection{How things are represented?}
 \subsubsection{Role Representations}
 Spatio-Temporal Representations:
 
-\paragraph{Representation of time}
 \paragraph{Representation of space}
 \paragraph{Representation of events and actions}
 
@@ -84,7 +113,9 @@ Spatio-Temporal Representations:
 
 ...
 
-We present at section~\ref{sect|perspectivetaking}, page~\pageref{sect|perspectivetaking} an 3D real-time environment, SPARK, that allows to compute on-line several perspective aware symbolic properties.
+We present at section~\ref{sect|perspectivetaking},
+page~\pageref{sect|perspectivetaking} an 3D real-time environment, SPARK, that
+allows to compute on-line several perspective aware symbolic properties.
 
 \subsubsection{False beliefs and Theory Of Mind}
 \label{sect|theory-of-mind}
