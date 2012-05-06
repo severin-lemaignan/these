@@ -234,18 +234,40 @@ ancestors the two sets \concept{\{animal, satellite\}} (subclasses of ancestor
 \concept{spatial thing}) and \concept{\{white whale, moon\}} (subclasses of
 ancestor \concept{white object}).
 
-\subsubsection{Reasoning with uncertainty}
-\subsubsection{(Non) Monotonic Reasoning}
-
 
 \subsubsection{Memory}
-\label{subssect|memory}
+\label{sect|oroserver-memory}
 
-The ORO server offers a simple mechanism
+The ORO server offers a mechanism to mimick simple forms of biological memory.
+When new statements are inserted in the knowledge base, a \emph{memory profile}
+can be attached to this set.
+
+Three such profiles are predefined: {\tt short term}, {\tt episodic} and {\tt
+long term}. They each correspond to a different lifetime for the statements
+(respectively 10 seconds, 5 minutes and no time limit). After this duration,
+the statements are automatically removed from the knowledge base.
+
+This approach is limited. In particular, \emph{episodic} memory primarly refers
+to the semantics of the statements (that is expected to be related to an event)
+and not to a specific life duration. We discuss at the end of this work possible
+improvements.
+
+\paragraph{Active Concepts} \emph{Short term} memory, however, is used in real
+world applications, in particular to implement the idea of \emph{active
+concept}: some modules, like our natural language processor (described later
+on, at chapter~\ref{chapt|dialogs}), use the {\tt short term} memory profile to
+mark for a few seconds important concepts that are currently manipulated by the
+robot. For example, if a human asks the robot: ``Give me all red objects'', the
+human, the \concept{Give} action, and each red objects that are found are
+successively marked as \emph{active concepts} by inserting statements like
+\stmt{human type ActiveConcept} in the short-term memory (which can be
+considered, in this case, to be a working memory, as distinguished at
+section~\ref{sect|memory}).
+
 
 \subsubsection{Learning by modifying the knowledge structure}
 
-
+\subsubsection{Fast Concept Lookup}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
