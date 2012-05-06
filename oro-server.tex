@@ -124,6 +124,27 @@ allows to compute on-line several perspective aware symbolic properties.
 
 \subsubsection{Introspection: Who am I? What can I do?}
 
+\subsubsection{Multi-lingual support}
+\label{sect|multilingual}
+
+The RDF specification supports internationalisation by the way of
+\emph{language tags}: plain literals may have an optional language tag (taken
+from the standard RFC-3066) that tells in which human language the literal is
+expressed.
+
+ORO benefits from this mechanism, and can be configured to use a specific
+language as default. When an language is explicitely selected, the translated
+labels of concepts (when available in the underlying ontology) are used instead
+of the default English ones. Section~\ref{sect|commonsense-i13n} gives more
+details on the current level of internationalisation of the ORO common-sense
+ontology.
+
+Since only the labels (\ie the human-friendly name of the concepts) are subject
+to translation, changing the default language of the ORO server has no semantic
+impact: entities in the ontology always refer to same concepts. Same inferences
+are drawn, same connections to knowledge sources are made, etc. The strenght of
+semantic approaches is here well illustrated.
+
 %%%%%%%%%%
 \subsection{Reasoning Techniques}
 
@@ -293,3 +314,6 @@ How much knowledge is available? Which content? How big is the knowledge base?
     \caption{TBox of the specializations of \concept{PartiallyTangible}.}
     \label{fig|tangible_things_tbox}
 \end{figure}
+
+\subsection{Internationalisation}
+\label{sect|commonsense-i13n}
