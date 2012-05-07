@@ -69,6 +69,31 @@ based on Description Logics: the ORO knowledge model is based on RDF triples
 (\ie exclusively binary predicates). Triples \stmt{subject predicate object}
 are the atoms of knowledge for ORO.
 
+The formal expressiveness of the current version of the ORO common-sense
+ontology (commit {\tt 19f1fcf27} in the public repository\footnote{Clonable
+from \url{http://git.openrobots.org/git/robots/oro.git}}) is
+$\mathcal{SROIQ(D)}$, which correspond to the OWL2 language expressiveness (the
+appendix~\ref{chapt|dl} presents the usual naming conventions of Description
+Logics expressiveness).
+
+The relation between expressiveness and reasoning complexity is highly
+``unstable'': for isntance, adding  the single ORO axiom \stmt{farFrom
+disjointProperty near} that states that two individuals can not be at the same
+time near and far from each other changes the expressiveness power from
+$\mathcal{SHOIQ(D)}$ to $\mathcal{SROIQ(D)}$: this apparently innocuous
+assertion change the complexity class of the whole ontology, and the concept
+satisfiability reasoning problem switches from a {\it NExpTime-complete}
+problem to a {\it NExpTime-hard} problem (\ie, \emph{at least} as hard as the
+hardest problem in {\it NExpTime}).
+
+This instability leads to hard-to-predict runtime performances on the robot,
+and light alteration of the knowledge structure can lead to very noticeable
+performance drops.
+
+Table~\ref{table|onto-stats}, page~\pageref{table|onto-stats} gives
+quantitative details on the type of axioms used in the ORO common-sense
+ontology.
+
 \paragraph{Reification} Since RDF triples constraint to binary predicates,
 \emph{reification} is often required to express $n$-ary relations. For
 instance, the relation \emph{A gives object B to C} can not directly be
@@ -528,6 +553,34 @@ How much knowledge is available? Which content? How big is the knowledge base?
     \caption{TBox of the specializations of \concept{PartiallyTangible}.}
     \label{fig|tangible_things_tbox}
 \end{figure}
+
+
+\begin{table}
+\begin{center}
+
+\begin{tabular}{ll}
+\toprule
+Expressiveness & $\mathcal{SROIQ(D)}$ \\
+Axioms & 961 (annotations: 359)\\
+Class count & 108 \\
+Object property count & 78 \\
+Data property count & 13 \\
+Individual count & 21 \\
+Functional properties & 19 \\
+Inverse properties & 9 \\
+Transitive properties & 4 \\
+Symmetric properties & 3 \\
+\bottomrule
+
+\end{tabular}
+\end{center}
+
+\caption{Statistics on the ORO common-sense ontology.}
+
+\label{table|onto-stats}
+\end{table}
+
+
 
 \subsection{Internationalisation}
 \label{sect|commonsense-i13n}
