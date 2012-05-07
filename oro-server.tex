@@ -106,20 +106,45 @@ Spatio-Temporal Representations:
 \paragraph{Representation of space}
 \paragraph{Representation of events and actions}
 
-\subsubsection{Context modeling}
-\subsubsection{Possible-Worlds and representing what others know}
 
-\paragraph{Multi-model representation for Persepective-taking}
+\subsubsection{Representation of Alternative Knowledge Models}
 \label{sect|alterite}
 
-...
+As pictured in Figure~\ref{fig|oro-overview}, ORO stores independent cognitive
+models for each agent it interacts with. When the ORO server actually
+identifies a new agent (or infers that some instance is an agent), it
+automatically creates a new, separate, in-memory OWL model for that agent.
+Then, different robot components, like execution control or situation
+assessment, may store the agents' beliefs in separate, independent models. All
+knowledge processing functions in the robot's primary model are equally
+available in every agent's model, which allows us to store and reason on
+different (and possibly globally inconsistent) models of the world.
+
+Each of these models is independent and logically consistent, enabling
+reasoning on different perspectives of the world that would otherwise be
+considered as globally inconsistent (for instance, an object can be visible for
+the robot but not for the human. This object can have at the same time the
+property \concept{isVisible \textit{true}} and \concept{isVisible
+\textit{false}} in two different models).
+
+\paragraph{False beliefs and Theory Of Mind} \label{sect|theory-of-mind}
+
+This feature actually allows us to consider the robot to be endowed with a
+simple \emph{theory of mind}~\cite{Scassellati2002}: the robot can explicitly
+model the belief state of its interactors, and expose it to the control
+architecture. In the chapter~\ref{chapt|dialogs},  in the context of dialogue
+understanding, we present how we use this feature to make sense of user
+sentences from his/her point of view.
 
 We present at section~\ref{sect|perspectivetaking},
 page~\pageref{sect|perspectivetaking} an 3D real-time environment, SPARK, that
 allows to compute on-line several perspective aware symbolic properties.
 
-\subsubsection{False beliefs and Theory Of Mind}
-\label{sect|theory-of-mind}
+\paragraph{Context modeling}
+
+These multiple models can also be viewed as different \emph{interpretive
+scopes}, allowing the robot to interpret the same reality from different points
+of view.
 
 
 
