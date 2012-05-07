@@ -592,6 +592,44 @@ Reasoning \& Knowledge}~\cite{Sisbot2011}), a situation assessment reasoner
 that generates relevant symbolic information from the geometry of the
 environment with respect to relations between objects, robots and humans.
 
+\paragraph{On Perspective Taking} Visual perspective taking refers to the
+ability for visually perceiving the environment from other's point of view.
+This ability allows us to identify the referent in situations when the visual
+perception for one person differs from the other one. In developmental
+psychology, one typical example consists of two similar objects in a room (eg.
+two balls) where both are visible for the child, but only one is  visible for
+the adult. Thus, when the adult asks the child to hand over ``the ball'', the
+child is able to correctly identify which ball the adult is referring to (\ie
+the visible one from the adult point of view), without asking~\cite{Moll2006}.
+
+Besides, in order to compute a visual perspective, the actual visibility alone
+is not enough. We believe that visual perspective taking ability is not
+restricted to what the other person is seeing in a given moment, but also what
+he \emph{can} see with a minimal effort (moving the eyes or the head). To model
+the potential visibility of an object we compute the visibility ratio while
+turning the head of the agent model towards the object
+(figure~\ref{fig::sparkRepresentations}).
+
+Spatial perspective taking refers to the qualitative spatial location of
+objects (or agents) with respect to a frame (\eg the keys on my left).  Based
+on the frame of reference, the description of an object varies. Humans mix
+perspectives frequently during interaction.  This is more effective than
+maintaining a consistent one, either because the (cognitive) cost of switching
+is lower than remaining with the same perspective, or if the cost is about the
+same, because the spatial situation may be easily described from one
+perspective rather than another~\cite{Tversky1999}. Ambiguities arise when one
+speaker refers to an object within a reference system (or changes the reference
+system, \ie, switches perspective) without informing her partner about it. For
+example, the speaker could ask for the ``keys on the left''. Since no reference
+system has been given, the listener would not know where exactly to look.
+However, asking for ``the keys on your left'' gives enough information to the
+listener to understand where the speaker is referring to. On the
+contrary, when using an exact, unambiguous term of reference to describe a
+location (eg. ``go north'') no ambiguity arises.
+
+In this work, we use two types of the frames of reference: egocentric (from the
+robot perspective) and addressee-centered (from the human perspective).
+
 \begin{figure}[ht!]
    \begin{center}
 %
