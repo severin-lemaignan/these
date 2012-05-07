@@ -36,6 +36,121 @@ Note that the origins of AI where in purely symbolic models, that were
 not usable either. Rich interleaving between geometric reasoning and symbolic
 models is required.
 
+...
+
+While \emph{knowledge} has no general definition that researchers agree on, for
+our own purposes we define knowledge as \emph{information interpreted in the
+cultural and social context of the robot}, where information is a
+\emph{statement} or an \emph{assertion} about the world\footnote{In this paper,
+statements are always triples \stmt{subject predicate object}, \ie binary
+relations between entities.}. In practical terms, knowledge is made of
+statements that are \emph{contextualized}, if possible \emph{synthesized}, and
+\emph{limited} to a domain of validity. These three features have important 
+consequences for the way a knowledge representation and storage system must 
+be designed. Let us examine them:
+
+\paragraph{Contextualizing} is the ability for a cognitive system to connect a
+fact with a \emph{cultural context}, an \emph{interpretive scope} and the set
+of other facts previously acquired by the agent.
+
+Since machines are limited to syntactic (in contrast to semantic)
+processing, we are mostly looking for a syntactic (\ie, based on symbols)
+matching between concepts representations (in our case, sets of alphanumeric
+characters).\fxfatal{il faut sans doute évoquer ici la relation
+sémantique/syntactique que propose Choamsky}.
+
+We call \textit{cultural context} a broad set of common, general facts that are
+considered widely accepted among the interactors (\eg ``bottles may contain
+water''). This knowledge is often referred as \emph{common-sense knowledge}.
+
+By \emph{interpretive scope} we mean that a concept may have different
+interpretations depending on the agent, the current situation or the time frame
+the statement belongs to. Since a fact in one scope can be different (or even
+inconsistent) with a fact in another scope (for instance, one object can be
+visible for the robot and invisible for another agent), the underlying
+knowledge representation system must properly handle these interpretive
+frameworks.
+
+Note that the focus of ORO is on enabling such context to be
+effectively represented rather than actually identifying the current context.
+While several approaches for building contextualized knowledge are proposed in this
+paper (symbolic environment interpretation, perspective taking, grounded
+natural language resolution, self-awareness of its own activity), much remains
+to be done for a robot to actually identify its current context as well as
+contexts that may be referred to.
+
+\paragraph{Synthesis} corresponds to the identification of facts and their
+components (concepts and predicates) with respect to other facts. For instance,
+if the robot observes a human sitting down at a table, and at the same time, we
+tell it that ``Peter is sitting at the table'', we would like the robot to
+infer that ``Peter'' may be the name of the human. \textit{Synthesis}
+refers to the fact that several, \textit{a priori} uncorrelated, facts
+must be associated with the same common concept. This process requires the
+ability to control the logical consistency of the knowledge corpus. To
+continue with the previous example,  if we add the fact that the human that
+is sitting is a woman, the synthesis ``Peter is the name of the human'' is
+not valid anymore.
+
+\paragraph{Domain of validity} specifies the scope in which
+ information is (believed to be) true. It covers several aspects: temporal,
+situational and probabilistic. While related to the previous concept of
+\emph{interpretive scopes}, the domain of validity addresses the question
+whether a fact must be or not considered in a given context. This validity
+limitation is not usually carried by the fact itself. In the previous example,
+for instance, the robot observes a human sitting at a table.  The fact ``a
+human is sitting at the table'' is true only for a limited period of time,
+until the human stands up. This period of time is not directly accessible
+(the robot does not know how long the human plans to stay), but the
+knowledge representation must be able to deal with this uncertainty and
+should explicitly label this fact as being limited in time.
+
+To know if a fact is permanent or transitional (as defined by Pollock
+\fxfatal{citation de Langage et Cognition, page 50}) is difficult (especially
+considering that a feature may be considered as permanent or not depending of
+the context: within the situation ``a familly meal''\fxfatal{Check
+translation!}, the fact ``the human is sitting at the table'' could be
+considered as permanent. Conversely, ``ground is static'' is generally
+considered as a static fact, expect if we are talking of planetary mechanics
+for instance. The difficulty lies in the selection of the relevant situation
+in which reasoning must be carried out at a given time) and have currently to
+be defined in the cultural background of the robot.
+
+These three aspects lead us to envisage a knowledge representation system
+characterized by the following abilities: 
+\begin{itemize}
+	\item represent raw information,
+	\item render a general cultural background, in the form of common-sense knowledge,
+	\item attach interpretive scopes to new statements,
+	\item add and connect new statements to knowledge already present,
+	\item store restrictions on the domain of validity of the knowledge.
+\end{itemize}
+
+Besides, the following active processes would be desirable:
+\begin{itemize}
+	\item acquire and maintain knowledge perceived from the physical world or
+	retrieved from other sources (interaction with other agents, web-based contents,...)
+	\item synthesize facts as much as possible,
+	\item monitor contexts and accordingly manage the validity of the stored knowledge,
+	\item ensure the logical consistency of the knowledge repository, and
+	explicit inconsistencies when required\footnote{One may argue that the real world is 
+	inherently inconsistent. In this article, we make a
+	\textit{consistent world} assumption, in order to leverage reasoning
+	capabilities of the first-order logics. This is supported by the natural
+	tendency of humans themselves to provide a consistent explanation of their
+	world.}.
+\end{itemize}
+
+This list does not cover all the possible features that could be exposed by a
+symbolic knowledge management system. Bio-inspired memory management (the
+ability to forget or reinforce knowledge) or curiosity (the ability to identify
+lacking knowledge and actively trigger behaviours to acquire it --Hawes et
+al.~\cite{Hawes2011} have contributed in this area with \emph{Dora}, a
+robot endowed with motivation mechanisms to explore unknown regions of
+the environment--), to give some examples, could arguably be added to the list.
+However, this first analysis sets a convenient reference frame to understand
+and evaluate knowledge representation systems, including the \textsc{ORO}
+knowledge management system we propose.
+
 \subsection{The Semantic Robot}
 \label{sect|semantic}
 
