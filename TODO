@@ -60,10 +60,7 @@ TODO Thesis
   0%         2.3.1 KnowRob
    -         2.3.2 ORO
  60%         2.3.3 PEIS KR&R
-                 Notable experiments
  50%         2.3.4 NKRL
-                 Intrinsic language features
-                 Integration with physical world and in the robot architecture
  75%         2.3.5 CAST Knowledge model
 100%         2.3.6 GSM
 100%         2.3.7 OMRKF
@@ -82,44 +79,30 @@ TODO Thesis
      3 The OpenRobots Ontology framework
  65%     3.1 Functional overview
  10%     3.2 The ORO Knowledge model
-  0%         3.2.1 Expressiveness: What Can be Represented?
-                 Open World and Close World Assumptions
-                 Meta-cognition: knowledge on the knowledge
-  0%         3.2.2 How things are represented?
-                 Role Representations
-                 Context modeling
-                 Possible-Worlds and representing what others know
-                 False beliefs and Theory Of Mind
+100%         3.2.1 Expressiveness: What Can be Represented?
+ 50%         3.2.2 How things are represented?
+  0%             Role Representations
+100%             Representation of Alternative Knowledge Models
                  Introspection: Who am I? What can I do?
- 10%         3.2.3 Reasoning Techniques
-                 Standard reasoning techniques
- 60%             Classification and discrimination algorithms
-                 Reasoning with uncertainty
-                 (Non) Monotonic Reasoning
-                 Memory
-                 Learning by modifying the knowledge structure
-  0%         3.2.4 The left-overs: What ORO does not provide?
-                 Representation of uncertainty and likelihood
-                 Presupposition accommodation
-                 Prediction, projection and diagnosis tasks
-                 Physics-based reasoning
-                 Planning
+100%             Multi-lingual support
+100%         3.2.3 Reasoning Techniques
+100%             Standard reasoning techniques
+100%             Classification and discrimination algorithms
+100%             Memory
+100%             Knowledge Structure Alteration and Learning
+100%             Fast Concept Lookup
  10%     3.3 Knowledge instanciation: the OpenRobots Common-Sense Ontology
              3.3.1 Designing the OpenRobots common-sense ontology
          
      4 Implementation and Integration in Robots
-         4.1 Some implementation notes
- 75%         4.1.1 A centralized server-based implementation
-                 Front-end
-                 Plugins
-                 API
-                 Java Implementation
-  0%         4.1.2 OWL-DL ontologies and Jena
-  0%         4.1.3 Reasoning: the Pellet reasoner
+ 95%     4.1 A centralized server-based implementation
+100%         4.1.1 Front-end
+100%         4.1.2 Modules
+100%         4.1.3 Back-end
+100%         4.1.4 API
+ 80%         4.1.5 Java Implementation
 100%     4.2 Bindings to other components/languages
 100%         4.2.1 Language bindings
-100%             Python
-100%             C++
 100%         4.2.2 Interface with robotic middlewares
 100%     4.3 Monitoring and debugging
 100%         4.3.1 Logging
@@ -127,12 +110,10 @@ TODO Thesis
  75%     4.4 Integration in the robot architecture
   0%         4.4.1 RPC and events-oriented interactions
 100%         4.4.2 Acquiring and Anchoring Knowledge in the physical world: the
-100%             SPARK module
-100%             Building an Agent-Aware Symbolic Model of the Environment
-100%             Building a Model of Agents
+                   SPARK module
              4.4.3 Integration with symbolic task planning and executive layers
 100%             Symbolic Task Planning
-  0%             Execution Control
+ 75%             Execution Control
  50%         4.4.4 Integration with natural language processors
  75%     4.5 Towards an Event-Driven, Knowledge-Oriented Architecture
          
@@ -150,26 +131,15 @@ TODO Thesis
  ?       5.4 Planing for interaction   ----> to remove
          
      6 Evaluation
- 20%     6.1 Comparison of oroEserver with other existing systems
+  0%     6.1 Limits of ORO
+ 20%     6.1 Comparison of oro server with other existing systems
   0%         6.1.1 Performances Analysis
          6.2 Experimental evaluation
 100%         6.2.1 Simulation of HRI interaction
-100%             The MORSE simulator
-100%             HRI specific features
-100%             An Experimental Framework
 100%         6.2.2 Case Studies
-100%             Knowledge acquisition: Point & Learn
-100%             Odd One Out
-100%             The Spy game
 100%         6.2.3 First Interaction Experiment
-100%             Implicit disambiguation through visual perspective taking
-100%             Explicit disambiguation through verbal interaction and gestures
   0%         6.2.4 Second Interaction Experiment
 100%         6.2.5 Roboscopie
-100%             The Performance
-100%             Storyline
-100%             Technical overview
-100%             Significance for HRI
  20% 7 Conclusion
          7.1 Discussion
 100%         7.1.1 Modeling the Real World
@@ -178,45 +148,3 @@ TODO Thesis
   0%         7.1.3 Learning
   0%     7.2 Towards the next generation of Knowledge Representation Systems
          for Robotics
-     
-     Appendices
-     
-     A Task representation in the ontology
-         A.1 What are tasks for the ontology?
-         A.2 Different facets of the reality
-         A.3 A simple case: the Move task
-         A.4 Fluent-based approach
-         A.5 Introducing rules
-         A.6 Drawing a conclusion
-             A.6.1 Task instanciation
-             A.6.2 Pre- and post-conditions
-             A.6.3 Task abstract model
-         A.7 Some previous work & references
-     
-     B The Knowledge API
-         B.1 Conventions
-         B.2 Statements, partial statements and rules
-             B.2.1 Resources and literals
-             B.2.2 Statements
-             B.2.3 Partial statements
-             B.2.4 Rules
-             B.2.5 Probabilities
-             B.2.6 Sets of statements
-         B.3 Policies
-         B.4 Models
-         B.5 Core API
-             B.5.1 Service management
-             B.5.2 Managing knowledge
-             B.5.3 Knowledge retrieval
-             B.5.4 Managing models
-             B.5.5 Taxonomy walking
-         B.6 API Extensions
-         B.7 Partial implementations
-         B.8 Notes
-         B.8.1 TBox alteration
-         
-     C oroEserver API
-     
-     D Main Software Contributions
-     
-     Bibliography
