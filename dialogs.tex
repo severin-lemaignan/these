@@ -290,10 +290,10 @@ verbal phrase resolution takes place.
 
    \ELSE
       \BEGIN
-	\IF \CALL{Ontology.CheckEquivalent}{candidates} \THEN
-	  id \GETS candidates[0] \\
-	\ELSE
-	  id \GETS \CALL{Discrimination}{candidates} \\ %\STMTNUM{1em}{st.discrimination}\\
+        \IF \CALL{Ontology.CheckEquivalent}{candidates} \THEN
+          id \GETS candidates[0] \\
+        \ELSE
+          id \GETS \CALL{Discrimination}{candidates} \\ %\STMTNUM{1em}{st.discrimination}\\
       \END \\
    \CALL{Replace}{g, id, sentence}
 \END
