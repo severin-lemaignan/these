@@ -423,7 +423,53 @@ considered, in this case, to be a working memory, as distinguished at
 section~\ref{sect|memory}).
 
 
-\subsubsection{Learning by modifying the knowledge structure}
+\subsubsection{Knowledge Structure Alteration and Learning}
+
+In the ORO server, the knowledge structure (\emph{TBox}) is purely declarative
+and asserted as regular statements (like \stmt{Location subClassOf
+SpatialThing}), following the RDF Schema (RDFS) and OWL language constructs.
+Table~\ref{table|main-tbox-properties} presents few of the main properties and
+classes defined in RDFS and OWL that allow to describe the ontology
+structure. These constructs can all be inserted at runtime to alter the
+knowledge model of the server.
+
+\begin{table}
+\begin{center}
+
+\begin{tabular}{ll}
+\toprule
+{\bf Name} & {\bf Example} \\
+\midrule
+{\tt rdfs:subClassOf} & \stmt{Human subClassOf Agent} \\
+{\tt rdfs:subPropertyOf} & \stmt{hasColor subPropertyOf hasFeature} \\
+{\tt rdfs:domain} & \stmt{thinks domain IntelligentAgent} \\
+{\tt rdfs:range} & \stmt{name range string} \\
+{\tt owl:inverseOf} & \stmt{sees inverseOf seenBy} \\
+{\tt owl:FunctionalProperty} & \stmt{age type FunctionalProperty} \\
+{\tt owl:TransitiveProperty} & \stmt{isAbove type TransitiveProperty} \\
+
+\bottomrule
+
+\end{tabular}
+\end{center}
+
+\caption{Some of the properties and classes defined in RDFS and OWL that allow
+to define the semantics and relations of terms within an ontology.}
+
+\label{table|main-tbox-properties}
+\end{table}
+
+
+We have not addressed the issue of learning in general in this work. However,
+coupled with language processing features, the ability to easily alter the
+knowledge structure allows for implementation of specific learning mechanisms.
+For example, one can teach the robot that cats are animals by processing a
+sentence like ``Cats are animals'' into \stmt{Cat subClassOf Animal} and then
+adding it at runtime into the knowledge base. From that points, all entities
+asserted or infered to be cats will be as well infered to be animals.
+
+The case study \emph{Point \& Learn} (section~\ref{expe|pointandlearn})
+presents some experimental results in this domain.
 
 \subsubsection{Fast Concept Lookup}
 \label{sect|oroserver-lookup}
