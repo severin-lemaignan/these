@@ -1,0 +1,139 @@
+\chapter{Description Logics Semantics}
+\label{chapt|dl}
+
+This appendix describes some notations and the naming convention of Description
+Logics. The content of this page comes from the Wikipedia page on Descriptions
+Logics\footnote{\url{http://en.wikipedia.org/wiki/Description_logic}} and the
+DL Complexity Navigator~\cite{ZolinDLComplexityNavigator}. The academic reference
+on this matter is~\cite{Baader2008}.
+
+
+\paragraph{ACL} Let $N_C$, $N_R$ and $N_O$  be (respectively) sets of \emph{concept names}
+(also known as \emph{atomic concepts}), \emph{role names} and \emph{individual
+names} (also known as \emph{individuals}, \emph{nominals} or \emph{objects}).
+Then the ordered triple ($N_C$, $N_R$, $N_O$ ) is the \emph{signature} of the
+language.
+
+Description Logics are implicitely \emph{Attributive Concept Language with
+Complements}: $\mathcal{ALC}$.  The set of $\mathcal{ALC}$ \emph{concepts} is
+the smallest set such that:
+
+\begin{itemize}
+    \item The following are \emph{concepts}:
+    \begin{itemize}
+        \item $\top$ (\emph{top} is a \emph{concept})
+        \item $\bot$ (\emph{bottom} is a \emph{concept})
+        \item Every $A \in N_C$ (all \emph{atomic concepts} are \emph{concepts})
+    \end{itemize}
+
+\item If $C$ and $D$ are \emph{concepts} and $R \in N_R$ then the following are \emph{concepts}:
+        \begin{itemize}
+            \item $C\sqcap D$ (the intersection of two \emph{concepts} is a \emph{concept})
+            \item $C\sqcup D$ (the union of two \emph{concepts} is a \emph{concept})
+            \item $\neg C$ (the complement of a \emph{concept} is a \emph{concept})
+            \item $\forall R.C$ (the universal restriction of a \emph{concept} by a \emph{role} is a \emph{concept})
+            \item $\exists R.C$ (the existential restriction of a \emph{concept} by a \emph{role} is a \emph{concept})
+        \end{itemize}
+
+\end{itemize}
+
+ %% The following definitions follow the treatment in Baader et al.<ref name="DLHB"/>
+ %% 
+ %% A \emph{terminological interpretation} $\mathcal{I}=(\Delta^{\mathcal{I}},
+ %% \cdot^{\mathcal{I}})$ over a \emph{signature} $(N_C,N_R,N_O)$ consists of
+ %% 
+ %% \begin{itemize}
+ %%     \item a non-empty set $\Delta^{\mathcal{I}}$ called the \emph{domain}
+ %%     \item a \emph{interpretation function} $\cdot^{\mathcal{I}}$ that maps:
+ %%         \begin{itemize}
+ %%         \item every \emph{individual} $a$ to an element $a^{\mathcal{I}} \in \Delta^{\mathcal{I}}$
+ %%         \item every \emph{concept} to a subset of $\Delta^{\mathcal{I}}$
+ %%         \item every \emph{role name} to a subset of $\Delta^{\mathcal{I}}  \times \Delta^{\mathcal{I}}$
+ %%         \end{itemize}
+ %% \end{itemize}
+ %% 
+ %% such that
+ %% 
+ %% \begin{itemize}
+ %%     \item $\top^{\mathcal{I}} = \Delta^{\mathcal{I}}$
+ %%     \item $\bot^{\mathcal{I}} = \emptyset$
+ %%     \item $(C \sqcup D)^{\mathcal{I}} = C^{\mathcal{I}} \cup D^{\mathcal{I}}$ \emph{(union means disjunction)}
+ %%     \item $(C \sqcap D)^{\mathcal{I}} = C^{\mathcal{I}} \cap D^{\mathcal{I}}$ \emph{(intersection means conjunction)}
+ %%     \item $(\neg C)^{\mathcal{I}} = \Delta^{\mathcal{I}} \setminus C^{\mathcal{I}} $ \emph{(complement means negation)}
+ %%     \item $(\forall R.C)^{\mathcal{I}} = \{x \in \Delta^{\mathcal{I}} | \texttt{for} \; \texttt{every} \; y, (x,y) \in R^{\mathcal{I}} \;  \texttt{implies} \; y \in C^{\mathcal{I}} \} $
+ %%     \item $(\exists R.C)^{\mathcal{I}} = \{x \in \Delta^{\mathcal{I}} | \texttt{there} \; \texttt{exists} \; y, (x,y) \in R^{\mathcal{I}} \; \texttt{and} \; y \in C^{\mathcal{I}}\} $
+ %% 
+ %% \end{itemize}
+ %% 
+ %% Define $\mathcal{I} \models$ (read \emph{I models}) as follows
+ %% 
+ %% \paragraph{TBox}
+ %% 
+ %% \begin{itemize}
+ %%     \item $\mathcal{I} \models C \sqsubseteq D$ if and only if $C^{\mathcal{I}} \subseteq D^{\mathcal{I}}$
+ %%     \item $\mathcal{I} \models \mathcal{T}$ if and only if $\mathcal{I} \models t$ for every $t \in \mathcal{T}$
+ %% 
+ %% \end{itemize}
+ %% 
+ %% \paragraph{ABox}
+ %% 
+ %% \begin{itemize}
+ %%     \item $\mathcal{I} \models a : C$ if and only if $a^{\mathcal{I}} \in C^{\mathcal{I}}$
+ %%     \item $\mathcal{I} \models (a,b) : R$ if and only if $(a^{\mathcal{I}},b^{\mathcal{I}}) \in R^{\mathcal{I}}$
+ %%     \item $\mathcal{I} \models \mathcal{A}$ if and only if $\mathcal{I} \models a$ for every $a \in \mathcal{A}$
+ %% 
+ %% \end{itemize}
+ %% 
+
+This can be formulated as ACL languages allowing:
+\begin{itemize}
+    \item Atomic negation (negation of concept names that do not appear on the left hand side of axioms)
+    \item Concept intersection
+    \item Universal restrictions
+    \item Limited existential quantification
+\end{itemize}
+
+The expressiveness of ACL languages can be extended, following this naming convention:
+
+\begin{itemize}
+    \item $\mathcal{F}$ for support of functional properties,
+
+    \item $\mathcal{N}$ for cardinality restrictions
+    (\concept{owl:cardinality}, \concept{owl:maxCardinality}, implies
+    $\mathcal{F}$),
+
+    \item $\mathcal{Q}$ for qualified cardinality restrictions (available in
+    OWL 2, cardinality restrictions that have fillers other than
+    \concept{owl:Thing}, implies $\mathcal{N}$), 
+
+    \item $\mathcal{E}$ for full existential qualification (Existential
+    restrictions that have fillers other than \concept{owl:Thing}),
+
+    \item $\mathcal{U}$ for concept union,
+
+    \item $\mathcal{C}$ for complex concept negation,
+
+    \item $\mathcal{S}$ for role transitivity,
+
+    \item $\mathcal{H}$ for role hierarchy (subproperties -
+    \concept{rdfs:subPropertyOf}),
+
+    \item $\mathcal{R}$ for complex role inclusion axioms (reflexivity and
+    irreflexivity; role disjointness, implies $\mathcal{S}$ and $\mathcal{H}$),
+
+    \item $\mathcal{O}$ for nominals (enumerated classes of object value
+    restrictions - \concept{owl:oneOf}, \concept{owl:hasValue}),
+
+    \item $\mathcal{I}$ for inverse properties,
+
+    \item $\mathcal{(D)}$ for use of datatype properties, data values or data
+    types.
+
+\end{itemize}
+
+OWL2 is a $\mathcal{SROIQ(D)}$ languages, which can be written in expansed form
+as $\mathcal{ALC} + \mathcal{SHRFNQOI(D)}$. This is the expressiveness level of
+the ORO common-sense ontology.
+
+
+
