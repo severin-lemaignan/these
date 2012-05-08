@@ -535,17 +535,44 @@ into account the language configuration.
 
 \section{Knowledge instantiation: the OpenRobots Common-Sense Ontology}
 
-How much knowledge is available? Which content? How big is the knowledge base?
+The ORO platform is made of the server that we have already presented, and a
+common-sense ontology, the \emph{ORO Common-sense Ontology}.
 
-\subsection{Designing the \textsc{OpenRobots} common-sense ontology}
+At start-up, the knowledge models of the ORO server are initialised with a
+configurable sets of initial ontologies that build the initial pool of facts
+known to the robot.
+
+Usually, the ORO server is started with the common-sense ontology that we
+present in this section, and one scenario-specific ontology that contains in
+most cases the set of individuals with relevant properties needed by the
+experiment.
+
+\subsection{Design of the ORO common-sense ontology}
 \label{sect|commonsense-design}
+
+The ORO common-sense ontology has been designed from two requirements: covering
+our experimental needs and conforming as much as possible to the {\sc OpenCyc}
+upper ontology.
+
+This lead to a bidirectional design process: from \emph{bottom-up} regarding
+the choices of concepts to model, \emph{top-down} regarding the taxonomy. The
+classes that appear on figure~\ref{fig|upper_tbox} belong thereby to the {\sc
+OpenCyc} namespace.
 
 \begin{figure}
     \centering
     \includegraphics[scale=0.6]{oro/top_tbox.pdf}
-    \caption{The upper part of the ORO common-sense TBox.}
+
+    \caption{The upper part of the ORO common-sense TBox. All these concepts
+    belong to the {\sc OpenCyc} namespace.}
+    
     \label{fig|upper_tbox}
 \end{figure}
+
+This figure~\ref{fig|upper_tbox} also illustrates the fundamental disjunction
+in the ORO model between \emph{temporal} and \emph{spatial} entities (formally,
+$(TemporalThing \sqcap SpatialThing)^{\mathcal{I}} = \emptyset$, with
+$\mathcal{I}$ the \emph{interpretation} of our model).
 
 \begin{figure}
     \centering
