@@ -105,12 +105,12 @@ knowledge representation must be able to deal with this uncertainty and
 should explicitly label this fact as being limited in time.
 
 To know if a fact is permanent or transitional (as defined by Pollock
-\fxfatal{citation de Langage et Cognition, page 50}) is difficult (especially
+\cite{Pollock1998}, page 51) is difficult (especially
 considering that a feature may be considered as permanent or not depending of
 the context: within the situation ``a familly meal''\fxfatal{Check
 translation!}, the fact ``the human is sitting at the table'' could be
 considered as permanent. Conversely, ``ground is static'' is generally
-considered as a static fact, expect if we are talking of planetary mechanics
+considered as a permanent fact, expect if we are talking of planetary mechanics
 for instance. The difficulty lies in the selection of the relevant situation
 in which reasoning must be carried out at a given time) and have currently to
 be defined in the cultural background of the robot.
@@ -156,6 +156,141 @@ knowledge management system we propose.
 
 
 One concept, several symbols: cf multilingual support of ORO server \ref{sect|multilingual}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Towards Analysing the Knowledge Representation Requirements}
+\label{sect|krs-related-work}
+
+
+The idea of \emph{Cognitive Robotics} was coined in the early 1990s by Reiter.
+In a chapter on that subject in \emph{Fondations of Artifical
+Intelligence}~\cite{Levesque2008}, Levesque reminds about the manifesto they
+wrote together in 1998:
+
+\begin{quotation}
+
+    Central to this effort is to develop an understanding of the relationship
+    between the knowledge, the perception, and the action of [\ldots] a robot. The
+    sorts of questions we want to be able to answer are
+
+    \begin{itemize} 
+
+        \item to execute a program, what information does a robot need to have
+        at the outset vs. the information that it can acquire \emph{en route}
+        by perceptual means?
+
+        \item what does the robot need to know about its environment vs. what
+        need only be known by the designer?
+
+        \item when should a robot use perception to find out if something is
+        true as opposed to reasoning about what it knows was true in the past?
+
+        \item when should the inner workings of an action be available to the
+        robot for reasoning and when should the action be considered primitive
+        or atomic?
+
+    \end{itemize}
+
+    and so on. With respect to robotics, our goal (like that of many in AI) is
+    \emph{high-level robotic control}: develop a system that is capable of
+    generating actions in the world that are appropriate as a function of some
+    current set of beliefs and desires.
+
+\end{quotation}
+
+To be answered, those questions have in common one prerequisite: the robot must
+be able to manipulate \emph{explicitly} knowledge, and hence, need a way to
+represent the knowledge.
+
+This section focuses on this knowledge representation issue: we aims at first
+establishing a comprehensive typology of representational needs for
+robotics in the specific context of service robotics, and then at painting the
+current landscape of approaches to the knowledge representation problem in the
+research community.
+
+While not strictly focused on knowledge in the context of
+service robotics, several previous work have sketched lists of important items for cognitive robots.
+
+Heintz et al.~\cite{Heintz2008} define
+\emph{knowledge processing middlewares} as systems supporting ``declarative
+specifications for flexible configuration and dynamic reconfiguration of
+context dependent processing at many different levels of abstraction''. They
+identify six characteristics: the system must be able to merge informations
+from different, possibly distributed sources; it should support quantitative as
+well as qualitative processing of information, it should offer bottom-up and
+top-down processing, it should be able to deal with uncertainty, allow for
+``flexible configuration and reconfiguration'' (which require what we call
+\emph{non-monotonicity} in this article) and finally meta-knowledge and
+introspective capacities (``declarative specification of the processing
+functionalities''). In this paper, we focus our analysis on similar system with
+however an emphasize on the symbolic capabilities.
+
+Several surveys compare global cognitive architectures (\cite{Vernon2007, Chong2009}).
+Vernon et al.~\cite{Vernon2007} split these architectures into two broad
+categories: the \emph{cognitivist} ones (where cognition is considered as an
+explicit computation problem, often based on symbol manipulation), and the
+\emph{emergent} ones (where cognition only exists as a result of the
+interaction of the system with its environment). The approaches presented in
+this paper are, at a few exceptions, prototypical \emph{cognitivist} approaches
+that aim at making knowledge explicit within the robot architecture. Vernon et
+al. propose twelve \emph{characteristics of cognitive system} to compare
+architectures. Amongst them, they mention the \emph{inter-agent epistemology} (how
+the structure of the world is captured in a representation and shared), the
+relation to \emph{embodiment}, the ability to \emph{anticipate} and to
+\emph{adapt}, and the mechanisms of \emph{motivation}. While presented at the
+level of the whole robotic architecture, these features also translate into
+knowledge representation strategies and are relevant to our study.
+\fxwarning{Detail Chong here}
+
+At an even broader scope, several authors from fields that are connected to robotics
+have previously listed desirable features of artificial systems aiming at
+rich cognitive abilities.
+
+For instance, in~\cite{McCarthy2007}, McCarthy recently listed the challenges
+he identifies on the road to a \emph{human-level AI}.
+
+\begin{itemize}
+
+	\item the ability to \emph{"operate successfully in the common sense
+	informatic situation"},
+
+	\item the necessity of relying on mathematical logic, as the most fruitful
+	formalism for machine intelligence,
+
+	\item the ability to deal with \emph{approximate concepts and approximate
+	theories} (that would include representing them, and reasoning with them),
+
+	\item non-monotonic reasoning,
+
+	\item what McCarthy calls \emph{Elaboration Tolerance}: the ability to
+	extend \emph{on demand} the closed domain of interpretation for a
+	given assertion,
+
+	\item the ability to formalize and reason about contexts,
+
+	\item reasoning about events, and in particular, actions,
+
+	\item the capacity of introspection,
+
+	\item and finally, he points the issue of giving computer the right
+	heuristics for decision making.
+
+\end{itemize}
+
+Coming from the perspective of natural language processing in situated context,
+Roy and Reiter, in~\cite{Roy2005}, summarize what they see as the main
+challenges to be tackled by KRS: cross-modal representation systems,
+association of words with perceptual and action categories (\emph{grounding}),
+modeling of context, definition of the right granularity of models, integration
+of temporal modeling and planning, ability to match past (learned) experiences
+with the current interaction and ability to take into account the human
+perspective.
+
+Knowledge representation systems in robotics are concerned by most, if not all,
+of these points, and we shall indeed mention them in our typology, in slightly
+reformulated ways.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
