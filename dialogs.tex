@@ -28,13 +28,13 @@ human sentence --- ``Jido, give me this'' --- to be understood by the robot,
 correctly interpreted in the spatial context of the interaction, and ultimately
 transformed into an action?
 
-Austin~\cite{Austin1962} would have at first glance analyzed such kind of
+Austin~\cite{Austin1962} would have at first glance analysed such kind of
 sentence as a \emph{speech act}, comprising of \emph{locutionary},
 \emph{illocutionary} and possibly \emph{perlocutionary} acts. First, we want to
 understand the direct meaning of the sentence (\emph{locutionary act}): we must
 acquire the sentence, convert it into a useful syntactic form (quite probably
 by mean of speech recognition), and understand the semantics of the sentence,
-\ie, What is refered by ``\textit{Jido}''? What is ``\textit{give}''? What is
+\ie, What is referred by ``\textit{Jido}''? What is ``\textit{give}''? What is
 ``\textit{me}''? And ``\textit{this}''?
 
 Working in a situated context, we want furthermore to \emph{resolve} these
@@ -58,7 +58,7 @@ could as well point at something or refer to some previously mentioned concept.
 Second, the \emph{illocutionary force}, \ie the \emph{intent} of the utterance
 as thought by the agent must be extracted, and understood. In our example,
 Thomas obviously wants an action to be performed by the robot. The action
-parametrization is conveyed by the semantics attached to the words and the
+parametrisation is conveyed by the semantics attached to the words and the
 grammatical structures of the sentence. In our example, the type of action is
 given by the verb ``\textit{give}''. Assuming the robot has some procedural
 knowledge attached to this symbol, the action type can be considered as
@@ -75,7 +75,7 @@ three distinct, inter-related cognitive functions:
 
 \begin{inparaenum}[\itshape 1)]
 
-\item \emph{Physical environment modeling} and \emph{spatial reasoning}
+\item \emph{Physical environment modelling} and \emph{spatial reasoning}
 (grouped under the term \emph{situation
 assessment})  are in charge of building and
 maintaining a coherent model of the physical world. This model is realistic in
@@ -85,7 +85,7 @@ objects.  The geometric model is used to compute several spatial properties of
 the scene that actually convert the original sensory data into symbolic
 beliefs. This includes relative locations of objects, visibility state,
 gestures like pointing, etc.  Assuming that other agents are as well
-represented in the model, the same computations are applied to analyze the
+represented in the model, the same computations are applied to analyse the
 scene from each agents' point of view (\ie from their \emph{perspectives}).
 This approach is presented in depth in~\cite{Sisbot2011}.
 
@@ -123,10 +123,10 @@ focuses on this last facet (dialogue processing).
 \subsection{Related work}
 
 Processing natural language in situated context is already an established
-research field. In~\cite{Roy2005}, Roy summarizes what he sees as the main
+research field. In~\cite{Roy2005}, Roy summarises what he sees as the main
 challenges to be tackled: cross-modal representation systems, association of
-words with perceptual and action categories, modeling of context, figuring out
-the right granularity of models, integrating temporal modeling and planning,
+words with perceptual and action categories, modelling of context, figuring out
+the right granularity of models, integrating temporal modelling and planning,
 the ability to match past (learned) experiences with the current interaction
 and the ability to take into account the human perspective.
 
@@ -163,14 +163,14 @@ different sensing modalities, including verbal ones (the robot is able to
 \emph{imagine} objects), are merged. Their framework also allows management of
 the interaction history (the human can ask for a past event). They propose an
 implementation in an environment built on simple entities (a manipulator arm
-and color balls).
+and colour balls).
 
 \subsection{Contribution}
 
 Compared to previous contributions, our efforts have two foci: {\it (1)}
 integration between language processing and perception of the environment and
 the humans, from several perspectives; and {\it (2)} realistic human-robot interactions:
-realtime processing; open speech; complex, dynamic, partially unknown human environments; fully
+real-time processing; open speech; complex, dynamic, partially unknown human environments; fully
 embodied autonomous robots with manipulation abilities. 
 
 We do not claim any contribution to the field of computational linguists (see
@@ -189,7 +189,7 @@ this article.
 \label{dialog}
 
 Verbal interaction with human presents two categories of challenges: syntactic
-ones, and semantic ones. The robot must be able to process and analyze the
+ones, and semantic ones. The robot must be able to process and analyse the
 structure of human utterances, \ie natural language sentences, and then make
 sense of them. As stated in the introduction, we process three categories of
 sentences: \emph{statements}, \emph{desires} and \emph{questions} that can be
@@ -215,7 +215,7 @@ eventually translates the discourse in a set of declarative OWL/RDF statements.
 \centering
   \includegraphics[width=0.6\linewidth]{images/dialogs/dialog_module_simple.pdf}
   \caption{The {\sc Dialogs} module has three main steps: the parsing,
-  the interpretation and the verbalization. The interpretation module is
+  the interpretation and the verbalisation. The interpretation module is
   responsible for both the \emph{resolution} and the semantic content
   \emph{analysis and translation}.} 
   \label{fig|dialog}
@@ -470,7 +470,7 @@ now add the new information provided by the human, \ie the new statement
 \stmt{banana\_01 hasSize big}, to the human model in the ontology server.
 
 The translation of \emph{yellow} to \concept{hasColor yellow} is not obvious: in
-the general case, we associate a adjective to the noun it characterizes with
+the general case, we associate a adjective to the noun it characterises with
 the \concept{hasFeature} predicate (for instance, \emph{The sight is beautiful}
 would translate to \stmt{sight hasFeature beautiful}). But we can also manually
 set the predicate associated to a category of adjectives: It is what has been
@@ -690,7 +690,7 @@ disambiguation routines
 (algorithm~\ref{algo|Resolution}(\ref{st.discrimination})~\cite{Ros2010b}
 \fxwarning{add a link to appropriate section} find differences between the
 instances (in the example, one banana is yellow while the other one is green)
-and build a sentence through the \emph{verbalization} module to ask the user a
+and build a sentence through the \emph{verbalisation} module to ask the user a
 closed question that will help clarify the ambiguity: ``Is it yellow or
 green?'' The user's answer is parsed and merged with the previous sentence. The
 resulting, augmented, sentence (``The green banana is good") goes again through
@@ -717,8 +717,8 @@ Two cases can alter the way the discrimination routines work:
     \item If a sentence starts with {\it Learn that...}, failures during 
     discrimination are interpreted as new concepts, and instead of marking the 
     nominal as not resolved, and new identifier is created and add to the knowledge base.
-    \item For questions like {\it Which color is the bottle?}, the discrimination 
-    algorithm can not use the feature {\it color} to identify to bottle. The 
+    \item For questions like {\it Which colour is the bottle?}, the discrimination 
+    algorithm can not use the feature {\it colour} to identify to bottle. The 
     resolution algorithm pass this kind of constraints as a parameter of the 
     discrimination routines.
 \end{enumerate}
@@ -730,7 +730,7 @@ by \textsc{Dialogs}. For instance, a question like ``What is on the table?'' is
 grounded (to extract the relation \concept{isOn} and to find what \emph{table}
 refers to) and transformed into the following kind of query: \concept{find ?var
 [\stmt{?var isOn table1}]}.  Answers are converted back to a full sentence by
-the \emph{verbalization} module, and uttered to the human.
+the \emph{verbalisation} module, and uttered to the human.
 
 
 The next chapter (page~\pageref{chapter|evaluation}) presents several

@@ -5,7 +5,7 @@ This chapter introduces the \emph{OpenRobots Ontology} server and its
 common-sense knowledge base.
 
 We present a \textbf{functional description} of oro-server, and detail at
-lenght its knowledge model. Its actual implementation is discussed in the next
+length its knowledge model. Its actual implementation is discussed in the next
 chapter.
 
 We also present in depth the \emph{OpenRobots Common-Sense Ontology} that
@@ -15,7 +15,7 @@ contains most of the knowledge at hand when the robot starts.
 \label{sect|functional-overview}
 
 
-We have adopted a centralized approach for knowledge management called
+We have adopted a centralised approach for knowledge management called
 ORO~\cite{Lemaignan2010}. The platform is designed as a central
 knowledge storage service implemented as a server where the robot
 components can add or query statements at run-time. Figure~\ref{fig|oro-overview}
@@ -35,14 +35,14 @@ reasoner.
 
 A front-end accepts and manages connections to clients. The clients' requests
 are processed by a set of internal modules: basic operations on statements,
-but also higher cognitive and human-robot interaction related functionalities
+but also higher cognitive and human-robot interaction related features
 are available. External plugins can also be easily added.
 
 Besides acting as a facts database, the ORO platform exposes several
 functions: operations on knowledge statements relying on inference (through a
 continuous first-order logic classification process), management of
 \emph{per-agent} symbolic models, and also higher cognitive and human-robot
-interaction related functionalities like categorization of sets of concepts
+interaction related features like categorisation of sets of concepts
 or profiles of memory (that enable the robot to ``forget'' about some facts).
 
 ORO also provides an event mechanism that allows components to be triggered
@@ -77,7 +77,7 @@ appendix~\ref{chapt|dl} presents the usual naming conventions of Description
 Logics expressiveness).
 
 The relation between expressiveness and reasoning complexity is highly
-``unstable'': for isntance, adding  the single ORO axiom \stmt{farFrom
+``unstable'': for instance, adding  the single ORO axiom \stmt{farFrom
 disjointProperty near} that states that two individuals can not be at the same
 time near and far from each other changes the expressiveness power from
 $\mathcal{SHOIQ(D)}$ to $\mathcal{SROIQ(D)}$: this seemingly  innocuous
@@ -86,7 +86,7 @@ satisfiability reasoning problem switches from a {\it NExpTime-complete}
 problem to a {\it NExpTime-hard} problem (\ie, \emph{at least} as hard as the
 hardest problem in {\it NExpTime}).
 
-This instability leads to hard-to-predict runtime performances on the robot,
+This instability leads to hard-to-predict run-time performances on the robot,
 and light alteration of the knowledge structure can lead to very noticeable
 performance drops.
 
@@ -99,7 +99,7 @@ ontology.
 instance, the relation \emph{A gives object B to C} can not directly be
 represented in RDF. This relation is reified as \{\stmt{act1 type Action},
 \stmt{act1 performedBy A}, \stmt{act1 actsOn B}, \stmt{act1 receivedBy C}\}. As
-long as the instance \concept{act1} exists in the knowledge base, the orignial
+long as the instance \concept{act1} exists in the knowledge base, the original
 relation \emph{A gives object B to C} is considered to hold. This kind of
 reification is common in the ORO knowledge model.
 
@@ -165,7 +165,7 @@ We present at section~\ref{sect|spark}, page~\pageref{sect|spark} a 3D
 real-time environment, SPARK, that allows to compute on-line several
 perspective aware symbolic properties.
 
-\paragraph{Context modeling}
+\paragraph{Context modelling}
 
 These multiple models can also be viewed as different \emph{interpretive
 scopes}, allowing the robot to interpret the same reality from different points
@@ -184,7 +184,7 @@ from the standard RFC-3066) that tells in which human language the literal is
 expressed.
 
 ORO benefits from this mechanism, and can be configured to use a specific
-language as default. When an language is explicitely selected, the translated
+language as default. When an language is explicitly selected, the translated
 labels of concepts (when available in the underlying ontology) are used instead
 of the default English ones. Section~\ref{sect|commonsense-i13n} gives more
 details on the current level of internationalisation of the ORO common-sense
@@ -193,7 +193,7 @@ ontology.
 Since only the labels (\ie the human-friendly name of the concepts) are subject
 to translation, changing the default language of the ORO server has no semantic
 impact: entities in the ontology always refer to same concepts. Same inferences
-are drawn, same connections to knowledge sources are made, etc. The strenght of
+are drawn, same connections to knowledge sources are made, etc. The strength of
 semantic approaches is here well illustrated.
 
 %%%%%%%%%%
@@ -235,7 +235,7 @@ restrictions (except the SWRL rules) at run-time. This allows knowledge
 introspection and enables the robot to alter its own knowledge structures (the
 so-called \emph{T-Box} model) during its life-time by adding new constraints
 and properties to classes and predicates (we can for instance teach the robot
-\emph{at runtime} that cats are animals, \ie \stmt{Cat rdfs:subClassOf
+\emph{at run-time} that cats are animals, \ie \stmt{Cat rdfs:subClassOf
 Animal}).
 
 
@@ -255,7 +255,7 @@ The main algorithms are presented in this section.
 
 \paragraph{Common and first different ancestors} The \emph{Common Ancestors}
 algorithm (algorithm~\ref{algo|common-ancestors}) returns the classes that
-are the ``first'' common superclasses of the two concepts.
+are the ``first'' common super-classes of the two concepts.
 
 \begin{figure}
     \centering
@@ -299,7 +299,7 @@ sub-classes in this intersection.
 The \emph{First Different Ancestors} algorithm
 (algorithm~\ref{algo|first-different-ancestors}) returns the list of direct
 sub-classes of the common ancestors. They are intuitively the most generic
-types that \emph{differenciate} the two concepts. In the taxonomy
+types that \emph{differentiate} the two concepts. In the taxonomy
 figure~\ref{fig|common-ancestors}, two instances \concept{a} and \concept{b} of
 respectively \concept{white whale} and \concept{moon} have as first different
 ancestors the two sets \concept{\{animal, satellite\}} (subclasses of ancestor
@@ -316,7 +316,7 @@ grounding capability.
 
 Clarification and discrimination algorithms are based on what we call
 \emph{descriptors}: descriptors can be properties of individuals, either
-acquired by the robot are statically asserted in a comon-sense ontology. They
+acquired by the robot are statically asserted in a common-sense ontology. They
 are also the result of other reasoning algorithms like the \emph{Common
 Ancestors} and \emph{Different Ancestors} algorithms presented above.
 We shall see later how symbolic knowledge is first acquired from geometric
@@ -327,7 +327,7 @@ sample proposed in figure~\ref{fig|discriminant}.
 Based on all this information, and a given partial (or complete) description of
 an object (list of attribute-value pairs), the robot is able to identify the
 referred object the following way (Algorithm~\ref{algo|clarify}). First it
-obtains all objects that fulfill the initial description. Based on the result
+obtains all objects that fulfil the initial description. Based on the result
 it either succeeds (obtains one single object), fails (no object with that
 description could be found) or obtains several objects. In this latter case, a
 new descriptor is added (mark~\ref{clar.desc}) to the initial description and
@@ -376,11 +376,11 @@ candidates \GETS \CALL{GetObjectFromDescription}{description} \\
     \label{fig|discriminant}
 \end{figure}
 
-We have implemented a set of semantic categorization functions in ORO. One of
+We have implemented a set of semantic categorisation functions in ORO. One of
 them consists in looking for discriminants, \ie descriptors that allow a
 maximum discrimination among a set of individuals. In the example above,
-considering the attributes \emph{type, color} and \emph{material}, ORO would
-return \emph{color} and \emph{material} as discriminants, since their values
+considering the attributes \emph{type, colour} and \emph{material}, ORO would
+return \emph{colour} and \emph{material} as discriminants, since their values
 are unique for the given set of objects.
 
 We distinguish two types of discriminants. \emph{Complete} discriminants are
@@ -399,7 +399,7 @@ figure~\ref{fig|discriminant}. We search a discriminant for the following
 individuals: \concept{plant1}, \concept{animal1}, \concept{animal2} and
 \concept{animal3}. First we obtain the direct properties for all the
 individuals, \ie we do not consider all the hierarchy of properties. In the
-example, \concept{plant1} has two superclasses (\concept{Plant} and
+example, \concept{plant1} has two super-classes (\concept{Plant} and
 \concept{Thing}), but we only take the most direct one (the class
 \concept{Plant}). Next, we compute the number of individuals per property
 (mark~\ref{disc.nbind}) and the number of different values for that property
@@ -446,7 +446,7 @@ P \GETS \CALL{Ontology.GetProperties}{individuals} \\
 \subsubsection{Memory}
 \label{sect|oroserver-memory}
 
-The ORO server offers a mechanism to mimick simple forms of biological memory.
+The ORO server offers a mechanism to mimic simple forms of biological memory.
 When new statements are inserted in the knowledge base, a \emph{memory profile}
 can be attached to this set.
 
@@ -455,7 +455,7 @@ long term}. They each correspond to a different lifetime for the statements
 (respectively 10 seconds, 5 minutes and no time limit). After this duration,
 the statements are automatically removed from the knowledge base.
 
-This approach is limited. In particular, \emph{episodic} memory primarly refers
+This approach is limited. In particular, \emph{episodic} memory primarily refers
 to the semantics of the statements (that is expected to be related to an event)
 and not to a specific life duration. We discuss at the end of this work possible
 improvements.
@@ -480,7 +480,7 @@ and asserted as regular statements (like \stmt{Location subClassOf
 SpatialThing}), following the RDF Schema (RDFS) and OWL language constructs.
 Table~\ref{table|main-tbox-properties} presents few of the main properties and
 classes defined in RDFS and OWL that allow to describe the ontology
-structure. These constructs can all be inserted at runtime to alter the
+structure. These constructs can all be inserted at run-time to alter the
 knowledge model of the server.
 
 \begin{table}
@@ -515,8 +515,8 @@ coupled with language processing features, the ability to easily alter the
 knowledge structure allows for implementation of specific learning mechanisms.
 For example, one can teach the robot that cats are animals by processing a
 sentence like ``Cats are animals'' into \stmt{Cat subClassOf Animal} and then
-adding it at runtime into the knowledge base. From that points, all entities
-asserted or infered to be cats will be as well infered to be animals.
+adding it at run-time into the knowledge base. From that points, all entities
+asserted or inferred to be cats will be as well inferred to be animals.
 
 The case study \emph{Point \& Learn} (section~\ref{expe|pointandlearn})
 presents some experimental results in this domain.
@@ -525,7 +525,7 @@ presents some experimental results in this domain.
 \label{sect|oroserver-lookup}
 
 Because this operation is frequent, in particular for language processing
-application, the ORO server also provides a fast concept lookup mechanism to
+application, the ORO server also provides a fast concept look-up mechanism to
 search for a concept identifier by its human-friendly name (label) that takes
 into account the language configuration.
 
@@ -533,7 +533,7 @@ into account the language configuration.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Knowledge instanciation: the OpenRobots Common-Sense Ontology}
+\section{Knowledge instantiation: the OpenRobots Common-Sense Ontology}
 
 How much knowledge is available? Which content? How big is the knowledge base?
 
@@ -550,7 +550,7 @@ How much knowledge is available? Which content? How big is the knowledge base?
 \begin{figure}
     \centering
     \includegraphics[scale=0.6]{oro/tangible_things_tbox.pdf}
-    \caption{TBox of the specializations of \concept{PartiallyTangible}.}
+    \caption{TBox of the specialisations of \concept{PartiallyTangible}.}
     \label{fig|tangible_things_tbox}
 \end{figure}
 
