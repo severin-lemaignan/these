@@ -4,7 +4,8 @@ TODO Thesis
 100% Abstract
   0% Résumé
   0% Zusammenfassung
-     
+100% Conventions
+
  35% 1 Introduction: Human-Robot interaction and Knowledge
  45%     1.1 The general context of Human-Robot interaction in this work
  75%     1.2 A Prototypical Scenario
@@ -17,7 +18,7 @@ TODO Thesis
   0%             Perspective-Taking, False Beliefs, Theory of Mind
   0%             and also...
  10%         1.4.2 Targeted applications/experiments
-  0%     1.5 Organisation of the thesis
+100%     1.5 Organisation of the thesis
          
  20% 2 Symbolic knowledge representation
  75%     2.1 What do we call "knowledge"?
@@ -112,7 +113,7 @@ TODO Thesis
                    SPARK module
              4.4.3 Integration with symbolic task planning and executive layers
 100%             Symbolic Task Planning
- 75%             Execution Control
+100%             Execution Control
  50%         4.4.4 Integration with natural language processors
          
 95%  5 An advanced application: situated natural language processing
@@ -128,14 +129,16 @@ TODO Thesis
              5.3.3 Informational Content Extraction Requiring Clarification
          
      6 Evaluation
-  0%     6.1 Limits of ORO
+ 30%     6.1 Limits of ORO
  20%     6.1 Comparison of oro server with other existing systems
   0%         6.1.1 Performances Analysis
          6.2 Experimental evaluation
 100%         6.2.1 Simulation of HRI interaction
 100%         6.2.2 Case Studies
-100%         6.2.3 First Interaction Experiment
-  0%         6.2.4 Second Interaction Experiment
+ 75%         6.2.3 Interaction Experiments
+100%            First Interaction Experiment
+ 10%            Second Interaction Experiment
+100%            Third Interaction Experiment
 100%         6.2.5 Roboscopie
  20% 7 Conclusion
          7.1 Discussion
