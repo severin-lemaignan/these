@@ -1079,6 +1079,29 @@ The \emph{Odd One Out} experiment (section~\ref{expe|odd_one_out}) relies on
 
 \paragraph{SHARY}
 
+SHARY~\cite{Warnier2012} is a high level robot control system for cognitive
+robot interacting with humans, based on the {\sc OpenPRS} environment (an
+open-source implementation of PRS Procedural Reasoning
+System~\cite{Ingrand1992}).
+
+A full {\sc OpenPRS} interface with ORO has been developed, and request and
+events mechanisms are heavily used by SHARY to monitor and react to changes in
+the robot environment.
+
+SHARY also produces symbolic facts that are added to the ORO server, including
+the outcome of actions. This allows to partially expose the internal state of
+the execution controller, and enhancing the introspective capabilities of the
+system.
+
+Finally SHARY can also directly interacts with situation assessement and
+geometric layers (like the SPARK module), which indirectly influences the ORO
+content. For instance, SHARY can create or delete position hypotheses for
+currently unperceived objects, which in turn are converted into ({\it
+de-facto}) hypothetical symbolic beliefs in the knowledge base.
+
+Section~\ref{sect|expe3} presents an experiment that demonstrates the
+integration between SHARY and ORO.
+
 \paragraph{pyRobots} {\tt pyRobots} is not a real execution controller: it
 comprise a set of Python scripts that ease the construction of complex scripted
 interaction. {\tt pyRobots} is based on \emph{actions} (high-level tasks like
