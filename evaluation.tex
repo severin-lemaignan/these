@@ -311,13 +311,27 @@ robot at LAAS-CNRS (based on the LAAS Pocolibs middleware).
 
 \end{figure}
 
-We have implemented a \textit{Point \& learn} behaviour on the Bert robot~\cite{Lallee2010b} (Figure~\ref{fig|bristol}): the user shows an object to the robot, and if the robot sees it for the first time, it will ask for its name and type.
+We have implemented a \textit{Point \& learn} behaviour on the Bert
+robot~\cite{Lallee2010b} (Figure~\ref{fig|bristol}): the user shows an object
+to the robot, and if the robot sees it for the first time, it will ask for its
+name and type.
 
-The object perception module relies on motion capture (VICON system) to identify and localize objects. A so-called \textit{primitive detection} module is responsible for updating ORO with the list of objects currently seen by the robot as well as their state (moving or not) and their relations to other objects (touching or not). On the other end, a human-robot interface based on the CLSU Toolkit\footnote{\url{http://cslu.cse.ogi.edu/toolkit/}} is in charge of speech recognition, speech synthesis and basic natural language processing.
+The object perception module relies on motion capture (VICON system) to
+identify and localize objects. A so-called \textit{primitive detection} module
+is responsible for updating ORO with the list of objects currently seen by the
+robot as well as their state (moving or not) and their relations to other
+objects (touching or not). On the other end, a human-robot interface based on
+the CLSU Toolkit\footnote{\url{http://cslu.cse.ogi.edu/toolkit/}} is in charge
+of speech recognition, speech synthesis and basic natural language processing.
 
-By querying ORO for moving objects, the interface retrieves the object ID that has the focus of attention (last moving object), and asks the human for a name and a type if the object is new. Figure~\ref{tab|transcript_bert} reproduces a typical dialog with Bert.
+By querying ORO for moving objects, the interface retrieves the object ID that
+has the focus of attention (last moving object), and asks the human for a name
+and a type if the object is new. Figure~\ref{tab|transcript_bert} reproduces a
+typical dialog with Bert.
 
-At the end of this sequence, two more RDF statements are added to the robot knowledge base: \texttt{[5001 rdfs:label "coffee-cup"]} and \texttt{[5001 rdf:type Cup]}.
+At the end of this sequence, two more RDF statements are added to the robot
+knowledge base: \texttt{[5001 rdfs:label "coffee-cup"]} and \texttt{[5001
+rdf:type Cup]}.
 
 \begin{figure}[!ht]
 \centering
@@ -338,7 +352,9 @@ At the end of this sequence, two more RDF statements are added to the robot know
 	\label{tab|transcript_bert}
 \end{figure}
 
-Due to the limitation of the speech recognition software, only a predefined set of names or types could be recognized, thus preventing the robot to add completely original objects.
+Due to the limitation of the speech recognition software, only a predefined set
+of names or types could be recognized, thus preventing the robot to add
+completely original objects.
 
 \subsubsection{Odd One Out}
 \label{expe|odd_one_out}
@@ -352,22 +368,42 @@ Due to the limitation of the speech recognition software, only a predefined set 
     \subfigure[]{
         \includegraphics[width=0.4\textwidth]{experiments/rviz.png}
     }
-\caption{(a) Rosie, looking for objects it may know, and (b) viewed in RViz. The clusters of point are given an unique identifier by the perception that allow the supervision create the link between the physical objects and their symbolic representation in ORO.}
+
+    \caption{(a) Rosie, looking for objects it may know, and (b) viewed in
+    RViz. The clusters of point are given an unique identifier by the
+    perception that allow the supervision create the link between the physical
+    objects and their symbolic representation in ORO.}
+
 \label{fig|kimpwatching}
 \end{figure}
 
 
-The \emph{Odd One Out} scenario extends the \textit{Point \& Learn} experiment and completes an on-going experiment at the IAS laboratory where a robot is asked to list missing items on a table being set, based on probabilistic reasoning on previously recorded observations.
+The \emph{Odd One Out} scenario extends the \textit{Point \& Learn} experiment
+and completes an on-going experiment at the IAS laboratory where a robot is
+asked to list missing items on a table being set, based on probabilistic
+reasoning on previously recorded observations.
 %~\cite{Pangercic2009}.
 
-We use ORO to introduce human interactions and common-sense reasoning: the robot picks an unknown object from the table, shows it to the user, and asks about its name and type (Figure~\ref{fig|kimpwatching}). The user continues to describe the object (through concepts) until a concept known by the robot is given. The learning process starts over again with another unknown object. Once all objects are learned, the robot tells which objects do not belong to a typical breakfast table (\textit{i.e.} objects that are neither food or tableware). The human interacts with the robot through a dedicated XMPP bridge, allowing to chat with the robot with a standard Jabber messaging client. Figure~\ref{tab|transcript_kimp} corresponds to a chat session with Rosie.
+We use ORO to introduce human interactions and common-sense reasoning: the
+robot picks an unknown object from the table, shows it to the user, and asks
+about its name and type (Figure~\ref{fig|kimpwatching}). The user continues to
+describe the object (through concepts) until a concept known by the robot is
+given. The learning process starts over again with another unknown object. Once
+all objects are learned, the robot tells which objects do not belong to a
+typical breakfast table (\textit{i.e.} objects that are neither food or
+tableware). The human interacts with the robot through a dedicated XMPP bridge,
+allowing to chat with the robot with a standard Jabber messaging client.
+Figure~\ref{tab|transcript_kimp} corresponds to a chat session with Rosie.
 
-The supervision (\textsc{cram}\footnote{\textsc{cram} (Cognitive Robotic Abstract Machine) is a RPL-derived framework for rapid development of cognitive robot control programs we currently develop.}~\cite{Beetz2010}) automatically updates the ORO server whenever an object enters or leaves the field of view.
-%(the perception is based on the \textsc{CoP} framework~\cite{Klank2009}). 
-Therefore, the integration of ORO can be seen as an extension to
-the robot's belief state that not only contains abstract identifiers
-of the internal object representation used in plans, but also the
-semantics and roles of objects in the scenario.
+The supervision (\textsc{cram}\footnote{\textsc{cram} (Cognitive Robotic
+Abstract Machine) is a RPL-derived framework for rapid development of cognitive
+robot control programs we currently develop.}~\cite{Beetz2010}) automatically
+updates the ORO server whenever an object enters or leaves the field of view
+(the perception is based on the \textsc{CoP} framework~\cite{Klank2009}).
+Therefore, the integration of ORO can be seen as an extension to the robot's
+belief state that not only contains abstract identifiers of the internal object
+representation used in plans, but also the semantics and roles of objects in
+the scenario.
 
 \begin{figure}[!ht]
 \centering
@@ -390,19 +426,45 @@ semantics and roles of objects in the scenario.
 	\chatN{human} & no \\
 	\chatN{rosie} & These objects are odd: my laptop \\
 	\end{tabular}
-	\caption{Transcript of a Jabber session with the robot Rosie. Compared to dialog with Bert (\ref{tab|transcript_bert}), we see here that the robot anchors the new objects in its already acquired knowledge.}
+
+    \caption{Transcript of a Jabber session with the robot Rosie. Compared to
+    dialog with Bert (\ref{tab|transcript_bert}), we see here that the robot
+    anchors the new objects in its already acquired knowledge.}
+	
 	\label{tab|transcript_kimp}
 \end{figure}
 
-By asking in loop the human for the categories of an object until it can connect it to a concept it already knows, the robot accurately anchors perception in its symbolic model and it is able to reason about it. At the end of the experiment, the robot identifies and returns the odd objects for the breakfast table (\textit{i.e.}, in our example, objects that are neither \texttt{Tableware} or \texttt{Food}).
+By asking in loop the human for the categories of an object until it can
+connect it to a concept it already knows, the robot accurately anchors
+perception in its symbolic model and it is able to reason about it. At the end
+of the experiment, the robot identifies and returns the odd objects for the
+breakfast table (\textit{i.e.}, in our example, objects that are neither
+\texttt{Tableware} or \texttt{Food}).
 
-An unexpected example of what the symbolic reasoning layer brings to more traditional robotic architectures emerged during the \emph{Odd One Out} experiment: the perception routines provided segmented blobs corresponding to objects, along with their colours. The supervision would then feed ORO with the visible objects. At some point, ORO suddenly refused to add an object. What seemed at first a communication bug between modules, was actually the consequence of a consistency check by ORO: Because of bad light conditions, the color recognition was not very reliable, and the same object was set to have two different colours at the same time. That was inferred as impossible by ORO and thus discarded. This kind of logical failure can be used to improve low-level perception results by ``closing the loop'' with high-level, symbolic knowledge.
+An unexpected example of what the symbolic reasoning layer brings to more
+traditional robotic architectures emerged during the \emph{Odd One Out}
+experiment: the perception routines provided segmented blobs corresponding to
+objects, along with their colours. The supervision would then feed ORO with the
+visible objects. At some point, ORO suddenly refused to add an object. What
+seemed at first a communication bug between modules, was actually the
+consequence of a consistency check by ORO: Because of bad light conditions, the
+color recognition was not very reliable, and the same object was set to have
+two different colours at the same time. That was inferred as impossible by ORO
+and thus discarded. This kind of logical failure can be used to improve
+low-level perception results by ``closing the loop'' with high-level, symbolic
+knowledge.
 
 
 \subsubsection{The Spy game}
 \label{spygame}
 
-This game is based on the traditional children game ``I Spy''. The idea is to discover the object or concept one of the participants is thinking of by asking questions such as: ``Is it green? Is it a machine? Is it on your left?'', etc. When playing, children exploit their knowledge about the world while categorizing and describing objects through useful discriminants that allow them to find out the answer as fast as possible while including perspective taking abilities~\cite{Moll2006}.
+This game is based on the traditional children game ``I Spy''. The idea is to
+discover the object or concept one of the participants is thinking of by asking
+questions such as: ``Is it green? Is it a machine? Is it on your left?'', etc.
+When playing, children exploit their knowledge about the world while
+categorizing and describing objects through useful discriminants that allow
+them to find out the answer as fast as possible while including perspective
+taking abilities~\cite{Moll2006}.
 
 \begin{figure}
 \centering
@@ -416,7 +478,20 @@ This game is based on the traditional children game ``I Spy''. The idea is to di
 \label{fig|spyGameScenario}
 \end{figure}
 
-The scenario for this game (Figure~\ref{fig|spyGameScenario}) consists on a face-to-face interaction where the human thinks of an object present in the environment, while the robot queries the human until either discovering the object or giving up, if no object was found. A categorization example is presented in Figure~\ref{fig|objectsSpyGame}. The game starts with the human user giving a first hint (communication is done through a keyboard and screen), allowing the robot to start the search filtering those objects that fulfill this first description. Based on this subset, ORO provides a descriptor (or set of descriptors) that allows a maximum discrimination among objects in the subset. The robot queries the user about the value of the descriptor (or the most discriminant among the set of descriptors) and with this new information, the current subset of objects is filtered again. The process is repeated until either obtaining a single object that fulfills all the descriptor values, or failing (\textit{i.e.} no object found). 
+The scenario for this game (Figure~\ref{fig|spyGameScenario}) consists on a
+face-to-face interaction where the human thinks of an object present in the
+environment, while the robot queries the human until either discovering the
+object or giving up, if no object was found. A categorization example is
+presented in Figure~\ref{fig|objectsSpyGame}. The game starts with the human
+user giving a first hint (communication is done through a keyboard and screen),
+allowing the robot to start the search filtering those objects that fulfill
+this first description. Based on this subset, ORO provides a descriptor (or set
+of descriptors) that allows a maximum discrimination among objects in the
+subset. The robot queries the user about the value of the descriptor (or the
+most discriminant among the set of descriptors) and with this new information,
+the current subset of objects is filtered again. The process is repeated until
+either obtaining a single object that fulfills all the descriptor values, or
+failing (\textit{i.e.} no object found). 
 
 \begin{figure}[!h]
 \centering
@@ -453,7 +528,16 @@ The scenario for this game (Figure~\ref{fig|spyGameScenario}) consists on a face
 %	- shelf: pink_shelf
 %GameObject: spacenavbox, orangebox, accesskit
 
-We have integrated the game in the LAAS-CNRS Jido robot~\cite{Alami1998a}. Objects are identified through a tag-based vision approach\footnote{ARToolKit: \url{http://www.hitl.washington.edu/artoolkit/}} and motion capture is used for human tracking. Their descriptions regarding categories (type of object) and features (color, shape) are manually given in advance. Spatial relationships ({\tt front}, {\tt back}, {\tt left}, etc, and {\tt in}, {\tt on} and {\tt next to}) and visibility (only visible objects for both agents can be considered in the game) are automatically computed on-line by the \textsc{MHP/Move3D} geometric reasoner and planner~\cite{Marin2008}. Figure~\ref{fig|spyGameExample} shows an example of a round game.
+We have integrated the game in the LAAS-CNRS Jido robot~\cite{Alami1998a}.
+Objects are identified through a tag-based vision approach\footnote{ARToolKit:
+\url{http://www.hitl.washington.edu/artoolkit/}} and motion capture is used for
+human tracking. Their descriptions regarding categories (type of object) and
+features (color, shape) are manually given in advance. Spatial relationships
+({\tt front}, {\tt back}, {\tt left}, etc, and {\tt in}, {\tt on} and {\tt next
+to}) and visibility (only visible objects for both agents can be considered in
+the game) are automatically computed on-line by the \textsc{MHP/Move3D}
+geometric reasoner and planner~\cite{Marin2008}.
+Figure~\ref{fig|spyGameExample} shows an example of a round game.
 
 
 \begin{figure}
@@ -476,27 +560,40 @@ We have integrated the game in the LAAS-CNRS Jido robot~\cite{Alami1998a}. Objec
 	\label{fig|spyGameExample}
 \end{figure}
 
-\subsection{First Interaction Experiment}
+\subsection{Interaction Experiments}
+
+Three larger experiments have been also conducted. The first two are focused on
+knowledge representation and verbal interaction: the ``Moving to London''
+scenario where the human asks for help to find and pack objects, and the
+``Aperitif Time'' scenario (that will be only briefly presented) where the
+robot tries to prepare a tray with the drinks the human desires. In these
+experiments, robot actions are limited to simple motions (like head tracking or
+predefined pick-and-place).
+
+The third experiment, prepared with Mathieu Warnier and Julien Guitton,
+involves the SHARY execution controller and the HATP symbolic task planner
+besides ORO and {\sc Dialogs}. In this scenario, the human and the robot try to
+cooperatively remove objects from a table.
+
+\subsubsection{First Interaction Experiment: ``Moving to London'' scenario}
 \label{sect|expe1}
 
-In order to illustrate the approach presented in this paper, we have designed
-the following daily life situation. Tom and Jerry are moving to London, so they
-are packing things in boxes. The scenario takes places in the living-room,
-where Jido (our robot) is observing while they move things here and there. To
-assess the reasoning abilities of the robot they ask Jido for information
-(entered through keyboard). Ideally, the robot should also perform actions when
-required (e.g. hand an object when asking ``give me...''). However, since it is
-out of the scope of this work, we do not include any motion from the robot's
-side.
+This first experiment is based on the following daily life situation: Tom and
+Jerry are moving to London, so they are packing things in boxes. The scenario
+takes places in the living-room, where Jido (our robot) is observing while they
+move things here and there. To assess the reasoning abilities of the robot they
+ask Jido for information (entered through keyboard). Ideally, the robot should
+also perform actions when required (e.g. hand an object when asking ``give
+me...''). However, since it is out of the scope of this work, we do not include
+any motion from the robot's side.
 
 Perception of objects is done through a tag-based system and humans are
 detected through motion capture. The robot knowledge base is pre-loaded with
-the \emph{ORO Commonsense Ontology}\footnote{This ontology can be downloaded
-from \url{http://oro.openrobots.org/}.}.  We next describe in detail two
+the \emph{ORO Commonsense Ontology}.  We next describe in detail two
 situations where we can follow the internal robot's reasoning and the
 interaction with the users.
 
-\subsubsection{Implicit disambiguation through visual perspective taking}
+\paragraph{Implicit disambiguation through visual perspective taking}
 
 Tom enters the room while carrying a big box (Figure~\ref{fig|vpt}, page 1). He
 approaches the table and asks Jido to handle him the video tape: ``Jido, can
