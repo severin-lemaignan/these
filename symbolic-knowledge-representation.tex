@@ -297,7 +297,6 @@ reformulated ways.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{A Typology of Knowledge Representation Requirements for Robotics}
 \label{sect|features}
-
 We now want to organize requirements from this imaginary cooking scenario where
 numerous desirable features for a knowledge representation system for robotics
 have been identified without any particular order.
@@ -314,18 +313,18 @@ As previously mentioned, we propose six main categories.
 
 \begin{scriptsize}
 \begin{center}
-\begin{tikzpicture}[grow=right, level distance = 3cm, level 1/.style={sibling distance=5mm}]
+\begin{tikzpicture}[taxonomy]
     %[edge from parent fork east]
     %every node/.style={fill=black!30,rounded corners},
     %[parent anchor=east,child anchor=west,grow=east,
     %edge from parent/.style={thick,draw}]
-    \node {Dimensions}
-        child {node {Instantiation}}
-        child {node {Integration}}
-        child {node {Acquisition}}
-        child {node {Reasoning}}
-        child {node {Representation}}
-        child {node {Expressiveness}};
+    \node [taxon] {Dimensions}
+        child {node [taxon] {{\bf F}. Instantiation}}
+        child {node [taxon] {{\bf E}. Integration}}
+        child {node [taxon] {{\bf D}. Acquisition}}
+        child {node [taxon] {{\bf C}. Reasoning}}
+        child {node [taxon] {{\bf B}. Representation}}
+        child {node [taxon] {{\bf A}. Expressiveness}};
 \end{tikzpicture}
 \end{center}
 \end{scriptsize}
@@ -335,13 +334,13 @@ As previously mentioned, we propose six main categories.
 
 \begin{scriptsize}
 \begin{center}
-\begin{tikzpicture}[grow=right, sibling distance=5mm, level distance = 3.5cm]
-    \node {\bf Expressiveness}
-            child {node {Meta-cognition}}
-            child {node {Uncertainty}}
-            child {node {Open/Closed world assumption}}
-            child {node {Expressive power}}
-            child {node {Logic formalism}};
+\begin{tikzpicture}[taxonomy]
+    \node [taxon] {\bf A. Expressiveness}
+            child {node [taxon] {{\bf A.5}. Meta-cognition}}
+            child {node [taxon] {{\bf A.4}. Uncertainty}}
+            child {node [taxon] {{\bf A.3}. OWA/CWA}}
+            child {node [taxon] {{\bf A.2}. Expressive power}}
+            child {node [taxon] {{\bf A.1}. Logic formalism}};
 \end{tikzpicture}
 \end{center}
 \end{scriptsize}
@@ -543,13 +542,13 @@ introspection in general.
 
 \begin{scriptsize}
 \begin{center}
-\begin{tikzpicture}[grow=right, sibling distance=5mm, level distance = 3cm]
-    \node {\bf Representation}
-            child {node {Memory}}
-            child {node {Introspection}}
-            child {node {Possible Worlds}}
-            child {node {Context}}
-            child {node {Roles}};
+\begin{tikzpicture}[taxonomy]
+    \node [taxon] {\bf B. Representation}
+            child {node [taxon] {{\bf B.5}. Memory}}
+            child {node [taxon] {{\bf B.4}. Introspection}}
+            child {node [taxon] {{\bf B.3}. Possible Worlds}}
+            child {node [taxon] {{\bf B.2}. Context}}
+            child {node [taxon] {{\bf B.1}. Roles}};
 \end{tikzpicture}
 \end{center}
 \end{scriptsize}
@@ -615,7 +614,7 @@ may require meta-cognition (for instance to be able to expose its internal
 knowledge), it is not always mandatory. The current state of the robot can be
 represented as a simple instantiation of a specific category (for instance, if
 the robot give an object to the human, this state could be represented with the
-triplets \setstmt{robot performs action1, action1 isA Give}.
+triples \setstmt{robot performs action1, action1 isA Give}.
 
 \paragraph{Modelling of the robot capabilities}
 
@@ -653,6 +652,11 @@ into a hierarchy. Short-term memory is refined with the concept of
     \label{fig|memory_models}
 \end{figure}
 
+It worth emphasing that if memory is commonly associated to the process of
+forgetting facts after a variable amount of \emph{time}, it covers actually
+more mechanisms that are relevant to robotics, like selective remembering
+triggered by a specific context or reinforcement learning.
+
 Most knowledge representation systems offers some kind of memory as a pool of
 facts that are not forgotten by the robot until it is halted (this memory is
 often referred as a \emph{working memory}, but with a meaning unrelated to
@@ -672,18 +676,18 @@ human-like memory organization.
 
 \begin{scriptsize}
 \begin{center}
-\begin{tikzpicture}[grow=right, sibling distance=5mm, level distance = 4cm]
-    \node {\bf Reasoning}
-            child {node {Learning}}
-            child {node {Naive physics}}
-            child {node {Planning}}
-            child {node {Prediction}}
-            child {node {Presupposition}}
-            child {node {Non-monotonicity}}
-            child {node {Uncertainty}}
-            child {node {Lazy evaluation}}
-            child {node {Structural alteration}}
-            child {node {Standard reasoning}};
+\begin{tikzpicture}[taxonomy]
+    \node [taxon] {\bf C. Reasoning}
+            child {node [taxon] {{\bf C.10}. Learning}}
+            child {node [taxon] {{\bf C.9}. Naive physics}}
+            child {node [taxon] {{\bf C.8}. Planning}}
+            child {node [taxon] {{\bf C.7}. Prediction}}
+            child {node [taxon] {{\bf C.6}. Presupposition}}
+            child {node [taxon] {{\bf C.5}. Non-monotonicity}}
+            child {node [taxon] {{\bf C.4}. Uncertainty}}
+            child {node [taxon] {{\bf C.3}. Lazy evaluation}}
+            child {node [taxon] {{\bf C.2}. Structural alteration}}
+            child {node [taxon] {{\bf C.1}. Standard reasoning}};
 \end{tikzpicture}
 \end{center}
 \end{scriptsize}
@@ -760,14 +764,54 @@ generic SWRL ({\em Semantic Web Rule Language}) rules like: \par
 
 \subsubsection{Alteration of the knowledge structure}
 
-In systems
+The content of a knowledge base is often conveniently divided into a
+\emph{structural part} that defines the conceptualisation of a domain in term
+of vocabulary and relations within the concepts, and an \emph{instantiation} of
+this structure into concrete entities.
 
-All systems allow to modify the ABox, not always possible to alter the TBox
+The terms TBox and ABox are commonly found to describe this two different types of
+statements in ontologies. TBox statements describe a system in terms of
+controlled vocabularies, for example, a set of classes and properties. ABox are
+TBox-compliant statements about that vocabulary.
 
+All knowledge representation systems allow to modify the ABox, which can be
+considered as the dynamic part of the knowledge base. It is however not always
+possible to alter the TBox because not all reasoning systems can dynamically
+take into account structural changes in the knowledge base.
+
+Example of TBox alteration include modification of the taxonomy (like addition
+or retractation of a \concept{subClassOf} relation), changes to the asserted
+domain or range of a predicate, addition or retractation of rules.
+
+Supporting TBox alteration has notable consequences on the learning
+capabilities of the system: teaching general facts (\ie, facts at the level of
+whole categories) like ``cars go on roads'' to a robot requires an alteration
+of the TBox.
 
 \subsubsection{Lazy evaluation}
 \label{sect|lazy-evaluation}
 
+\emph{Lazy evaluation} describes the ability for a KRS to delay active
+knowledge acquisition or resoning operations until the value is actually
+needed.
+
+For instance, a system that computes the symbolic relative placement of two
+objects only when this fact is required to answer a query would be said to
+adopt a lazy evaluation strategy, whereas a system that computes {\it a priori}
+such relations (and by consequence, carries out such computation for possibly
+all known objects) would be said to use a \emph{strict evaluation} policy.
+
+Lazy evaluation has an immediate impact on efficiency and scalability of the
+system, and some problems may even be only tractable with a lazy evaluation
+strategy (the relative placements of object is an example of combinatory
+explosion in strict evaluation approaches, although this issue is mitigated in
+real use-cases by heuristics that select a subset of objects to evaluate).
+
+One downside is that the knowledge base never contains explicitly the complete
+set of beliefs of the robot. This limits for instance the ability for the robot
+to react to logical conditions that involves fact that are lazily evaluated
+(``trigger a callback when object A is behind object B'' could be an example of
+a event triggered by a logical condition).
 
 \subsubsection{Reasoning with uncertainty}
 
@@ -877,10 +921,45 @@ performed starting in some initial state.
 in case of failure to provide possible explanation. This can be seen as the
 temporal reverse of the projection task.
 
-\subsubsection{Planning}
+\subsubsection{Task Planning}
 \label{sect|planning}
 
 Making decision based on prediction
+
+Symbolic task planning is the ability for a robot to select a sequence of
+actions in order to reach a given final state. This capability is closely
+related to the previously mentioned projection and legality tasks: for a robot
+to plan, it must be able to build hypothetical states of the world that would
+follow from the successive application of actions (prediction task), and at
+each step, select possible, legal actions based on their pre-conditions
+(legality task). As already mentioned, these tasks are highly non-monotonic.
+
+
+Symbolic task planning in general is a large research
+field\cite{Russell2009planning}. The so-called Classical Planning Problem,
+first, is characterised by a unique known initial state, durationless
+deterministic actions which can be taken only one at a time, and a single
+agent. STRIPS and PDDL are amongst the commonly used languages for representing
+such planning problems.
+
+Planning with nondeterministic durationless actions with probabilities can be
+represented as discrete-time \emph{Markov decision processes} (MDP), and when
+full observability is replaced by partial observability, we deal with
+\emph{partially observable Markov decision process} (POMDP).
+
+\emph{Hierarchical Task Networks} (HTN) are another common formalism for
+planning problems, where an initial set of tasks (\emph{High Level Tasks}, HLA)
+is decomposed into either primitive actions or a new set of subtasks.
+
+From the observation that the core reasoning techniques (back and forward
+chaining) are shared between planners and reasoners used in knowledge
+representation systems, task planning can be considered within the KRS.
+
+It is however common to rely on external components dedicated to symbolic task
+planning (in particular because of the non-monotonicity requirements) with a
+tight link to the KRS for domain retreival and/or resulting plan storage.
+
+%An extensive report on task modeling in OWL ontologies in appendix
 
 \subsubsection{Physics-based reasoning}
 \label{sect|physics}
@@ -905,11 +984,12 @@ that carries the geometries and physical properties of objects.
 
 \begin{scriptsize}
 \begin{center}
-\begin{tikzpicture}[grow=right, sibling distance=5mm, level distance = 3cm]
-    \node {\bf Acquisition}
-            child {node {Dynamic instantiation}}
-            child {node {Grounding}}
-            child {node {Acquisition and fusion}};
+\begin{tikzpicture}[taxonomy]
+    \node [taxon] {\bf D. Acquisition}
+            child {node [taxon] {{\bf D.4} Dynamic instantiation}}
+            child {node [taxon] {{\bf D.3} Motivation}}
+            child {node [taxon] {{\bf D.2} Grounding}}
+            child {node [taxon] {{\bf D.1} Acquisition and fusion}};
 \end{tikzpicture}
 \end{center}
 \end{scriptsize}
@@ -917,23 +997,22 @@ that carries the geometries and physical properties of objects.
 \subsubsection{Knowledge acquisition and modalities fusion}
 \label{sect|knowledge-acquisition}
 
-In the survey inclusion criteria, we have insisted on only considering robotic
-systems that acquire knowledge by themselves, during their runtime.
+In the survey inclusion criteria, we have chosen to only consider robotic
+systems that acquire knowledge by themselves, at runtime.
 
-\emph{Acquiring knowledge} means in our context building new statements
-(usually as new logical facts) connected to our existing knowledge from
-external sources of information. We consider mainly three of them:
-proprioceptive/exteroceptive sensors, interaction with other agents, humans or
-robots, and remote databases. This process has generally at least two steps:
-the information acquisition by itself, and the \emph{transformation} of the
-information into knowledge, \emph{aligned} with the robot existing model
-(following our terminology for information and knowledge, as discussed in the
-introduction).
+In our context, \emph{acquiring knowledge} means to build new logical
+statements from data sources and to anchor them into the existing knowledge. We
+consider three possible sources of data: proprioceptive/exteroceptive sensing,
+interaction with other agents, humans or robots, and remote knowledge bases.
+The acquisition process has generally two steps: the information acquisition by
+itself, and the \emph{transformation} of the information into knowledge,
+\emph{aligned} with the robot existing model (following our terminology for
+information and knowledge, as discussed in the introduction).
 
-Knowledge acquisition is generally not done directly in the knowledge
-representation system. On the contrary, several, if not numerous, external
-components are usually required to convert percepts into symbolic facts and to
-ground them.
+It must be observed that knowledge acquisition is generally not done directly
+in the knowledge representation system. External components (often aggregated
+into knowledge acquisition \emph{pipelines}) are usually required to convert
+percepts into symbolic facts and to ground them.
 
 While we do not review in this article all these systems, the whole process of
 knowledge acquisition is central in cognitive robotic architecture and the
@@ -948,6 +1027,115 @@ at various levels, but in many cases (especially if the modalities are of very
 different natures, like in the example above) merging will require
 symbolic-level reasoning. The KRS has a direct impact on the feasibility and
 ease of such operations.
+
+Let review shortly the three sub-categories of knowledge acquisition.
+
+\begin{scriptsize}
+\begin{center}
+\begin{tikzpicture}[taxonomy]
+    \node [taxon] {\bf D.1 Acquisition and fusion}
+            child {node [taxon] {{\bf D.1.3} Linked Resources}}
+            child {node [taxon] {{\bf D.1.2} Interaction}}
+            child {node [taxon] {{\bf D.1.1} Sensing}};
+\end{tikzpicture}
+\end{center}
+\end{scriptsize}
+
+\paragraph{Sensing}
+
+From the point of view of knowledge representation, the sensing capability can
+be split into proprioceptive sensing (\ie, sensing of the robot own internal
+state) and exteroceptive sensing (sensing of the robot environment). The
+(physical) introspection capabilities of the robot relies on the former.
+
+\fxwarning{What to say here?}
+
+\paragraph{Interaction}
+
+Interaction with other intelligent agents (humans or robots) is another
+important source of knowledge acquisition. It relies obviously on some form of
+sensing (from speech recognition to gesture recognition) but we distinguish it
+from the previous section because \emph{interaction} implies a form of
+communication. Communication is associated to specific functions
+(figure~\ref{fig|communication-model}), and in particular, it implies a shared
+\emph{context} (usually implicit) between interactors.
+
+
+We distinguish between two main interaction channels: verbal and deictic.
+
+\begin{scriptsize}
+\begin{center}
+\begin{tikzpicture}[taxonomy]
+    \node [taxon] {\bf D.1.2 Interaction}
+            child {node [taxon] {{\bf D.1.2.2} Deictic Interaction}}
+            child {node [taxon] {{\bf D.1.2.1} Verbal Interaction}};
+\end{tikzpicture}
+\end{center}
+\end{scriptsize}
+
+\label{sect|nlp}
+
+The field of verbal interaction processing for robots spans from pattern-based,
+constrainted sentences recognition to natural, bidirectional, unconstrained
+verbal communication. Kruijff et al. provides in~\cite{Kruijff2010} an
+up-to-date survey of literature on situated human-robot dialogue, focusing on
+formal representation systems, bi-directionality of the interaction and context
+building.
+
+Natural Language Processing (NLP) is a large research field by itself, and
+while the robotic community may be lagging behind on many theoretical aspects,
+it brings one important aspect: the embodiment. Because the interactors, both
+the robot and the human, are establishing a communication within a shared
+physical context, the verbal communication channel is complemented by deictic
+channels, back channels and possibly shared physical experiences: a human can
+show something to a robot, saying ``Give me this''. This is simply not possible
+for a virtual agent.
+
+Several of the knowledge representation systems we present have developed
+specific built-in mechanisms or extensions to parse, ground and possibly
+rebuild natural language.
+
+Deictic (used in the literal meaning of ``display, demonstration, reference'')
+interaction is also an established field of research in human-robot
+interaction. Common deictic forms of communication include attentional focus
+(via face and gaze tracking) and joint attention, pointing, emotional
+expressions (based on face expressions, postures, emotional gestures).
+
+Like other knowledge acquisition modalities, the recognition and interpretation
+of deictic communication is rarely directly included in a KRS, but, as
+previously mentioned, the symbolic representation of such communication acts is
+relevant and important to achieve successful multi-modal interactions.
+
+\paragraph{Linked Knowledge Resources}
+\label{sect|lod}
+
+Robots, and in particular service robots, can access (with sometimes some
+security-related constraints) the World Wide Web and remote knowledge stores.
+
+The current shift towards the Semantic Web (\ie structured, annotated data that
+are easily machine-processable) makes increasingly easy to have robots to reuse
+autonomously this knowledge. The DBPedia project, for instance, illustrates
+well the tendency: it provides an automatically generated RDF version of the
+Wikipedia encyclopedia.
+
+In its current state, the relevance of the DBPedia project in our context is
+however limited: the triples that are extracted are mostly ``mechanical'' (like
+the categories of a term, or factual informations extracted from Wikipedia's
+InfoBox), and the vast majority of the knowledge actually contained in the
+encyclopedia pages remains out of reach of automated parsers. Efforts like {\sc
+ReVerb}~\cite{Fader2011} work however at automatic extraction of triples by
+examining subject-verb-object relations in plain text.
+
+Another notable project that seeks at providing large amount of
+machine-friendly common-sense knowledge is the MIT's OpenMind
+project~\cite{Singh2002}. The project is designed to let the general public
+easily add common-sense statements in semi-controlled natural language, that is
+then processed to a publicly available ontology.
+
+An other approach that is easier at short-term to let robots remotely access
+knowledge repositories consists is building robot-specific shared repositories,
+with declarative and/or procedural (\ie, plan library) knowledge. The
+RoboEarth~\cite{Waibel2011} project is an example of such an effort.
 
 \subsubsection{Grounding/anchoring strategies}
 \label{sect|grounding}
@@ -979,6 +1167,11 @@ Varadarajan2011}.
     \label{fig|semanticmap}
 \end{figure}
 
+\subsubsection{Intrinsic Motivation}
+
+\cite{Oudeyer2007} -> page 2 gives a detailled account of psychological grounds.
+Curiosity, Pro-active behaviour...
+
 \subsubsection{Dynamic instantiation}
 \label{sect|new-instances}
 Ability to automatically create new object instances
@@ -989,13 +1182,12 @@ Ability to automatically create new object instances
 
 \begin{scriptsize}
 \begin{center}
-\begin{tikzpicture}[grow=right, sibling distance=5mm, level distance = 3cm]
-    \node {\bf Integration}
-            child {node {Performances}}
-            child {node {Monitoring}}
-            child {node {Natural Language}}
-            child {node {Executive layers}}
-            child {node {Sensori-motor}};
+\begin{tikzpicture}[taxonomy]
+    \node [taxon] {\bf E. Integration}
+            child {node [taxon] {{\bf D.4} Performances}}
+            child {node [taxon] {{\bf D.3} Monitoring}}
+            child {node [taxon] {{\bf D.2} Executive layers}}
+            child {node [taxon] {{\bf D.1} Sensori-motor}};
 \end{tikzpicture}
 \end{center}
 \end{scriptsize}
@@ -1057,31 +1249,6 @@ at this level have notable consequences on the whole design of the upper
 control architecture of the robot, in particular regarding its modularity and
 the ease of addition of new components.
 
-\subsubsection{Language Processing}
-\label{sect|nlp}
-
-The scope of this survey is service robotic, which suggest human-robot
-interaction. While numerous modalities of communication between humans and
-robots do exist and have been extensively studied, the most challenging of
-these interactions is natural, bidirectional, unconstrained verbal
-communication. Kruijff et al. provides in~\cite{Kruijff2010} an up-to-date
-survey of literature on situated human-robot dialogue, focusing on formal
-representation systems, bi-directionality of the interaction and context
-building.
-
-Natural Language Processing (NLP) is a large research field by itself, and
-while the robotic community may be lagging behind on many theoretical aspects,
-it brings one important aspect: the embodiment. Because the interactors, both
-the robot and the human, are establishing a communication within a shared
-physical context, the verbal communication channel is complemented by deictic
-channels, back channels and possibly shared physical experiences: a human can
-show something to a robot, saying ``Give me this''. This is simply not possible
-for a virtual agent.
-
-Several of the knowledge representation systems we present have developed
-specific built-in mechanisms or extensions to parse, ground and possibly
-rebuild natural language.
-
 \subsubsection{Monitoring and debugging}
 \label{sect|debugging}
 
@@ -1103,27 +1270,66 @@ cognitive behaviour of the robot, is useful.
 \subsubsection{Evaluation of performances}
 \label{sect|performances}
 
-Benchmarks of symbolic systems for robots are notoriously hard to conduct for
+
+Benchmarks of symbolic systems for robots are hard to conduct for
 several reasons: identifying good metrics for robotic experiments in general is
 difficult because of the complex interactions between tenth of modules running
-in parallel. Isolating the role of one specific component is thus hard.
-Furthermore, knowledge representation systems are usually tightly connected to
-numerous other modules, and the lack of standard API for knowledge services
-makes it especially hard to switch between KRS to compare them. Also, because
+in parallel, and isolating one specific component is difficult.
+Also, knowledge representation systems are often tightly coupled to
+the other modules, and the lack of standard API for knowledge services
+makes it especially hard to switch between KRS to compare them. Finally, because
 service robots are design to act in rich, dynamic environments, possibly with
 humans, building repeatable experiments is challenging.
 
-Cognitive architectures and KRS in particular are consequently often
-benchmarked with synthetic datasets (which leads to other issues: how to assess
-the meaningfulness of the performance of a reasoner on an artificial
-ontology?~\cite{Bail2010}) or \emph{toy} experiments~\cite{Chong2009} that do
-not reflect real-world complexity.
+\begin{scriptsize}
+\begin{center}
+\begin{tikzpicture}[taxonomy]
+    \node [taxon] {\bf D.5 Performance \\Evaluation}
+            child {node [taxon] {{\bf D.5.2} Cognitive Performances}}
+            child {node [taxon] {{\bf D.5.1} Raw Performances}};
+ \end{tikzpicture}
+\end{center}
+\end{scriptsize}
 
-While evaluating the performances of knowledge representation systems
-themselves may be difficult, the cognitive performances of the robot as a whole
-can be aptly evaluated through ``classical'' tests from the psychology (like
-False-Belief experiments~\cite{Leslie2000} or the Token
-test~\cite{DiSimoni1978}).
+
+\paragraph{Raw Performances} The \emph{raw performance} is evaluated on
+quantitative benchmarks. The main metric is the \emph{scalability}
+$\mathcal{S}^{KRS}$ of the system with the size of the knowledge base
+$\sigma=|\Delta^{\mathcal{I}}|$  (in term of atoms or statements).
+
+We call \emph{relaxation time} $\mathcal{R}^{\mathcal{M}}$ the (averaged) time
+required by the system after a model modification of type $\mathcal{M}$ before
+being available for further interaction, and \emph{query time}
+$\mathcal{Q}^{\mathcal{M}'}$ the (averaged) time to execute a query of
+complexity $\mathcal{M}'$ on the KRS. The type $\mathcal{M}$ of model
+alteration is either an ABox modification (addition/removal of an instance) or
+a TBox alteration (addition/removal of a class, a class restriction or a rule).
+Query complexity $\mathcal{M}'$ is...\fxwarning{find references}.
+
+\emph{Temporal scalability} is defined in term of the nature of the function
+$f^{\mathcal{M}, \mathcal{M}'}(\sigma) = \mathcal{R}^{\mathcal{M}}(\sigma) +
+\mathcal{Q}^{\mathcal{M}'}(\sigma)$ (\ie the relation of the relaxation time
+and query time to the knowledge base size). \emph{Space scalability} is the
+relation of memory consumption to the size. The scalability is tightly coupled
+to the expressiveness of the underlying knowledge model, which need to be known
+for the scalability measurement to be meaningful.
+
+Note that robotic applications may have a knowledge base size relatively small
+compared to the complexity of its TBox. In that case the relaxation and query
+times for a constant, average knowledge size $\sigma$ may be more relevant as a
+metric for KRS raw performance.
+
+Because of coupling and repeatability issues we have mentioned, raw
+performances of KRS are often benchmarked with synthetic datasets (which leads
+to issues: how to assess the meaningfulness of the performance of a reasoner on
+an artificial ontology?~\cite{Bail2010}) or toy experiments~\cite{Chong2009}
+that do not always model the whole complexity of real-world application.
+
+\paragraph{Cognitive Performances} While evaluating the raw performances of
+knowledge representation systems in a relevant manner may be difficult, the cognitive
+performances of the robot as a whole can be also evaluated through
+``classical'' tests from the psychology (like False-Belief
+experiments~\cite{Leslie2000} or the Token test~\cite{DiSimoni1978}).
 
 However, the performance evaluation of current tools is mostly qualitative and
 scenario-specific (``did my system do the job for my task?''), and amongst the
@@ -1133,17 +1339,108 @@ that could be compared to other system.
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Knowledge instantiation}
 
-How much knowledge is available? Which content? How big is the knowledge base?
+\begin{scriptsize}
+\begin{center}
+\begin{tikzpicture}[taxonomy]
+    \node [taxon] {\bf F. Knowledge instantiation}
+            child {node [taxon] {{\bf F.5} Self-Knowledge}}
+            child {node [taxon] {{\bf F.4} Metrics}}
+            child {node [taxon] {{\bf F.3} Granularity}}
+            child {node [taxon] {{\bf F.2} Common-sense and Alignement}}
+            child {node [taxon] {{\bf F.1} Design Strategy}};
+ \end{tikzpicture}
+\end{center}
+\end{scriptsize}
 
-\begin{itemize}
-	\item  Which underlying knowledge (\emph{common-sense}, \emph{upper knowledge}\ldots{})
-	\begin{itemize}
-		\item  top-down approach?
-	\end{itemize}
+This last branch of our taxonomy looks at the actual \emph{content} of the
+knowledge base: the knowledge instantiation. Here, \emph{instantiation} does
+not only refer to the instantiation of the knowledge structure (what we have
+called the ABox), but also includes the knowledge structure itself (the TBox).
 
-\end{itemize}
+While we have previously mentioned features of knowledge representation system
+that enable the robot to fill its knowledge base with content and alter the
+knowledge structure, most of the systems also come with a certain amount of
+initial knowledge that often includes \emph{common-sense} knowledge (\ie facts
+that widely known to humans, and hence often implicit: ``to put a cake in the
+oven, one must first open the oven's door'').
+
+The design strategy, the choice to rely on common-sense knowledge or not, the
+reuse of standard ontologies, the quantity of {\it a priori} knowledge are many
+parameters that lead to different knowledge models.
+
+\subsubsection{Design Strategy}
+
+Ontology engineering has grown into a research field of its own, covering
+formalized methodologies for ontology creation, reuse, modularisation, etc.
+
+The creation
+
+Two main approaches are common in the cognitive robotic community:
+\emph{top-down} design and \emph{bottom-up}.
+
+\subsubsection{Common-sense and alignment with Standard Upper-ontologies}
+
+At section~\ref{sect|lod} we have presented how remote knowledge bases are a
+valuable source of knowledge, including common-sense knowledge, that robot can
+extract.
+
+\subsubsection{Granularity}
+
+The knowledge \emph{granularity} qualifies the level of details or refinement
+of the knowledge stored.
+
+...
+
+The storage of literal values is a particular case: while knowledge
+representation systems have been considered until now mostly as symbolic
+systems, they can often represent literal values (in particular, numerical
+values) as well.
+
+Depending on the representation language, literal values can be naturally
+represented and processed (common case in logic programming language) or not
+(storing numerical value, let alone matrices, in OWL is cumbersome).
+
+\subsubsection{Metrics}
+
+Qualitative and quantitative metrics give an insight on the size and
+expressive complexity of ontologies.
+
+Table~\ref{table|upper_onto_metrics} gives such metrics for four major
+upper-ontologies commonly used in the semantic Web community (taken
+from~\cite{Mascardi2007} and the projects' respective websites).
 
 
+\begin{table}
+\begin{center}
+
+\begin{tabular}{llllll}
+\toprule
+{\bf Project} & {\bf Terms} & {\bf Assertions} \\
+\midrule
+Cyc & > 300 000 & > 3 000 000 & \\
+YAGO & > 10 000 000 & > 120 000 000 \\
+SUMO & 20 000 & 60 000 \\
+DBPedia (for English) & 1 840 000 & 385 000 000\\
+OpenMind Common Sense (for English) & & 1 000 000\\
+\bottomrule
+
+\end{tabular}
+\end{center}
+\caption{Selection of metrics for the major upper-ontologies.}
+\label{table|upper_onto_metrics}
+\end{table}
+
+
+
+\subsubsection{Self-Knowledge}
+
+``Self-knowledge'' is the term used in psychology to describe the knowledge
+that an individual has, acquires or infers about itself through its
+experiences. It answers the question ``What am I like?''.
+
+For a robot to have at its disposal self-knowledge is closely link to the
+introspective capability that we have previously mentioned
+(section~\ref{sect|introspection})
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
