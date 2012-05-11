@@ -1874,66 +1874,86 @@ the API makes no assumptions on implementations regarding:
 
 \subsection{The API}
 
+The API is divided in five parts:
+\begin{enumerate}
+    \item Methods related to service management,
+    \item Methods related to knowledge alteration,
+    \item Methods related to knowledge querying,
+    \item Methods related to models manipulation and finally
+    \item Methods related to taxonomy walking.
+\end{enumerate}
+
+Parts 2 and 3 are the two main parts, involved with knowledge manipulation.
+
+\paragraph{Knowledge Alteration} Methods in part 2 are build around the generic
+\jmeth{revision} method, that takes as parameter a set of logical propositions
+and a policy.
+
+A policy is represented as a set of \texttt{(key, value)} pairs whose possible
+values are presented in table~\ref{table|knowledge-policies}.
+
+\begin{table}
+\begin{center}
+
+    \begin{tabular}{lp{4cm}p{9cm}}
+    \toprule
+    Key & Values & Meaning \\
+    
+    \midrule
+
+    { \tt method} & {\tt add} \emph{(default)} & the statements are added to the
+    knowledge base, without ensuring consistency.\\ 
+    
+    \midrule
+
+    & {\tt safe\_add} & the statements are added only if they (individually) do
+    not lead to inconsistencies.\\ 
+
+    \midrule
+    
+    & {\tt retract} & the statements are removed from the model. Associated
+    probabilities are discarded.\\ 
+    
+    \midrule
+    
+    &{\tt update} & Updates objects of one or several statements in the
+    specified model. If the predicate is not inferred to be \emph{functional}
+    (\ie, it accept only one single value), behaves like {\tt add}.\\ 
+    
+    \midrule
+    
+    & {\tt revision} or {\tt safe\_update} & Updates objects of one or several
+    statements in the specified model if it does not (individually) lead to
+    inconsistencies. If the predicate is not inferred to be \emph{functional}
+    (\ie, it accepts only one single value), behaves like {\tt safe\_add}.\\ 
+    
+    \midrule
+    
+    {\tt model} & {\tt all} \emph{(default)} & all existing \emph{models}
+    (section~\ref{sect|kbapi-models}) are impacted by the change.\\
+
+    \midrule
+    
+    & a valid model id or a set of valid model id & only the specified model(s)
+    are impacted\\
+    
+    \bottomrule
+    
+    \end{tabular}
+
+\end{center}
+\caption{Knowledge revision policies.}
+\label{table|knowledge-policies}
+\end{table}
+
+\paragraph{Knowledge Querying} The main method that allow for knowledge
+retrieval is \jmeth{find}. A \jmeth{find} query is build as a set of partial
+statements (\ie, statements with named or anonymous unbound terms) that form a
+pattern. It returns statements matching the pattern.
+
+``Shortcut'' methods are offered by the API for common operations
+(adding/retracting a statement, checking if a statement exists, etc.). Where
+relevant, probabilistic versions of the methods are also defined.
+
 The complete API reference is provided in Appendix~\ref{chapter|kb-api}.
-
-
-\subsection{Discussion on design issues}
-
-
-\subsubsection{General}
-
-
-\begin{itemize}
-\item  Balance between ease of use/understand and completeness
-\item  Should we specify a communication protocol (for instance JSON-RPC)?
-\item  API = specification only, or as well a "middle-layer" that convert to a common, unique representation?
-\end{itemize}
-
-\subsubsection{Expressiveness}
-
-
-\begin{itemize}
-\item  Should we be more specific on the required expressiveness?
-\item  What are the pros/cons of not having requirements?
-\item  Do we (and how much do we) limit research on knowledge representation system by designing this API?
-\end{itemize}
-
-\subsubsection{Probabilities}
-
-
-\begin{itemize}
-\item  At statement level? At set of statements level? at model level?
-\end{itemize}
-
-\subsubsection{Extensibility}
-
-
-\begin{itemize}
-\item  Policies can easily be extended
-\item  method \texttt{special} allows implementation specific extensions
-\end{itemize}
--
-
-
-\subsection{Other ideas, out of the API}
-
-
-\begin{itemize}
-\item  events ?
-\begin{itemize}
-\item  registerEvent(String, String, String, List): registers an event. Expected parameters are: type, triggering type, variable, event pattern.
-\item  registerEvent(String, String, List): registers an event. Expected parameters are: type, triggering type, event pattern.
-\end{itemize}
-
-\end{itemize}
-
-\begin{itemize}
-\item  SPARQL ?
-\begin{itemize}
-\item  sparql(String, String): performs one SPARQL query on the ontology
-\end{itemize}
-
-\end{itemize}
-
-
 

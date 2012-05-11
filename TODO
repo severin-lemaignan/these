@@ -60,15 +60,7 @@ TODO Thesis
 100%         2.3.7 OMRKF
 100%         2.3.8 Ke Jia Project
 100%         2.3.9 ARMAR/Tapas
-         2.4 The Knowledge API
-100%         2.4.1 Rationale and General Considerations
- 50%         2.4.2 The API
- 10%         2.4.3 Discussion on design issues
-                 General
-                 Expressiveness
-                 Probabilities
-                 Extensibility
-  ?          2.4.4 Other ideas, out of the API
+100%     2.4 The Knowledge API
          
      3 The OpenRobots Ontology framework
  65%     3.1 Functional overview
