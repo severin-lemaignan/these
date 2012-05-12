@@ -530,6 +530,12 @@ introspection in general.
 \subsection{How things are represented?}
 \label{sect|higher-level-domain-representation}
 
+We do not discuss in this section the general strategies to construct a
+knowledge model (they will be presented in
+section~\ref{sect|design-strategies}). We focus here on questions that involve
+representational challenges (time, space, context) or require specific
+cognitive capabilities (theory of mind, introspection, memory).
+
 \begin{scriptsize}
 \begin{center}
 \begin{tikzpicture}[taxonomy]
@@ -543,12 +549,65 @@ introspection in general.
 \end{center}
 \end{scriptsize}
 
-
 \subsubsection{Role Representations}
 
-Thematic roles
+This section discusses strategies and approaches to represent in a knowledge
+model three important \emph{roles}\fxwarning{Reference on the term 'role'?}.
 
-Spatio-Temporal Representations:
+\begin{scriptsize}
+\begin{center}
+\begin{tikzpicture}[taxonomy]
+    \node [taxon] {\bf B.1 Roles}
+            child {node [taxon] {{\bf B.1.3}. Actions}}
+            child {node [taxon] {{\bf B.1.2}. Time}}
+            child {node [taxon] {{\bf B.1.1}. Space}};
+\end{tikzpicture}
+\end{center}
+\end{scriptsize}
+
+
+\paragraph{Representation of space}
+
+Symbolic representation of space is a widely studied topic. In particular, a
+large literature corpus is available on spatial ontologies.
+
+Two main classes of spatial relations are usually represented at the symbolic
+level: the topology of environments and the placement of physical entities.
+
+\begin{scriptsize}
+\begin{center}
+\begin{tikzpicture}[taxonomy]
+    \node [taxon] {\bf B.1.1 Space}
+            child {node [taxon] {{\bf B.1.1.2}. Placement}}
+            child {node [taxon] {{\bf B.1.1.1}. Topology}};
+\end{tikzpicture}
+\end{center}
+\end{scriptsize}
+
+...topology??
+
+Symbolic representation of entities placement can be absolute or relative. The
+relation \concept{isOn}, for example, leads to absolute statements: the
+validity of the relation is independent of the nature of its subjects and
+objects, and is also independent of the observer.
+
+On the contrary, the relation \concept{nextTo} is relative, and depends on the
+relative size of the subject and the object. Two houses distant of 2 meters
+from each other can be considered as next to each other. Two ants separated by
+2 meters are not next to each other.
+
+The relation \concept{leftOf} is another example of relative spatial relation,
+this time because it depends on the observer viewpoint.
+
+\fxwarning{\concept{front}/\concept{back} -> entities have or not a concept of front/back.}
+
+Choices must be made in the knowledge representation system to adequately
+represent relative spatial relations. Options include the computation of such
+relations only on-demand, when the context is know (which viewpoints, etc.) or
+storage of these facts in different models, one per agent.
+
+\fxwarning{Find references on that subject -> classification of spatial
+relations. Wikipedia?}
 
 \paragraph{Representation of time}
 
@@ -557,18 +616,73 @@ As an agent acting at human-like time scale and dealing with temporal concepts
 time. Time representation is split into two distinct abilities: representing
 time points (both in the past -- which is roughly equivalent to assignment of
 timestamps to events the robot perceives -- and in the future), and
-representing \emph{passing time} (durations, timespans) like in \emph{``the
-eggs will be cooked in 10 min''}.
+representing \emph{passing time} (situations, durations, timespans) like in
+\emph{``the eggs will be cooked in 10 min''}.
+
+We call \emph{situations} all temporal concepts with a non-zero duration,
+whereas \emph{events} are durationless temporal concepts.
 
 \fxfatal{Discuss time chronicles~\cite{Ghallab1996}}
 \fxfatal{Discuss Allen intervals}
 
-We call a system that do not account for time (\ie that permanently lives in
+We call a system that does not account for time (\ie that permanently lives in
 present) \emph{atemporal}.
 
-\paragraph{Representation of space}
 
-\paragraph{Representation of events and actions}
+\paragraph{Actions}
+
+Events and actions are two temporal concepts that are of particular importance to
+robotic systems, as systems that perceive, react and perform in their environment.
+
+While representation of events \fxwarning{revient à} to label a timestamp,
+representation of actions are more complex since they semantically imply
+interactions between concepts. From a taxonomy point of view, actions are a
+particular type of event that normaly leads to a situation corresponding to the
+action realization.
+
+\emph{Thematic roles}~\cite{Gruber1965} (also found as \emph{semantic roles} or
+\emph{theta roles} in the literature) allow to semantically qualify the
+parameters of an action. The recipient of the action, the performer, the object
+acted upon, the destination are some example of common thematic roles.
+
+Table~\ref{table|theta-roles} presents a more comprehensive list of thematic
+roles proposed by \cite{Aarts1997} (see~\cite{Gutierrez2001} for a comparison
+of other sets of thematic roles present in the literature).
+
+\begin{table}
+\begin{center}
+
+\begin{tabular}{lp{12cm}}
+
+\toprule
+       Role & Meaning \\
+\midrule
+      Agent & The \emph{doer} or instigator of the action denoted by the predicate. \\
+    Patient & The \emph{undergoer} of the action or event denoted by the predicate. \\
+      Theme & The entity that is moved by the action or event denoted by the predicate. \\
+Experiencer & The living entity that experiences the action or event denoted by the predicate. \\
+       Goal & The location or entity in the direction of which something moves. \\
+Benefactive & The entity that benefits from the action or event denoted by the predicate. \\
+     Source & The location or entity from which something moves. \\
+ Instrument & The medium by which the action or event denoted by the predicate is carried out. \\
+   Locative & The specification of the place where the action or event denoted by the predicate in situated. \\
+\bottomrule
+
+\end{tabular}
+\end{center}
+\caption{Thematic Roles~\cite{Aarts1997}.}
+\label{table|theta-roles}
+\end{table}
+
+In the context of robotic, a \emph{task} represents the abstract model of an
+action. Tasks usually specify at least the conditions required to performed the
+action and the consequences of the realization of the action, and are central
+to the decisional layers of the robot, in particular for the planning,
+monitoring and execution control activities. Knowledge representation systems
+may thus have specific mechanisms to represent them (and possible, to reason
+about them, as presented in section~\ref{sect|planning}).
+
+%An extensive report on task modeling in OWL ontologies in appendix
 
 \subsubsection{Context modeling}
 
@@ -801,7 +915,7 @@ One downside is that the knowledge base never contains explicitly the complete
 set of beliefs of the robot. This limits for instance the ability for the robot
 to react to logical conditions that involves fact that are lazily evaluated
 (``trigger a callback when object A is behind object B'' could be an example of
-an event triggered by a logical condition).
+a event triggered by a logical condition).
 
 \subsubsection{Reasoning with uncertainty}
 
@@ -1174,10 +1288,10 @@ Ability to automatically create new object instances
 \begin{center}
 \begin{tikzpicture}[taxonomy]
     \node [taxon] {\bf E. Integration}
-            child {node [taxon] {{\bf D.4} Performances}}
-            child {node [taxon] {{\bf D.3} Monitoring}}
-            child {node [taxon] {{\bf D.2} Executive layers}}
-            child {node [taxon] {{\bf D.1} Sensori-motor}};
+            child {node [taxon] {{\bf E.4} Performances}}
+            child {node [taxon] {{\bf E.3} Monitoring}}
+            child {node [taxon] {{\bf E.2} Executive layers}}
+            child {node [taxon] {{\bf E.1} Sensori-motor}};
 \end{tikzpicture}
 \end{center}
 \end{scriptsize}
@@ -1274,9 +1388,9 @@ humans, building repeatable experiments is challenging.
 \begin{scriptsize}
 \begin{center}
 \begin{tikzpicture}[taxonomy]
-    \node [taxon] {\bf D.5 Performance \\Evaluation}
-            child {node [taxon] {{\bf D.5.2} Cognitive Performances}}
-            child {node [taxon] {{\bf D.5.1} Raw Performances}};
+    \node [taxon] {\bf E.4 Performance \\Evaluation}
+            child {node [taxon] {{\bf E.4.2} Cognitive Performances}}
+            child {node [taxon] {{\bf E.4.1} Raw Performances}};
  \end{tikzpicture}
 \end{center}
 \end{scriptsize}
