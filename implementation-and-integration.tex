@@ -1145,8 +1145,25 @@ components involved in the situated dialogue grounding.
     \label{fig|dialog-integration}
 \end{figure}
 
-Chapter~\ref{chapt|dialogs} presents in greater details the integration of
-the {\sc Dialogs} module for situated natural language processing with ORO.
+Verbal interaction with a human is either initiated by the human or by the robot.
+
+In case of human initiated dialogue, two main steps follow: understanding the
+direct meaning of the sentence (what does the words mean?), and understanding
+the intent of the sentence. The first step usually requires a large amount of
+queries to the knowledge base to clarify and disambiguate the meaning of the
+sentence ; the second step, depending on the intent (question, desire,
+assertions), leads to either other queries (to answer a question) or new
+assertions.
+
+An interaction initiated by the robot usually follows an event triggered by the
+controller (or possibly directly by the knowledge base). The dialogue that it
+initiates then requires the same interaction capabilities with the knowledge
+base that we mentioned in the previous paragraph.
+
+Studying the integration of natural language grounding with a symbolic
+knowledge base is one of the focus of the thesis, and the next chapter is
+entierly dedicated to {\sc Dialogs}, a component for situated natural language
+processing, and its integration with ORO.
 
 %%%%%%%%%%%%%%%%%
 
