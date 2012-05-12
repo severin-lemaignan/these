@@ -176,7 +176,7 @@ to the knowledge models always access both the \emph{asserted} and
 with no reasoner without any visible API change for the modules. They will
 simply manipulate only asserted facts.
 
-\subsubsection{API}
+\subsection{API}
 
 As of version 0.8, the ORO server API exposes about 50 methods (some of them
 are besides polymorphic) organised into seven categories: \emph{Base}, \emph{Agents},
@@ -191,7 +191,7 @@ the API. In future releases, the API could in consequence be shortened.
 
 The current API is provided in appendix~\ref{chapt|oro-api}.
 
-\subsubsection{Java Implementation}
+\subsection{Java Implementation}
 \label{sect|java-impl}
 
 The ORO server has been developed with modularity in mind, thus most of its
@@ -210,13 +210,15 @@ instantiate one front-end (\jinterface{IConnector}), one main back-end
 (\jinterface{IOntologyBackend}) and several modules (\jinterface{IModule}),
 including plugins that are loaded at run-time.
 
-Modules commonly also implement the \jinterface{IServiceProvider} interface to
-expose \emph{services} (\jclass{IService}). These are the actual methods found
+Modules usually also implement the \jinterface{IServiceProvider} interface to
+expose \emph{services} (\jinterface{IService}). These are the actual methods found
 in the server API. Java methods that belongs to the API simply need to be
-decorated with a \jinterface{@RPCMethod} Java annotation to automatically
-exported. Extending the server API is thus simply a matter of annotating any
+decorated with a \jinterface{@RPCMethod} Java annotation to be automatically
+exposed. Extending the server API is thus simply a matter of annotating any
 Java method with \jinterface{@RPCMethod}. Listing~\ref{code|oro-add} shows one
-example of a service annotated in such a way, the {\tt add} method.
+example of a service annotated in such a way, the {\tt add} method. This method
+convert a set of strings representing triples into \jinterface{IStatements}, 
+and add them to the triple store with the back-end method \jmeth{oro.add}.
 
 \lstset{language=java}
 \begin{lstlisting}[caption=The {\tt add} method from ORO {\tt BaseModule}, 
@@ -241,6 +243,16 @@ public void add(Set<String> rawStmts, String memProfile)
 }
 \end{lstlisting}
 
+As visible on the figure~\ref{fig|oro-impl-java}, the \jclass{AgentsModule}
+plays a particular role: it manages the alternative knowledge models of other
+agents, and store a \jinterface{IOntologyBackend} for each of them. This module
+also re-export a large part of the services exposed by the \jclass{BaseModule}
+(methods for standard knowledge manipulation), but in their multi-agent
+versions.
+
+This design issue (duplication of certain basic services) is due to the
+historical development of ther ORO server, and must be improved in future
+versions.
 
 %%%%%%%%%%%%%%%%%
 \section{Bindings to other components/languages}
