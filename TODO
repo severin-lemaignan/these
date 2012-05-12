@@ -4,30 +4,24 @@ TODO Thesis
 100% Abstract
   0% Résumé
   0% Zusammenfassung
-     
+100% Conventions
+
  35% 1 Introduction: Human-Robot interaction and Knowledge
  45%     1.1 The general context of Human-Robot interaction in this work
  75%     1.2 A Prototypical Scenario
 100%     1.3 Contributions
-100%         1.3.1 Scientific contributions
-100%         1.3.2 Technical contributions
  10%     1.4 What are the challenges?
  10%         1.4.1 Specific requirements of human-robot interaction
   0%             Human communication
   0%             Perspective-Taking, False Beliefs, Theory of Mind
   0%             and also...
  10%         1.4.2 Targeted applications/experiments
-  0%     1.5 Organisation of the thesis
+100%     1.5 Organisation of the thesis
          
- 20% 2 Symbolic knowledge representation
+ 75% 2 Symbolic knowledge representation
  75%     2.1 What do we call "knowledge"?
          2.2 A Typology of Knowledge Representation Requirements for Robotics
 100%         2.2.1 Expressiveness: What Can be Represented?
-                 Main Logic Formalisms
-                 Expressive Power
-                 Open World and Close World Assumptions
-                 Representation of uncertainty and likelihood
-                 Meta-cognition: knowledge on the knowledge
              2.2.2 How things are represented?
  10%             Role Representations
  30%             Context modeling
@@ -36,26 +30,26 @@ TODO Thesis
 100%             Memory
              2.2.3 Reasoning Techniques
 100%             Standard reasoning techniques
- 20%             Alteration of the knowledge structure
-  0%             Lazy evaluation
+100%             Alteration of the knowledge structure
+100%             Lazy evaluation
   0%             Reasoning with uncertainty
  70%             (Non) Monotonic Reasoning
 100%             Presupposition Accommodation
  10%             Prediction, projection and diagnosis tasks
-  0%             Planning
+100%             Planning
 100%             Physics-based reasoning
   0%             Learning
              2.2.4 Acquiring Knowledge
 100%             Knowledge acquisition and modalities fusion
 100%             Grounding/anchoring strategies
+ 10%             Intrinsic Motivation
   0%             Dynamic instantiation
 100%         2.2.5 Practical Integration in Robotic Architectures
-                 Integration with sensori-motor layers
-                 Integration with executive layers
-                 Language Processing
-                 Monitoring and debugging
-                 Evaluation of performances
-  0%         2.2.6 Knowledge instantiation
+             2.2.6 Knowledge instantiation
+ 10%             Design Strategies
+  0%             Granularity
+ 30%             Metrics
+ 30%             Self-Knowledge
          2.3 Surveyed systems
   0%         2.3.1 KnowRob
    -         2.3.2 ORO
@@ -66,19 +60,11 @@ TODO Thesis
 100%         2.3.7 OMRKF
 100%         2.3.8 Ke Jia Project
 100%         2.3.9 ARMAR/Tapas
-         2.4 The Knowledge API
-100%         2.4.1 Rationale and General Considerations
- 50%         2.4.2 The API
- 10%         2.4.3 Discussion on design issues
-                 General
-                 Expressiveness
-                 Probabilities
-                 Extensibility
-  ?          2.4.4 Other ideas, out of the API
+100%     2.4 The Knowledge API
          
      3 The OpenRobots Ontology framework
  65%     3.1 Functional overview
- 10%     3.2 The ORO Knowledge model
+         3.2 The ORO Knowledge model
 100%         3.2.1 Expressiveness: What Can be Represented?
  50%         3.2.2 How things are represented?
   0%             Role Representations
@@ -86,11 +72,6 @@ TODO Thesis
                  Introspection: Who am I? What can I do?
 100%             Multi-lingual support
 100%         3.2.3 Reasoning Techniques
-100%             Standard reasoning techniques
-100%             Classification and discrimination algorithms
-100%             Memory
-100%             Knowledge Structure Alteration and Learning
-100%             Fast Concept Lookup
  10%     3.3 Knowledge instanciation: the OpenRobots Common-Sense Ontology
              3.3.1 Designing the OpenRobots common-sense ontology
          
@@ -102,17 +83,11 @@ TODO Thesis
 100%         4.1.4 API
  80%         4.1.5 Java Implementation
 100%     4.2 Bindings to other components/languages
-100%         4.2.1 Language bindings
-100%         4.2.2 Interface with robotic middlewares
 100%     4.3 Monitoring and debugging
-100%         4.3.1 Logging
-100%         4.3.2 Visualisation
- 75%     4.4 Integration in the robot architecture
+ 85%     4.4 Integration in the robot architecture
 100%         4.4.2 Acquiring and Anchoring Knowledge in the physical world: the
                    SPARK module
-             4.4.3 Integration with symbolic task planning and executive layers
-100%             Symbolic Task Planning
- 75%             Execution Control
+100%         4.4.3 Integration with symbolic task planning and executive layers
  50%         4.4.4 Integration with natural language processors
          
 95%  5 An advanced application: situated natural language processing
@@ -128,14 +103,16 @@ TODO Thesis
              5.3.3 Informational Content Extraction Requiring Clarification
          
      6 Evaluation
-  0%     6.1 Limits of ORO
+ 30%     6.1 Limits of ORO
  20%     6.1 Comparison of oro server with other existing systems
   0%         6.1.1 Performances Analysis
          6.2 Experimental evaluation
 100%         6.2.1 Simulation of HRI interaction
 100%         6.2.2 Case Studies
-100%         6.2.3 First Interaction Experiment
-  0%         6.2.4 Second Interaction Experiment
+ 75%         6.2.3 Interaction Experiments
+100%            First Interaction Experiment
+ 10%            Second Interaction Experiment
+100%            Third Interaction Experiment
 100%         6.2.5 Roboscopie
  20% 7 Conclusion
          7.1 Discussion

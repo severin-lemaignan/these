@@ -1,17 +1,70 @@
-\chapter*{\centering \begin{normalsize}Conventions\end{normalsize}}
-\begin{quotation}
-\noindent
+\chapter*{\centering \begin{normalsize}Conventions and Notations\end{normalsize}}
 
-This thesis relies on specific writing conventions to describe symbolic
-knowledge.
+This thesis relies on several notations and specific writing conventions to describe symbolic
+knowledge and logical relations.
 
-Namespaces...
+Ontologies and excerpts of ontologies presented in the work are mostly written
+in the W3C's OWL language. As a derivative of XML, it uses \emph{namespaces} to
+declare the scopes of concepts. The main namespaces that are used in this work
+are {\tt owl:}, {\tt rdf:}, {\tt rdfs:}, {\tt cyc:} (for concepts defined in the
+{\sc OpenCyc} upper ontology) and {\tt oro:} (for the concepts defined in our
+work). For readability, the namespaces will be omitted when they are not
+required for the understanding.
 
-Concepts...
+The table below summarizes the terminology that is used in this work to discuss
+knowledge representation questions. While these terms are generally not
+strictly synonyms, we will use them interchangeabily when no confusion may
+arise.
 
-Statements...
+\begin{center}
+\begin{tabular}{p{3.5cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}}
+\toprule
+Concept, \par Entity, \par Element & Class (OWL), \par Concept (DL) & Relation, \par Property (OWL), Role (DL), \par (Binary) Predicate & Instance (OWL), Individual (DL) \\
+\bottomrule
 
-Rules...
+\end{tabular}
+\end{center}
 
-\end{quotation}
+Description Logic terminology (noted DL above) for classes and relations will
+be used only in the specific context of Description Logic. In other cases, the
+term \emph{concept} will encompass \emph{classes}, \emph{properties} and
+\emph{instances} in the OWL terminology.
+
+In our context, a logical \emph{statement} is both a declarative sentence and
+the meaning of this sentence (in this case, it is a \emph{fact} or a
+\emph{belief}). The acception of the term \emph{statement} will depend on the
+context of use. Furthermore, statements are generally represented as
+\emph{triples} $\langle subject, predicate, object \rangle$. Statements that are
+explicitely added to a knowledge base are called \emph{assertions}.
+
+The terms \emph{statement}, \emph{assertion}, \emph{fact}, \emph{belief},
+\emph{triple} are thus frequently used with similar meanings.
+
+Single concepts are typeset with this font: \concept{concept}, while statements
+are typeset in this way: \stmt{subject predicate object}.
+
+Relations between concepts and rules rely on logical connectors. The table
+below presents the most important ones that are found in this thesis.
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+$\sqcap$ & intersection or conjunction of classes \\
+$\sqcup$ & union or disjunction of classes \\
+$\forall$ & universal restriction \\
+$\exists$ & existential restriction \\
+$\equiv$ & class equivalence \\
+$\emptyset$ & empty set \\
+\midrule
+$\land$ & logical AND \\
+$\lor$ & logical OR \\
+$\to$ & implication \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Finally, we may use the Manchester
+Syntax\footnote{\url{http://www.co-ode.org/resources/reference/manchester_syntax/}}
+to present in a readable way certain more complex class expressions.
+
 \clearpage

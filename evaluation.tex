@@ -766,18 +766,47 @@ A similar experiment has been conducted in an appartment environment
 \subsubsection{Third Interaction Experiment: ``Cleaning the Table''}
 \label{sect|expe3}
 
+The third experiment involved a more complex decisional layer where the ORO
+server was used in conjunction with the HATP symbolic task planner and the
+SHARY execution controller (the complete software architecture we deployed for
+this experiment is pictured on figure~\ref{fig|archi},
+page~\pageref{fig|archi}).
+
+In this scenario (figure~\ref{fig|cleantable-video}), a human and a robot
+cooperate to remove objects from a table. The robot produces symbolic plans for
+both itself and the human (\cite{Alami2011}, see also section~\ref{sect|hatp})
+that allow the robot to (verbally) share the task with the human (like ``I take
+the green box and I put it in the trashbin, you take the black video tape and
+you throw it in the trashbin''). Plans are created based on perceived
+visibility and reachability of the objects, and the robot also monitors the
+human activities to track the advancement of the whole plan (this last aspect
+is presented in~\cite{Warnier2012}).
+
 \begin{figure}
     \centering
     \includegraphics[width=0.7\columnwidth]{experiments/cleantable.jpg}
-    \caption{This experiment also led to a video that can be viewed online:
-    \url{http://www.youtube.com/watch?v=IODx50uV_k4}.}
+    \caption{}
     \label{fig|cleantable-video}
 \end{figure}
 
 
+Figure~\ref{fig|cleantable-timeline} presents a excerpt of the whole task and
+shows how the different components produce and use symbolic knowledge (note
+that the plan is actually computed {\it a priori}. It appears nevertheless on
+this diagram for better readability).
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\columnwidth]{experiments/manip_run.pdf}
+
+    \caption{This diagram shows a simplified version of the ``Clean the Table'' scenario timeline.}
+
+    \label{fig|cleantable-timeline}
+\end{figure}
 
 
-
+This experiment also led to a video that can be viewed online:
+\url{http://www.youtube.com/watch?v=IODx50uV_k4}.
 
 
 \subsection{Roboscopie}
