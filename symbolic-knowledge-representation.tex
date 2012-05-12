@@ -301,33 +301,23 @@ We now want to organize requirements from this imaginary cooking scenario where
 numerous desirable features for a knowledge representation system for robotics
 have been identified without any particular order.
 
-This section proposes a more formal typology of desirable features for a such a
-system. For each feature, we provide a short definition along with links to
-relevant literature.
+This section proposes a more formal typology and a nomenclature of analysis
+axis to study and compare knowledge representation systems
+(figure~\ref{fig|taxo}). For each dimension, this section provides a short
+definition accompagnied by links to relevant literature.
 
-Table~\ref{table|contribution-by-systems}, at the end of the article,
+\begin{figure}
+        \centering
+        \includegraphics[width=0.8\columnwidth]{taxonomy.pdf}
+        \caption{Taxonomy of the analysis dimensions of knowledge
+        representation systems for service robotics.}
+        \label{fig|taxo}
+\end{figure}
+
+Table~\ref{table|contribution-by-systems}, at the end of the chapter,
 summarizes all these features with the main domain of contribution of each
 surveyed KRS.
 
-As previously mentioned, we propose six main categories.
-
-\begin{scriptsize}
-\begin{center}
-\begin{tikzpicture}[taxonomy]
-    %[edge from parent fork east]
-    %every node/.style={fill=black!30,rounded corners},
-    %[parent anchor=east,child anchor=west,grow=east,
-    %edge from parent/.style={thick,draw}]
-    \node [taxon] {Dimensions}
-        child {node [taxon] {{\bf F}. Instantiation}}
-        child {node [taxon] {{\bf E}. Integration}}
-        child {node [taxon] {{\bf D}. Acquisition}}
-        child {node [taxon] {{\bf C}. Reasoning}}
-        child {node [taxon] {{\bf B}. Representation}}
-        child {node [taxon] {{\bf A}. Expressiveness}};
-\end{tikzpicture}
-\end{center}
-\end{scriptsize}
 
 \subsection{Expressiveness: What Can be Represented?}
 \label{sect|expressiveness}

@@ -1,0 +1,130 @@
+strict digraph Knowledge {
+
+rankdir=LR;
+overlap=scale;
+
+node [shape=plaintext,fontsize=24,fontname="Ubuntu"];
+
+root [label="Dimensions\nof KRS"];
+root -> A;
+root -> B;
+root -> C;
+root -> D;
+root -> E;
+root -> F;
+
+F [label="F. Instantiation"];
+E [label="E. Integration"];
+D [label="D. Acquisition"];
+C [label="C. Reasoning"];
+B [label="B. Representation"];
+A [label="A. Expressiveness"];
+
+
+A5 [label="A.5. Meta-cognition"];
+A4 [label="A.4. Uncertainty"];
+A3 [label="A.3. OWA/CWA"];
+A2 [label="A.2. Expressive\n power"];
+A1 [label="A.1. Logic\n formalism"];
+
+A -> A1;
+A -> A2;
+A -> A3;
+A -> A4;
+A -> A5;
+
+B5 [label="B.5. Memory"];
+B4 [label="B.4. Introspection"];
+B3 [label="B.3. Possible\n Worlds"];
+B2 [label="B.2. Context"];
+B1 [label="B.1. Roles"];
+
+
+B13 [label="B.1.3. Actions"];
+B12 [label="B.1.2. Time"];
+B11 [label="B.1.1. Space"];
+
+B112 [label="B.1.1.2. Placement"];
+B111 [label="B.1.1.1. Topology"];
+
+B -> B1 -> B11 -> B111;
+           B11 -> B112;
+     B1 -> B12;
+     B1 -> B13;
+B -> B2;
+B -> B3;
+B -> B4;
+B -> B5;
+
+
+
+C10 [label="C.10. Learning"];
+C9 [label="C.9. Naive\n physics"];
+C8 [label="C.8. Planning"];
+C7 [label="C.7. Prediction"];
+C6 [label="C.6. Presupposition"];
+C5 [label="C.5. Non-monotonicity"];
+C4 [label="C.4. Uncertainty"];
+C3 [label="C.3. Lazy\n evaluation"];
+C2 [label="C.2. Structural\n alteration"];
+C1 [label="C.1. Standard\n reasoning"];
+
+C -> C1;
+C -> C2;
+C -> C3;
+C -> C4;
+C -> C5;
+C -> C6;
+C -> C7;
+C -> C8;
+C -> C9;
+C -> C10;
+
+D4 [label="D.4 Dynamic\n instantiation"];
+D3 [label="D.3 Motivation"];
+D2 [label="D.2 Grounding"];
+D1 [label="D.1 Acquisition\n and fusion"];
+
+D13 [label="D.1.3 Linked\n Resources"];
+D12 [label="D.1.2 Interaction"];
+D11 [label="D.1.1 Sensing"];
+
+D122 [label="D.1.2.2 Deictic\n Interaction"];
+D121 [label="D.1.2.1 Verbal\n Interaction"];
+
+D -> D1 -> D11;
+     D1 -> D12 -> D121;
+           D12 -> D122;
+     D1 -> D13;
+D -> D2;
+D -> D3;
+D -> D4;
+
+E4 [label="E.4 Performances"];
+E3 [label="E.3 Monitoring"];
+E2 [label="E.2 Executive\n layers"];
+E1 [label="E.1 Sensori-motor"];
+
+E42 [label="E.4.2 Cognitive\n Performances"];
+E41 [label="E.4.1 Raw\n Performances"];
+
+E -> E1;
+E -> E2;
+E -> E3;
+E -> E4 -> E41;
+     E4 -> E42;
+
+F5 [label="F.5 Self-Knowledge"];
+F4 [label="F.4 Metrics"];
+F3 [label="F.3 Granularity"];
+F2 [label="F.2 Common-sense\n and Alignement"];
+F1 [label="F.1 Design\n Strategy"];
+
+F -> F1;
+F -> F2;
+F -> F3;
+F -> F4;
+F -> F5;
+
+}
+            

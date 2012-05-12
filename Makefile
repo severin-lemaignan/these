@@ -1,6 +1,7 @@
 
 TARGET=these.tex
 
+DOT=$(wildcard images/*.dot)
 SVG=$(wildcard images/*/*.svg)
 
 all: these
@@ -10,11 +11,15 @@ all: these
 
 %.aux: these
 
+%.svg: %.dot
+
+	twopi -Tsvg -o$(@) $(<)
+
 bib: $(TARGET:.tex=.aux)
 
 	bibtex $(TARGET:.tex=.aux)
 
-these: $(TARGET) $(SVG:.svg=.pdf)
+these: $(TARGET) $(SVG:.svg=.pdf) $(DOT:.dot=.pdf)
 
 	TEXFONTS=:./fonts TEXINPUTS=:./fonts:./sty pdflatex $(TARGET)
 	#TEXFONTS=:./fonts TEXINPUTS=:./sty pdflatex $(TARGET)
@@ -32,7 +37,7 @@ proof:
 	perl bin/dups *.tex
 
 clean:
-	rm -f *.aux *.log *.snm *.out *.toc *.nav *intermediate *~ *.glo *.ist $(SVG:.svg=.pdf)
+	rm -f *.aux *.log *.snm *.out *.toc *.nav *intermediate *~ *.glo *.ist $(SVG:.svg=.pdf) $(DOT:.dot=.svg) $(DOT:.dot=.pdf)
 
 distclean: clean
 	rm -f $(TARGET:.tex=.pdf)
