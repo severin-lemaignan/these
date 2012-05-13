@@ -23,14 +23,14 @@ TODO Thesis
          2.2 A Typology of Knowledge Representation Requirements for Robotics
 100%         2.2.1 Expressiveness: What Can be Represented?
              2.2.2 How things are represented?
- 10%             Role Representations
+ 80%             Role Representations
  30%             Context modeling
- 10%             Possible-Worlds and representing what others know
+ 60%             Possible-Worlds and representing what others know
 100%             Introspection: Who am I? What can I do?
 100%             Memory
              2.2.3 Reasoning Techniques
 100%             Standard reasoning techniques
-100%             Alteration of the knowledge structure
+100%             Dynamic instantiation and alteration of the knowledge structure
 100%             Lazy evaluation
   0%             Reasoning with uncertainty
  70%             (Non) Monotonic Reasoning
@@ -43,7 +43,6 @@ TODO Thesis
 100%             Knowledge acquisition and modalities fusion
 100%             Grounding/anchoring strategies
  10%             Intrinsic Motivation
-  0%             Dynamic instantiation
 100%         2.2.5 Practical Integration in Robotic Architectures
              2.2.6 Knowledge instantiation
  10%             Design Strategies

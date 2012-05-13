@@ -542,7 +542,7 @@ cognitive capabilities (theory of mind, introspection, memory).
     \node [taxon] {\bf B. Representation}
             child {node [taxon] {{\bf B.5}. Memory}}
             child {node [taxon] {{\bf B.4}. Introspection}}
-            child {node [taxon] {{\bf B.3}. Possible Worlds}}
+            child {node [taxon] {{\bf B.3}. Modality}}
             child {node [taxon] {{\bf B.2}. Context}}
             child {node [taxon] {{\bf B.1}. Roles}};
 \end{tikzpicture}
@@ -619,12 +619,20 @@ timestamps to events the robot perceives -- and in the future), and
 representing \emph{passing time} (situations, durations, timespans) like in
 \emph{``the eggs will be cooked in 10 min''}.
 
-We call \emph{situations} all temporal concepts with a non-zero duration,
-whereas \emph{events} are durationless temporal concepts.
+This introduces the disjunction in time representation between
+\emph{situations}, that is, any temporal concept with a non-zero duration, and
+\emph{events}, that is, any durationless temporal concept.
+
+Other definitions of a situation do exist, notably in the context of
+\emph{situation calculus}~\cite{Levesque1998}, Reiter and Levesque consider a
+situation to be an history of actions.
 
 \fxfatal{Discuss time chronicles~\cite{Ghallab1996}}
 \fxfatal{Discuss Allen intervals}
 
+The concept of \emph{fluent} plays another important role for time
+representation. Fluents are properties (or \emph{conditions}) that change over
+time, like $sees(agent1, apple, t)$.
 We call a system that does not account for time (\ie that permanently lives in
 present) \emph{atemporal}.
 
@@ -634,7 +642,7 @@ present) \emph{atemporal}.
 Events and actions are two temporal concepts that are of particular importance to
 robotic systems, as systems that perceive, react and perform in their environment.
 
-While representation of events \fxwarning{revient à} to label a timestamp,
+While representation of events boils down to label a timestamp,
 representation of actions are more complex since they semantically imply
 interactions between concepts. From a taxonomy point of view, actions are a
 particular type of event that normaly leads to a situation corresponding to the
@@ -693,16 +701,31 @@ interpretation of the information. It covers the \emph{domain of validity} of
 the facts, the \emph{common-sense} knowledge required to fill the gaps in the
 representation\fxfatal{give an example}, \fxfatal{What more?}.
 
-\subsubsection{Possible-Worlds and representing what others know}
+\subsubsection{Modality, Contingency and Theory of Mind}
 \label{sect|possible-worlds}
 
-    
 Linked to the context representation, but seen from another angle, knowledge
-representation systems may provide explicit ways to model other point of view
+representation systems may support logical \emph{modality}. A knowledge model
+is logically modal if is support the concept of \emph{possible worlds}, \ie,
+parallel beliefs models (or \emph{interpretations}) that can be independently
+accessed.
+
+A \emph{contingent} proposition is defined as neither always true (a tautology)
+nor always false (a contradiction) in every possible world. In knowledge
+representation systems for robotics that support logical modality,
+interpretations are often initialised with a common set of initial beliefs
+(like common-sense knowledge). This initial common knowledge is hence true in
+every possible worlds for the robot, and thus does not belong to the contingent
+knowledge.
+
+Alternative mental models may be used to represent different (possibly
+hypothetical or even imaginary) views on the world, from the robot own
+perspective, or from persepectives of other agents, as computed by the robot.
+
+provide explicit ways to model other point of view
 on the world. This ability is often referred as the \emph{perspective taking}
 ability.
 
-\cite{Levesque2008}, p. 4
 
 \subsubsection{Introspection: Who am I? What can I do?}
 \label{sect|introspection}
@@ -790,7 +813,7 @@ human-like memory organization.
             child {node [taxon] {{\bf C.5}. Non-monotonicity}}
             child {node [taxon] {{\bf C.4}. Uncertainty}}
             child {node [taxon] {{\bf C.3}. Lazy evaluation}}
-            child {node [taxon] {{\bf C.2}. Structural alteration}}
+            child {node [taxon] {{\bf C.2}. Instantiation and structural alteration}}
             child {node [taxon] {{\bf C.1}. Standard reasoning}};
 \end{tikzpicture}
 \end{center}
@@ -866,7 +889,7 @@ generic SWRL ({\em Semantic Web Rule Language}) rules like: \par
         \normalsize 
 
 
-\subsubsection{Alteration of the knowledge structure}
+\subsubsection{Dynamic Instantiation and Alteration of the Knowledge Structure}
 
 The content of a knowledge base is often conveniently divided into a
 \emph{structural part} that defines the conceptualisation of a domain in term
@@ -874,14 +897,23 @@ of vocabulary and relations within the concepts, and an \emph{instantiation} of
 this structure into concrete entities.
 
 The terms TBox and ABox are commonly found to describe this two different types of
-statements in ontologies. TBox statements describe a system in terms of
+statements in ontologies: TBox statements describe a system in terms of
 controlled vocabularies, for example, a set of classes and properties. ABox are
 TBox-compliant statements about that vocabulary.
 
-All knowledge representation systems allow to modify the ABox, which can be
-considered as the dynamic part of the knowledge base. It is however not always
-possible to alter the TBox because not all reasoning systems can dynamically
-take into account structural changes in the knowledge base.
+Most knowledge representation systems allow to modify the ABox, which can be
+considered as the dynamic part of the knowledge base. Alteration of the ABox
+include the addition or retractation of relations between existing instances,
+and the addition or removal of instances. We call the later \emph{dynamic
+instantiation}: the capability for a system to create new instances at
+run-time. The term dynamic instantion applies primarily to concrete entities
+(typically, a new object is discovered by the robot, a symbolic instance is
+created for it), but may also apply to abstract entities (like an instance of
+action, of a feeling, etc.).
+
+KRS may also allow to alter the TBox. This requires the underlying reasoning
+systems to be able to dynamically take into account structural changes in the
+knowledge base.
 
 Example of TBox alteration include modification of the taxonomy (like addition
 or retractation of a \concept{subClassOf} relation), changes to the asserted
@@ -1028,7 +1060,6 @@ temporal reverse of the projection task.
 \subsubsection{Task Planning}
 \label{sect|planning}
 
-Making decision based on prediction
 
 Symbolic task planning is the ability for a robot to select a sequence of
 actions in order to reach a given final state. This capability is closely
@@ -1058,6 +1089,13 @@ is decomposed into either primitive actions or a new set of subtasks.
 From the observation that the core reasoning techniques (back and forward
 chaining) are shared between planners and reasoners used in knowledge
 representation systems, task planning can be considered within the KRS.
+
+Since McCarthy's \emph{Situation Calculus} in 1963, numerous knowledge
+representation formalisms dedicated to representation and reasoning about
+actions and situation have emerged: besides situation calculs, \emph{fluent
+calculus} and \emph{event calculus} are the main ones.
+Thielscher~\cite{Thielscher2011} recently proposed a unification of these
+approach in a new \emph{action calculus}.
 
 It is however common to rely on external components dedicated to symbolic task
 planning (in particular because of the non-monotonicity requirements) with a
@@ -1090,7 +1128,6 @@ that carries the geometries and physical properties of objects.
 \begin{center}
 \begin{tikzpicture}[taxonomy]
     \node [taxon] {\bf D. Acquisition}
-            child {node [taxon] {{\bf D.4} Dynamic instantiation}}
             child {node [taxon] {{\bf D.3} Motivation}}
             child {node [taxon] {{\bf D.2} Grounding}}
             child {node [taxon] {{\bf D.1} Acquisition and fusion}};
@@ -1275,10 +1312,6 @@ Varadarajan2011}.
 
 \cite{Oudeyer2007} -> page 2 gives a detailled account of psychological grounds.
 Curiosity, Pro-active behaviour...
-
-\subsubsection{Dynamic instantiation}
-\label{sect|new-instances}
-Ability to automatically create new object instances
 
 %%%%%%%%%%%%%%%%%
 \subsection{Practical Integration in Robotic Architectures}
@@ -1473,6 +1506,7 @@ reuse of standard ontologies, the quantity of {\it a priori} knowledge are many
 parameters that lead to different knowledge models.
 
 \subsubsection{Design Strategy}
+\label{sect|design-strategies}
 
 Ontology engineering has grown into a research field of its own, covering
 formalized methodologies for ontology creation, reuse, modularisation, etc.

@@ -35,7 +35,7 @@ A -> A5;
 
 B5 [label="B.5. Memory"];
 B4 [label="B.4. Introspection"];
-B3 [label="B.3. Possible\n Worlds"];
+B3 [label="B.3. Modality"];
 B2 [label="B.2. Context"];
 B1 [label="B.1. Roles"];
 
@@ -66,7 +66,7 @@ C6 [label="C.6. Presupposition"];
 C5 [label="C.5. Non-monotonicity"];
 C4 [label="C.4. Uncertainty"];
 C3 [label="C.3. Lazy\n evaluation"];
-C2 [label="C.2. Structural\n alteration"];
+C2 [label="C.2. Instantiation and\n structural alteration"];
 C1 [label="C.1. Standard\n reasoning"];
 
 C -> C1;
@@ -80,7 +80,6 @@ C -> C8;
 C -> C9;
 C -> C10;
 
-D4 [label="D.4 Dynamic\n instantiation"];
 D3 [label="D.3 Motivation"];
 D2 [label="D.2 Grounding"];
 D1 [label="D.1 Acquisition\n and fusion"];
@@ -98,7 +97,6 @@ D -> D1 -> D11;
      D1 -> D13;
 D -> D2;
 D -> D3;
-D -> D4;
 
 E4 [label="E.4 Performances"];
 E3 [label="E.3 Monitoring"];
