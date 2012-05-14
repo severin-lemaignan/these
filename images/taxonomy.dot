@@ -5,7 +5,7 @@ overlap=scale;
 
 node [shape=plaintext,fontsize=24,fontname="Ubuntu"];
 
-root [label="Dimensions\nof KRS"];
+root [label="Dimensions\n of KRS", fontsize=45];
 root -> A;
 root -> B;
 root -> C;
@@ -13,12 +13,12 @@ root -> D;
 root -> E;
 root -> F;
 
-F [label="F. Instantiation"];
-E [label="E. Integration"];
-D [label="D. Acquisition"];
-C [label="C. Reasoning"];
-B [label="B. Representation"];
-A [label="A. Expressiveness"];
+F [label="F. Instantiation", fontsize=40];
+E [label="E. Integration", fontsize=40];
+D [label="D. Acquisition", fontsize=40];
+C [label="C. Reasoning", fontsize=40];
+B [label="B. Representation", fontsize=40];
+A [label="A. Expressiveness", fontsize=40];
 
 
 A5 [label="A.5. Meta-cognition"];
