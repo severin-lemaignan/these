@@ -502,7 +502,7 @@ These wrappers use the C++ or Python bindings previously presented to expose
 the features of ORO server as a stand-alone ROS/YARP nodes.
 
 %%%%%%%%%%%%%%%%%
-\section{Monitoring and debugging}
+\section{Monitoring and Debugging}
 \label{sect|monitoring}
 
 \subsection{Logging}
@@ -515,6 +515,10 @@ Those logs can then be replayed by a special tool written in Python that
 simulates the original communication with the server: timestamps are respected
 and if multiple clients where connected to the server, the log player forks one
 thread by client to simulate parallel access to the server.
+
+Also available to the developer, an explanation of the inconsistencies when
+they occur is produced by the server, and helps to retrace the sequence of
+logical steps that led to the inconsistency.
 
 \subsection{Visualisation}
 

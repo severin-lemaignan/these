@@ -202,47 +202,17 @@ semantic approaches is here well illustrated.
 Some of the main algorithms are presented here as well (like the algorithms for
 classification and discrimination,~\ref{sect|discrimination}).
 
+\subsubsection{Standard Inference Services}
 
-\subsubsection{Standard reasoning techniques}
+As detailled in the next chapter, we use the Pellet open-source reasoner to
+reason on the knowledge base. This enables to expose several standard inference
+services: consistency checking, concept satisfiability, classification and
+realisation (the most specific classes that an individual belongs to).
 
-
-Knowledge is stored as OWL/RDF ontologies in ORO. We use the Pellet reasoner to
-classify them. This enables several type of reasoning:
-
-\begin{itemize}
-	\item reasoning on inheritance relations (\eg \emph{all bottles are containers}),
-	\item property axioms
-		\begin{itemize}
-		\item entailments based on predicates' domain and range,
-		\item cardinality constraints (including \concept{allValue}, 
-		\concept{someValue}, \concept{hasValue}),
-		\item property characteristics (symmetry, transitivity)
-		\end{itemize}
-	\item class restrictions like: \par \footnotesize \concept{Bottle} $\equiv$
-		\concept{Artifact} {\bf that} (\concept{hasShape} {\bf value}
-		\concept{cylinderShape})\footnote{This example uses the \emph{Manchester
-		syntax}, \url{http://www.w3.org/TR/owl2-manchester-syntax/}} \normalsize
-	\item set operations like: \par \footnotesize \concept{Color} $\equiv$ {\bf unionOf}(\concept{blue},
-		\concept{green}, \concept{orange}, \concept{black}...) \normalsize
-	\item generic SWRL ({\em Semantic Web Rule Language}) rules like: \par
-		\footnotesize \concept{looksAt(?agt, ?obj)} $\land$
-		\concept{pointsAt(?agt,?obj)} \par $\Rightarrow$ \concept{focusesOn(?agt, ?obj)}
-		\normalsize 
-	\end{itemize}
-
-We provide in ORO accessors to query, add or remove all these properties and
-restrictions (except the SWRL rules) at run-time. This allows knowledge
-introspection and enables the robot to alter its own knowledge structures (the
-so-called \emph{T-Box} model) during its life-time by adding new constraints
-and properties to classes and predicates (we can for instance teach the robot
-\emph{at run-time} that cats are animals, \ie \stmt{Cat rdfs:subClassOf
-Animal}).
-
-
-
-\paragraph{Decidability}
-
-...
+In case of inconsistency in one of the ORO's knowledge models, an explanation
+of the inconsistency is proposed, in a human-readable form, for debugging
+purposes. The automatic exploitation of the explanation by the robot executive
+controller is yet to be developed.
 
 \subsubsection{Classification and discrimination algorithms}
 \label{sect|discrimination}

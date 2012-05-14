@@ -61,7 +61,7 @@ B -> B5;
 C10 [label="C.10. Learning"];
 C9 [label="C.9. Naive\n physics"];
 C8 [label="C.8. Planning"];
-C7 [label="C.7. Prediction"];
+C7 [label="C.7. Prediction\n and explanation"];
 C6 [label="C.6. Presupposition"];
 C5 [label="C.5. Non-monotonicity"];
 C4 [label="C.4. Uncertainty"];
