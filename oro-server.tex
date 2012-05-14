@@ -63,11 +63,50 @@ inferred to be true.
 \label{sect|knowledge-model}
 
 \subsection{Expressiveness}
+\label{sect|oro-expressiveness}
 
 Unlike systems relying on logic programming like {\sc KnowRob}, ORO is purely
 based on Description Logics: the ORO knowledge model is based on RDF triples
 (\ie exclusively binary predicates). Triples \stmt{subject predicate object}
 are the atoms of knowledge for ORO.
+
+Knowledge in the ORO server is represented with OWL2. The available constructs
+include:
+
+\begin{itemize}
+    \item inheritance relations,\eg: \par
+    \stmt{Bottle subClassOf Container} $\models$ \emph{all bottles are containers},
+
+    \item property axioms
+        \begin{itemize}
+
+        \item specification of predicates' domain and range, \eg:\par
+        \stmt{thinksAbout domain IntelligentAgent} $\models$ \emph{only
+        intelligent agents can think},
+
+        \item cardinality constraints (including \concept{allValue}, 
+        \concept{someValue}, \concept{hasValue}),
+
+        \item property characteristics (symmetry, transitivity, reflexivity,
+        antisymmetry, etc.)
+
+        \end{itemize}
+
+    \item class restrictions like: \par \concept{Bottle} $\equiv$
+        \concept{Artifact} {\bf that} (\concept{hasShape} {\bf value}
+        \concept{cylinderShape})\footnote{This example uses the \emph{Manchester
+        syntax}, \url{http://www.w3.org/TR/owl2-manchester-syntax/}}
+
+    \item set operations like: \par \concept{Color} $\equiv$ {\bf unionOf}(\concept{blue},
+        \concept{green}, \concept{orange}, \concept{black}...)
+\end{itemize}
+
+DL-safe\footnote{In DL-safe rules, variables bind only to explicitly named
+individuals in the ontology.} SWRL ({\em Semantic Web Rule Language}) rules are
+also supported. For example: \par
+        \concept{looksAt(?agt, ?obj)} $\land$
+        \concept{pointsAt(?agt,?obj)} $\Rightarrow$ \concept{focusesOn(?agt, ?obj)}
+
 
 The formal expressiveness of the current version of the ORO common-sense
 ontology (commit {\tt 19f1fcf27} in the public repository\footnote{Clonable
@@ -76,19 +115,19 @@ $\mathcal{SROIQ(D)}$, which correspond to the OWL2 language expressiveness (the
 appendix~\ref{chapt|dl} presents the usual naming conventions of Description
 Logics expressiveness).
 
-The relation between expressiveness and reasoning complexity is highly
-``unstable'': for instance, adding  the single ORO axiom \stmt{farFrom
-disjointProperty near} that states that two individuals can not be at the same
-time near and far from each other changes the expressiveness power from
-$\mathcal{SHOIQ(D)}$ to $\mathcal{SROIQ(D)}$: this seemingly  innocuous
-assertion change the complexity class of the whole ontology, and the concept
-satisfiability reasoning problem switches from a {\it NExpTime-complete}
-problem to a {\it NExpTime-hard} problem (\ie, \emph{at least} as hard as the
-hardest problem in {\it NExpTime}).
+It is important to note that the relation between expressiveness and reasoning
+complexity is fragile: for instance, adding  the single ORO axiom
+\stmt{farFrom disjointProperty near} (that states that two individuals can not
+be at the same time near and far from each other) changes the expressiveness
+power from $\mathcal{SHOIQ(D)}$ to $\mathcal{SROIQ(D)}$: this seemingly
+innocuous assertion change the complexity class of the whole ontology, and the
+concept satisfiability reasoning problem switches from a {\it
+NExpTime-complete} problem to a {\it NExpTime-hard} problem (\ie, \emph{at
+least} as hard as the hardest problem in {\it NExpTime}).
 
-This instability leads to hard-to-predict run-time performances on the robot,
-and light alteration of the knowledge structure can lead to very noticeable
-performance drops.
+This instability leads to hard-to-predict run-time performances on the robot
+because a light alteration of the knowledge structure can lead to very
+noticeable performance drops.
 
 Table~\ref{table|onto-stats}, page~\pageref{table|onto-stats} gives
 quantitative details on the type of axioms used in the ORO common-sense
@@ -122,15 +161,16 @@ see section~\ref{sect|time-representation}}.
 
 \paragraph{Open World Assumption}
 
+Following the OWL language model and as mentioned at
+section~\ref{sect|owa-cwa}, the ORO knowledge model makes the open world
+assumption.
+
+This allows to easily represent that a fact is unknown (by simply not stating
+it in the knowledge base), but also requires to carefully explicit what the
+entities are and are not.
+
 %%%%%%%%%%
-\subsection{How things are represented?}
-
-\subsubsection{Role Representations}
-Spatio-Temporal Representations:
-
-\paragraph{Representation of space}
-\paragraph{Representation of events and actions}
-
+\subsection{Representation Techniques}
 
 \subsubsection{Representation of Alternative Knowledge Models}
 \label{sect|alterite}
@@ -170,10 +210,6 @@ perspective aware symbolic properties.
 These multiple models can also be viewed as different \emph{interpretive
 scopes}, allowing the robot to interpret the same reality from different points
 of view.
-
-
-
-\subsubsection{Introspection: Who am I? What can I do?}
 
 \subsubsection{Multi-lingual support}
 \label{sect|multilingual}
@@ -448,10 +484,13 @@ section~\ref{sect|memory}).
 In the ORO server, the knowledge structure (\emph{TBox}) is purely declarative
 and asserted as regular statements (like \stmt{Location subClassOf
 SpatialThing}), following the RDF Schema (RDFS) and OWL language constructs.
-Table~\ref{table|main-tbox-properties} presents few of the main properties and
-classes defined in RDFS and OWL that allow to describe the ontology
-structure. These constructs can all be inserted at run-time to alter the
-knowledge model of the server.
+
+To complements the constructs presented above at
+section~\ref{sect|oro-expressiveness}, table~\ref{table|main-tbox-properties}
+presents few of the main properties and classes defined in RDFS and OWL that
+allow to describe the ontology structure. These constructs can all be inserted
+at run-time to alter the knowledge model of the server. They are immediately
+taken into account by all reasoning process taking place after this point.
 
 \begin{table}
 \begin{center}

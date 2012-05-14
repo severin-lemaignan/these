@@ -17,7 +17,7 @@ TODO Thesis
   0%             and also...
  10%         1.4.2 Targeted applications/experiments
 100%     1.5 Organisation of the thesis
-         
+
  75% 2 Symbolic knowledge representation
  75%     2.1 What do we call "knowledge"?
          2.2 A Typology of Knowledge Representation Requirements for Robotics
@@ -25,7 +25,7 @@ TODO Thesis
              2.2.2 How things are represented?
  80%             Role Representations
  30%             Context modeling
- 60%             Possible-Worlds and representing what others know
+100%             Modality, Contingency and Theory of Mind
 100%             Introspection: Who am I? What can I do?
 100%             Memory
              2.2.3 Reasoning Techniques
@@ -35,7 +35,7 @@ TODO Thesis
   0%             Reasoning with uncertainty
  70%             (Non) Monotonic Reasoning
 100%             Presupposition Accommodation
- 10%             Prediction, projection and diagnosis tasks
+ 70%             Prediction, projection, explanation
 100%             Planning
 100%             Physics-based reasoning
   0%             Learning
@@ -65,10 +65,8 @@ TODO Thesis
  65%     3.1 Functional overview
          3.2 The ORO Knowledge model
 100%         3.2.1 Expressiveness: What Can be Represented?
- 50%         3.2.2 How things are represented?
-  0%             Role Representations
+ 50%         3.2.2 Representation Techniques
 100%             Representation of Alternative Knowledge Models
-                 Introspection: Who am I? What can I do?
 100%             Multi-lingual support
 100%         3.2.3 Reasoning Techniques
  10%     3.3 Knowledge instanciation: the OpenRobots Common-Sense Ontology
