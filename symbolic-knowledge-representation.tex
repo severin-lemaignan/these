@@ -715,16 +715,66 @@ nor always false (a contradiction) in every possible world. In knowledge
 representation systems for robotics that support logical modality,
 interpretations are often initialised with a common set of initial beliefs
 (like common-sense knowledge). This initial common knowledge is hence true in
-every possible worlds for the robot, and thus does not belong to the contingent
+every possible worlds for the robot, and thus does not belong to its contingent
 knowledge.
 
-Alternative mental models may be used to represent different (possibly
-hypothetical or even imaginary) views on the world, from the robot own
-perspective, or from persepectives of other agents, as computed by the robot.
+Logical modality allows to implement alternative mental models. They may be
+used to represent different (possibly hypothetical or even imaginary) views on
+the world, from the robot own perspective, or from other persepectives computed
+by the robot.
 
-provide explicit ways to model other point of view
-on the world. This ability is often referred as the \emph{perspective taking}
-ability.
+The representation of the mental perspective of other agents has a particular
+importance in human-robot interaction. It relies first on the ability to view
+the world from a standpoint which is not \emph{egocentric}. This cognitive
+ability is referred as \emph{perspective taking} (see
+Flavell~\cite{Flavell1992} and Tversky~\cite{Tversky1999} for the psychological
+grounds of perspective taking, itself originated in Piaget's work on cognitive
+development, as remembered by Flavell), and has been studied by
+infants~\cite{Moll2006} and robots as well~\cite{Trafton2005, Breazeal2006,
+Ros2010}.
+
+The idea of a \emph{theory of mind}~\cite{Premack1978} emerges from the
+perspective taking ability. It can be defined as the ability for one to
+understand and acknowledge that other intelligent agents can have their own
+mental state (that includes beliefs, intents, desires, knowledge) that is
+possibly different from one's own. The \emph{attention} plays a central to the
+development and recognition of a theory of mind~\cite{Baron-Cohen1985,
+Leslie2000}.
+
+A notable consequence of having a theory of mind is the representation of
+\emph{false beliefs}, \ie, facts that are believed to be true for an agent, but
+false for other ones. The ``Sally and Ann'' experiment
+(figure~\ref{fig|sally-ann}) is a classical example of a false belief
+situation. In~\ref{fig|sally-ann-final}, Sally thinks the ball is in the beige
+box because she did not see Ann moving it. An external observer asked ``Where
+will Sally look for the ball?'' would answer ``in the blue box'' without a
+theory of mind (\ie, a model of the knowledge of Sally), whereas it would
+correctly answer ``In the beige box'' with a theory of mind.
+
+\begin{figure}
+        \centering
+        \subfigure[Sally puts the ball in the beige box.]{
+            \includegraphics[scale=0.4]{typology/sally_ann1.pdf}
+        } \hspace{15pt} %
+        \subfigure[She goes away.]{
+            \includegraphics[scale=0.4]{typology/sally_ann2.pdf}
+        } \\
+        \subfigure[Ann moves the ball.]{
+            \includegraphics[scale=0.4]{typology/sally_ann3.pdf}
+        } \hspace{15pt} %
+        \subfigure[Where will Sally look for the ball?]{
+            \includegraphics[scale=0.4]{typology/sally_ann4.pdf}
+            \label{fig|sally-ann-final}
+        }
+        \caption{The standard ``Sally and Ann'' false-beliefs experiment, taken
+        from~\cite{Leslie2000}.}
+
+        \label{fig|sally-ann}
+\end{figure}
+
+Scassellati~\cite{Scassellati2002} is amongst the researcher having studied
+theory of mind for robots.
+
 
 
 \subsubsection{Introspection: Who am I? What can I do?}
