@@ -737,16 +737,29 @@ next to the toolbox.''
 \subsubsection{Second Interaction Experiment: ``Aperitif Time''}
 \label{sect|expe2}
 
-A similar experiment has been conducted in an appartment environment
-(figure~\ref{fig|livingroom}).
-
+A similar experiment has been conducted in the appartment environment
+(figure~\ref{fig|livingroom}) of the LAAS-CNRS with the PR2 robot.
 
 \begin{figure}
     \centering
     \includegraphics[width=0.7\columnwidth]{experiments/adream-livingroom.png}
-    \caption{The ``Living room'' setup}
+
+    \caption{The ``Living room'' setup, as represented by the robot during the
+    experiment.}
+
     \label{fig|livingroom}
 \end{figure}
+
+This second experiment is focused on verbal interaction, and the perception is
+limited to the human tracking with a deported ASUS XTion (similar to the
+Kinect) sensor. Contrary to the first experiment, objects in the environment
+are not detected. Their positions are predefined. Pick\&Place manipulation
+tasks are not planned either, and the robot gestures are predefined as well.
+
+Dialogue with the robot goes through a custom Android application running on a
+touchpad held by the human. This application relies on the Google Speech API
+for text-to-speech recognition, and communicates exchange messages with the
+robot via the XMPP/Jabber protocol.
 
 
 \begin{figure}
@@ -757,7 +770,52 @@ A similar experiment has been conducted in an appartment environment
     \label{fig|aperitif-video}
 \end{figure}
 
+The experiment consists in manipulation of drinks (soda cans, wine minibottles)
+by verbal commands that take into account the human perspective, and may
+require discrimination (for instance, ``Give me the juice'' can refer either to
+the orange juice or to the apple juice).
 
+The reasoning and decisional principles are similar to the previous experiment,
+and are not detailed here. This experiment can be considered as a more mature
+version of the first one: more objects are involved, speech understanding is
+vastly improved, the decisional layer is more developed (the {\tt pyRobots}
+environment, briefly presented at section~\ref{sect|pyrobots}, is used to react
+to incoming orders), the robot acts (pick \& place, tracking of the human with
+the head, etc.).
+
+\paragraph{Evaluation} The results of these two first experiments is however
+not fully satisfactory.
+
+\begin{itemize}
+
+    \item the complexity of the system makes it error prone. Besides, lack of
+        sufficient decoupling between the higher-level components can lead to
+        long restart procedures. In particular, the ORO knowledge base also has
+        stability issues (reasoner crashes), that greatly vary with the
+        ontology content, in ways that are difficult to predict.
+
+    \item in the first experiment, the tag-based tracking of object is fragile
+        (sensible to partial occlusions, lighting conditions, etc.), while in
+        the second experiment, the absence of tracking of objects (due in part
+        to the size of cans, too small to stick a tag, in part to the desire to
+        avoid altogether perception issues in the system, and in part to the
+        location of objects, sometimes only partially visible, like the can on
+        the bottom of the picture~\ref{fig|aperitif-video}) leads obviously to
+        poor robustness of manipulation tasks.
+
+    \item ...
+\end{itemize}
+
+It must be also noted that the second experiment has been originally designed
+as a user-study: a naive, non-expert user was given a list of drinks to ask the
+robot to prepare for the aperitif. The idea was to compare the time required
+for the task achievement with several conditions, including use or not of
+perspective taking. We gave up with this project because of the lack of good
+enough resillience of the dialogue system to non-expert inputs. For instance
+ill-formed English sentences or elliptic sentences are not dealt correctly
+with. A pre-study that was meant to gather example of verbal inputs and
+involving about fifty users has been however conducted. It provides a valuable
+database to exercice and further develop the dialogue management system.
 
 \subsubsection{Third Interaction Experiment: ``Cleaning the Table''}
 \label{sect|expe3}
