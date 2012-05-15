@@ -441,7 +441,7 @@ proposition can not be decided to be true or false) problems.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.6\columnwidth]{typology/expressive_overlap_dl_horn.pdf}
+    \includegraphics[width=0.3\columnwidth]{typology/expressive_overlap_dl_horn.pdf}
     \caption{expressiveness overlap of Description Logics and logic programs
     based on Horn clauses, taken from~\cite{Grosof2003}}
     \label{fig|overlap_dl_horn}
@@ -634,6 +634,7 @@ situation to be an history of actions.
 The concept of \emph{fluent} plays another important role for time
 representation. Fluents are properties (or \emph{conditions}) that change over
 time, like $sees(agent1, apple, t)$.
+
 We call a system that does not account for time (\ie that permanently lives in
 present) \emph{atemporal}.
 
@@ -1154,9 +1155,9 @@ robotics~\cite{Oudeyer2007}.
 The cognitive capability of \emph{justification} is also intimately linked to
 the meta-cognition capability and participates to the overall \emph{cognitive
 observability} of the system.
+
 \subsubsection{Task Planning}
 \label{sect|planning}
-
 
 Symbolic task planning is the ability for a robot to select a sequence of
 actions in order to reach a given final state. This capability is closely
@@ -1741,14 +1742,64 @@ for systems that are explicit knowledge representation and reasoning modules,
 \end{table}
 \end{landscape}
 
-\fxfatal{Bielefeld -> could not find much...}
+\fxfatal{Bielefeld -> could not find much\ldots}
 \fxfatal{Kollar/Tellex -> really focusing on the natural language grounding}
 
 \subsection{KnowRob}
 \label{sect|knowrob}
 
-\subsection{ORO}
-\label{sect|oro}
+
+{\sc KnowRob}~\cite{Tenorth2009a} is an integrated knowledge management system
+developed at the Technical University of Munich. It is build as a set of
+modules (figure~\ref{fig|knowrob} organized around a core reasoning system
+written in Prolog. The core component interfaces through Java/Prolog or
+C/Prolog APIs with external modules.
+
+{\sc KnowRob} offers a mechanism called \emph{computables} that allow to
+evaluate certain predicates by calling external dedicated functions (for
+instance, the valuation of a proposition like \stmt{object1 isOn object2} is
+computed when required by calling a specific geometric reasonning module).
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\columnwidth]{stateofart/knowrob.pdf}
+
+    \caption{Overview of the {\sc KnowRob} framework, taken
+    from~\cite{Tenorth2011}.}
+
+    \label{fig|knowrob}
+\end{figure}
+
+
+Extension modules plug into the system and provide specialized reasoning
+capabilities or interfaces to external data, \eg to read object detections from
+the vision system. These modules mainly operate on the level of instances
+(ABox).
+
+\paragraph{Knowledge model} {\sc KnowRob} can load OWL ontologies, and the
+\emph{KnowRob-Base} ontology is provided as a common-sense ontology, with a
+focus on household and kitchen domains. {\sc KnowRob} also store and reason on
+introspective knowledge through the \emph{Semantic Robot Description
+Language}~\cite{Kunze2011} that allow to represent symbolically the
+capabilities of the robot, and is used for planning.
+
+
+\paragraph{Reasoning Techniques} Amongst the notable {\sc KnowRob} extensions,
+{\sc ProbCog}~\cite{Jain2009} is an effort to provide probabilistic reasoning
+based on bayesian networks, integration with naive physics reasoning has been
+studied~\cite{Kunze2011a}, automatic parsing of Web resource in semi-natural
+language has been experimented with~\cite{Tenorth2009b}.
+
+\paragraph{Grounding} Anchoring of knowledge in the {\sc KnowRob} framework
+relies on...CoP? Semantic Maps~\cite{Blodow2011}.
+
+%\paragraph{Integration with Decisional Layers} CRAM~\cite{Beetz2010}
+
+\paragraph{Notable Experiments} {\sc KnowRob} has been deployed on several
+scenarii at the Technical University of Munich, on the PR2 robot and on a 2-arm
+custom mobile manipulator in the scope of the ``assistive
+kitchen''~\cite{Beetz2008} project. In these experiments, {\sc KnowRob} has
+been used as central knowledge hub...
 
 \subsection{PEIS KR\&R}
 \label{sect|peis-ecology}
@@ -1774,7 +1825,7 @@ We survey here the semantic layer~\cite{Daoutis2009}, referred as \emph{PEIS KR\
 % - idem, they cite a paper on what spatial relations to compute
 % - location of objects based on a previously provided semantic map (but not much on this semantic map)
 % - two "memories": the robot memory stores the current list of percieved objects ; the archive memory stores what is not percieved anymore
-% - uses directly Cyc (ie, 250 000 common sense concepts...), via CycL language -> 2nd and higher order logics (quantification over predicates, functions, etc)
+% - uses directly Cyc (ie, 250 000 common sense concepts\ldots), via CycL language -> 2nd and higher order logics (quantification over predicates, functions, etc)
 % Remark: using 2nd order logic (ie meta statements), it would be easy to store the knowledge of each agent
 % - disambiguation in concept name by asking human to decide amongst all concepts known by Cyc
 % - template based natural language
@@ -1794,7 +1845,7 @@ As a system relying on {\sc CycL}, contexts can be expressed as
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.9\columnwidth]{stateofart/peis-architecture.pdf}
+	\includegraphics[width=0.5\columnwidth]{stateofart/peis-architecture.pdf}
 	\caption{The PEIS knowledge representation system, taken from~\cite{Daoutis2009}}
 	\label{fig|peis-archi}
 \end{figure}
@@ -1830,7 +1881,7 @@ The PEIS framework offers through the \emph{PEIS middleware} a practical way to
 insert a new component into the shared \emph{tuple space}.  Thus, the KR\&R
 module can be seamlessly integrated into the PEIS ecosystem.
 
-\subsubsection{Notable experiments}
+\paragraph{Notable experiments}
 \label{sect|peis-expe}
 
 \subsection{NKRL}
@@ -1843,15 +1894,15 @@ field~\cite{Sabri2011}. NKRL is not {\it per-se} a knowledge representation
 system, as it is primarily a language. However, it is used as the
 representation and reasoning mechanism for robots by Sabri et al.
 
-\subsubsection{Intrinsic language features}
+\paragraph{Intrinsic language features}
 \label{sect|nkrl-intrinsic-features}
 
-\paragraph{Expressiveness}
+Expressiveness...
 
-\subsubsection{Integration with physical world and in the robot architecture}
+\paragraph{Integration with physical world and in the robot architecture}
 \label{sect|nkrl-integration}
 
-...seem to be mostly WIP...
+\ldots seem to be mostly WIP\ldots
 
 
 \subsection{CAST Knowledge model}
@@ -1885,6 +1936,9 @@ module is called back, and can add this new information to its model.
 In the presented implementation, the CAST knowledge model does no allow for
 effectively representing actions or temporal information.\fxfatal{What about reasoning? can they retrieve for example 'all proxies for colorful objects'?}
 
+In~\cite{Hawes2011}, Hawes et al. also explore \emph{curiosity} mechanisms in
+the context of spatial representations.
+
 \subsection{GSM}
 \label{sect|gsm}
 
@@ -1903,7 +1957,7 @@ theory of mind).
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.9\columnwidth]{stateofart/gsm.pdf}
+    \includegraphics[width=0.6\columnwidth]{stateofart/gsm.pdf}
 
     \caption{Simplified hierarchical structure of the Grounded Situation Model,
     based on~\cite{Mavridis2006}}
@@ -1945,7 +1999,7 @@ implemented with Horn clauses.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\columnwidth]{stateofart/omrkf.pdf}
+    \includegraphics[width=0.5\columnwidth]{stateofart/omrkf.pdf}
 
     \caption{OMRKF organizes knowledge into four \emph{classes}, each composed
     of three \emph{levels}. The figure shows some examples of link between
