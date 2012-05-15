@@ -859,7 +859,7 @@ human-like memory organization.
             child {node [taxon] {{\bf C.10}. Learning}}
             child {node [taxon] {{\bf C.9}. Naive physics}}
             child {node [taxon] {{\bf C.8}. Planning}}
-            child {node [taxon] {{\bf C.7}. Prediction}}
+            child {node [taxon] {{\bf C.7}. Prediction and explanation}}
             child {node [taxon] {{\bf C.6}. Presupposition}}
             child {node [taxon] {{\bf C.5}. Non-monotonicity}}
             child {node [taxon] {{\bf C.4}. Uncertainty}}
@@ -1092,7 +1092,7 @@ environment. This article focuses on symbolic knowledge representation systems,
 but we shall mention when a KRS explicitly provides support for presupposition
 accommodation.
 
-\subsubsection{Prediction, projection and diagnosis tasks}
+\subsubsection{Prediction, projection, explanation}
 \label{sect|prediction-projection}
 
 Levesque~\cite{Levesque2008} distinguish two main tasks, the \emph{projection
@@ -1108,6 +1108,52 @@ performed starting in some initial state.
 in case of failure to provide possible explanation. This can be seen as the
 temporal reverse of the projection task.
 
+\paragraph{Explanation} Diagnosis is also linked to the \emph{explanation} or
+\emph{justification} capabilities that may be offered by the knowledge
+representation system. The explanation of an entailment is the sequence (or
+set of sequences if several are possible) of reasoning steps that allow to
+conclude. An explanation can also conversely explain why a statement leads to a
+contradiction.
+
+The following example shows an explanation for an inconsistency in a particular
+knowledge base: by adding the statement \stmt{robot1 belongsTo human1}, we
+observe that an inconsistency is triggered. The reasoner provides the four
+following observations\footnote{This example uses the \emph{Manchester syntax},
+\url{http://www.w3.org/TR/owl2-manchester-syntax/}} to explain the
+inconsistency:
+
+\begin{quote}
+\scriptsize
+\begin{enumerate}
+    \item \concept{myself} {\bf Type} \concept{belongsTo} {\bf some} \concept{Thing}
+    \item \concept{belongsTo} {\bf Domain} \concept{Artifact}
+    \item \concept{myself} {\bf Type} \concept{Agent}
+    \item {\bf DisjointClasses:} \concept{Agent}, \concept{Artifact}
+\end{enumerate}
+\normalsize
+\end{quote}
+
+This explanation directly portrays the underlying structure of the knowledge
+model. A KRS may provide mechanisms to expose this kind of analysis, either
+automatically when inconsistencies survene, or on demand.
+
+Explanation of contradictions plays a particular role for robots: from a
+cognitive point of view, a logical inconsistency (\ie, a contradiction) can be
+viewed as a \emph{cognitive conflict} or \emph{cognitive dissonance} (\ie, two
+incompatible models of the world that must be dealt with). Being able to expose
+and explain such cognitive conflicts eases the control of the behaviour of the
+robot in unexpected semantic situations, and forms a first step towards an
+adquate reaction.
+
+Cognitive dissonance is also identified by developmental psychologists like
+Piaget as a motivation factor for a child to progress through the various
+stages of its cognitive development. This has been also studied in
+robotics~\cite{Oudeyer2007}.
+
+
+The cognitive capability of \emph{justification} is also intimately linked to
+the meta-cognition capability and participates to the overall \emph{cognitive
+observability} of the system.
 \subsubsection{Task Planning}
 \label{sect|planning}
 
@@ -1359,10 +1405,26 @@ Varadarajan2011}.
     \label{fig|semanticmap}
 \end{figure}
 
-\subsubsection{Intrinsic Motivation}
+\subsubsection{Intrinsic Motivation and Curiosity}
 
-\cite{Oudeyer2007} -> page 2 gives a detailled account of psychological grounds.
-Curiosity, Pro-active behaviour...
+The reason for a robot to acquire knowledge are various, and usually external
+to the robot itself. It is often driven by the needs of the tasks the robot has
+to execute. In this case, motivations are managed by the execution controler
+and are mostly unvisible to the knowledge representation system.
+
+However, motivation can also be intrinsic, driven by the internal state of the
+robot, without external pressure or reward. In this case, the 
+
+In the context of robotics, Oudeyer notes however that \emph{the information that is
+compared \emph{[to compute a level of motivation]} has to be understood in an
+information theoretic perspective, in which what is considered is the intrinsic
+mathematical structure of the values of stimuli, independently of their
+meaning.}~\cite{Oudeyer2007}.
+
+Psychological grounds of motivation are summarized in~\cite{Oudeyer2007} while
+the main approaches to computational motivation, divided into knowledge based
+models, competence based models and morphological models, are surveyed
+in~\cite{Oudeyer2008}.
 
 %%%%%%%%%%%%%%%%%
 \subsection{Practical Integration in Robotic Architectures}
