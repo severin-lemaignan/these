@@ -210,10 +210,67 @@ robotics in the specific context of service robotics, and then at painting the
 current landscape of approaches to the knowledge representation problem in the
 research community.
 
-While not strictly focused on knowledge in the context of
-service robotics, several previous work have sketched lists of important items for cognitive robots.
+\subsection*{Survey Inclusion Criteria}
+\label{sect|inclusion-criteria}
 
-Heintz et al.~\cite{Heintz2008} define
+Every robotic system has, implicitly or not, some knowledge representation
+systems. It may range from a simple state vector to an explicit symbolic
+knowledge base.  This survey focuses on the right end of this spectrum:
+symbolic systems, suited for abstract reasoning.
+
+Besides, we have decided to restraint the set of systems to those actually
+implemented on robots, and used in semantic-rich environments (\ie dynamic,
+partially unknown environments with a large range of different entities which
+may have interactions). The typical scenario that would involve such robots is
+a service robot in a human-friendly environment like a kitchen (we will
+describe such a scenario in section~\ref{sect|scenario}).
+
+We have limited ourselves to systems that
+\begin{inparaenum} 
+    \item  run on \emph{service robot} (that is, robots that interact with 
+    objects in a semantic-rich environment primarily designed for humans),
+    \item  ground the knowledge in the physical world (physically embedded
+    systems able to assess their environment),
+    \item  are able to merge different knowledge modalities,
+    \item  are able of on-line, dynamic knowledge acquisition and reasoning 
+    (\ie not simple static databases).
+\end{inparaenum}
+
+This exclude \textit{de-facto} platforms like {\sc DyKnow}~\cite{Heintz2004}
+which are focused on data fusion and knowledge grounding at lower levels.
+
+We have also choosen not to include the GOLOG language and its
+derivatives~\cite{Levesque1997, Ferrein2008, Gspandl2011} in this survey. While
+several implementations on robots, including service robots, do exist, the
+focus of this language is on representation and reasoning about actions and
+situations, and the link with symbolic, abstract knowledge is not explicit.
+
+While classical cognitive architectures like {\sc Soar}~\cite{Lehman2006} or
+{\sc ACT-R} have declarative knowledge modules~\cite{Derbinsky2010} and have
+been recently used on service robots (see {\sc ACT-R/E}~\cite{Kennedy2009} for
+instance), they are also absent from this survey because we did not find much
+references in the literature on knowledge manipulation and representation
+applied to robotic scenarii for these architectures.
+
+\subsection{Previous Work}
+\label{sect|evaluation-literature}
+
+A large part of our proposal is build as a comprehensive synthesis of
+classification and analysis found in the literatture. This synthesis is focused
+on cognitive abilities strictly related to knowledge manipulation, in the
+context of service robotics.
+
+Levesque and Lakemeyer~\cite{Levesque2008} present in a chapter on Cognitive
+Robotics several characteristics of knowledge representation systems for
+robots, stressing the need of representing the dynamics of the world.  Sensing
+is included in the knowledge representation via fluents; they introduce the
+idea of \emph{possible worlds} to represent distinct parallel mental models;
+action representation and reasoning about tasks is discussed in the context of
+situation calculus; open world vs. closed world approaches are both mentioned.
+They also discuss how robot programming and knowledge representation can be
+related. We integrate most of these items in our typology.
+
+In a slightly broader context, Heintz et al.~\cite{Heintz2008} define
 \emph{knowledge processing middlewares} as systems supporting ``declarative
 specifications for flexible configuration and dynamic reconfiguration of
 context dependent processing at many different levels of abstraction''. They
@@ -297,6 +354,7 @@ reformulated ways.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{A Typology of Knowledge Representation Requirements for Robotics}
 \label{sect|features}
+
 We now want to organize requirements from this imaginary cooking scenario where
 numerous desirable features for a knowledge representation system for robotics
 have been identified without any particular order.
@@ -317,6 +375,7 @@ definition accompagnied by links to relevant literature.
 Table~\ref{table|contribution-by-systems}, at the end of the chapter,
 summarizes all these features with the main domain of contribution of each
 surveyed KRS.
+
 
 
 \subsection{Expressiveness: What Can be Represented?}
@@ -650,6 +709,7 @@ interactions between concepts. From a taxonomy point of view, actions are a
 particular type of event that normaly leads to a situation corresponding to the
 action realization.
 
+
 \emph{Thematic roles}~\cite{Gruber1965} (also found as \emph{semantic roles} or
 \emph{theta roles} in the literature) allow to semantically qualify the
 parameters of an action. The recipient of the action, the performer, the object
@@ -693,6 +753,9 @@ may thus have specific mechanisms to represent them (and possible, to reason
 about them, as presented in section~\ref{sect|planning}).
 
 %An extensive report on task modeling in OWL ontologies in appendix
+
+
+
 
 \subsubsection{Context modeling}
 
@@ -1107,7 +1170,10 @@ performed starting in some initial state.
 
 \paragraph{Diagnosis}: this corresponds to the ability to rewind on past events
 in case of failure to provide possible explanation. This can be seen as the
-temporal reverse of the projection task.
+temporal reverse of the projection task. Because of their modelisation of
+situations as an history of actions, derivatives of the GOLOG logic programming
+languages are a good example of diagnosis tasks integrated to the knowledge
+representation system~\cite{Gspandl2011}.
 
 \paragraph{Explanation} Diagnosis is also linked to the \emph{explanation} or
 \emph{justification} capabilities that may be offered by the knowledge
@@ -1194,6 +1260,11 @@ actions and situation have emerged: besides situation calculs, \emph{fluent
 calculus} and \emph{event calculus} are the main ones.
 Thielscher~\cite{Thielscher2011} recently proposed a unification of these
 approach in a new \emph{action calculus}.
+
+The GOLOG~\cite{Levesque1997} language and its derivatives (like {\sc
+ReadyLOG}~\cite{Ferrein2008} and {\sc IndiLOG}~\ref{Gspandl2011}) propose
+implementations of the situation calculus focused on robotic applications.
+
 
 It is however common to rely on external components dedicated to symbolic task
 planning (in particular because of the non-monotonicity requirements) with a
@@ -1712,17 +1783,17 @@ This section briefly presents each of them.
 \toprule
 {\bf Project} & {\bf Category} & {\bf Authors (Institution)} & {\bf Project homepage} & {\bf Programming language} & {\bf Knowledge model/Logical Formalism} & {\bf Reasoner} & Main reference \\
 \midrule
+ARMAR/Tapas & KRS & Holzapfel, Waibel \par (Karlsruhe TH) & & ? & TFS (Typed Feature Structures) & & \cite{Holzapfel2008}\\
+CAST Proxies & Ubiquitous & Wyatt, Hawes, Jacobsson, Kruijff (Brimingham Univ., DFKI Saarbrücken) & & & Amodal proxies & & \cite{Jacobsson2008} \\
+GSM & KRS & Mavridis, Roy \par (MIT MediaLab) & & ? & & & \cite{Mavridis2006} \\
+Ke Jia Project & KRS & Chen et al. \par (Univ. of Science and Technology of China) & \url{www.wrighteagle.org/en} & ASP & ASP & ASP & \cite{Chen2010} \\
 {\sc KnowRob} & KRS & Tenorth, Beetz \par (TU Munich) & \url{ias.in.tum.de/kb/wiki} & {\sc Prolog} & {\sc Prolog} + OWL-DL & Custom \par ({\sc Prolog}) & \cite{Tenorth2009a} \\
+NKRL & Language & Zarri et al. \par (Paris Est Créteil Univ.) & & NKRL & & & \cite{Sabri2011} \\
+%OBOC & KRS & Mendoza & & & & & \cite{Mendoza2005} \\
+OUR-K & KRS & Suh et al. \par (Hanyang Univ.) & \url{incorl.hanyang.ac.kr/xe} & ? & Horn Clauses & ? & \cite{Suh2007} \\
 ORO & KRS & Lemaignan, Alami \par (LAAS-CNRS) & \url{oro.openrobots.org} & {\sc Java} & OWL-DL ({\sc Jena}) & {\sc Pellet} & \cite{Lemaignan2010} \\
 PEIS KR\&R & KRS & Daoutis, Coradeshi, Loutfi, Saffiotti \par (Örebro Univ.) & \url{www.aass.oru.se/~peis} & {\sc C}, {\sc CycL} & CycL (1st and 2nd order logics, modal logics) & & \cite{Daoutis2009} \\
-CAST Proxies & Ubiquitous & Wyatt, Hawes, Jacobsson, Kruijff (Brimingham Univ., DFKI Saarbrücken) & & & Amodal proxies & & \cite{Jacobsson2008} \\
-NKRL & Language & Zarri et al. \par (Paris Est Créteil Univ.) & & NKRL & & & \cite{Sabri2011} \\
-GSM & KRS & Mavridis, Roy \par (MIT MediaLab) & & ? & & & \cite{Mavridis2006} \\
-OMRKF & KRS & Suh et al. \par (Hanyang Univ.) & \url{incorl.hanyang.ac.kr/xe} & ? & Horn Clauses & ? & \cite{Suh2007} \\
-Ke Jia Project & KRS & Chen et al. \par (Univ. of Science and Technology of China) & \url{www.wrighteagle.org/en} & ASP & ASP & ASP & \cite{Chen2010} \\
-ARMAR/Tapas & KRS & Holzapfel, Waibel \par (Karlsruhe TH) & & ? & TFS (Typed Feature Structures) & & \cite{Holzapfel2008}\\
-Golog & Language & Levesque (Toronto Univ.) & & {\sc Prolog} & & & \\
-OBOC & KRS & Mendoza & & & & & \cite{Mendoza2005} \\
+%Golog & Language & Levesque (Toronto Univ.) & & {\sc Prolog} & & & \\
 % & & Varadarajan, Vincze \par (TU Wien) & & & & & \cite{Varadarajan2011} \\ % -> affordances, but no implementation on a robot
 % & & Kaelbling, Lozano-Pérez \par (MIT CSAIL) & & & & & \cite{Kaelbling2011} \\ % -> mostly planning under uncertainty
 % & & Hertzberg (Osnabrück Univ.) \\ % -> affordances, semantic mapping
@@ -1742,8 +1813,143 @@ for systems that are explicit knowledge representation and reasoning modules,
 \end{table}
 \end{landscape}
 
-\fxfatal{Bielefeld -> could not find much\ldots}
-\fxfatal{Kollar/Tellex -> really focusing on the natural language grounding}
+%\fxfatal{Bielefeld -> could not find much\ldots}
+%\fxfatal{Kollar/Tellex -> really focusing on the natural language grounding}
+
+\subsection{ARMAR/Tapas}
+
+{\sc Tapas} is the name of the knowledge representation system and dialogue
+manager found on the ARMARIII robot~\cite{Holzapfel2008}.
+
+Knowledge in {\sc Tapas} exists as procedural knowledge (plans) and declarative
+knowledge. The later is split into \emph{lexical knowledge}, \emph{semantic
+knowledge} and a database of identified objects (with their properties). The
+\emph{lexical knowledge} contains lexical and grammatical informations about
+the objects. The \emph{semantic knowledge} is organized into an ontology
+relying on \emph{typed feature structures} (TFS,~\cite{Carpenter1992}, a
+formalism originating from the computational linguistics community, and a
+superset of first-order logic).
+
+{\sc Tapas} has a strong focus on natural language grounding. It proceeds by
+generating grammars from properties represented in the ontology to parse and
+understand dialogue.
+
+Another focus is put on handling unknown words and objects. {\sc Tapas}
+provides routines to recognize unknown entities, and propose and interactive
+and iterative verbal process to categorize (including adding new categories)
+those new concepts.
+
+\subsection{CAST Knowledge model}
+\label{sect|cast}
+
+CAS (\emph{CoSy Architecture Schema}) Toolkit~\cite{Hawes2007} is a
+comprehensive toolkit aimed at building cognitive architectures for robots
+through a set of interconnected SAs (\emph{subarchitectures}). The CAS does not
+expose a central knowledge base as seen in previous works. It instead
+represents knowledge as unrooted \emph{proxies}. Those proxies are formally
+defined in \cite{Jacobsson2008} as $p= \langle F_p, u_p \rangle$ where $F_p$ is
+a set of instantiated features (like $\phi^{Colour}_{red}$) and $u_p$ a
+\emph{proxies union} that form an equivalence class corresponding to one
+entity.
+
+A union of proxies forms a global amodal representation of an entity, that can
+be explicitly shared and manipulated. Being not centralized, the knowledge
+model can be qualified of \emph{ubiquitous}. Furthermore, knowledge source in
+the CAS architecture is tightly bound to the on-line grounding process (be it
+grounded in perception or in dialogue). While nothing seems to prevent it, no
+{\it a priori} knowledge (including common-sense knowledge) is used.
+
+Knowledge sharing is ensured by the event mechanism of CAST: modules can
+monitor proxies for alteration by other modules. Jacobsson et al. mention how
+this can apply to reinforcement learning: the vision module creates a proxy for
+an orange object. This proxy get monitored by a learning module. In parallel,
+the proxy is bound to an union by the natural language understanding module
+that add new a feature like \emph{"this object is a fruit"}. The learning
+module is called back, and can add this new information to its model.
+
+In the presented implementation, the CAST knowledge model does no allow for
+effectively representing actions or temporal information.\fxfatal{What about
+reasoning? can they retrieve for example 'all proxies for colorful objects'?}
+
+In~\cite{Hawes2011}, Hawes et al. also explore \emph{curiosity} mechanisms in
+the context of spatial representations.
+
+\subsection{GSM}
+\label{sect|gsm}
+
+GSM (for \emph{Grounded Situation Model})~\cite{Mavridis2006} is a knowledge
+representation system primarily built to ``facilitate cross-modal
+interoperability'',  especially in the context of verbal interaction with a
+robot.
+
+Unlike most of the previously presented systems, GSM does not rely on any
+formal language but rather on a layered data structure (Figure~\ref{fig|gsm})
+that organizes the surrounding world into agents and relations between agents.
+Each agent (any animate or inanimate object) is attached to a physical model (made
+of \emph{body parts} that have properties like their position, color, etc.) and
+a mental model (which is a recursively embedded GSM, thus allowing a sort of
+theory of mind).
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\columnwidth]{stateofart/gsm.pdf}
+
+    \caption{Simplified hierarchical structure of the Grounded Situation Model,
+    based on~\cite{Mavridis2006}}
+
+    \label{fig|gsm}
+\end{figure}
+
+Properties are represented in three layers: a stochastic representation, close
+to sensory percepts, a \emph{continuous single-valued} encoding of the
+stochastic model, and a discrete, categorical model.
+
+One notable feature of GSM is the \emph{bidirectionality} of the grounding
+process: not only sensor percepts are abstracted into categories suitable for
+human conversation, but human utterance (like ``There is a red ball in the
+center of the table'') can also be turned into property descriptions. This
+basically enable the knowledge representation system of the robot to
+\emph{imagine} entities.
+
+GSM also features several strategies for managing time and events.
+\emph{Moments} are created by storing timestamped snap-shots of GSM, and
+\emph{event classifiers} allow to define and detect events.
+
+\paragraph{Experiments} GSM has mostly been tested on table-top manipulation
+and interaction tasks (a ``conversational helping hand'' as stated by the
+authors) realized on a 7-DOF arm equipped with force feedback, cameras for blob
+tracking and speech recognition (Sphinx4). Mavridis and Roy provide in addition
+an in-depth analysis of the performance of GSM by the mean of a standard
+psycholinguistic test, the \emph{Token test}~\cite{DiSimoni1978}.
+
+\subsection{GOLOG}
+\label{sect|kejia}
+
+
+\subsection{Ke Jia Project}
+\label{sect|kejia}
+
+The Ke Jia project~\cite{Chen2010} integrates on a mobile platform a knowledge
+representation language with natural language processing, task planing and
+motion planing.
+
+Knowledge representation relies on \emph{Action Language C}, itself based on
+\emph{Answer Set Programming} (ASP)~\cite{Gelfond2008}. These languages, that
+are syntactically close to Prolog, are based on \emph{stable models} of logic
+programs, and support non-monotonic reasoning. Default and non-monotonic
+reasoning has been especially researched within the Ke Jia project for symbolic
+task planing~\cite{Ji2011} and underspecified natural language processing.
+
+Amongst other features, the natural language processing capabilities of the
+system support acquisition of new logical rules at run-time.
+
+\paragraph{Experiments} The Ke Jia robot has been demonstrated in several tasks
+involving human-robot interaction with natural language. These tasks include a
+task with multiple \emph{pick \& carry} that are globally optimized, naive
+physics reasoning via taught rules or more complex scenarii with the robot
+delivering drinks, taking into account changing and mutually exclusive
+preferences of users.
+
 
 \subsection{KnowRob}
 \label{sect|knowrob}
@@ -1800,6 +2006,70 @@ scenarii at the Technical University of Munich, on the PR2 robot and on a 2-arm
 custom mobile manipulator in the scope of the ``assistive
 kitchen''~\cite{Beetz2008} project. In these experiments, {\sc KnowRob} has
 been used as central knowledge hub...
+
+\subsection{NKRL}
+\label{sect|nkrl}
+
+\emph{NKRL} stands for \emph{Narrative Knowledge Representation Language}.
+While this language is developed since a long time by Zarri~\cite{Zarri1997,
+Zarri2008}, recent research direction include application to the robotic
+field~\cite{Sabri2011}. NKRL is not {\it per-se} a knowledge representation
+system, as it is primarily a language. However, it is used as the
+representation and reasoning mechanism for robots by Sabri et al.
+
+\paragraph{Intrinsic language features}
+\label{sect|nkrl-intrinsic-features}
+
+Expressiveness...
+
+\paragraph{Integration with physical world and in the robot architecture}
+\label{sect|nkrl-integration}
+
+\ldots seem to be mostly WIP\ldots
+
+\subsection{OUR-K and OMRKF}
+\label{sect|omrkf}
+
+The Ontology-based Unified Robot
+Knowledge~\cite{Lim2011} (OUR-K) framework, successor of the Ontology-based Multi-layered Robot Knowledge Framework~\cite{Suh2007}
+(OMRKF), is a knowledge representation system based on five inter-related
+\emph{classes} of knowledge (Figure~\ref{fig|omrkf}). It proposes a layered
+approach to knowledge representation that allows to integrate the grounding
+process to the knowledge representation process. OUR-K knowledge model is
+implemented with a mix of Description Logics for the concept hierarchies and Horn clauses.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\columnwidth]{stateofart/ourk.pdf}
+
+    \caption{OUR-K organizes knowledge into fives \emph{classes}, each composed
+    of \emph{levels}. Figure based on~\cite{Lim2011}.}
+
+    \label{fig|omrkf}
+\end{figure}
+
+Each level of knowledge is build as three stages of ontological realization: a
+\emph{meta-concept} (the level itself, like ``temporal context'', ``behaviour''
+or ``object feature''), a taxonomy of concepts inside this level (for instance
+$cup : Object \sqsubseteq tableware : Object$) and an instantiation of the
+taxonomy ($cup1 : cup$).
+
+\paragraph{Representation} The environment is represented in OUR-K in the
+$space : Model$ knowledge level as a classical three layers mapping (metric,
+topological and semantic maps). Objects (in $object : Model$) are localized in
+$space : Model$ through Voronoi nodes.
+
+The knowledge class $Context$ proposes an explicit statement of spatial context
+(mostly geometric relations between objects), temporal context and a more
+general \emph{high-level} context, inferred from spatial and temporal contexts.
+
+Finally, the $Activity$ knowledge class store compound actions in a HTN-like
+structure, exploited at run-time by a planner.
+
+\paragraph{Experiments} Experiments conducted with OUR-K and OMRKF include
+finding kitchen objects and reporting about their state to a human.  This
+experiment also shows how OUR-K can deal with objects only partially matched by
+their descriptor by introducing a $candidate()$ function.
 
 \subsection{PEIS KR\&R}
 \label{sect|peis-ecology}
@@ -1884,198 +2154,6 @@ module can be seamlessly integrated into the PEIS ecosystem.
 \paragraph{Notable experiments}
 \label{sect|peis-expe}
 
-\subsection{NKRL}
-\label{sect|nkrl}
-
-\emph{NKRL} stands for \emph{Narrative Knowledge Representation Language}.
-While this language is developed since a long time by Zarri~\cite{Zarri1997,
-Zarri2008}, recent research direction include application to the robotic
-field~\cite{Sabri2011}. NKRL is not {\it per-se} a knowledge representation
-system, as it is primarily a language. However, it is used as the
-representation and reasoning mechanism for robots by Sabri et al.
-
-\paragraph{Intrinsic language features}
-\label{sect|nkrl-intrinsic-features}
-
-Expressiveness...
-
-\paragraph{Integration with physical world and in the robot architecture}
-\label{sect|nkrl-integration}
-
-\ldots seem to be mostly WIP\ldots
-
-
-\subsection{CAST Knowledge model}
-\label{sect|cast}
-
-CAS (\emph{CoSy Architecture Schema}) Toolkit~\cite{Hawes2007} is a
-comprehensive toolkit aimed at building cognitive architectures for robots
-through a set of interconnected SAs (\emph{subarchitectures}). The CAS does not
-expose a central knowledge base as seen in previous works. It instead
-represents knowledge as unrooted \emph{proxies}. Those proxies are formally
-defined in \cite{Jacobsson2008} as $p= \langle F_p, u_p \rangle$ where $F_p$ is
-a set of instantiated features (like $\phi^{Colour}_{red}$) and $u_p$ a
-\emph{proxies union} that form an equivalence class corresponding to one
-entity.
-
-A union of proxies forms a global amodal representation of an entity, that can
-be explicitly shared and manipulated. Being not centralized, the knowledge
-model can be qualified of \emph{ubiquitous}. Furthermore, knowledge source in
-the CAS architecture is tightly bound to the on-line grounding process (be it
-grounded in perception or in dialogue). While nothing seems to prevent it, no
-{\it a priori} knowledge (including common-sense knowledge) is used.
-
-Knowledge sharing is ensured by the event mechanism of CAST: modules can
-monitor proxies for alteration by other modules. Jacobsson et al. mention how
-this can apply to reinforcement learning: the vision module creates a proxy for
-an orange object. This proxy get monitored by a learning module. In parallel,
-the proxy is bound to an union by the natural language understanding module
-that add new a feature like \emph{"this object is a fruit"}. The learning
-module is called back, and can add this new information to its model.
-
-In the presented implementation, the CAST knowledge model does no allow for
-effectively representing actions or temporal information.\fxfatal{What about reasoning? can they retrieve for example 'all proxies for colorful objects'?}
-
-In~\cite{Hawes2011}, Hawes et al. also explore \emph{curiosity} mechanisms in
-the context of spatial representations.
-
-\subsection{GSM}
-\label{sect|gsm}
-
-GSM (for \emph{Grounded Situation Model})~\cite{Mavridis2006} is a knowledge
-representation system primarily built to ``facilitate cross-modal
-interoperability'',  especially in the context of verbal interaction with a
-robot.
-
-Unlike most of the previously presented systems, GSM does not rely on any
-formal language but rather on a layered data structure (Figure~\ref{fig|gsm})
-that organizes the surrounding world into agents and relations between agents.
-Each agent (any animate or inanimate object) is attached to a physical model (made
-of \emph{body parts} that have properties like their position, color, etc.) and
-a mental model (which is a recursively embedded GSM, thus allowing a sort of
-theory of mind).
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.6\columnwidth]{stateofart/gsm.pdf}
-
-    \caption{Simplified hierarchical structure of the Grounded Situation Model,
-    based on~\cite{Mavridis2006}}
-
-    \label{fig|gsm}
-\end{figure}
-
-Properties are represented in three layers: a stochastic representation, close
-to sensory percepts, a \emph{continuous single-valued} encoding of the
-stochastic model, and a discrete, categorical model.
-
-One notable feature of GSM is the \emph{bidirectionality} of the grounding
-process: not only sensor percepts are abstracted into categories suitable for
-human conversation, but human utterance (like ``There is a red ball in the
-center of the table'') can also be turned into property descriptions. This
-basically enable the knowledge representation system of the robot to
-\emph{imagine} entities.
-
-GSM also features several strategies for managing time and events.
-\emph{Moments} are created by storing timestamped snap-shots of GSM, and
-\emph{event classifiers} allow to define and detect events.
-
-\paragraph{Experiments} GSM has mostly been tested on table-top manipulation
-and interaction tasks (a ``conversational helping hand'' as stated by the
-authors) realized on a 7-DOF arm equipped with force feedback, cameras for blob
-tracking and speech recognition (Sphinx4). Mavridis and Roy provide in addition
-an in-depth analysis of the performance of GSM by the mean of a standard
-psycholinguistic test, the \emph{Token test}~\cite{DiSimoni1978}.
-
-\subsection{OMRKF}
-\label{sect|omrkf}
-
-The Ontology-based Multi-layered Robot Knowledge Framework~\cite{Suh2007}
-(OMRKF) is a knowledge representation system based on four inter-related
-\emph{classes} of knowledge (Figure~\ref{fig|omrkf}). It proposes a layered
-approach to knowledge representation that allows to integrate the grounding
-process to the knowledge representation process. OMRKF knowledge model is
-implemented with Horn clauses.
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\columnwidth]{stateofart/omrkf.pdf}
-
-    \caption{OMRKF organizes knowledge into four \emph{classes}, each composed
-    of three \emph{levels}. The figure shows some examples of link between
-    knowledge classes and knowledge levels. Based on~\ref{Suh2007}.}
-
-    \label{fig|omrkf}
-\end{figure}
-
-Each level of knowledge is build as three stages of ontological realization: a
-\emph{meta-concept} (the level itself, like ``temporal context'', ``behaviour''
-or ``object feature'', a taxonomy of concepts inside this level (for instance
-$cup : Object \sqsubseteq tableware : Object$) and an instantiation of the
-taxonomy ($cup1 : cup$).
-
-Environment is represented in OMRKF in the $space : Model$ knowledge level as a
-classical three layers mapping (metric, topological and semantic maps). Objects
-(in $object : Model$) are localized in $space : Model$ through Voronoi nodes.
-
-The knowledge class $Context$ proposes an explicit statement of spatial context
-(mostly geometric relations between objects), temporal context and a more
-general \emph{high-level} context, inferred from spatial and temporal contexts.
-
-Finally, the $Activity$ knowledge class store compound actions in a HTN-like
-structure, exploited at run-time by a planner.
-
-\paragraph{Experiments} Experiments conducted with OMRKF include finding
-kitchen objects and reporting about their state to a human.  This experiment
-also shows how OMRKF can deal with objects only partially matched by their
-descriptor by introducing a $candidate()$ function.
-
-\subsection{Ke Jia Project}
-\label{sect|kejia}
-
-The Ke Jia project~\cite{Chen2010} integrates on a mobile platform a knowledge
-representation language with natural language processing, task planing and
-motion planing.
-
-Knowledge representation relies on \emph{Action Language C}, itself based on
-\emph{Answer Set Programming} (ASP)~\cite{Gelfond2008}. These languages, that
-are syntactically close to Prolog, are based on \emph{stable models} of logic
-programs, and support non-monotonic reasoning. Default and non-monotonic
-reasoning has been especially researched within the Ke Jia project for symbolic
-task planing~\cite{Ji2011} and underspecified natural language processing.
-
-Amongst other features, the natural language processing capabilities of the
-system support acquisition of new logical rules at run-time.
-
-\paragraph{Experiments} The Ke Jia robot has been demonstrated in several tasks
-involving human-robot interaction with natural language. These tasks include a
-task with multiple \emph{pick \& carry} that are globally optimized, naive
-physics reasoning via taught rules or more complex scenarii with the robot
-delivering drinks, taking into account changing and mutually exclusive
-preferences of users.
-
-\subsection{ARMAR/Tapas}
-
-{\sc Tapas} is the name of the knowledge representation system and dialogue
-manager found on the ARMARIII robot~\cite{Holzapfel2008}.
-
-Knowledge in {\sc Tapas} exists as procedural knowledge (plans) and declarative
-knowledge. The later is split into \emph{lexical knowledge}, \emph{semantic
-knowledge} and a database of identified objects (with their properties). The
-\emph{lexical knowledge} contains lexical and grammatical informations about
-the objects. The \emph{semantic knowledge} is organized into an ontology
-relying on \emph{typed feature structures} (TFS,~\cite{Carpenter1992}, a
-formalism originating from the computational linguistics community, and a
-superset of first-order logic).
-
-{\sc Tapas} has a strong focus on natural language grounding. It proceeds by
-generating grammars from properties represented in the ontology to parse and
-understand dialogue.
-
-Another focus is put on handling unknown words and objects. {\sc Tapas}
-provides routines to recognize unknown entities, and propose and interactive
-and iterative verbal process to categorize (including adding new categories)
-those new concepts.
 
 %%%%%%%%%% Underlying knowledge model table %%%%%%%%
 \begin{table}
@@ -2091,7 +2169,7 @@ PEIS Ecology & {\sc ResearchCyc} \\
 NKLR &  None \\
 CAST Proxies &  None \\
 GSM &  Predefined categories \\
-OMRKF & {\it A priori} knowledge structure and axioms, custom set of instances\\
+OUR-K & {\it A priori} knowledge structure and axioms, custom set of instances\\
 Ke Jia & None \\
 ARMAR/{\sc Tapas} & Custom ontology related to the kitchen\\
 
