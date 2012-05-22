@@ -1,15 +1,17 @@
 \chapter*{\centering \begin{normalsize}Conventions and Notations\end{normalsize}}
 
-This thesis relies on several notations and specific writing conventions to describe symbolic
-knowledge and logical relations.
+This thesis relies on several notations and specific writing conventions to
+describe symbolic knowledge and logical relations.
 
 Ontologies and excerpts of ontologies presented in the work are mostly written
-in the W3C's OWL language. As a derivative of XML, it uses \emph{namespaces} to
+in the W3C's OWL language. As a derivative of XML, it uses namespaces to
 declare the scopes of concepts. The main namespaces that are used in this work
-are {\tt owl:}, {\tt rdf:}, {\tt rdfs:}, {\tt cyc:} (for concepts defined in the
-{\sc OpenCyc} upper ontology) and {\tt oro:} (for the concepts defined in our
-work). For readability, the namespaces will be omitted when they are not
-required for the understanding.
+are {\tt owl:}, {\tt rdf:}, {\tt rdfs:} (respective namespaces and schema
+namespace of the Web Ontology Language and the Resource Description Framework),
+{\tt cyc:} (concepts defined in the {\sc OpenCyc} upper ontology) and {\tt
+oro:} (concepts defined in our \emph{OpenRobots Common-Sense} ontology}). For
+readability, the namespaces will be omitted when they are not required for the
+understanding.
 
 The table below summarizes the terminology that is used in this work to discuss
 knowledge representation questions. While these terms are generally not
@@ -19,29 +21,30 @@ arise.
 \begin{center}
 \begin{tabular}{p{3.5cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}}
 \toprule
-Concept, \par Entity, \par Element & Class (OWL), \par Concept (DL) & Relation, \par Property (OWL), Role (DL), \par (Binary) Predicate & Instance (OWL), Individual (DL) \\
+Entity, \par Element, \par Concept & Class (OWL), \par Concept (DL) & Relation, \par Property (OWL), Role (DL), \par (Binary) Predicate & Instance (OWL), Individual (DL) \\
 \bottomrule
 
 \end{tabular}
 \end{center}
 
-Description Logic terminology (noted DL above) for classes and relations will
-be used only in the specific context of Description Logic. In other cases, the
-term \emph{concept} will encompass \emph{classes}, \emph{properties} and
-\emph{instances} in the OWL terminology.
+Description Logic terminology (noted DL above) for classes (\ie \emph{concept})
+and relations (\ie \emph{role}) will be used only in the specific context of
+Description Logic. In other cases, the term \emph{concept} is used as a general
+term that encompasses \emph{classes}, \emph{properties} and \emph{instances} in
+the OWL terminology.
 
-In our context, a logical \emph{statement} is both a declarative sentence and
+Depending on the context, a logical \emph{statement} is either a declarative sentence or
 the meaning of this sentence (in this case, it is a \emph{fact} or a
-\emph{belief}). The acception of the term \emph{statement} will depend on the
-context of use. Furthermore, statements are generally represented as
+\emph{belief}). Statements are generally represented as
 \emph{triples} $\langle subject, predicate, object \rangle$. Statements that are
 explicitely added to a knowledge base are called \emph{assertions}.
 
-The terms \emph{statement}, \emph{assertion}, \emph{fact}, \emph{belief},
-\emph{triple} are thus frequently used with similar meanings.
+Again, we may use interchangeabily the terms \emph{statement},
+\emph{assertion}, \emph{fact}, \emph{belief}, \emph{triple} when no confusion
+arise.
 
 Single concepts are typeset with this font: \concept{concept}, while statements
-are typeset in this way: \stmt{subject predicate object}.
+are typeset in this way (when represented as triples): \stmt{subject predicate object}.
 
 Relations between concepts and rules rely on logical connectors. The table
 below presents the most important ones that are found in this thesis.
@@ -63,8 +66,8 @@ $\to$ & implication \\
 \end{tabular}
 \end{center}
 
-Finally, we may use the Manchester
-Syntax\footnote{\url{http://www.co-ode.org/resources/reference/manchester_syntax/}}
-to present in a readable way certain more complex class expressions.
+Finally, we punctually use the Manchester
+Syntax\footnote{\url{http://www.w3.org/TR/owl2-manchester-syntax/}} to present
+in a readable way complex class expressions.
 
 \clearpage
