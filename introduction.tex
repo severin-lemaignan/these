@@ -60,100 +60,6 @@ the level of agency (the ability to \emph{act in the world}).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{The general context of Human-Robot interaction in this work}
-\label{sect|general-context}
-
-{\em Aperitif time. Sitting down in his comfortable armchair, Tom gives a look
-at the empty table. ``{\em Hey robot, put two glasses and this bottle on the
-tray!}''. ``{\em And bring that over there.}''. The robot asks ``{\em The
-Martini or the Porto?}''. ``{\em Bring both!}'' answers Tom. The robot prepares
-the order and smoothly bring the tray to the table.}
-
-\begin{figure}%[!ht] 
-    \centering
-    \includegraphics[width=0.8\columnwidth]{intro/aperitif_time.jpg} 
-
-    \caption{Interacting with the robot in an everyday situation: the human
-    asks for help in vague terms, the robot takes into account the human's {\it
-    a priori} knowledge and spatial perspective to refine its understanding of
-    the question.} 
-
-    \label{fig|vpt} 
-\end{figure}
-
-While the dream of the robot-servant could be questioned, this kind of natural
-interaction is a short-term target for the human-robot interaction community.
-
-This simple scenario belongs to the broad class of \emph{interactive
-manipulation problems}: several agents agree a (more or less implicit) joint
-goal that requires some sort of cooperation to be successfully achieved. These
-problems involve both dialogue and manipulation and are often iterative
-(step-by-step resolution, questions-answers,...).
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.9\columnwidth]{intro/grounding_robot.pdf}
-    \caption{A robot reasoning about human-robot interaction and anticipation
-    of human activities: sources of in- formation are multi-modal dialogue and
-    observation of the environment and the human activities.}
-    \label{fig|hri-dec}
-\end{figure}
-
-
-Figure~\ref{fig|hri-dec} illustrates some of the aspects of the interaction.
-From the robot perspective, several cognitive skills are involved: dialogue
-processing through verbal and deictic modalities (what does the human say? what
-attitude -- glances, postures, gestures... -- does he express?), acquisition
-and maintainance of one or several models of the environment, not only from the
-robot point of view, but also from the other agents' points of view,
-anticipation (what are the intentions of the human? Can I predict and
-anticipate his/her actions?), planning and control (how would I proceed further
-towards the goal?), monitoring of the other agents' activities (do we have an
-effective cooperation?) and the overall progress of the task. 
-
-What are the prerequisites for such a sentence --``Robot, put two glasses and
-this bottle on the tray''-- to be understood by the robot, correctly
-interpreted in the spatial context of the interaction, and eventually
-transformed into a set of actions? We summarize these challenges in four
-categories:
-
-\begin{enumerate}
-
-    \item how to build and maintain a consistent geometric model of the current
-    situation, acquired through perception or deduction from previous
-    perceptions,
-
-    \item how to build an unambiguous symbolic representation of concepts
-    (objects, agents, actions...) underlying the interaction, and practical for
-    decision-making processes,
-
-    \item how to establish the joint goal(s), how to build and maintain
-    iteratively shared (human-robot) plans, 
-
-    \item how to refine and execute the computed plans, and how to monitor
-    those achieved by its human partner?
-
-\end{enumerate}
-
-
-This chapter focuses on points {\it 1} and {\it 2}. It presents techniques,
-developed and used on several real robots, for the creation of a set of
-environment models suitable for grounded situation interpretation,
-decision-making and control.
-
-The two other items are however important to actually perform the interaction.
-Thus we briefly overview a global architecture of a robot able to cooperate
-with humans before really focusing on the grounding issues.
-
-
-
-
-Interaction for \emph{joint action} in a \emph{situated} environment.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \section{A Prototypical Scenario}
 \label{sect|scenario}
 
@@ -323,6 +229,187 @@ the humans own structures and vocabulary).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Human-Robot Interaction: the Challenges}
+\label{sect|challenges}
+
+\subsection{Specifying the Context}
+\label{sect|general-context}
+
+{\em Aperitif time. Sitting down in his comfortable armchair, Tom gives a look
+at the empty table. ``{\em Hey robot, put two glasses and this bottle on the
+tray!}''. ``{\em And bring that over there.}''. The robot asks ``{\em The
+Martini or the Porto?}''. ``{\em Bring both!}'' answers Tom. The robot prepares
+the order and smoothly bring the tray to the table.}
+
+\begin{figure}%[!ht] 
+    \centering
+    \includegraphics[width=0.8\columnwidth]{intro/aperitif_time.jpg} 
+
+    \caption{Interacting with the robot in an everyday situation: the human
+    asks for help in vague terms, the robot takes into account the human's {\it
+    a priori} knowledge and spatial perspective to refine its understanding of
+    the question.} 
+
+    \label{fig|vpt} 
+\end{figure}
+
+While the dream of the robot-servant could be questioned, this kind of natural
+interaction is a short-term target for the human-robot interaction community.
+
+This simple scenario belongs to the broad class of \emph{interactive
+manipulation problems}: several agents agree a (more or less implicit) joint
+goal that requires some sort of cooperation to be successfully achieved. These
+problems involve both dialogue and manipulation and are often iterative
+(step-by-step resolution, questions-answers,...).
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\columnwidth]{intro/grounding_robot.pdf}
+    \caption{A robot reasoning about human-robot interaction and anticipation
+    of human activities: sources of in- formation are multi-modal dialogue and
+    observation of the environment and the human activities.}
+    \label{fig|hri-dec}
+\end{figure}
+
+
+Figure~\ref{fig|hri-dec} illustrates some of the aspects of the interaction.
+From the robot perspective, several cognitive skills are involved: dialogue
+processing through verbal and deictic modalities (what does the human say? what
+attitude -- glances, postures, gestures... -- does he express?), acquisition
+and maintainance of one or several models of the environment, not only from the
+robot point of view, but also from the other agents' points of view,
+anticipation (what are the intentions of the human? Can I predict and
+anticipate his/her actions?), planning and control (how would I proceed further
+towards the goal?), monitoring of the other agents' activities (do we have an
+effective cooperation?) and the overall progress of the task. 
+
+What are the prerequisites for such a sentence --``Robot, put two glasses and
+this bottle on the tray''-- to be understood by the robot, correctly
+interpreted in the spatial context of the interaction, and eventually
+transformed into a set of actions? We summarize these challenges in four
+categories:
+
+\begin{enumerate}
+
+    \item how to build and maintain a consistent geometric model of the current
+    situation, acquired through perception or deduction from previous
+    perceptions,
+
+    \item how to build an unambiguous symbolic representation of concepts
+    (objects, agents, actions...) underlying the interaction, and practical for
+    decision-making processes,
+
+    \item how to establish the joint goal(s), how to build and maintain
+    iteratively shared (human-robot) plans, 
+
+    \item how to refine and execute the computed plans, and how to monitor
+    those achieved by its human partner?
+
+\end{enumerate}
+
+
+This chapter focuses on points {\it 1} and {\it 2}. It presents techniques,
+developed and used on several real robots, for the creation of a set of
+environment models suitable for grounded situation interpretation,
+decision-making and control.
+
+The two other items are however important to actually perform the interaction.
+Thus we briefly overview a global architecture of a robot able to cooperate
+with humans before really focusing on the grounding issues.
+
+
+
+
+Interaction for \emph{joint action} in a \emph{situated} environment.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{The Challenges}
+
+
+Those two broad targets should lead to two improvements for human-robot
+interaction:
+
+
+\begin{itemize}
+	\item to loosen the constraints on symbolic modelling of the robot
+	environment by providing more expressive representation system than
+	classical databases or fact repositories,
+
+	\item to improve human-robot interaction by explicitly providing to the
+	machine an interpretation frame, at least partially shared with the human.
+
+\end{itemize}
+
+
+\fxnote{Put focus on knowledge related challenge => focus on questions that need to be
+answered}
+\fxnote{Show what is difficult in the scenario, and why this requires research.}
+
+\subsection{Specific requirements of human-robot interaction}
+\label{sect|pecularities-krs-for-hri}
+
+Peculiarities on knowledge representation required by HRI, in the frame of the
+general context defined in section~\ref{sect|general-context}:
+
+\subsubsection{Human communication}
+
+\begin{figure}%[!ht]
+\centering
+  \includegraphics[width=0.6\linewidth]{communication/jakobson_communication_model.pdf}
+  \caption{The \emph{Communication Model}, as proposed by Jakobson. In bold
+  characters are the \emph{communication dimensions}, in italics, the
+  corresponding \emph{communication functions}.}
+  \label{fig|jakobson_communication_model}
+\end{figure}
+
+\subsubsection{Perspective-Taking, False Beliefs, Theory of Mind}
+
+\fxnote{Present here Sally and Ann}
+
+\subsubsection{and also...}
+
+\begin{itemize}
+	\item Ability to talk about concepts that are not immediately perceived by
+	the robot
+
+
+	\item \fxerror{TBD: absence of knowledge representation} Ability to
+	represent that an agent knows something about something else, even if we do
+	not know \emph{what}.
+
+\end{itemize}
+
+\subsection{Targeted applications/experiments}
+\label{sect|targeted-applications-experiments}
+
+
+The operational targets are two-fold:
+
+\begin{inparaenum}[\itshape a\upshape)]
+
+	\item determine, for a abstract/theoritical/general point of view, how and
+	why a cognitive architecture could contribute to these aims; and
+
+	\item implement it.
+
+\end{inparaenum}
+
+\begin{itemize}
+	\item \textbf{Categorization}: \emph{Odd One Out}-style experiment,
+	\item \textbf{Dialogue}: Grounded dialogue,
+	\item \textbf{Introspection verbalization}: Integration dialogue/planing, verbalization of plans,
+	\fxerror{TDB: integration dialogue/planing + verbalization of plans}
+	\item \textbf{Connection to remote knowledge sources}: \emph{DBpedia}, \emph{WordNet}, \emph{KnowRob ontology}...
+	\fxerror{TDB: integration remote knowledge sources}
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \section{Contributions}
 \label{sect|contributions}
@@ -413,9 +500,10 @@ reasoners). This software project is now publicly available, used by other
 laboratories, and comes with extensive documentation and bindings for several
 mainstream languages (C++, Python...) and middlewares (ROS, YARP).
 
-In parallel of this development, and in collaboration with other developpers,
+In parallel of this development, and in collaboration with other developers,
 I have also drafted (and partially implemented) a proposal for a standard API
-for knowledge interchange between robotic components.
+for knowledge manipulation that supports the specific needs of robotic
+applications.
 
 Coming along with the ORO server, I introduce in this thesis the
 \emph{ORO common-sense ontology} which is a proposal of an upper ontology for
@@ -423,12 +511,12 @@ service and interactive robotics. This ontology consists of about two hundred
 classes, relations and rules that are significant for the modelling of the
 robot's beliefs and state, and the interactions with other agents (humans or
 robots). This ontology also tries to stay closely aligned with the standard
-{\sc OpenCyc} upper-ontology to guarantee future interoperability with semantic
+{\sc OpenCyc} upper-ontology to guarantee interoperability with semantic
 web resources and other robots.
 
 A third technical contribution is the introduction of a new
-\emph{knowledge-oriented, event driven} communication model between high-level
-decisional modules: by introducing a concept of \emph{semantic events}, the ORO
+knowledge-oriented, event driven communication model between high-level
+decisional modules: by introducing the concept of \emph{semantic events}, the ORO
 server enables the development of new executive layers that combine reactive
 behaviour with high-level abstractions: for instance, triggering a behaviour
 when a human looks at the robot while sit, can be expressed in our architecture
@@ -453,115 +541,67 @@ development of the core functionalities of this open-source simulator which is
 now used by over twenty laboratories world-wide. While this project as a whole
 is not directly related to the thesis main domain, I have led the effort towards
 effective simulation of human-robot interaction in MORSE, which is now the
-current state-of-the-art in this domain.
+current state-of-the-art in this domain. It is briefly presented at
+section~\ref{sect|simulation}.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\section{What are the challenges?}
-\label{sect|scenario-challenges}
+\section{A reader's guide}
 
-Those two broad targets should lead to two improvements for human-robot
-interaction:
+\subsection*{The thesis in 15min}
 
+Because of the contingencies of this world, we acknowledge that the complete
+reading of this thesis may not fit in one's tight schedule.
 
-\begin{itemize}
-	\item to loosen the constraints on symbolic modelling of the robot
-	environment by providing more expressive representation system than
-	classical databases or fact repositories,
+If you have only about 15 minutes to dedicate to this work, we suggest to read
+the following sections in that order:
 
-	\item to improve human-robot interaction by explicitly providing to the
-	machine an interpretation frame, at least partially shared with the human.
+\begin{itemize} \item What are the challenges? (section~\ref{sect|challenges},
+            page~\pageref{sect|challenges}),
+
+    \item Contributions (section~\ref{sect|contributions},
+        page~\pageref{sect|contributions}),
+
+    \item The ORO functional overview (section~\ref{sect|functional-overview},
+        page~\pageref{sect|functional-overview}),
+
+    \item The first interaction experiment (section~\ref{sect|expe1},
+        page~\pageref{sect|expe1}),
+
+    \item The evaluation of ORO and other knowledge representation systems
+        (section~\ref{sect|evaluation-oroserver},
+        page~\pageref{sect|evaluation-oroserver}),
+
+    \item And finally, the discussion on perspectives
+        (section~\ref{sect|perspectives}, page~\pageref{sect|perspectives}),
 
 \end{itemize}
 
+\fxfatal{Re-read these sections to make sure it makes sense}
 
-\fxnote{Put focus on knowledge related challenge => focus on questions that need to be
-answered}
-\fxnote{Show what is difficult in the scenario, and why this requires research.}
+\subsection*{For the patient reader}
 
-\subsection{Specific requirements of human-robot interaction}
-\label{sect|pecularities-krs-for-hri}
-
-Peculiarities on knowledge representation required by HRI, in the frame of the
-general context defined in section~\ref{sect|general-context}:
-
-\subsubsection{Human communication}
-
-\begin{figure}%[!ht]
-\centering
-  \includegraphics[width=0.6\linewidth]{communication/jakobson_communication_model.pdf}
-  \caption{The \emph{Communication Model}, as proposed by Jakobson. In bold
-  characters are the \emph{communication dimensions}, in italics, the
-  corresponding \emph{communication functions}.}
-  \label{fig|jakobson_communication_model}
-\end{figure}
-
-\subsubsection{Perspective-Taking, False Beliefs, Theory of Mind}
-
-\fxnote{Present here Sally and Ann}
-
-\subsubsection{and also...}
-
-\begin{itemize}
-	\item Ability to talk about concepts that are not immediately perceived by
-	the robot
-
-
-	\item \fxerror{TBD: absence of knowledge representation} Ability to
-	represent that an agent knows something about something else, even if we do
-	not know \emph{what}.
-
-\end{itemize}
-
-\subsection{Targeted applications/experiments}
-\label{sect|targeted-applications-experiments}
-
-
-The operational targets are two-fold:
-
-\begin{inparaenum}[\itshape a\upshape)]
-
-	\item determine, for a abstract/theoritical/general point of view, how and
-	why a cognitive architecture could contribute to these aims; and
-
-	\item implement it.
-
-\end{inparaenum}
-
-\begin{itemize}
-	\item \textbf{Categorization}: \emph{Odd One Out}-style experiment,
-	\item \textbf{Dialogue}: Grounded dialogue,
-	\item \textbf{Introspection verbalization}: Integration dialogue/planing, verbalization of plans,
-	\fxerror{TDB: integration dialogue/planing + verbalization of plans}
-	\item \textbf{Connection to remote knowledge sources}: \emph{DBpedia}, \emph{WordNet}, \emph{KnowRob ontology}...
-	\fxerror{TDB: integration remote knowledge sources}
-\end{itemize}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\section{Organisation of the thesis}
-
-Roughly speaking, our work is organized in three parts: an analysis of
+Roughly speaking, the thesis is organized in three parts: an analysis of
 knowledge representation systems for service and personal robotic, the
 presentation of ORO, our own implementation of such a knowledge representation
 system, and finally we report on practical uses of explicit knowledge
-manipulation on robots.
+manipulation on robots, first for natural language processing, then through
+several experiments.
 
 The first part is covered in the chapter~\ref{chapt|krs}: after a discussion on
 what we call ``knowledge'' in our context, we explore its importance by
-listing, in a typology of characteristics, the requirements our robots have
+listing, in a typology of characteristics, the requirements of our robots
 related to knowledge management. This first chapter is completed by a survey of
-eight systems for knowledge management that have been already deployed on real robots.
+eight systems for knowledge management that have been already deployed on real
+robots.
 
-Later, at the conclusion, we give a second look at these systems to try to
+At the end of the thesis, we give a second look at these systems to try to
 draw a picture of the overall landscape of knowledge representation approaches
-in the robotic reseach community to identify new possible research paths.
+in the robotic reseach community, to identify new possible research directions.
 
 The second part is covered by chapters~\ref{chapt|oroserver} and
 \ref{chapt|implementation-integration}. Chapter~\ref{chapt|oroserver} presents
@@ -575,7 +615,7 @@ perceptions, planning and control are presented.
 Chapters~\ref{chapt|dialogs} and \ref{chapt|evaluation} form the third and last
 part of the thesis. Chapter~\ref{chapt|dialogs} details \emph{Dialogs}, a
 module for situated dialogue grounding that takes advantage of the symbolic
-knowledge exposed by ORO. Lastly, chapter~\ref{chapt|evaluation} presents
+knowledge exposed by ORO, and chapter~\ref{chapt|evaluation} presents
 several evaluations of our work through various experiments conducted during
 the four years of the thesis preparation.
 
