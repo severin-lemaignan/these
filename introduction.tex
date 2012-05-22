@@ -165,42 +165,31 @@ Interaction for \emph{joint action} in a \emph{situated} environment.
 \end{figure*}
 
 In order to illustrate what we consider to be the required features of a
-knowledge representation system for robotics, we introduce in this section a
-demonstration scenario.
+knowledge representation system for robotics, we introduce in this section an
+(imaginary) demonstration scenario.
 
 While devising a scenario inevitably constraints the breadth of abilities we
 examine, we insist on the fact that our main purpose here is to ground into a
-real case the set of representational features we consider as desirable.  We
-will \emph{not} evaluate any of the systems we survey in this article by
-judging their applicability to this particular scenario.
+concrete case the set of representational features we consider as desirable.
 
-We entitle our scenario ``the Brownie scenario'' (Fig.~\ref{fig|scenario}).
-
-Robi and Roba are two service robots. They are considered to be able to freely
-move and pick objects, but they are not expected to have the exact same
-hardware and softwares architectures, and specially, they are not expected to
-have the same knowledge representation system. These robots cooperate with a
-human in a kitchen environment.
+We entitle our scenario ``the Brownie scenario'' (Figure~\ref{fig|scenario}):
+Robi and Roba are two service robots, that can freely
+move and pick objects around (with possibly different hardware and softwares
+architectures, including different knowledge representation systems). They
+cooperate with a human in a kitchen environment.
 
 The main task of the scenario is the joint realization of a brownie, initiated
-by the human injunction ``Let's make a brownie for tonight!''.
+by the human: ``Let's make a brownie for tonight!''.
 
-The scenario is successful if the task is achieved (the brownie is baked) and:
-
-\begin{itemize} 
-
-	\item it took less time that it would have require for the human alone, 
-
-	\item it didn't require a heavier cognitive involvement from the human that
-	what would have been required without the robots' help.  
-
-\end{itemize}
+The scenario is successful if the task is achieved (the brownie is baked) in a
+reasonable time (typically shorter than what it would have been required by the
+human alone).
 
 We voluntarily do not detail the subtasks of the scenario, neither we define
 how they are shared amongst agents. In our analysis we focus on the general,
 \textit{a priori} representational needs of the scenario.
 
-A ``first-order'' analysis of this task leads to a first partition of the
+A ``first-order'' analysis of this task leads to a rough partition of the
 required representation abilities:
 
 \begin{enumerate}
@@ -214,47 +203,49 @@ required representation abilities:
 
 % Representation of a complex task
 We can further refine these categories: to prepare and bake a brownie, the
-robot first needs to make sense of the very term \emph{brownie}: what is it?
+robot first needs to make sense of the term \emph{brownie} itself: what is it?
 what is it used for? what is it made of? etc. We call this knowledge
 \emph{common-sense knowledge} and the robot must be able not only to represent
-it, but also to have some kind of access to it (for instance through a initial
+it, but also to have access to an initial source (for instance through a initial
 set of facts that are made available at startup, or via access to a Web-based
 knowledge base like Wikipedia, etc.)
 
-Bound to the action \emph{make}, this should lead the robot to build and
-represent a \emph{context}: we are in a scenario involving cooking. Actions
-related to cooking often take place in the kitchen, cooking requires ingredients, 
-utensils and a procedure that may be provided by a recipe, etc.
+Once bound to the action \emph{make}, this should lead the robot to build and
+represent a \emph{context}: we are in a scenario involving cooking. The context
+enables the robot to retrieve more common-sense knowledge, like that actions
+related to cooking often take place in the kitchen, cooking requires
+ingredients, utensils and a procedure that may be provided by a recipe.
 
-This last sentence implies several other features for our knowledge
+These last assertions imply several other features for our knowledge
 representation system: ``cooking often takes place in the kitchen'' implies
 that representation of both uncertainty and likelihood is desirable. The fact
 that cooking is associated to a place further implies that the system models
 locations and is able to attach \emph{thematic relations} to concept
 (here, the likely location of the cooking action).
 
-``cooking requires ingredients that may be provided by a recipe'' hints about a
-very common feature available in most knowledge representation systems:
-\emph{reasoning}. The robot \emph{infers} that cooking may require a recipe
-since a list of ingredients is a pre-requisite of the cooking action, and a
-recipe may provide such a list. If we omit the ``may'', this is a typical
-example of first-order logic reasoning. Many other reasoning techniques exist
-(including probabilistic ones -- ones able to deal with the ``may''), we shall
-illustrate some of them later in this scenario.
+``cooking requires ingredients'' hints about another very common feature
+available in most knowledge representation systems: \emph{reasoning}. The robot
+can \emph{infers} that cooking may require a recipe since a list of ingredients
+is a pre-requisite of the cooking action, and a recipe may provide such a list.
+If we omit the ``may'', this is a typical example of first-order logic
+reasoning. Many other reasoning techniques exist (including probabilistic ones
+-- ones able to deal with the ``may''), we shall illustrate some of them later
+in this scenario.
 
-We mentioned that a recipe often provides a procedure (or a \emph{plan}). The robot
-should be able to store this plan in a way that allow later execution.  The
-plan is likely to contain \emph{spatio-temporal constraints} (like ``put
-the brownie in the oven for 20 min'') that must as well be appropriately
-represented.
+We mentioned that a recipe often provides a procedure (or a \emph{plan}). The
+robot should be able to store this plan in a way that allow later execution.
+The plan is likely to contain \emph{spatio-temporal constraints} (like ``put
+the brownie in the oven for 20 min'' or ``let's cook \emph{for tonight}'') that
+must as well be appropriately represented.
 
 To make decision, a robot may also want to \emph{predict} the state of the world
-after some action (``if I leave the cake 2h in the oven, it will be burned'').
+after some action (``if I leave the cake 2h in the oven, it will burn'').
 Such ability to project itself in future or, generally speaking, in other
 possible state of the world is related to several cognitive ability and
 reasoning techniques: \emph{planning}, \emph{representation of possible worlds}
 and \emph{non-monotonic reasoning}, in addition to common-sense knowledge and
-\emph{physics-based reasoning}.
+\emph{physics-based} reasoning (that allows to predict that an egg is likely to
+break if dropped).
 
 Procedures are in addition often \emph{underspecified}: we can expect the recipe
 to provide a cooking duration, but we usually do not expect the recipe to tell
@@ -263,8 +254,8 @@ self-evident that the door must first be opened to put the cake in the oven.
 Such underspecification should be detectable, representable, and ideally
 completable by the knowledge representation system\footnote{Note that we do not
 assume here the {\it knowledge representation system} to be a single software
-component: it may well be the result of the aggregation of several modules
-working together}.
+component: it may well be the result of the aggregation of several logical
+components working together. We come back later on this aspect.}.
 
 % Representation feature that enable cooperation
 Then, we want our three agents to cooperate. This, in turn, leads to another
@@ -276,22 +267,23 @@ necessary for the brownie. This \emph{helping} behaviour makes sense only if
 the first agent knows that the recipient agent both needs the information but
 does not know it. This in turn requires the robot to be able to model the
 knowledge of the other agents: to think \emph{from the perspective} of another
-agent (this idea is related to the so-called Theory of Mind~\cite{...}).
+agent (an idea that is related to the availability of a theory of
+mind~\cite{Leslie2000}).
 
 Ability to communicate is one important pre-requisite to collaboration.
-Communication in general~\cite{Jakobson1960} requires the addresser and the
-addressee to share a common interpretative framework (shared common-sense
-knowledge -- or cultural background -- and a shared context). In our scenario,
-the agents are working in a kitchen. This element of context does not however
+Communication in general requires the addresser and the addressee to share a
+common interpretative framework (a shared common-sense knowledge -- or cultural
+background -- and a shared context)~\cite{Jakobson1960}. In our scenario, the
+agents are working in a kitchen. This element of context does not however
 suffice if, for example, an agent asks another agent to ``give {[him]} the
-bowl''. Besides the symbol ``bowl'', which physical entity are we actually
+bowl''. Behind the symbol ``bowl'', which physical entity are we actually
 talking about? If we want to act on the world, this so-called \emph{grounding}
 operation is essential, and may be tightly bound to the underlying knowledge
-representation system. Note that grounding usually denotes the {\it top-down}
-operation: from the symbol to the percept. It is however commonly bundled with
-the converse operation, that retrieve (or create) symbols from perception.
+representation system. Note that grounding is a bidirectional process: in
+covers the {\it top-down} operation (from the symbol to the percept) and the
+{\it bottom-up} converse (retrieval or creation of symbols from perception).
 
-A related ability is called \emph{pre-supposition accomodation}: if one of the
+A related ability is called \emph{pre-supposition accommodation}: if one of the
 agent moves behind another one, with the brownie dough in its arm, and says
 ``be careful, I'm behind you!'', we want the first agent to be able to
 represent both symbolically and geometrically (because, for instance, if the
@@ -313,9 +305,9 @@ other agents' actions and goals.
 In order to effectively share tasks, the robot must also know what it is
 capable of: \emph{capability introspection} (both in term of general capability
 and of immediate ability) is thus often desirable. More general introspection
-(like the ability to tell ``who I am'' or ``what do I think of'' does not
-appear to be necessary in our scenario. This may however enrich the human-robot
-interaction.
+(like the ability to tell ``who I am'' or ``what do I think of'') does not
+appear to be necessary in our scenario. This may however be required in more
+general human-robot interaction.
 
 Last but not least, our scenario assumes implicitly \emph{natural interaction}
 between humans and robots (as showed by the casual style of the
