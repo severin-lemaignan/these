@@ -98,47 +98,47 @@ identify the main weaknesses of current approaches of knowledge representation
 regarding the long-term goal of \emph{human-level robots}.
 
 \begin{landscape}
-\begin{table}\footnotesize
+\begin{table}\scriptsize
 \begin{center}
 
-\begin{tabular}{cp{4.5cm}p{2.3cm}p{2cm}p{1cm}p{1cm}p{1cm}p{1cm}p{1.5cm}p{2cm}p{1.5cm}p{1.5cm}}
+\begin{tabular}{cp{4cm}p{1.5cm}p{1.5cm}p{1.5cm}p{1.5cm}p{2cm}p{1.5cm}p{1.5cm}p{1.5cm}|p{1.5cm}}
 \toprule
-\multicolumn{2}{c}{\bf Category} & {\sc KnowRob} & {ORO} & {\sc PEIS} & {\sc CAST} & {\sc Ke Jia} & {\sc NKRL} & {\sc GSM} & {\sc OMRKF} & {\sc ARMAR} & {\sc Hertzberg} \\
-
-\midrule
-
-\multirow{5}{0.7cm}[0.2cm]{\turn[1.5cm]{90}{\bf Expr. power}} & Logical formalism & Prolog & DL (OWL) & {\sc CycL} &  & ASP &  & & Horn clauses & TFS & \\
- & OWA/CWA & CWA & OWA & ? & ? & CWA & ? & ? & ? & ? & ? \\
- & Modeling uncertainty & +++ (extension) & & & & & & ++ (stochastic) & + (\emph{candidate} entities) \\
- & Meta-cognition & ++ & ++ & & & & & & \\
-\hline
-\multirow{6}{0.2cm}{\turn{90}{\bf Model}} & Space Representation & & & & & & & & ++  \\
- & Time representation & & & & & & & + (snapshots) & +  \\
- & Context & & & & & & & & ++  \\
- & Alternative worlds & & +++ & & & & ++ & &  \\
- & Introspection & + (SRDF) & & & & & & &  \\
- & Memory models & & + & & & & & &  \\
-\hline
-\multirow{10}{0.2cm}{\turn{90}{\bf Reasoning}} & Standard FOL reasoning & +++ & +++ & & & +++ & & & +  \\
- & Knowledge structure alteration & & ++ & & & ++ & & & & ++ &  \\
- & Lazy evaluation & +++ & & & & & & &  \\
- & Reasoning under uncertainty & ++ (extension) & & & & & + & & \\
- & Non-monotonic reasoning & & & & & +++ & & &  \\
- & Presupposition accommodation & & & & & & & +++ & \\
- & Prediction, projection, diagnosis & & & & & & & & \\
- & Physics-based reasoning & +++ (extension) & & & & & & &  \\
- & Planning & + & +++ (external) & & & ++ & & & + \\
- & Learning & & + & & & & & & & ++ &  \\
-\hline
-\multirow{3}{0.7cm}{\turn[1cm]{90}{\bf Knw. acq.}} & Acquisition techniques & & & & & & & & \\
- & Grounding & +++ \par (semantic maps) & ++ (external amodal model) & & & & & ++ & ++ \\
- & instantiation & & & & & & & & \\
-\hline
-\multirow{4}{0.2cm}{\turn{90}{\bf Integ.}} & ...with sensori-motor layers & & & & & & & + & + \\
- & ...with executive layers & & & & & & & + & ++ \\
- & NLP & & +++ (external) & & & +++ & & +++ & & +++ & \\
- & Monitoring and debugging & & & & & & & & \\
- & Performances & & & & & + & & +++ (Token test) & & & \\
+\multicolumn{2}{c}{\bf Category}                                                     & {\sc ARMAR}           & {\sc CAST}    & {\sc GSM}         & {\sc Ke Jia} & {\sc KnowRob}            & {\sc NKRL}        & {\sc OUR-K}                   & {\sc PEIS} & {ORO}                         \\
+                                                                                                                                                                                                                                                                                            
+\midrule                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                            
+\multirow{5}{0.7cm}[0.2cm]{\turn[1.5cm]{90}{\bf Expressiveness}} & Logical formalism & TFS                   &               &                   & ASP          & Prolog                   &                   & Horn clauses                  & {\sc CycL} & DL (OWL)                      \\
+                                                                           & OWA/CWA &                       &               &                   & CWA          & CWA                      &                   &                               &            & OWA                           \\
+                                                              & Modeling uncertainty &                       &               & ++ (stochastic)   &              & +++ (extension)          & +                 & + (\emph{candidate} entities) &            &                               \\
+                                                                    & Meta-cognition &                       &               &                   &              & ++                       &                   &                               &            & ++                            \\
+\hline                                                                                                                                                                                                                                                                                      
+\multirow{6}{0.2cm}{\turn{90}{\bf Representation}}            & Space Representation &                       &               &                   &              &                          &                   & ++                            &            &                               \\
+                                                               & Time representation &                       &               & + (snapshots)     &              &                          &                   & +                             &            &                               \\
+                                                                           & Actions &                       &               &                   &              &                          &                   &                               &            &                               \\
+                                                                           & Context &                       &               &                   &              &                          &                   & ++                            &            &                               \\
+                                                                          & Modality &                       &               &                   &              &                          & ++                &                               &            & +++                           \\
+                                                                     & Introspection &                       &               &                   &              & + (SRDF)                 &                   &                               &            &                               \\
+                                                                     & Memory models &                       &               &                   &              &                          &                   &                               &            & +                             \\
+\hline                                                                                                                                                                                                                                                                                      
+\multirow{10}{0.2cm}{\turn{90}{\bf Reasoning}}              & Standard FOL reasoning &                       &               &                   & +++          & +++                      &                   & +                             &            & +++                           \\
+                                            & Instantiation and structure alteration & ++                    &               &                   & ++           &                          &                   &                               &            & ++                            \\
+                                                                   & Lazy evaluation &                       &               &                   &              & +++                      &                   &                               &            &                               \\
+                                                           & Non-monotonic reasoning &                       &               &                   & +++          &                          &                   &                               &            &                               \\
+                                                      & Presupposition accommodation &                       &               & +++               &              &                          &                   &                               &            &                               \\
+                                    & Prediction, projection, diagnosis, explanation &                       &               &                   &              &                          &                   &                               &            &                               \\
+                                                                          & Planning &                       &               &                   & ++           & +                        &                   & +                             &            & +++ (external)                \\
+                                                           & Physics-based reasoning &                       &               &                   &              & +++ (extension)          &                   &                               &            &                               \\
+                                                                          & Learning & ++                    &               &                   &              &                          &                   &                               &            & +                             \\
+\hline                                                                                                                                                                                                                                                                                      
+\multirow{3}{0.7cm}{\turn[1cm]{90}{\bf Acquisition}}        & Acquisition techniques &                       &               &                   &              &                          &                   &                               &            &                               \\
+                                                                               & NLP & +++                   &               & +++               & +++          &                          &                   &                               &            & +++ (external)                \\
+                                                                         & Grounding &                       &               & ++                &              & +++ \par (semantic maps) &                   & ++                            &            & ++ (external amodal model)    \\
+                                                              & Intrinsic Motivation &                       & ++            &                   &              &                          &                   &                               &            &                               \\
+\hline                                                                                                                                                                                                                                                                                      
+\multirow{4}{0.2cm}{\turn{90}{\bf Integration}} &   \ldots with sensori-motor layers &                       &               & +                 &              &                          &                   & +                             &            &                               \\
+                                                      & \ldots with executive layers &                       &               & +                 &              &                          &                   & ++                            &            &                               \\
+                                                          & Monitoring and debugging &                       &               &                   &              &                          &                   &                               &            &                               \\
+                                                           & Performances evaluation &                       &               & ++ (Token test)   & +            &                          &                   &                               &            &                               \\
 
 \bottomrule
 
