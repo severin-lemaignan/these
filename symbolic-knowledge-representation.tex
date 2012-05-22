@@ -1712,8 +1712,57 @@ introspective capability that we have previously mentioned
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Surveyed systems}
+\section{Existing Systems for Knowledge Representation in Service Robotics}
 \label{sect|surveyed-systems}
+
+
+Table \ref{table|surveyed-systems} lists the knowledge representation
+systems that we have surveyed.
+
+This section first clarify the inclusion criteria, and then briefly presents
+each of them. At chapter~\ref{chapt|evaluation}, we will consider again these
+systems, this time as a whole, to build a summary of the fields of knowledge
+representation that are adequately (or not) tackled by the existing systems.
+
+\begin{landscape}
+\begin{table}\scriptsize
+\begin{center}
+
+\begin{tabular}{p{2.2cm}p{1.6cm}p{4cm}lp{2.4cm}p{3.4cm}p{1.5cm}}
+\toprule
+{\bf Project} & {\bf Category} & {\bf Authors (Institution)} & {\bf Project homepage} & {\bf Programming language} & {\bf Knowledge model/Logical Formalism} & Main reference \\
+\midrule
+ARMAR/Tapas & Formal & Holzapfel, Waibel \par (Karlsruhe TH) & & & TFS (Typed Feature Structures) & \cite{Holzapfel2008}\\
+CAST Proxies & Ubiquitous & Wyatt, Hawes, Jacobsson, Kruijff (Brimingham Univ., DFKI Saarbrücken) & & & Amodal proxies & \cite{Jacobsson2008} \\
+GLAIR & Formal & Shapiro, Bona \par (Buffalo Univ.) & & & SNePS & \cite{Shapiro2009} \\
+GSM & Structural & Mavridis, Roy \par (MIT MediaLab) & & & & \cite{Mavridis2006} \\
+Ke Jia Project & Formal & Chen et al. \par (Univ. of Science and Technology of China) & \url{www.wrighteagle.org/en} & ASP (Answer Set Programming) & ASP & \cite{Chen2010} \\
+{\sc KnowRob} & Formal & Tenorth, Beetz \par (TU Munich) & \url{ias.in.tum.de/kb/wiki} & {\sc Prolog} & {\sc Prolog} + OWL-DL &  \cite{Tenorth2009a} \\
+NKRL & Language & Zarri et al. \par (Paris Est Créteil Univ.) & & NKRL & & \cite{Sabri2011} \\
+%OBOC & KRS & Mendoza & & & & & \cite{Mendoza2005} \\
+OUR-K/OMRKF & Formal & Lim, Suh et al. \par (Hanyang Univ.) & \url{incorl.hanyang.ac.kr/xe} & ? & DL + Horn Clauses &  \cite{Lim2011, Suh2007} \\
+%ORO & KRS & Lemaignan, Alami \par (LAAS-CNRS) & \url{oro.openrobots.org} & {\sc Java} & OWL-DL ({\sc Jena}) & {\sc Pellet} & \cite{Lemaignan2010} \\
+PEIS KR\&R & Formal & Daoutis, Coradeshi, Loutfi, Saffiotti \par (Örebro Univ.) & \url{www.aass.oru.se/~peis} & {\sc C}, {\sc CycL} & CycL (1st and 2nd order logics, modal logics) & \cite{Daoutis2009} \\
+%Golog & Language & Levesque (Toronto Univ.) & & {\sc Prolog} & & & \\
+% & & Varadarajan, Vincze \par (TU Wien) & & & & & \cite{Varadarajan2011} \\ % -> affordances, but no implementation on a robot
+% & & Kaelbling, Lozano-Pérez \par (MIT CSAIL) & & & & & \cite{Kaelbling2011} \\ % -> mostly planning under uncertainty
+% & & Hertzberg (Osnabrück Univ.) \\ % -> affordances, semantic mapping
+% (based on {\sc KnowRob} & & (JSK) \\
+
+\bottomrule
+
+\end{tabular}
+\end{center}
+
+\caption{List of surveyed systems. Categories are \emph{Formal} for systems
+that have a formal underlying knowledge representation, \emph{Ubiquitous} for
+systems where knowledge is fully distributed, \emph{Language} for languages
+used as KRS on robots or \emph{Structural} for KRS where knowledge is
+represented as special data structures.}
+
+\label{table|surveyed-systems}
+\end{table}
+\end{landscape}
 
 \subsection*{Survey Inclusion Criteria}
 \label{sect|inclusion-criteria}
@@ -1726,9 +1775,10 @@ symbolic systems, suited for abstract reasoning.
 Besides, we have decided to restraint the set of systems to those actually
 implemented on robots, and used in semantic-rich environments (\ie dynamic,
 partially unknown environments with a large range of different entities which
-may have interactions). The typical scenario that would involve such robots is
-a service robot in a human-friendly environment like a kitchen (we will
-describe such a scenario in section~\ref{sect|scenario}).
+may have interactions). The typical scenario that would involve such robots
+is the \emph{Brownie Scenario} already presented at
+section~\ref{sect|scenario}: a service robot in a human-friendly environment
+like a kitchen.
 
 We have limited ourselves to systems that
 \begin{inparaenum} 
@@ -1741,7 +1791,7 @@ We have limited ourselves to systems that
     (\ie not simple static databases).
 \end{inparaenum}
 
-This excludes \textit{de-facto} platforms like {\sc DyKnow}~\cite{Heintz2004}
+These criteria exclude platforms like {\sc DyKnow}~\cite{Heintz2004}
 which are focused on data fusion and knowledge grounding at lower levels.
 
 We have also choosen not to include the GOLOG language and its
@@ -1757,52 +1807,8 @@ instance), they are also absent from this survey because we did not find much
 references in the literature on knowledge manipulation and representation
 applied to robotic scenarii for these architectures.
 
-
-Table \ref{table|surveyed-systems} presents the eight knowledge representation
-systems surveyed in this article.
-
-This section briefly presents each of them.
-
-\begin{landscape}
-\begin{table}\footnotesize
-\begin{center}
-
-\begin{tabular}{p{2.2cm}p{1.6cm}p{4cm}lp{2.4cm}p{3.4cm}p{2.8cm}p{1.5cm}}
-\toprule
-{\bf Project} & {\bf Category} & {\bf Authors (Institution)} & {\bf Project homepage} & {\bf Programming language} & {\bf Knowledge model/Logical Formalism} & {\bf Reasoner} & Main reference \\
-\midrule
-ARMAR/Tapas & KRS & Holzapfel, Waibel \par (Karlsruhe TH) & & ? & TFS (Typed Feature Structures) & & \cite{Holzapfel2008}\\
-CAST Proxies & Ubiquitous & Wyatt, Hawes, Jacobsson, Kruijff (Brimingham Univ., DFKI Saarbrücken) & & & Amodal proxies & & \cite{Jacobsson2008} \\
-GSM & KRS & Mavridis, Roy \par (MIT MediaLab) & & ? & & & \cite{Mavridis2006} \\
-Ke Jia Project & KRS & Chen et al. \par (Univ. of Science and Technology of China) & \url{www.wrighteagle.org/en} & ASP & ASP & ASP & \cite{Chen2010} \\
-{\sc KnowRob} & KRS & Tenorth, Beetz \par (TU Munich) & \url{ias.in.tum.de/kb/wiki} & {\sc Prolog} & {\sc Prolog} + OWL-DL & Custom \par ({\sc Prolog}) & \cite{Tenorth2009a} \\
-NKRL & Language & Zarri et al. \par (Paris Est Créteil Univ.) & & NKRL & & & \cite{Sabri2011} \\
-%OBOC & KRS & Mendoza & & & & & \cite{Mendoza2005} \\
-OUR-K & KRS & Suh et al. \par (Hanyang Univ.) & \url{incorl.hanyang.ac.kr/xe} & ? & Horn Clauses & ? & \cite{Suh2007} \\
-ORO & KRS & Lemaignan, Alami \par (LAAS-CNRS) & \url{oro.openrobots.org} & {\sc Java} & OWL-DL ({\sc Jena}) & {\sc Pellet} & \cite{Lemaignan2010} \\
-PEIS KR\&R & KRS & Daoutis, Coradeshi, Loutfi, Saffiotti \par (Örebro Univ.) & \url{www.aass.oru.se/~peis} & {\sc C}, {\sc CycL} & CycL (1st and 2nd order logics, modal logics) & & \cite{Daoutis2009} \\
-%Golog & Language & Levesque (Toronto Univ.) & & {\sc Prolog} & & & \\
-% & & Varadarajan, Vincze \par (TU Wien) & & & & & \cite{Varadarajan2011} \\ % -> affordances, but no implementation on a robot
-% & & Kaelbling, Lozano-Pérez \par (MIT CSAIL) & & & & & \cite{Kaelbling2011} \\ % -> mostly planning under uncertainty
-% & & Hertzberg (Osnabrück Univ.) \\ % -> affordances, semantic mapping
-% (based on {\sc KnowRob} & & (JSK) \\
-
-\bottomrule
-
-\end{tabular}
-\end{center}
-
-\caption{List of surveyed systems. Projects are listed by category (\emph{KRS}
-for systems that are explicit knowledge representation and reasoning modules,
-\emph{Ubiquitous} for systems where knowledge processing is fully distributed,
-\emph{Language} for languages used as KRS on robots), then names.}
-
-\label{table|surveyed-systems}
-\end{table}
-\end{landscape}
-
-%\fxfatal{Bielefeld -> could not find much\ldots}
-%\fxfatal{Kollar/Tellex -> really focusing on the natural language grounding}
+A comprehensive reference on (bio-inspired) cognitive architectures is also
+available from the BICA Society~\ref{BicaCogArch2011}.
 
 \subsection{ARMAR/Tapas}
 
@@ -1862,6 +1868,26 @@ reasoning? can they retrieve for example 'all proxies for colorful objects'?}
 In~\cite{Hawes2011}, Hawes et al. also explore \emph{curiosity} mechanisms in
 the context of spatial representations.
 
+\subsection{GLAIR}
+\label{sect|glair}
+
+
+While mostly implemented on virtual agents, the GLAIR cognitive architecture by
+Shapiro and Bona~\cite{Shapiro2009} is an architecture explicitly built to
+tackle the grounding issue from the percept to the decision. It is a
+three-layers architecture: a \emph{Knowledge Layer}, a low-level
+\emph{Sensori-Actuator Layer} and an intermediate \emph{Perceptuo-Motor Layer}
+that binds the previous two.  The knowledge layer relies on SNePS, a custom
+knowledge representation language (more expressive than first-order logic), and
+natural language processing capabilities are also available.
+
+The GLAIR project has been only demonstrated in a limited set of
+environments, but exhibits interesting features such as explicit management
+of contexts of facts and memory models (long term/short term,
+episodic/semantic).
+
+\fxfatal{To complete!}
+
 \subsection{GSM}
 \label{sect|gsm}
 
@@ -1880,7 +1906,7 @@ theory of mind).
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.9\columnwidth]{stateofart/gsm.pdf}
+    \includegraphics[width=0.7\columnwidth]{stateofart/gsm.pdf}
 
     \caption{Simplified hierarchical structure of the Grounded Situation Model,
     based on~\cite{Mavridis2006}}
@@ -1909,10 +1935,6 @@ authors) realized on a 7-DOF arm equipped with force feedback, cameras for blob
 tracking and speech recognition (Sphinx4). Mavridis and Roy provide in addition
 an in-depth analysis of the performance of GSM by the mean of a standard
 psycholinguistic test, the \emph{Token test}~\cite{DiSimoni1978}.
-
-\subsection{GOLOG}
-\label{sect|kejia}
-
 
 \subsection{Ke Jia Project}
 \label{sect|kejia}
@@ -1982,7 +2004,7 @@ capabilities of the robot, and is used for planning.
 {\sc ProbCog}~\cite{Jain2009} is an effort to provide probabilistic reasoning
 based on bayesian networks, integration with naive physics reasoning has been
 studied~\cite{Kunze2011a}, automatic parsing of Web resource in semi-natural
-language has been experimented with~\cite{Tenorth2009b}.
+language has been experimented with~\cite{Nyga2009}.
 
 \paragraph{Grounding} Anchoring of knowledge in the {\sc KnowRob} framework
 relies on...CoP? Semantic Maps~\cite{Blodow2011}.
@@ -2143,32 +2165,6 @@ module can be seamlessly integrated into the PEIS ecosystem.
 \label{sect|peis-expe}
 
 
-%%%%%%%%%% Underlying knowledge model table %%%%%%%%
-\begin{table}
-\begin{center}
-
-\begin{tabular}{lp{4cm}}
-\toprule
-{\bf Project} & {\bf Common-sense \par knowledge source} \\
-\midrule
-{\sc KnowRob} & {\sc OpenCyc}, processed web content, custom OWL-DL ontology \\
-ORO & {\sc OpenCyc}, custom OWL-DL ontology \\
-PEIS Ecology & {\sc ResearchCyc} \\
-NKLR &  None \\
-CAST Proxies &  None \\
-GSM &  Predefined categories \\
-OUR-K & {\it A priori} knowledge structure and axioms, custom set of instances\\
-Ke Jia & None \\
-ARMAR/{\sc Tapas} & Custom ontology related to the kitchen\\
-
-\bottomrule
-
-\end{tabular}
-\end{center}
-\caption{Underlying knowledge sources for each project}
-\label{table|knowledge-sources}
-\end{table}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -2327,4 +2323,29 @@ pattern. It returns statements matching the pattern.
 relevant, probabilistic versions of the methods are also defined.
 
 The complete API reference is provided in Appendix~\ref{chapter|kb-api}.
+
+
+\clearpage
+
+That concludes the chapter on Symbolic Knowledge Representation for robotics.
+
+In that chapter, we have first discussed a definition of \emph{knowledge} in
+our context of service robotics and human-robot interaction. We have presented
+several references from the literature regarding the identification and
+classification of proeminent features of knowledge representation systems. 
+
+We have then introduce a comprehensive typology of such features, that
+comprises of about fifty concepts sorted into six main categories: features
+related to knowledge expressiveness, features related to representation
+techniques, features related to reasoning, features related to acquisition and
+grounding of knowledge, features related to the integration of a KRS into a
+larger robotic architecture, and finally, features that characterize the
+represented knowledge itself. Each of the fifty concepts has been briefly
+presented with references to the literature.
+
+Finally, we have surveyed nine systems for knowledge representation in service
+robots and underlined their main strenghts.
+
+The next chapter introduces ORO, a tenth KRS that we have design and
+implemented during the thesis preparation.
 
