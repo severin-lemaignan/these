@@ -5,11 +5,49 @@
 Shrobe and Szolovits,
 \url{http://groups.csail.mit.edu/medg/ftp/psz/k-rep.html}}
 
-\section{What do we call "knowledge"?}
-\label{sect|on-knowledge}
-
-\subsection{The Concept of Knowledge}
+\subsection{Knowledge and Robotics}
 \label{sect|knowledge}
+
+The idea of \emph{Cognitive Robotics} was coined in the early 1990s by Reiter.
+In a chapter on that subject in \emph{Fondations of Artifical
+Intelligence}~\cite{Levesque2008}, Levesque reminds about the manifesto they
+wrote together in 1998:
+
+\begin{quotation}
+
+    Central to this effort is to develop an understanding of the relationship
+    between the knowledge, the perception, and the action of [\ldots] a robot. The
+    sorts of questions we want to be able to answer are
+
+    \begin{itemize} 
+
+        \item to execute a program, what information does a robot need to have
+        at the outset vs. the information that it can acquire \emph{en route}
+        by perceptual means?
+
+        \item what does the robot need to know about its environment vs. what
+        need only be known by the designer?
+
+        \item when should a robot use perception to find out if something is
+        true as opposed to reasoning about what it knows was true in the past?
+
+        \item when should the inner workings of an action be available to the
+        robot for reasoning and when should the action be considered primitive
+        or atomic?
+
+    \end{itemize}
+
+    and so on. With respect to robotics, our goal (like that of many in AI) is
+    \emph{high-level robotic control}: develop a system that is capable of
+    generating actions in the world that are appropriate as a function of some
+    current set of beliefs and desires.
+
+\end{quotation}
+
+\fxwarning{...petit pont vers la suite}
+
+\subsection{What do we call "knowledge"?}
+\label{sect|on-knowledge}
 
 
 Since we will discuss at length the concept of knowledge in the context
@@ -160,113 +198,48 @@ One concept, several symbols: cf multilingual support of ORO server \ref{sect|mu
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Towards Analysing the Knowledge Representation Requirements}
-\label{sect|krs-related-work}
+\section{A Typology of Knowledge Representation Requirements for Robotics}
+\label{sect|features}
 
+This section now focuses on formalizing the knowledge representation issue: we
+aim first at establishing a comprehensive typology of representational needs
+for robotics in the specific context of service robotics, before painting, at
+section~ref{sect|surveyed-systems}, the current landscape of approaches to the
+knowledge representation problem in the research community.
 
-The idea of \emph{Cognitive Robotics} was coined in the early 1990s by Reiter.
-In a chapter on that subject in \emph{Fondations of Artifical
-Intelligence}~\cite{Levesque2008}, Levesque reminds about the manifesto they
-wrote together in 1998:
+This section proposes a more formal typology and a nomenclature of analysis
+axis to study and compare knowledge representation systems
+(figure~\ref{fig|taxo}). For each dimension, this section provides a short
+definition accompagnied by links to relevant literature.
 
-\begin{quotation}
+\begin{figure}
+        \centering
+        \includegraphics[width=0.8\columnwidth]{taxonomy.pdf}
+        \caption{Taxonomy of the analysis dimensions of knowledge
+        representation systems for service robotics.}
+        \label{fig|taxo}
+\end{figure}
 
-    Central to this effort is to develop an understanding of the relationship
-    between the knowledge, the perception, and the action of [\ldots] a robot. The
-    sorts of questions we want to be able to answer are
+Table~\ref{table|contribution-by-systems}, at the end of the chapter,
+summarizes all these features with the main domain of contribution of each
+surveyed KRS.
 
-    \begin{itemize} 
-
-        \item to execute a program, what information does a robot need to have
-        at the outset vs. the information that it can acquire \emph{en route}
-        by perceptual means?
-
-        \item what does the robot need to know about its environment vs. what
-        need only be known by the designer?
-
-        \item when should a robot use perception to find out if something is
-        true as opposed to reasoning about what it knows was true in the past?
-
-        \item when should the inner workings of an action be available to the
-        robot for reasoning and when should the action be considered primitive
-        or atomic?
-
-    \end{itemize}
-
-    and so on. With respect to robotics, our goal (like that of many in AI) is
-    \emph{high-level robotic control}: develop a system that is capable of
-    generating actions in the world that are appropriate as a function of some
-    current set of beliefs and desires.
-
-\end{quotation}
-
-To be answered, those questions have in common one prerequisite: the robot must
-be able to manipulate \emph{explicitly} knowledge, and hence, need a way to
-represent the knowledge.
-
-This section focuses on this knowledge representation issue: we aims at first
-establishing a comprehensive typology of representational needs for
-robotics in the specific context of service robotics, and then at painting the
-current landscape of approaches to the knowledge representation problem in the
-research community.
-
-\subsection*{Survey Inclusion Criteria}
-\label{sect|inclusion-criteria}
-
-Every robotic system has, implicitly or not, some knowledge representation
-systems. It may range from a simple state vector to an explicit symbolic
-knowledge base.  This survey focuses on the right end of this spectrum:
-symbolic systems, suited for abstract reasoning.
-
-Besides, we have decided to restraint the set of systems to those actually
-implemented on robots, and used in semantic-rich environments (\ie dynamic,
-partially unknown environments with a large range of different entities which
-may have interactions). The typical scenario that would involve such robots is
-a service robot in a human-friendly environment like a kitchen (we will
-describe such a scenario in section~\ref{sect|scenario}).
-
-We have limited ourselves to systems that
-\begin{inparaenum} 
-    \item  run on \emph{service robot} (that is, robots that interact with 
-    objects in a semantic-rich environment primarily designed for humans),
-    \item  ground the knowledge in the physical world (physically embedded
-    systems able to assess their environment),
-    \item  are able to merge different knowledge modalities,
-    \item  are able of on-line, dynamic knowledge acquisition and reasoning 
-    (\ie not simple static databases).
-\end{inparaenum}
-
-This exclude \textit{de-facto} platforms like {\sc DyKnow}~\cite{Heintz2004}
-which are focused on data fusion and knowledge grounding at lower levels.
-
-We have also choosen not to include the GOLOG language and its
-derivatives~\cite{Levesque1997, Ferrein2008, Gspandl2011} in this survey. While
-several implementations on robots, including service robots, do exist, the
-focus of this language is on representation and reasoning about actions and
-situations, and the link with symbolic, abstract knowledge is not explicit.
-
-While classical cognitive architectures like {\sc Soar}~\cite{Lehman2006} or
-{\sc ACT-R} have declarative knowledge modules~\cite{Derbinsky2010} and have
-been recently used on service robots (see {\sc ACT-R/E}~\cite{Kennedy2009} for
-instance), they are also absent from this survey because we did not find much
-references in the literature on knowledge manipulation and representation
-applied to robotic scenarii for these architectures.
 
 \subsection{Previous Work}
 \label{sect|evaluation-literature}
 
-A large part of our proposal is build as a comprehensive synthesis of
-classification and analysis found in the literatture. This synthesis is focused
-on cognitive abilities strictly related to knowledge manipulation, in the
+As said, the typology we propose is in part based on a comprehensive synthesis of
+classifications and analysis found in the literatture. This synthesis is focused
+on cognitive abilities strictly related to knowledge manipulation in the
 context of service robotics.
 
-Levesque and Lakemeyer~\cite{Levesque2008} present in a chapter on Cognitive
+Levesque and Lakemeyer~\cite{Levesque2008} present in their chapter on Cognitive
 Robotics several characteristics of knowledge representation systems for
-robots, stressing the need of representing the dynamics of the world.  Sensing
-is included in the knowledge representation via fluents; they introduce the
+robots, stressing the need of representing the \emph{dynamics of the world}.  Sensing
+is included in the knowledge representation via \emph{fluents}; they introduce the
 idea of \emph{possible worlds} to represent distinct parallel mental models;
 action representation and reasoning about tasks is discussed in the context of
-situation calculus; open world vs. closed world approaches are both mentioned.
+\emph{situation calculus}; \emph{open world} vs. \emph{closed world} approaches are mentioned.
 They also discuss how robot programming and knowledge representation can be
 related. We integrate most of these items in our typology.
 
@@ -274,17 +247,16 @@ In a slightly broader context, Heintz et al.~\cite{Heintz2008} define
 \emph{knowledge processing middlewares} as systems supporting ``declarative
 specifications for flexible configuration and dynamic reconfiguration of
 context dependent processing at many different levels of abstraction''. They
-identify six characteristics: the system must be able to merge informations
+identify six characteristics: the system must be able to \emph{merge informations}
 from different, possibly distributed sources; it should support quantitative as
-well as qualitative processing of information, it should offer bottom-up and
-top-down processing, it should be able to deal with uncertainty, allow for
-``flexible configuration and reconfiguration'' (which require what we call
-\emph{non-monotonicity} in this article) and finally meta-knowledge and
-introspective capacities (``declarative specification of the processing
-functionalities''). In this paper, we focus our analysis on similar system with
-however an emphasize on the symbolic capabilities.
+well as qualitative processing of information, it should offer \emph{bottom-up} and
+\emph{top-down} processing, it should be able to deal with \emph{uncertainty}, allow for
+``flexible configuration and reconfiguration'' (which require what we call here
+\emph{non-monotonicity}) and finally \emph{meta-knowledge} and
+\emph{introspective capacities} (``declarative specification of the processing
+functionalities'').
 
-Several surveys compare global cognitive architectures (\cite{Vernon2007, Chong2009}).
+Several surveys compare global cognitive architectures \cite{Vernon2007, Chong2009}.
 Vernon et al.~\cite{Vernon2007} split these architectures into two broad
 categories: the \emph{cognitivist} ones (where cognition is considered as an
 explicit computation problem, often based on symbol manipulation), and the
@@ -305,7 +277,7 @@ At an even broader scope, several authors from fields that are connected to robo
 have previously listed desirable features of artificial systems aiming at
 rich cognitive abilities.
 
-For instance, in~\cite{McCarthy2007}, McCarthy recently listed the challenges
+For instance McCarthy recently listed in~\cite{McCarthy2007} the challenges
 he identifies on the road to a \emph{human-level AI}.
 
 \begin{itemize}
@@ -348,33 +320,6 @@ perspective.
 Knowledge representation systems in robotics are concerned by most, if not all,
 of these points, and we shall indeed mention them in our typology, in slightly
 reformulated ways.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{A Typology of Knowledge Representation Requirements for Robotics}
-\label{sect|features}
-
-We now want to organize requirements from this imaginary cooking scenario where
-numerous desirable features for a knowledge representation system for robotics
-have been identified without any particular order.
-
-This section proposes a more formal typology and a nomenclature of analysis
-axis to study and compare knowledge representation systems
-(figure~\ref{fig|taxo}). For each dimension, this section provides a short
-definition accompagnied by links to relevant literature.
-
-\begin{figure}
-        \centering
-        \includegraphics[width=0.8\columnwidth]{taxonomy.pdf}
-        \caption{Taxonomy of the analysis dimensions of knowledge
-        representation systems for service robotics.}
-        \label{fig|taxo}
-\end{figure}
-
-Table~\ref{table|contribution-by-systems}, at the end of the chapter,
-summarizes all these features with the main domain of contribution of each
-surveyed KRS.
 
 
 
@@ -1769,6 +1714,49 @@ introspective capability that we have previously mentioned
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Surveyed systems}
 \label{sect|surveyed-systems}
+
+\subsection*{Survey Inclusion Criteria}
+\label{sect|inclusion-criteria}
+
+Every robotic system has, implicitly or not, some knowledge representation
+systems. It may range from a simple state vector to an explicit symbolic
+knowledge base.  This survey focuses on the right end of this spectrum:
+symbolic systems, suited for abstract reasoning.
+
+Besides, we have decided to restraint the set of systems to those actually
+implemented on robots, and used in semantic-rich environments (\ie dynamic,
+partially unknown environments with a large range of different entities which
+may have interactions). The typical scenario that would involve such robots is
+a service robot in a human-friendly environment like a kitchen (we will
+describe such a scenario in section~\ref{sect|scenario}).
+
+We have limited ourselves to systems that
+\begin{inparaenum} 
+    \item  run on \emph{service robot} (that is, robots that interact with 
+    objects in a semantic-rich environment primarily designed for humans),
+    \item  ground the knowledge in the physical world (physically embedded
+    systems able to assess their environment),
+    \item  are able to merge different knowledge modalities,
+    \item  are able of on-line, dynamic knowledge acquisition and reasoning 
+    (\ie not simple static databases).
+\end{inparaenum}
+
+This excludes \textit{de-facto} platforms like {\sc DyKnow}~\cite{Heintz2004}
+which are focused on data fusion and knowledge grounding at lower levels.
+
+We have also choosen not to include the GOLOG language and its
+derivatives~\cite{Levesque1997, Ferrein2008, Gspandl2011} in this survey. While
+several implementations on robots, including service robots, do exist, the
+focus of this language is on representation and reasoning about actions and
+situations, and the link with symbolic, abstract knowledge is not explicit.
+
+While classical cognitive architectures like {\sc Soar}~\cite{Lehman2006} or
+{\sc ACT-R} have declarative knowledge modules~\cite{Derbinsky2010} and have
+been recently used on service robots (see {\sc ACT-R/E}~\cite{Kennedy2009} for
+instance), they are also absent from this survey because we did not find much
+references in the literature on knowledge manipulation and representation
+applied to robotic scenarii for these architectures.
+
 
 Table \ref{table|surveyed-systems} presents the eight knowledge representation
 systems surveyed in this article.
