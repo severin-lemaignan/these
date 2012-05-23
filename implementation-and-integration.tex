@@ -728,7 +728,7 @@ currently computed by the system.
 
 \begin{table}[h]
     \centering
-    \begin{tabular}{p{1.5cm}p{5cm}p{2cm}p{2.7cm}}
+    \begin{tabular}{p{1.5cm}lp{2cm}p{3.7cm}}
 	\rowcolor{white}
     \textbf{Subject} & \textbf{Predicate} & \textbf{Object} & \emph{Notes} \\ 
     \hline
@@ -782,7 +782,7 @@ description of the relative positioning of objects in the environment (table
 
 \begin{table}[h]
 	\centering
-	    \begin{tabular}{p{1.5cm}p{6cm}p{1.5cm}l}
+	    \begin{tabular}{p{1.5cm}lp{2cm}p{3.7cm}}
 		\rowcolor{white}
 		\textbf{Subject} & \textbf{Predicate} & \textbf{Object} & \emph{Notes} \\
 		\hline
@@ -891,15 +891,15 @@ during the agent capabilities analysis phase.
 
 \begin{table}[h]
 	\centering
-		\begin{tabular}{p{2cm}p{4.5cm}p{2cm}p{3.5cm}}
+		\begin{tabular}{p{2cm}lp{2cm}p{3.7cm}}
 		\rowcolor{white}
 		\textbf{Subject} & \textbf{Predicate} & \textbf{Object} & \emph{Notes} \\
 		\hline
 		 \concept{Agent}  & \concept{looksAt}  & \concept{SpatialThing} \\
 		 \concept{Agent}  & \concept{sees}  &  \concept{SpatialThing}  &    \\ 
-		 \concept{SpatialThing}  & \concept{isInFieldOfView}  &  \concept{xsd:boolean}  & via inference: \par \stmt{myself sees *} $\Leftrightarrow$ \stmt{* isInFieldOfView true} \\ 
+		 \concept{SpatialThing}  & \concept{isInFieldOfView}  &  \concept{xsd:boolean}  & via inference: \par \tiny \stmt{myself sees *} $\Leftrightarrow$ \stmt{* isInFieldOfView true} \\ 
 		 \concept{Agent}  & \concept{pointsAt} $\equiv$ \concept{cyc:pointingToward}  & \concept{SpatialThing} \\ 
-		 \concept{Agent}  & \concept{focusesOn}  &  \concept{SpatialThing}  &  via inference: \par \concept{looksAt} $\wedge$ \concept{pointsAt} $\Rightarrow$ \concept{focusesOn} \\
+		 \concept{Agent}  & \concept{focusesOn}  &  \concept{SpatialThing}  &  via inference: \par \tiny \concept{looksAt} $\wedge$ \concept{pointsAt} $\Rightarrow$ \concept{focusesOn} \\
 		\concept{Agent} & \concept{seesWithHeadMovement} &  \concept{SpatialThing} \\
 		\concept{Agent} & \concept{reaches} &  \concept{Object} \\ 
 

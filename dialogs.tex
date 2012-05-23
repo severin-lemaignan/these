@@ -151,16 +151,6 @@ partial utterances. They validated the approach with an extensive user-study.
 
 \fxwarning{Kollar/Tellex}
 
-Also worth mentioning, Mavridis and Roy~\cite{Mavridis2005} propose the idea of
-a \emph{grounded situation model} which is an amodal model of the world where
-different sensing modalities, including verbal ones (the robot is able to
-\emph{imagine} objects), are merged. Their framework also allows management of
-the interaction history (the human can ask for a past event). They propose an
-implementation in an environment built on simple entities (a manipulator arm
-and colour balls).
-
-\subsection{Contribution}
-
 Compared to previous contributions, our efforts have two foci: {\it (1)}
 integration between language processing and perception of the environment and
 the humans, from several perspectives; and {\it (2)} realistic human-robot interactions:
@@ -225,7 +215,7 @@ Figure~\ref{dialog|parser_output} shows an example of the raw output of the
 parser for a moderately complex sentence.
 
 \begin{figure}%[!ht]
-\begin{center}
+\centering
 \scriptsize
 \begin{alltt}
 >> IMPERATIVE
@@ -241,7 +231,6 @@ VP: \textbf{remember} (present simple)
               indirect objects:
                 NP: \textbf{me}
 \end{alltt}
-\end{center}
 \caption{Raw output of the {\sc Dialogs} parser after processing the
 sentence: ``remember that I want you to give me my nice blue bottle.'' 
 Nominal groups are not grounded yet.} 
