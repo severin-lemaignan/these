@@ -697,7 +697,8 @@ monitoring and execution control activities. Knowledge representation systems
 may thus have specific mechanisms to represent them (and possible, to reason
 about them, as presented in section~\ref{sect|planning}).
 
-%An extensive report on task modeling in OWL ontologies in appendix
+An technical report we have written on task modeling in OWL ontologies is
+available in appendix \ref{appendix|tasks}.
 
 
 
@@ -1214,6 +1215,11 @@ implementations of the situation calculus focused on robotic applications.
 It is however common to rely on external components dedicated to symbolic task
 planning (in particular because of the non-monotonicity requirements) with a
 tight link to the KRS for domain retreival and/or resulting plan storage.
+
+Finally, in the context of interaction between several agents, the management
+of \emph{joint intentions} and \emph{joint goals}~\cite{Tomasello2005,
+Bratman2009} are additional aspects that have to be represented and
+appropriately handled by the planning subsystem.
 
 %An extensive report on task modeling in OWL ontologies in appendix
 
@@ -2168,7 +2174,7 @@ module can be seamlessly integrated into the PEIS ecosystem.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{The Knowledge API}
+\section{An Interface for Knowledge Manipulation in Robotics}
 \label{sect|knowledge-api}
 
 During the preparation of the thesis, discussions with several people involved
@@ -2239,7 +2245,7 @@ the API makes no assumptions on implementations regarding:
     \item  Reasoning capabilities
 \end{itemize}
 
-\subsection{The API}
+\subsection{The Knowledge API}
 
 The API is divided in five parts:
 \begin{enumerate}
