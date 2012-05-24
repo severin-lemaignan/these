@@ -58,24 +58,30 @@ B -> B5;
 
 
 
-C10 [label="C.10. Learning"];
-C9 [label="C.9. Naive\n physics"];
-C8 [label="C.8. Planning"];
-C7 [label="C.7. Prediction\n and explanation"];
-C6 [label="C.6. Presupposition"];
-C5 [label="C.5. Non-monotonicity"];
-C4 [label="C.4. Uncertainty"];
+C10 [label="C.9. Learning"];
+C9 [label="C.8. Naive\n physics"];
+C8 [label="C.7. Planning"];
+C7 [label="C.6. Prediction\n and explanation"];
+C6 [label="C.5. Presupposition"];
+C5 [label="C.4. Non-monotonicity"];
 C3 [label="C.3. Lazy\n evaluation"];
 C2 [label="C.2. Instantiation and\n structural alteration"];
 C1 [label="C.1. Standard\n reasoning"];
 
+C74 [label="C.6.4 Explanation"];
+C73 [label="C.6.3 Diagnosis"];
+C72 [label="C.6.2 Legality"];
+C71 [label="C.6.1 Projection"];
+
 C -> C1;
 C -> C2;
 C -> C3;
-C -> C4;
 C -> C5;
 C -> C6;
-C -> C7;
+C -> C7 -> C71;
+     C7 -> C72;
+     C7 -> C73;
+     C7 -> C74;
 C -> C8;
 C -> C9;
 C -> C10;

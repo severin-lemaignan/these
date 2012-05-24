@@ -64,7 +64,7 @@ Finally, we conclude this chapter on symbolic knowledge representation by
 briefly presenting a novel API for knowledge manipulation, jointly designed
 with several other researchers on knowledge representation.
 
-\subsection{What do we call "knowledge"?}
+\paragraph{What do we call "knowledge"?}
 \label{sect|on-knowledge}
 
 Since we will discuss at length the concept of knowledge in the context of
@@ -203,14 +203,8 @@ We have already seen in the imaginary scenario introduced in
 chapter~\ref{chapt|intro} that many other cognitive abilities related to
 knowledge representation and manipulation are required by service robots. The
 above items give a high-level view of what knowledge \emph{intrinsically} need
-to exist. The next section will on the contrary aim at providing a
+to exist. The next section aims, on the contrary, at providing a
 comprehensive set of cognitive abilities related to knowledge.
-
-\subsection{The Semantic Robot}
-\label{sect|semantic}
-
-
-One concept, several symbols: cf multilingual support of ORO server \ref{sect|multilingual}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -219,14 +213,12 @@ One concept, several symbols: cf multilingual support of ORO server \ref{sect|mu
 \label{sect|features}
 
 This section now focuses on formalizing the knowledge representation issue: we
-aim first at establishing a comprehensive typology of representational needs
-for robotics in the specific context of service robotics, before painting, at
-section~ref{sect|surveyed-systems}, the current landscape of approaches to the
-knowledge representation problem in the research community.
-
-This section proposes a more formal typology and a nomenclature of analysis
-axis to study and compare knowledge representation systems
-(figure~\ref{fig|taxo}). For each dimension, this section provides a short
+aim first at establishing a comprehensive typology and nomenclature
+(figure~\ref{fig|taxo}) of representational needs for robotics in the specific
+context of service robotics, before painting, at
+section~\ref{sect|surveyed-systems}, the current landscape of approaches to the
+knowledge representation problem in the research community. For each such
+``dimensions'' of knowledge representation system, we provides a short
 definition accompagnied by links to relevant literature.
 
 \begin{figure}
@@ -237,10 +229,12 @@ definition accompagnied by links to relevant literature.
         \label{fig|taxo}
 \end{figure}
 
-Table~\ref{table|contribution-by-systems}, at the end of the chapter,
-summarizes all these features with the main domain of contribution of each
-surveyed KRS.
-
+The typology has been built from three main sources: a review of the lexisting
+literature on that topic that we present in the next section; the survey of
+nine knowledge representation systems already deployed; our own experience,
+acquired during the thesis preparation with the help of many discussions with
+researchers from both CNRS and TUM, that allowed to interweave two slightly
+different perspectives on knowledge in robotics.
 
 \subsection{Previous Work}
 \label{sect|evaluation-literature}
@@ -250,30 +244,42 @@ classifications and analysis found in the literatture. This synthesis is focused
 on cognitive abilities strictly related to knowledge manipulation in the
 context of service robotics.
 
-Levesque and Lakemeyer~\cite{Levesque2008} present in their chapter on Cognitive
-Robotics several characteristics of knowledge representation systems for
-robots, stressing the need of representing the \emph{dynamics of the world}.  Sensing
-is included in the knowledge representation via \emph{fluents}; they introduce the
-idea of \emph{possible worlds} to represent distinct parallel mental models;
-action representation and reasoning about tasks is discussed in the context of
-\emph{situation calculus}; \emph{open world} vs. \emph{closed world} approaches are mentioned.
-They also discuss how robot programming and knowledge representation can be
-related. We integrate most of these items in our typology.
+Levesque and Lakemeyer~\cite{Levesque2008} present in their chapter on
+Cognitive Robotics several characteristics of knowledge representation systems
+for robots, stressing the need of representing the \emph{dynamics of the
+world}.  Sensing is included in the knowledge representation via
+\emph{fluents}; they introduce the idea of \emph{possible worlds} to represent
+distinct parallel mental models; action representation and reasoning about
+tasks is discussed in the context of \emph{situation calculus}; \emph{open
+world} vs. \emph{closed world} approaches are mentioned.  They also discuss how
+robot programming and knowledge representation can be related. We integrate
+most of these items in our typology.
 
 In a slightly broader context, Heintz et al.~\cite{Heintz2008} define
 \emph{knowledge processing middlewares} as systems supporting ``declarative
 specifications for flexible configuration and dynamic reconfiguration of
 context dependent processing at many different levels of abstraction''. They
-identify six characteristics: the system must be able to \emph{merge informations}
-from different, possibly distributed sources; it should support quantitative as
-well as qualitative processing of information, it should offer \emph{bottom-up} and
-\emph{top-down} processing, it should be able to deal with \emph{uncertainty}, allow for
-``flexible configuration and reconfiguration'' (which require what we call here
-\emph{non-monotonicity}) and finally \emph{meta-knowledge} and
-\emph{introspective capacities} (``declarative specification of the processing
-functionalities'').
+identify six characteristics: the system must be able to \emph{merge
+informations} from different, possibly distributed sources; it should support
+quantitative as well as qualitative processing of information, it should offer
+\emph{bottom-up} and \emph{top-down} processing, it should be able to deal with
+\emph{uncertainty}, allow for ``flexible configuration and reconfiguration''
+(which require what we call here \emph{non-monotonicity}) and finally
+\emph{meta-knowledge} and \emph{introspective capacities} (``declarative
+specification of the processing functionalities'').
 
-Several surveys compare global cognitive architectures \cite{Vernon2007, Chong2009}.
+Several surveys compare global cognitive architectures \cite{Langley2006,
+Vernon2007, Chong2009}. Langley, Laird and Rogers~\cite{Langley2006}
+distinguish nine capabilities: recognition and categorization, decision making,
+perception and situation assessment, prediction and monitoring, planning,
+reasoning, execution control, interaction and
+learning/remembering/introspection. They also separatly identify four
+\emph{properties} of cognitive architecture, that categorise how knowledge is
+handled by the architecture: representation of knowledge, organization of
+knowledge, utilisation of knowledge and acquisition and refinement of
+knowledge. This categorisation had a notable influence on our typology, and
+many of these categories are also present in our proposal.
+
 Vernon et al.~\cite{Vernon2007} split these architectures into two broad
 categories: the \emph{cognitivist} ones (where cognition is considered as an
 explicit computation problem, often based on symbol manipulation), and the
@@ -282,20 +288,24 @@ interaction of the system with its environment). The approaches presented in
 this paper are, at a few exceptions, prototypical \emph{cognitivist} approaches
 that aim at making knowledge explicit within the robot architecture. Vernon et
 al. propose twelve \emph{characteristics of cognitive system} to compare
-architectures. Amongst them, they mention the \emph{inter-agent epistemology} (how
-the structure of the world is captured in a representation and shared), the
-relation to \emph{embodiment}, the ability to \emph{anticipate} and to
+architectures. Amongst them, they mention the \emph{inter-agent epistemology}
+(how the structure of the world is captured in a representation and shared),
+the relation to \emph{embodiment}, the ability to \emph{anticipate} and to
 \emph{adapt}, and the mechanisms of \emph{motivation}. While presented at the
 level of the whole robotic architecture, these features also translate into
 knowledge representation strategies and are relevant to our study.
-\fxwarning{Detail Chong here}
 
-At an even broader scope, several authors from fields that are connected to robotics
-have previously listed desirable features of artificial systems aiming at
-rich cognitive abilities.
+Chong et al.~\ref{Chong2009} also provide a recent review of the main cognitive
+architectures, with a focus on eight functions: perception, memory, goals
+management, problem solving capabilities, planning, reasoning, learning and
+links to neurobiology.
 
-For instance McCarthy recently listed in~\cite{McCarthy2007} the challenges
-he identifies on the road to a \emph{human-level AI}.
+At an even broader scope, several authors from fields that are connected to
+robotics have previously listed desirable features of artificial systems aiming
+at rich cognitive abilities.
+
+For instance McCarthy recently listed in~\cite{McCarthy2007} the challenges he
+identifies on the road to a \emph{human-level AI}.
 
 \begin{itemize}
 
@@ -326,21 +336,20 @@ he identifies on the road to a \emph{human-level AI}.
 \end{itemize}
 
 Coming from the perspective of natural language processing in situated context,
-Roy and Reiter, in~\cite{Roy2005}, summarize what they see as the main
-challenges to be tackled by KRS: cross-modal representation systems,
-association of words with perceptual and action categories (\emph{grounding}),
-modeling of context, definition of the right granularity of models, integration
-of temporal modeling and planning, ability to match past (learned) experiences
-with the current interaction and ability to take into account the human
-perspective.
+Roy and Reiter summarise in~\cite{Roy2005} what they see as the main challenges
+to be tackled by knowledge representation systems: \emph{cross-modal
+representation} systems, association of words with perceptual and action
+categories (\emph{grounding}), modeling of \emph{context}, definition of the
+right \emph{granularity} of models, integration of \emph{temporal modeling and
+planning}, ability to \emph{match past (learned) experiences} with the current
+interaction and ability to take into account the \emph{human perspective}.
 
-Knowledge representation systems in robotics are concerned by most, if not all,
-of these points, and we shall indeed mention them in our typology, in slightly
-reformulated ways.
+Knowledge representation systems in robotics are directly affected by these
+points, and we indeed integrate them in our typology, in slightly reformulated
+ways.
 
 
-
-\subsection{Expressiveness: What Can be Represented?}
+\subsection{What Can be Represented?}
 \label{sect|expressiveness}
 
 \begin{scriptsize}
@@ -356,26 +365,29 @@ reformulated ways.
 \end{center}
 \end{scriptsize}
 
+This first axis of analysis is its intrinsic expressive power. It answers the
+question: what can be possibly represented. When it explicitely exists, the
+\emph{language} of representation plays here an obvious role.
 
 \subsubsection{Main Logic Formalisms}
 
 The main role of a knowledge representation system is to provide an adequate
-representation system to store facts and concepts that can be informally
+representation system to formally store facts and concepts that could be informally
 described in natural language.
 
 Formal logic aims at providing such a representation system with the added
 value of providing a tractable support for inference and reasoning.
 
-Most (but not all) of the systems we survey rely on a particular logic
+Most (but not all) of the systems we have surveyed rely on a particular logic
 formalism. The choice of the formalism has a strong impact, on one side, on the
 range of ideas that can be expressed conveniently (\emph{practical
 expressiveness}) or at all (\emph{theoretical expressiveness}), on the other
-side, on the ability to solve the inference problem (called
+side, on the ability to solve the fundamental inference problem (called
 \emph{satisfiability}: is a given logical sentence true in my model?) in a
 tractable manner.
 
-A large number of logic formalism do exist, we shall summarize below the most
-relevant ones for systems actually deployed in current robotic architectures.
+A large number of logic formalism do exist and we briefly present below the most
+relevant ones for systems actually deployed in robotic architectures.
 
 \emph{Predicate logic} is the family of logic formalisms the most commonly
 found in knowledge representation. It distinguishes itself from the simpler
@@ -401,14 +413,12 @@ manner). In description logic, axioms are build from \emph{concepts},
 W3C OWL-DL standard is a widely-used language to describe domains with the
 description logic.
 
-Because Description Logics have been originally created from the perspective of
+Because description logics have been originally created from the perspective of
 a \emph{knowledge representation language} and not a logic language, their
 terminology (\emph{concept} or \emph{class}, \emph{role} or \emph{property},
-\emph{individual},\ldots) is well-suited to knowledge description and we may use
-it in the remaining of this paper outside of the strict context of  Description
-Logics.
+\emph{individual},\ldots) is well-suited to knowledge description.
 
-\emph{Modal logic}, that allow for statement qualification like
+\emph{Modal logic}, that allows for statement qualification like
 \emph{possibility} or \emph{necessity}, have been shown to be closely related
 to description logics~\cite{Baader2001}. Modal logic allows to represent conveniently parallel
 possible worlds and facts like ``the robot knows \emph{that the human knows}
@@ -417,7 +427,8 @@ how to read a recipe''.
 \fxfatal{On modal logics, see the remark of McCarthy, in \cite{McCarthy2007}, section 3}
 
 \emph{Temporal logic} are designed to represent and manipulate assertions whose
-truth value may vary in time.
+truth value may vary in time. We introduce one of its key idea (the
+\emph{fluents}) later in the typology.
 
 One last class of logics that is of particular relevance for robotic
 applications is the \emph{probabilistic logics} or \emph{Bayesian logics}.
@@ -470,7 +481,7 @@ proposition can not be decided to be true or false) problems.
 
 Figure~\ref{fig|overlap_dl_horn} shows that the expressive power of description
 logics and Horn clauses partially overlaps. In section~\ref{sect|reasoning} we
-mention extensions to description logics based on rule systems to bring closer
+mention extensions to description logics based on rule systems that bring closer
 the two approaches.
 
 The relationships between expressive power and reasoning complexity that follow
@@ -482,13 +493,13 @@ literature on that subject.
 \subsubsection{Open World and Close World Assumptions}
 \label{sect|owa-cwa}
 
-The \emph{close world} (CWA) vs. \emph{open world} (OWA) assumption names a
+The \emph{close world} (CWA) vs. \emph{open world} (OWA) assumptions name a
 modelling choice on the \emph{completeness} of a knowledge domain. In the close
 world assumption, a proposition that can not be proven true is assumed to be
 false (\emph{negation by failure}), while in the open world assumption, a
 proposition may be considered either true, false or unknown.
 
-This distinction is important in robotics were the robot may have to manipulate
+This distinction is important in robotics where the robot may have to manipulate
 concepts with only partial knowledge on them. For instance, let imagine a robot
 that sees a bottle on a table, whose bottom is hidden by another object. The
 robot can not prove that the bottle is indeed \emph{on} the table. A knowledge
@@ -520,7 +531,7 @@ The OWL language is specifically known to assume an open world.  Domains
 constrained with the closed world assumption lead to more tractable inference
 problems, and allow for instance the use of logic languages like Prolog. Thus,
 several approaches exists to \emph{locally close} a domain (\cf
-Levesque~\cite{Levesque2008}, section 24.3.2 for a summary of those).
+Levesque~\cite{Levesque2008}, section 24.3.2 for a summary of those ones).
 
 \subsubsection{Representation of uncertainty and likelihood}
 
@@ -531,17 +542,24 @@ table?''}). Most logics do not account explicitly for uncertainty. It must be
 either relied on specific logics (like Bayesian logics) or on extensions of
 classical logics.
 
+\fxwarning{To be completed!}
+
 \subsubsection{Meta-cognition: knowledge on the knowledge}
 
 As stated by Cox and Raja~\cite{Cox2007}, meta-cognition is composed of both
 \emph{``meta-level control of cognitive activities and the introspective
 monitoring of such activities to evaluate and to explain them"}.
 
+Sloman proposes in~\cite{Sloman2011} a detailed analysis of meta-cognition and
+its different aspects in both natural (human) and artifical systems.
+
 A knowledge representation system endowed with \emph{meta-cognition} is not
 only able to manipulate knowledge but also to exhibit and manipulate the
 structure of its knowledge and the reasoning process. For instance, the ability
-to explain a logical inconsistency in a KRS is a meta-cognitive function.
-Sloman~\cite{Sloman2011} \fxfatal{...Sloman?}
+to explain a logical inconsistency in a KRS is a meta-cognitive function, as is
+the ability to expose and alter the knowledge structure (these two reasoning
+techniques have their own entries in the taxonomy, at
+section~\ref{sect|reasoning}.
 
 At section~\ref{sect|introspection} below, we discuss the idea of
 introspection.  Meta-cognition can be viewed as the technical facet of the
@@ -574,7 +592,8 @@ cognitive capabilities (theory of mind, introspection, memory).
 \subsubsection{Role Representations}
 
 This section discusses strategies and approaches to represent in a knowledge
-model three important \emph{roles}\fxwarning{Reference on the term 'role'?}.
+model three important \emph{roles}: spatial relations, time and representation
+of actions.
 
 \begin{scriptsize}
 \begin{center}
@@ -591,7 +610,7 @@ model three important \emph{roles}\fxwarning{Reference on the term 'role'?}.
 \paragraph{Representation of space}
 
 Symbolic representation of space is a widely studied topic. In particular, a
-large literature corpus is available on spatial ontologies.
+large literature corpus is available on spatial ontologies\fxwarning{Which one?}.
 
 Two main classes of spatial relations are usually represented at the symbolic
 level: the topology of environments and the placement of physical entities.
@@ -606,7 +625,7 @@ level: the topology of environments and the placement of physical entities.
 \end{center}
 \end{scriptsize}
 
-...topology??
+\fxwarning{...topology??}
 
 Symbolic representation of entities placement can be absolute or relative. The
 relation \concept{isOn}, for example, leads to absolute statements: the
@@ -634,27 +653,26 @@ relations. Wikipedia?}
 \paragraph{Representation of time}
 
 As an agent acting at human-like time scale and dealing with temporal concepts
-(like actions), a robot may want to represent, and possibly to reason, about
+(like actions), a robot needs to represent and reason about
 time. Time representation is split into two distinct abilities: representing
 time points (both in the past -- which is roughly equivalent to assignment of
 timestamps to events the robot perceives -- and in the future), and
-representing \emph{passing time} (situations, durations, timespans) like in
+representing passing time (situations, durations, timespans) like in
 \emph{``the eggs will be cooked in 10 min''}.
 
-This introduces the disjunction in time representation between
-\emph{situations}, that is, any temporal concept with a non-zero duration, and
-\emph{events}, that is, any durationless temporal concept.
-
-Other definitions of a situation do exist, notably in the context of
-\emph{situation calculus}~\cite{Levesque1998}, Reiter and Levesque consider a
-situation to be an history of actions.
+This is usually formalised as a disjunction in time representation between
+\emph{events}, that is, any durationless temporal concept, and
+\emph{situations}, that is, any temporal concept with a non-zero
+duration\footnote{Other definitions of a situation do exist, notably in the
+context of \emph{situation calculus}~\cite{Levesque1998}, Reiter and Levesque
+consider a situation to be an history of actions.}.
 
 \fxfatal{Discuss time chronicles~\cite{Ghallab1996}}
 \fxfatal{Discuss Allen intervals}
 
 The concept of \emph{fluent} plays another important role for time
 representation. Fluents are properties (or \emph{conditions}) that change over
-time, like $sees(agent1, apple, t)$.
+time, like $sees(agent1, apple, t)$.\fxwarning{Un peu court... citation?}
 
 We call a system that does not account for time (\ie that permanently lives in
 present) \emph{atemporal}.
@@ -676,7 +694,6 @@ action realization.
 \emph{theta roles} in the literature) allow to semantically qualify the
 parameters of an action. The recipient of the action, the performer, the object
 acted upon, the destination are some example of common thematic roles.
-
 Table~\ref{table|theta-roles} presents a more comprehensive list of thematic
 roles proposed by \cite{Aarts1997} (see~\cite{Gutierrez2001} for a comparison
 of other sets of thematic roles present in the literature).
@@ -702,7 +719,10 @@ Benefactive & The entity that benefits from the action or event denoted by the p
 
 \end{tabular}
 \end{center}
-\caption{Thematic Roles~\cite{Aarts1997}.}
+
+\caption{A list of thematic roles, as proposed by Aarts~\cite{Aarts1997}.
+Depending on the action, only certain roles are meaningful.}
+
 \label{table|theta-roles}
 \end{table}
 
@@ -717,8 +737,8 @@ about them, as presented in section~\ref{sect|planning}).
 An technical report we have written on task modeling in OWL ontologies is
 available in appendix \ref{appendix|tasks}.
 
-
-
+Plans representation is closely related to action and task representation. It
+is specifically discussed at section~\ref{sect|planning}.
 
 \subsubsection{Context modeling}
 
@@ -727,7 +747,9 @@ how said that :-)}: it is essential for the robot to associate the facts it
 represents to a \emph{context}. The context carries the keys for the
 interpretation of the information. It covers the \emph{domain of validity} of
 the facts, the \emph{common-sense} knowledge required to fill the gaps in the
-representation\fxfatal{give an example}, \fxfatal{What more?}.
+representation\fxfatal{give an example}, \fxfatal{What more? -> McCarthy, merge
+with section 2.1.1?}.
+
 
 \subsubsection{Modality, Contingency and Theory of Mind}
 \label{sect|possible-worlds}
@@ -739,27 +761,26 @@ parallel beliefs models (or \emph{interpretations}) that can be independently
 accessed.
 
 A \emph{contingent} proposition is defined as neither always true (a tautology)
-nor always false (a contradiction) in every possible world. In knowledge
-representation systems for robotics that support logical modality,
-interpretations are often initialised with a common set of initial beliefs
-(like common-sense knowledge). This initial common knowledge is hence true in
-every possible worlds for the robot, and thus does not belong to its contingent
-knowledge.
+nor always false (a contradiction) in every possible world: its truth value
+depends on the context. In knowledge representation systems for robotics that
+support logical modality, interpretations are often initialised with a common
+set of initial beliefs (like common-sense knowledge). This initial common
+knowledge is hence true in every possible worlds for the robot, and thus does
+not belong to its contingent knowledge.
 
-Logical modality allows to implement alternative mental models. They may be
+On the contrary, alternative mental models with contingent knowledge may be
 used to represent different (possibly hypothetical or even imaginary) views on
-the world, from the robot own perspective, or from other persepectives computed
-by the robot.
+the world, from the robot own perspective or context, or from other
+persepectives computed by the robot.
 
 The representation of the mental perspective of other agents has a particular
-importance in human-robot interaction. It relies first on the ability to view
-the world from a standpoint which is not \emph{egocentric}. This cognitive
-ability is referred as \emph{perspective taking} (see
-Flavell~\cite{Flavell1992} and Tversky~\cite{Tversky1999} for the psychological
-grounds of perspective taking, itself originated in Piaget's work on cognitive
-development, as remembered by Flavell), and has been studied by
-infants~\cite{Moll2006} and robots as well~\cite{Trafton2005, Breazeal2006,
-Ros2010}.
+importance in human-robot interaction. It relies first on the ability to
+literally \emph{view} the world from a standpoint which is not
+\emph{egocentric}. This cognitive ability is referred as \emph{perspective
+taking} (see Flavell~\cite{Flavell1992} and Tversky~\cite{Tversky1999} for the
+psychological grounds of perspective taking, itself originated in Piaget's work
+on cognitive development, and has been studied by infants~\cite{Moll2006} and
+robots as well~\cite{Trafton2005, Breazeal2006, Ros2010}.
 
 The idea of a \emph{theory of mind}~\cite{Premack1978} emerges from the
 perspective taking ability. It can be defined as the ability for one to
@@ -811,15 +832,15 @@ theory of mind for robots.
 \paragraph{Introspection}
 
 Introspection is the ability to self-describe: what are my capabilities, what
-is my state (performing some action, idling, etc.), what are my beliefs (\ie my
-knowledge), what are my intentions and my plans?
+is my state (performing some action, idling, etc.), what are my beliefs, what
+are my intentions and my plans?
 
 Introspection must be distinguished from meta-cognition: While introspection
 may require meta-cognition (for instance to be able to expose its internal
 knowledge), it is not always mandatory. The current state of the robot can be
 represented as a simple instantiation of a specific category (for instance, if
 the robot give an object to the human, this state could be represented with the
-triples \setstmt{robot performs action1, action1 isA Give}.
+triples \setstmt{robot performs action1,action1 isA Give}.
 
 \paragraph{Modelling of the robot capabilities}
 
@@ -834,7 +855,7 @@ be deported outside of the main knowledge base. Efforts trying to formalize,
 maintain and expose the capabilities and state of a robot are not new (and
 ground themselves in work and techniques for self-descriptive remote procedure
 calls in computing science), but take a renewed importance with applications
-for high-level multi-robot cooperation. Recent work in that direction
+for high-level multi-robot cooperation. Recent works in that direction
 include~\cite{Kunze2011}.
 
 \subsubsection{Memory}
@@ -852,13 +873,13 @@ into a hierarchy. Short-term memory is refined with the concept of
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.9\columnwidth]{typology/memory_models.pdf}
+    \includegraphics[width=0.6\columnwidth]{typology/memory_models.pdf}
     \caption{Overview of the main types of memories}
     \label{fig|memory_models}
 \end{figure}
 
 It worth emphasing that if memory is commonly associated to the process of
-forgetting facts after a variable amount of \emph{time}, it covers actually
+forgetting facts after a variable amount of \emph{time}, it actually covers
 more mechanisms that are relevant to robotics, like selective remembering
 triggered by a specific context or reinforcement learning.
 
@@ -900,9 +921,6 @@ human-like memory organization.
 
 \subsubsection{Standard reasoning techniques}
 
-Being based on logical languages to represent the knowledge, most of the
-systems we survey allow various forms of \emph{reasoning}.
-
 We call \emph{standard reasoning techniques} techniques based on logical
 inference, using resolution algorithms like \emph{forward chaining},
 \emph{backward chaining} or \emph{semantic tableaux}.
@@ -927,10 +945,11 @@ A typical example would be that we are provided with an instance
 \concept{object1} and we want to know if this object is a kind of
 \concept{Bottle} or \concept{Glass}.
 
-Reasoners can often provide other type of inferences, like:
+Inferences can also be drawn from other constructs, whose availability depends
+on the representation language. OWL, for instance, has constructs for:
 
 \begin{itemize}
-    \item class subsumption (similar to inheritance)
+    \item class subsumption (to represent inheritance relations)
 
     \item reasoning on roles properties, including:
         \begin{itemize}
@@ -941,57 +960,61 @@ Reasoners can often provide other type of inferences, like:
 
         \item universal, existential and cardinality constraints,
 
-        \item property characteristics (inverse, symmetry, transitivity, etc.)
+        \item several second-order predicates (inverse, symmetry, transitivity, etc.)
 
         \end{itemize}
 
-    \item complex concept expressions like: \par \footnotesize \concept{Bottle}
-    $\equiv$ \concept{Artifact} {\bf that} (\concept{hasShape} {\bf value}
-    \concept{cylinderShape})\footnote{This example uses the \emph{Manchester
-    syntax}, \url{http://www.w3.org/TR/owl2-manchester-syntax/}} \normalsize
+    \item \emph{class restrictions} like: \par 
+    \footnotesize 
+    \concept{Bottle} $\equiv$ \concept{Artifact} {\bf that} (\concept{hasShape}
+    {\bf value} \concept{cylinderShape})
+    \normalsize
 
-    \item set operations like: \par \footnotesize \concept{Color} $\equiv \bigcup$ (\concept{blue}, \concept{green}, \concept{orange},
-    \concept{black}, \ldots) \normalsize
+    \item set operations like: \par 
+    \footnotesize 
+    \concept{Color} $\equiv \bigcup$ (\concept{blue}, \concept{green},
+    \concept{orange}, \concept{black}, \ldots) 
+    \normalsize
 
 \end{itemize}
 
-\paragraph{Rule Languages}
+\paragraph{Rule Languages} As mentioned earlier, knowledge models based on
+description logics can be extended through rule languages (typically for OWL,
+the SWRL language).
 
-As mentioned earlier, knowledge models based on description logics can be extended through rule languages.
+An intersection of properties is an example of expression that can only be
+represented with rules. For instance:
 
-Intersection of properties is an example of expression that can only be represented with rules: for instance, 
-
-generic SWRL ({\em Semantic Web Rule Language}) rules like: \par
-        \footnotesize \concept{looksAt(?agt, ?obj)} $\land$
-        \concept{pointsAt(?agt,?obj)} \par $\Rightarrow$ \concept{focusesOn(?agt, ?obj)}
-        \normalsize 
-
+\footnotesize
+\concept{looksAt(?agt, ?obj)} $\land$ \concept{pointsAt(?agt,?obj)}
+$\Rightarrow$ \concept{focusesOn(?agt, ?obj)}
+\normalsize
 
 \subsubsection{Dynamic Instantiation and Alteration of the Knowledge Structure}
 
 The content of a knowledge base is often conveniently divided into a
 \emph{structural part} that defines the conceptualisation of a domain in term
-of vocabulary and relations within the concepts, and an \emph{instantiation} of
+of vocabulary and relations between the concepts, and an \emph{instantiation} of
 this structure into concrete entities.
 
-The terms TBox and ABox are commonly found to describe this two different types of
-statements in ontologies: TBox statements describe a system in terms of
-controlled vocabularies, for example, a set of classes and properties. ABox are
-TBox-compliant statements about that vocabulary.
+The terms TBox and ABox are commonly found to describe this two different types
+of statements in ontologies: TBox statements describe a system structure (made,
+for example, of a set of classes and properties) whereas the ABox contains
+TBox-compliant statements that are asserted in this structure.
 
-Most knowledge representation systems allow to modify the ABox, which can be
+Knowledge representation systems allow to modify the ABox, which can be
 considered as the dynamic part of the knowledge base. Alteration of the ABox
 include the addition or retractation of relations between existing instances,
 and the addition or removal of instances. We call the later \emph{dynamic
 instantiation}: the capability for a system to create new instances at
-run-time. The term dynamic instantion applies primarily to concrete entities
+run-time. The term dynamic instantiation applies primarily to concrete entities
 (typically, a new object is discovered by the robot, a symbolic instance is
 created for it), but may also apply to abstract entities (like an instance of
 action, of a feeling, etc.).
 
-KRS may also allow to alter the TBox. This requires the underlying reasoning
-systems to be able to dynamically take into account structural changes in the
-knowledge base.
+The knowledge representation system may also allow to alter the TBox. This
+requires the underlying reasoning systems to be able to dynamically take into
+account structural changes in the knowledge base.
 
 Example of TBox alteration include modification of the taxonomy (like addition
 or retractation of a \concept{subClassOf} relation), changes to the asserted
@@ -1018,17 +1041,17 @@ all known objects) would be said to use a \emph{strict evaluation} policy.
 Lazy evaluation has an immediate impact on efficiency and scalability of the
 system, and some problems may even be only tractable with a lazy evaluation
 strategy (the relative placements of object is an example of combinatory
-explosion in strict evaluation approaches, although this issue is mitigated in
-real use-cases by heuristics that select a subset of objects to evaluate).
+explosion in strict evaluation approaches, although this issue could be
+mitigated in real use-cases by heuristics that would select a subset of objects
+to evaluate).
 
 One downside is that the knowledge base never contains explicitly the complete
 set of beliefs of the robot. This limits for instance the ability for the robot
-to react to logical conditions that involves fact that are lazily evaluated
-(``trigger a callback when object A is behind object B'' could be an example of
-a event triggered by a logical condition).
+to react to logical conditions that involve facts that are lazily evaluated
+(``trigger a callback when object A is behind object B'' would not be triggered
+with a purely lazy evaluation strategy for spatial relations).
 
-\subsubsection{Reasoning with uncertainty}
-
+%\subsubsection{Reasoning with uncertainty}
 
 \subsubsection{(Non) Monotonic Reasoning}
 
@@ -1050,15 +1073,15 @@ whose existence follows from the facts being taken into account will be
 considered.
 \end{quotation}
 
-Another important application of non-monotonic reasoning is representation of
-change: for example, to make an omelette, you need to crack eggs and wipe them.
-The eggs disappear and are replaced by an omelette:
+An important application of non-monotonic reasoning is the representation of
+change: for example, to make a brownie, one needs to crack eggs and mix them to the chocolate.
+The eggs disappear and are replaced by a dough:
 
-\concept{Egg}$(a) \land $ \concept{Egg} $(b) \land $
-\concept{MakeOmelette}$(a, b, c) \to \lnot $ \concept{Egg}$(a) \land \lnot $
-\concept{Egg}$(b) \land $ \concept{Omelette}$(c)$
+\concept{Egg}$(a) \land $ \concept{Chocolate} $(b) \land $
+\concept{MakeDough}$(a, b, c) \to \lnot $ \concept{Egg}$(a) \land \lnot $
+\concept{Chocolate}$(b) \land $ \concept{Dough}$(c)$
 
-The insertion of the proposition \concept{MakeOmelette}$(a, b, c)$ leads to
+The insertion of the proposition \concept{MakeDough}$(a, b, c)$ leads to
 retraction of other facts. This rule requires non-monotonic reasoning to be
 applied.
 
@@ -1098,11 +1121,12 @@ time representation.}
 \subsubsection{Presupposition Accommodation}
 \label{sect|presupposition-accommodation}
 
-\emph{Presupposition accommodation} is the ability for the system to
-automatically create a context allowing to make sense of a proposition.
+\emph{Presupposition accommodation}~\cite{VonFintel2008} is the ability for a
+system to automatically create a context allowing to make sense of a
+proposition.
 
-For instance, we can imagine a human telling a robot \emph{Please get me the
-bottle that is behind you}. If the robot has not yet see what is behind it, it
+Applied to robotics, we can imagine a human telling a robot ``Please get me the
+bottle that is behind you''. If the robot has not yet see what is behind it, it
 needs to assume (and represents in its knowledge model) that a undefined bottle
 can be found somewhere in the half of space behind it.
 
@@ -1115,57 +1139,76 @@ perceived can be seen as the converse of the grounding ability.
 
 Note also that presupposition accommodation implies a bidirectional link of the
 symbolic knowledge model with a geometric (or physical) model of the
-environment. This article focuses on symbolic knowledge representation systems,
-but we shall mention when a KRS explicitly provides support for presupposition
-accommodation.
+environment.
 
 \subsubsection{Prediction, projection, explanation}
 \label{sect|prediction-projection}
 
-Levesque~\cite{Levesque2008} distinguish two main tasks, the \emph{projection
-task} and the \emph{legality task}.
+Levesque~\cite{Levesque2008} distinguishes two main tasks related to reasoning
+on actions and consequences of actions, the \emph{projection task} and the
+\emph{legality task}.
+
+We call \emph{diagnosis} the converse of the projection task: the ability to
+track back the origin of a decision...\fxwarning{To be completed, also with
+explanation}.
+
+\begin{scriptsize}
+\begin{center}
+\begin{tikzpicture}[taxonomy]
+    \node [taxon] {\bf C.6 Prediction and Explaination}
+            child {node [taxon] {{\bf D.4} Explaination}}
+            child {node [taxon] {{\bf D.3} Diagnosis}}
+            child {node [taxon] {{\bf D.2} Legality}}
+            child {node [taxon] {{\bf D.1} Projection}};
+\end{tikzpicture}
+\end{center}
+\end{scriptsize}
+
 
 \paragraph{Projection task}: determining whether or not some condition while
-hold after a sequence of actions.
+hold after a sequence of actions. The projection task is a typical
+non-monotonic reasoning task, since at each step, the system must add but also
+retract beliefs, as defined in the tasks post-conditions.
 
 \paragraph{Legality task}: determining whether a sequence of action can be
 performed starting in some initial state.
 
 \paragraph{Diagnosis}: this corresponds to the ability to rewind on past events
 in case of failure to provide possible explanation. This can be seen as the
-temporal reverse of the projection task. Because of their modelisation of
+temporal reverse of the projection task. Because of their modelling of
 situations as an history of actions, derivatives of the GOLOG logic programming
-languages are a good example of diagnosis tasks integrated to the knowledge
+languages are a good example of the diagnosis task integrated to the knowledge
 representation system~\cite{Gspandl2011}.
 
 \paragraph{Explanation} Diagnosis is also linked to the \emph{explanation} or
 \emph{justification} capabilities that may be offered by the knowledge
 representation system. The explanation of an entailment is the sequence (or
 set of sequences if several are possible) of reasoning steps that allow to
-conclude. An explanation can also conversely explain why a statement leads to a
+reach a conclusion. An explanation can also conversely explain why a statement leads to a
 contradiction.
 
 The following example shows an explanation for an inconsistency in a particular
 knowledge base: by adding the statement \stmt{robot1 belongsTo human1}, we
 observe that an inconsistency is triggered. The reasoner provides the four
-following observations\footnote{This example uses the \emph{Manchester syntax},
-\url{http://www.w3.org/TR/owl2-manchester-syntax/}} to explain the
-inconsistency:
+following observations to explain the inconsistency:
 
 \begin{quote}
 \scriptsize
 \begin{enumerate}
-    \item \concept{myself} {\bf Type} \concept{belongsTo} {\bf some} \concept{Thing}
+    \item \concept{robot1} {\bf Type} \concept{belongsTo} {\bf some} \concept{Thing}
     \item \concept{belongsTo} {\bf Domain} \concept{Artifact}
-    \item \concept{myself} {\bf Type} \concept{Agent}
+    \item \concept{robot1} {\bf Type} \concept{Agent}
     \item {\bf DisjointClasses:} \concept{Agent}, \concept{Artifact}
 \end{enumerate}
 \normalsize
 \end{quote}
 
 This explanation directly portrays the underlying structure of the knowledge
-model. A KRS may provide mechanisms to expose this kind of analysis, either
-automatically when inconsistencies survene, or on demand.
+model: we can understand that a robot is modelled here as an agent, that agents
+and artifacts are disjoint classes and that only artifacts can belong to
+someone, hence the inconsistency. A KRS may provide mechanisms to expose this
+kind of analysis, either automatically when inconsistencies occur, or on
+demand.
 
 Explanation of contradictions plays a particular role for robots: from a
 cognitive point of view, a logical inconsistency (\ie, a contradiction) can be
@@ -1198,7 +1241,7 @@ each step, select possible, legal actions based on their pre-conditions
 
 
 Symbolic task planning in general is a large research
-field\cite{Russell2009planning}. The so-called Classical Planning Problem,
+field~\cite{Russell2009planning}. The so-called Classical Planning Problem,
 first, is characterised by a unique known initial state, durationless
 deterministic actions which can be taken only one at a time, and a single
 agent. STRIPS and PDDL are amongst the commonly used languages for representing
@@ -1229,7 +1272,7 @@ ReadyLOG}~\cite{Ferrein2008} and {\sc IndiLOG}~\ref{Gspandl2011}) propose
 implementations of the situation calculus focused on robotic applications.
 
 
-It is however common to rely on external components dedicated to symbolic task
+It is however also common to rely on external components dedicated to symbolic task
 planning (in particular because of the non-monotonicity requirements) with a
 tight link to the KRS for domain retreival and/or resulting plan storage.
 
@@ -1251,12 +1294,14 @@ dropped'', etc.). Many of the interactions with our everyday environments are
 ruled by such laws that are difficult to exhaustively encode.
 
 Some systems \cite{Kunze2011a} rely on external dedicated physics engine to
-compute symbolic facts from on-demand physics simulation. This, however,
-requires a tight integration between the symbolic model and a geometric model
-that carries the geometries and physical properties of objects.
+compute symbolic facts from on-demand physics simulation. This requires a tight
+integration between the symbolic model and a geometric model that carries the
+geometries and physical properties of objects.
 
 \subsubsection{Learning}
 \label{sect|learning}
+
+\fxfatal{Learning section to write}
 
 %%%%%%%%%%%%%%%%%
 \subsection{Acquiring Knowledge}
@@ -1275,9 +1320,6 @@ that carries the geometries and physical properties of objects.
 \subsubsection{Knowledge acquisition and modalities fusion}
 \label{sect|knowledge-acquisition}
 
-In the survey inclusion criteria, we have chosen to only consider robotic
-systems that acquire knowledge by themselves, at runtime.
-
 In our context, \emph{acquiring knowledge} means to build new logical
 statements from data sources and to anchor them into the existing knowledge. We
 consider three possible sources of data: proprioceptive/exteroceptive sensing,
@@ -1285,7 +1327,7 @@ interaction with other agents, humans or robots, and remote knowledge bases.
 The acquisition process has generally two steps: the information acquisition by
 itself, and the \emph{transformation} of the information into knowledge,
 \emph{aligned} with the robot existing model (following our terminology for
-information and knowledge, as discussed in the introduction).
+information and knowledge, as discussed at the begining of the chapter).
 
 It must be observed that knowledge acquisition is generally not done directly
 in the knowledge representation system. External components (often aggregated
@@ -1335,9 +1377,9 @@ important source of knowledge acquisition. It relies obviously on some form of
 sensing (from speech recognition to gesture recognition) but we distinguish it
 from the previous section because \emph{interaction} implies a form of
 communication. Communication is associated to specific functions
-(figure~\ref{fig|communication-model}), and in particular, it implies a shared
-\emph{context} (usually implicit) between interactors.
-
+(as shown on Jakobson's diagram, figure~\ref{fig|jakobson_communication_model},
+page~\pageref{fig|jakobson_communication_model}), and in particular, it implies
+a shared context (usually implicit) between interactors.
 
 We distinguish between two main interaction channels: verbal and deictic.
 
@@ -1355,19 +1397,17 @@ We distinguish between two main interaction channels: verbal and deictic.
 
 The field of verbal interaction processing for robots spans from pattern-based,
 constrainted sentences recognition to natural, bidirectional, unconstrained
-verbal communication. Kruijff et al. provides in~\cite{Kruijff2010} an
-up-to-date survey of literature on situated human-robot dialogue, focusing on
-formal representation systems, bi-directionality of the interaction and context
-building.
+verbal communication. A large literature corpus exists on Natural Language
+Processing (NLP) which is presented at section~\ref{sect|dialogs-related-work},
+page~\pageref{sect|dialogs-related-work}.
 
-Natural Language Processing (NLP) is a large research field by itself, and
-while the robotic community may be lagging behind on many theoretical aspects,
-it brings one important aspect: the embodiment. Because the interactors, both
-the robot and the human, are establishing a communication within a shared
-physical context, the verbal communication channel is complemented by deictic
-channels, back channels and possibly shared physical experiences: a human can
-show something to a robot, saying ``Give me this''. This is simply not possible
-for a virtual agent.
+NLP is an established research field by itself, and while the robotic community
+is still lagging behind on many theoretical aspects, it brings one important
+aspect: the embodiment. Because the interactors, both the robot and the human,
+are establishing a communication within a shared physical context, the verbal
+communication channel is complemented by deictic channels, back channels and
+possibly shared physical experiences: a human can show something to a robot,
+saying ``Give me this''. This is not possible for a virtual agent.
 
 Several of the knowledge representation systems we present have developed
 specific built-in mechanisms or extensions to parse, ground and possibly
@@ -1375,9 +1415,10 @@ rebuild natural language.
 
 Deictic (used in the literal meaning of ``display, demonstration, reference'')
 interaction is also an established field of research in human-robot
-interaction. Common deictic forms of communication include attentional focus
-(via face and gaze tracking) and joint attention, pointing, emotional
-expressions (based on face expressions, postures, emotional gestures).
+interaction. Common deictic forms of communication~\cite{Li2012} include
+attentional focus (via face and gaze tracking) and joint attention, pointing,
+emotional expressions (based on face expressions, postures, emotional
+gestures).
 
 Like other knowledge acquisition modalities, the recognition and interpretation
 of deictic communication is rarely directly included in a KRS, but, as
@@ -1387,8 +1428,8 @@ relevant and important to achieve successful multi-modal interactions.
 \paragraph{Linked Knowledge Resources}
 \label{sect|lod}
 
-Robots, and in particular service robots, can access (with sometimes some
-security-related constraints) the World Wide Web and remote knowledge stores.
+Robots, and in particular service robots, have usually an access (with possibly
+security-related constraints) to the World Wide Web and remote knowledge stores.
 
 The current shift towards the Semantic Web (\ie structured, annotated data that
 are easily machine-processable) makes increasingly easy to have robots to reuse
@@ -1400,17 +1441,16 @@ In its current state, the relevance of the DBPedia project in our context is
 however limited: the triples that are extracted are mostly ``mechanical'' (like
 the categories of a term, or factual informations extracted from Wikipedia's
 InfoBox), and the vast majority of the knowledge actually contained in the
-encyclopedia pages remains out of reach of automated parsers. Efforts like {\sc
-ReVerb}~\cite{Fader2011} work however at automatic extraction of triples by
-examining subject-verb-object relations in plain text.
+encyclopedia pages remains out of reach of automated parsers. Efforts in that
+direction however exist~\cite{Nyga2009, Fader2011}.
 
 Another notable project that seeks at providing large amount of
 machine-friendly common-sense knowledge is the MIT's OpenMind
 project~\cite{Singh2002}. The project is designed to let the general public
-easily add common-sense statements in semi-controlled natural language, that is
+easily add common-sense statements in semi-controlled natural language, which is
 then processed to a publicly available ontology.
 
-An other approach that is easier at short-term to let robots remotely access
+Another approach that is easier at short-term to let robots remotely access
 knowledge repositories consists is building robot-specific shared repositories,
 with declarative and/or procedural (\ie, plan library) knowledge. The
 RoboEarth~\cite{Waibel2011} project is an example of such an effort.
@@ -1418,8 +1458,8 @@ RoboEarth~\cite{Waibel2011} project is an example of such an effort.
 \subsubsection{Grounding/anchoring strategies}
 \label{sect|grounding}
 
-\emph{Grounding} (also called \emph{anchoring} when specifically referring to
-building links between \emph{percepts} and \emph{physical
+\emph{Grounding} (also called \emph{anchoring} when specifically referring to the
+building of links between \emph{percepts} and \emph{physical
 objects}~\cite{Coradeschi2003}) is the task consisting in building and
 maintaining a bi-directional link between sub-symbolic representations (sensors
 data, low-level actuation) and symbolic representations that can be
@@ -1438,6 +1478,8 @@ representations~\cite{Alami2011, Mavridis2006}, semantic maps
 affordance-based planing and object classification~\cite{Lorken2008,
 Varadarajan2011}.
 
+\fxwarning{Un peu court!}
+
 \begin{figure}
     \centering
     \includegraphics[width=0.9\columnwidth]{typology/semanticmaps_hertzberg.png}
@@ -1447,13 +1489,13 @@ Varadarajan2011}.
 
 \subsubsection{Intrinsic Motivation and Curiosity}
 
-The reason for a robot to acquire knowledge are various, and usually external
-to the robot itself. It is often driven by the needs of the tasks the robot has
-to execute. In this case, motivations are managed by the execution controler
-and are mostly unvisible to the knowledge representation system.
+The reasons for a robot to acquire knowledge are diverse, and usually external
+to the robot itself. It is often driven by the requirements of tasks that the
+robot has to execute. In this case, motivations are managed by the execution
+controler and are mostly unvisible to the knowledge representation system.
 
 However, motivation can also be intrinsic, driven by the internal state of the
-robot, without external pressure or reward. In this case, the 
+robot's beliefs, without external pressure or reward. In this case, the \fxwarning{to be completed}
 
 In the context of robotics, Oudeyer notes however that \emph{the information that is
 compared \emph{[to compute a level of motivation]} has to be understood in an
@@ -1518,8 +1560,9 @@ structures -> which ones?}
 
 Other systems do not fit either in such a partition between active and passive
 systems because they do not stand as independent modules but exist as diffuse,
-\emph{ubiquitous} knowledge manipulation system~\cite{Jacobsson2008}, for
-instance because they are primarily language~\cite{Ferrein2008, Sabri2011}.
+\emph{ubiquitous} knowledge manipulation system (case of the CAST knowledge
+model~\cite{Jacobsson2008}), for instance because they are primarily
+language~\cite{Ferrein2008, Sabri2011}.
 
 \subsubsection{Integration with executive layers}
 \label{sect|integration-executive-layers}
@@ -1560,16 +1603,31 @@ cognitive behaviour of the robot, is useful.
 \subsubsection{Evaluation of performances}
 \label{sect|performances}
 
-
-Benchmarks of symbolic systems for robots are hard to conduct for
-several reasons: identifying good metrics for robotic experiments in general is
+Benchmarks of symbolic systems for robots are hard to conduct for several
+reasons: identifying good metrics for robotic experiments in general is
 difficult because of the complex interactions between tenth of modules running
-in parallel, and isolating one specific component is difficult.
-Also, knowledge representation systems are often tightly coupled to
-the other modules, and the lack of standard API for knowledge services
-makes it especially hard to switch between KRS to compare them. Finally, because
-service robots are design to act in rich, dynamic environments, possibly with
-humans, building repeatable experiments is challenging.
+in parallel, and isolating one specific component is difficult.  Also,
+knowledge representation systems are often tightly coupled to the other
+modules. To quote Langley~\cite{Langley2006}:
+
+\begin{quote}
+The convential wisdom of software engineering is that one should
+develop independent modules that have mini- mal interaction. In contrast, a
+cognitive architecture offers a \emph{unified} theory of cognition with tightly
+interleaved modules that support synergistic effects.
+\end{quote}
+
+The lack of standard API for knowledge services makes it also hard to switch
+between KRS to compare them.
+
+Finally, because service robots are design to act in rich, dynamic
+environments, possibly with humans, building repeatable experiments is
+challenging, and quantitative measurements are often not the right
+metric~\cite{Langley2006}.
+
+We will however present here some quantitative metrics (related to scalability,
+for instance), followed by qualitative evaluation approaches, grouped under the
+term \emph{Cognitive Performances}.
 
 \begin{scriptsize}
 \begin{center}
@@ -1617,13 +1675,25 @@ that do not always model the whole complexity of real-world application.
 
 \paragraph{Cognitive Performances} While evaluating the raw performances of
 knowledge representation systems in a relevant manner may be difficult, the cognitive
-performances of the robot as a whole can be also evaluated through
-``classical'' tests from the psychology (like False-Belief
-experiments~\cite{Leslie2000} or the Token test~\cite{DiSimoni1978}).
+performances of the robot as a whole can be also evaluated.
 
-However, the performance evaluation of current tools is mostly qualitative and
-scenario-specific (``did my system do the job for my task?''), and amongst the
-surveyed KRS, only few systems proposes an evaluation of their performances
+Langley et al.~\cite{Langley2006} propose five such dimensions of evaluation:
+the \emph{generality} of the system (can it adapt easily to new tasks?), the
+\emph{rationality} or relevant of the inference/reasoning/decisions the system
+take, the \emph{reactivity} and \emph{persistence} that evaluates if the
+behaviour of a cognitive system is appropriate under unpredicted changes, the
+\emph{improvability} of the system as a function of the knowledge added to it,
+and finally, the resulting \emph{autonomy} of the system.
+
+Cognitive performance can also be evaluated with the support of tools developed
+in cognitive psychology. Several ``classical'' tests (like False-Belief
+experiments~\cite{Leslie2000} or the Token test~\cite{DiSimoni1978}) have been
+used to judge the cognitive abilities of robots~\cite{Mavridis2006,
+Breazeal2006}.
+
+However, the performance evaluation of current tools is still mostly system-
+and scenario-specific (``did my system do the job for my task?''), and amongst
+the surveyed KRS, only few systems proposes an evaluation of their performances
 that could be compared to other system.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%

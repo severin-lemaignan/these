@@ -97,16 +97,10 @@
 \newcommand{\stmt}[1]{{\footnotesize $\langle\stmttt#1\relax\rangle$}}
 \newcommand{\rawstmt}[1]{{\footnotesize \stmttt#1\relax}}
 \def\stmttt#1 #2 #3\relax{
-\texttt{\IfBeginWith{#1}{?}{\textbf{#1}} {#1}
-        \IfBeginWith{#2}{?}{\textbf{#2}} {\emph{#2}}
-        \ifthenelse {\equal{#3}{true} \OR \equal{#3}{false}} {\emph{#3}} {
-            \IfBeginWith{#3}{?}{\textbf{#3}} {#3}
-        }
-    }
-}
+\texttt{\IfBeginWith{#1}{?}{\textbf{#1}}{#1} \IfBeginWith{#2}{?}{\textbf{#2}}{\emph{#2}} \ifthenelse {\equal{#3}{true} \OR \equal{#3}{false}}{\emph{#3}}{\IfBeginWith{#3}{?}{\textbf{#3}} {#3}}}}
 
 \newcommand{\setstmt}[1]{{\footnotesize [\setstmttt#1\relax]}}
-\def\setstmttt#1,#2\relax{\rawstmt{#1}, \rawstmt{#2}}
+\def\setstmttt#1,#2\relax{\stmttt#1\relax, \stmttt#2\relax}
 
 % Java class/interface
 \newcommand{\jmeth}[1]{{\texttt{#1}}}
