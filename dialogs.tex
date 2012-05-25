@@ -11,63 +11,52 @@
 \subsection{Situated speech acts}
 \label{intro_example}
 
-A messy table, covered with cardboard boxes, books, video tapes... Thomas is
-moving and packs everything with the help of Jido, its robot.
+A messy kitchen table, covered with knifes, spoons, bowls... Tom is preparing
+the brownie, with Robi and Roba, its two robots.
 
-`` -- Jido, give me this'', says Thomas, looking at a box that contains a video
-tape. The robot smoothly grasps the tape, and hands it to the human.
+`` -- Robi, give me this bowl'', says Tom, looking at the table. The robot
+smoothly grasps the bowl, and hands it to the human.
 
-While this kind of interaction should hopefully sound quite familiar in a
-foreseeable future, our robots are not yet quite up to the task. Neither
-regarding natural language understanding nor plan-making and manipulation.
-
-To be combined together, those abilities require an unambiguous and shared
-representation of concepts (objects, agents, actions...) underlying the
-interaction: what are the prerequisites for such a
-human sentence --- ``Jido, give me this'' --- to be understood by the robot,
-correctly interpreted in the spatial context of the interaction, and ultimately
-transformed into an action?
+What are the prerequisites for such a human sentence --- ``Robi, give me this
+bowl'' --- to be understood by the robot, correctly interpreted in the spatial
+context of the interaction, and ultimately transformed into an action?
 
 Austin~\cite{Austin1962} would have at first glance analysed such kind of
 sentence as a \emph{speech act}, comprising of \emph{locutionary},
-\emph{illocutionary} and possibly \emph{perlocutionary} acts. First, we want to
+\emph{illocutionary} and possibly \emph{perlocutionary} acts: First, we want to
 understand the direct meaning of the sentence (\emph{locutionary act}): we must
 acquire the sentence, convert it into a useful syntactic form (quite probably
 by mean of speech recognition), and understand the semantics of the sentence,
-\ie, What is referred by ``\textit{Jido}''? What is ``\textit{give}''? What is
-``\textit{me}''? And ``\textit{this}''?
+\ie What is referred by ``\textit{Robi}''? What is ``\textit{give}''? What is
+``\textit{me}''? And ``\textit{this bowl}''?
 
 Working in a situated context, we want furthermore to \emph{resolve} these
-semantics atoms, \ie ground them in the sensory-motor space of the robot. For
+semantics atoms (\ie ground them) in the sensory-motor space of the robot. For
 instance, ``\textit{this}'' is a demonstrative pronoun that refers in this
 context to the object the human is focusing on, whatever \textit{focusing}
-means: here, Thomas is looking at something, which is a possible cue. But it
-could as well point at something or refer to some previously mentioned concept. 
+means: here, we guess Tom is looking at some bowl, which is a
+possible cue. But it could as well point at something or refer to some
+previously mentioned concept.
 
 \begin{figure}%[!ht] 
-	\centering
-	\includegraphics[width=0.9\linewidth]{images/dialogs/pt.jpg} 
-	\caption{Interacting with
-	the robot in an everyday setup: the human asks for help in vague terms, the
-	robot takes into account the human's spatial perspective to refine its
-	understanding of the question.} 
-	\label{fig|vpt} 
+    \centering
+    \includegraphics[width=0.9\linewidth]{images/dialogs/pt.jpg}
+    \caption{Asking the robot to hand over a tape on the table.}
+    \label{fig|vpt}
 \end{figure}
 
-
 Second, the \emph{illocutionary force}, \ie the \emph{intent} of the utterance
-as thought by the agent must be extracted, and understood. In our example,
-Thomas obviously wants an action to be performed by the robot. The action
+as thought by the agent must be extracted, and understood. In our example, Tom
+obviously wants an action to be performed by the robot. The action
 parametrisation is conveyed by the semantics attached to the words and the
 grammatical structures of the sentence. In our example, the type of action is
 given by the verb ``\textit{give}''. Assuming the robot has some procedural
-knowledge attached to this symbol, the action type can be considered as
-grounded for the robot. We can as well understand that the recipient of the
-action is the human, the performer is the robot itself, and the object acted
-upon is the tape. These are the basic \emph{thematic roles}~\cite{Gruber1965}
-that can be extracted from the sentence that allow to fully ground the action.
-
-\subsection{Building a symbolic model}
+knowledge (a planning domain and a planner) attached to this symbol, the action
+type can be considered as grounded for the robot. We can as well understand
+that the recipient of the action is the human, the performer is the robot
+itself, and the object acted upon is the bowl. These are the basic
+\emph{thematic roles} that can be extracted from the sentence that allow to
+fully ground the action.
 
 Extracting these speech acts and turning them into a content processable by the
 robot is a difficult challenge in the general case. We base our approach on
@@ -76,35 +65,19 @@ three distinct, inter-related cognitive functions:
 \begin{inparaenum}[\itshape 1)]
 
 \item \emph{Physical environment modelling} and \emph{spatial reasoning}
-(grouped under the term \emph{situation
-assessment})  are in charge of building and
-maintaining a coherent model of the physical world. This model is realistic in
-the sense that it relies on accurate 3D models of both manipulated objects and
-humans. It also has dedicated mechanisms to manage disappearing or occluded
-objects.  The geometric model is used to compute several spatial properties of
-the scene that actually convert the original sensory data into symbolic
-beliefs. This includes relative locations of objects, visibility state,
-gestures like pointing, etc.  Assuming that other agents are as well
-represented in the model, the same computations are applied to analyse the
-scene from each agents' point of view (\ie from their \emph{perspectives}).
-This approach is presented in depth in~\cite{Sisbot2011}.
+(grouped under the term \emph{situation assessment})  are in charge of building
+and maintaining a coherent model of the physical world. We have presented SPARK
+in the previous chapter.
 
-\item \emph{Knowledge representation and management}: the robot is endowed with
-an active knowledge base that provides a logically sound symbolic model of its
+\item \emph{Knowledge representation and management}: we have also already
+presented the ORO server in the previous chapters. It endows the robot with an
+active knowledge base that provides a logically sound symbolic model of its
 beliefs on the world, as well as models for each cognitive agent the robot
-interacts with. Each of these models is independent and logically consistent.
-This enable reasoning on different perspectives of the world that would be
-considered otherwise inconsistent (for instance, an object can be visible for
-the robot but not for the human. This object can have at the same time the
-property {\tt isVisible \textbf{true}} and {\tt isVisible \textbf{false}}, in
-two different models).  Our platform also features continuous storage, querying
-and event triggering over the pool of facts known by the robot. It relies on
-OWL ontologies (a decidable subset of the predicate logics). The knowledge base
-is presented in~\cite{Lemaignan2010}.
+interacts with.
 
 Used in combination with the situation assessment framework, the robot is thus
 able to maintain different models of the world, one per agent. This proves an
-essential feature (\cite{Roy2005, Kruijff2010}) to enable perspective-aware
+essential feature~\cite{Roy2005, Kruijff2010} to enable perspective-aware
 grounding of natural language, as we will see in next sections.
 
 \item \emph{Dialogue input processing}, including natural language parsing
@@ -115,8 +88,7 @@ inform the robot), \emph{orders} (or more generically \emph{desires}) and
 \emph{questions on declarative knowledge} (whose answers do not require
 explicit planning). This would roughly cover the \emph{representative}
 (sometimes referred as \emph{assertives}) and \emph{directives} type of
-illocutionary acts, in Searle~\cite{Searle1976} classification. This paper
-focuses on this last facet (dialogue processing).
+illocutionary acts in Searle~\cite{Searle1976} classification.
 
 \end{inparaenum}
 
@@ -124,12 +96,13 @@ focuses on this last facet (dialogue processing).
 \label{sect|dialogs-related-work}
 
 Processing natural language in situated context is already an established
-research field. In~\cite{Roy2005}, Roy summarises what he sees as the main
-challenges to be tackled: cross-modal representation systems, association of
-words with perceptual and action categories, modelling of context, figuring out
-the right granularity of models, integrating temporal modelling and planning,
-the ability to match past (learned) experiences with the current interaction
-and the ability to take into account the human perspective.
+research field. We have already mentioned Roy and Reiter~\cite{Roy2005} that
+propose cross-modal representation systems, association of words with
+perceptual and action categories, modelling of context, figuring out the right
+granularity of models, integrating temporal modelling and planning, the ability
+to match past (learned) experiences with the current interaction and the
+ability to take into account the human perspective as the main challenges of
+situated dialogue processing.
 
 Kruijff et al. provides in~\cite{Kruijff2010} an up-to-date survey of literature
 on situated human-robot dialogue, focusing on formal representation systems,
@@ -152,65 +125,56 @@ partial utterances. They validated the approach with an extensive user-study.
 
 \fxwarning{Kollar/Tellex}
 
-Compared to previous contributions, our efforts have two foci: {\it (1)}
+Several other systems, already presented at chapter~\ref{chapt|krs}, have
+tackled the challenge: the Tapas system, the GLAIR architecture, GSM or the Ke
+Jia project.
+
+Compared to these previous contributions, our efforts have two foci: {\it (1)}
 integration between language processing and perception of the environment and
-the humans, from several perspectives; and {\it (2)} realistic human-robot interactions:
-real-time processing; open speech; complex, dynamic, partially unknown human environments; fully
-embodied autonomous robots with manipulation abilities. 
+the humans, from several perspectives; and {\it (2)} realistic human-robot
+interactions: real-time processing; open speech; complex, dynamic, partially
+unknown human environments; fully embodied autonomous robots with manipulation
+abilities. 
 
-We do not claim any contribution to the field of computational linguists (see
-\cite{Kruijff2010} for a survey of formal approaches to natural language
-processing in the robotics field): our main contribution here is the grounding
-of concepts involved in the human discourse through the robot's own knowledge.
+We do not claim however any significant contribution to the field of
+theoritical computational linguists (see \cite{Kruijff2010} for a survey of
+formal approaches to natural language processing in the robotics field): our
+main contribution here is the grounding of concepts involved in the human
+discourse through the robot's own knowledge.
 
-Section~\ref{dialog} presents the overall grounding process, section~\ref{examples} 
-proposes an analysis of the processing of three prototypical sentences. 
-Experimental results are presented in section~\ref{experiment}. A 
-discussion regarding the current limitations of our system concludes
-this article.
+Section~\ref{dialog} presents the overall grounding process and
+section~\ref{examples} proposes an analysis of the processing of three
+prototypical sentences.  Experimental results are presented in the next chapter
+on the evaluation.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The Natural Language Grounding Process}
 \label{dialog}
 
-Verbal interaction with human presents two categories of challenges: syntactic
-ones, and semantic ones. The robot must be able to process and analyse the
-structure of human utterances, \ie natural language sentences, and then make
-sense of them. As stated in the introduction, we process three categories of
+As stated above, we process three categories of
 sentences: \emph{statements}, \emph{desires} and \emph{questions} that can be
 answered from the declarative knowledge present in the robot knowledge base (a
 choice similar to the \emph{Behaviour Cycle} in the GLAIR
 architecture~\cite{Shapiro2009}). In our work, the grounding process of the
 human discourse consists in extracting either the \emph{informational} content
 of the sentence to produce statements or its \emph{intentional} content (\ie
-performative value) to collect orders and questions. We do not claim any
-contribution to the field of computational linguists (see \cite{Kruijff2010}
-for a survey of formal approaches to natural language processing in the
-robotics field). Our main contribution here is the grounding (we call it
-\emph{resolution}) of concepts involved in the human discourse through the
-robot's own knowledge.
-
-We have developed a dedicated module called {\sc
-Dialogs}\footnote{\textsc{Dialogs} is an open-source project. Source code is
-available from \url{http://dialogs.openrobots.org}.} that processes human
-input in natural language, grounds the concepts in the robot's knowledge and
-eventually translates the discourse in a set of declarative OWL/RDF statements.
+performative value) to collect orders and questions.
 
 \begin{figure}[!ht]
 \centering
   \includegraphics[width=0.6\linewidth]{images/dialogs/dialog_module_simple.pdf}
-  \caption{The {\sc Dialogs} module has three main steps: the parsing,
-  the interpretation and the verbalisation. The interpretation module is
-  responsible for both the \emph{resolution} and the semantic content
-  \emph{analysis and translation}.} 
+
+  \caption{The {\sc Dialogs} module has four main steps: the parsing, the
+  resolution, the interpretation and the verbalisation.}
+
   \label{fig|dialog}
 \end{figure}
 
-As shown in Figure~\ref{fig|dialog}, the {\sc Dialogs} module is composed of
-three main blocks. The user's input is first pre-processed. For instance,
-\emph{I'm} constructs are expanded into \emph{I am} and then parsed. The parser
-is a custom-made, rule-based (\ie grammar-free) tool that extracts the
-grammatical structure from the user's sentence.
+As shown in Figure~\ref{fig|dialog}, the {\sc Dialogs} module that we have
+developed, is composed of four main blocks. The user's input is first
+pre-processed. For instance, \emph{I'm} constructs are expanded into \emph{I
+am} and then parsed. The parser is a custom-made, rule-based (\ie grammar-free)
+tool that extracts the grammatical structure from the user's sentence.
 
 Figure~\ref{dialog|parser_output} shows an example of the raw output of the
 parser for a moderately complex sentence.
@@ -238,20 +202,17 @@ Nominal groups are not grounded yet.}
 \label{dialog|parser_output}
 \end{figure}
 
-The result of the parsing is then sent to the \emph{interpretation} module, the
-core of the approach.  Interpretation consists in three distinct operations:
-the sentence \emph{resolution} (concepts grounding), the \emph{content
-analysis} (what is the intent of the utterance: information, question or
-desire) and the \emph{statement building} (translation into RDF statements).
-
-The sentence resolution has three steps: {\it(1)} pronouns and anaphora are
-replaced by, respectively, the correct speaker ID and the ID of the last object
-spoken about (extracted from the dialogue history), {\it(2)} nominal groups are
-disambiguated and grounded (noun phrase resolution), and {\it(3)} verbal groups
-are resolved as well, and their associated thematic roles are retrieved (verbal
-phrase resolution). Algorithm~\ref{algo|Resolution} describes the overall
-process.  Next section describes specific examples to show how the noun and
-verbal phrase resolution takes place.
+The result of the parsing is then sent to the \emph{resolution} module.  The
+processing can be divided again in three steps: {\it(1)} pronouns and anaphora
+are replaced by, respectively, the correct speaker ID and the ID of the last
+object spoken about (extracted from the dialogue history), {\it(2)} nominal
+groups are disambiguated and grounded (noun phrase resolution), and {\it(3)}
+verbal groups are resolved as well, and their associated thematic roles are
+retrieved (verbal phrase resolution). Algorithm~\ref{algo|Resolution} describes
+the overall process (with the subroutine \emph{GenerateDescription} presented
+in algorithm~\ref{algo|generatedescription},
+page~\pageref{algo|generatedescription}).  Next section describes specific
+examples to show how the noun and verbal phrase resolution takes place.
 
 \small
 \begin{pseudocode}[ruled]{Resolution}{sentence, currentSpeaker}
@@ -277,18 +238,108 @@ verbal phrase resolution takes place.
         \IF \CALL{Ontology.CheckEquivalent}{candidates} \THEN
           id \GETS candidates[0] \\
         \ELSE
-          id \GETS \CALL{Discrimination}{candidates} \\ %\STMTNUM{1em}{st.discrimination}\\
+          id \GETS \CALL{Discrimination}{candidates, currentSpeaker} \\ %\STMTNUM{1em}{st.discrimination}\\
       \END \\
    \CALL{Replace}{g, id, sentence}
 \END
 \end{pseudocode}
 \normalsize
 
-As represented in Figure~\ref{fig|dialog}, interpretation tightly relies on the
-communication with the knowledge base. All the concepts the robot manipulates
-are stored in the ontology server and retrieved through logical
-queries, except for the verbs that are currently stored in a dedicated library
-(the \emph{action library} in the diagram).
+The result of the resolution is then send over to the \emph{interpretation}
+module that first performs a \emph{content analysis} (what was the intent of
+the utterance: information, question or desire) and then translate the original
+sentence into RDF statements (the \emph{statement building} step).
+
+As represented in Figure~\ref{fig|dialog}, both resolution and interpretation
+tightly rely on the communication with the knowledge base. All the concepts the
+robot manipulates are stored in the ontology server and retrieved through
+logical queries, except for the verbs that are currently stored in a dedicated
+library (the \emph{action library} in the diagram).
+
+\small
+\begin{pseudocode}[ruled]{GenerateDescription}{group}
+\label{algo|generatedescription}
+
+\PROCEDURE{GenerateDescription}{group} 
+   noun \GETS \CALL{GetNoun}{group} \\ 
+   \IF \CALL{Ontology.Lookup}{noun} \in (Instances) %\STMTNUM{7.5em}{st.lookup} \THEN
+   		\BEGIN
+		id \GETS \CALL{Ontology.Lookup}{noun}\\	
+		\RETURN {\mathcal{D} + \langle *\ {\tt sameAs}\ <id> \rangle}\\
+		\END
+   \ELSE
+    	\mathcal{D} = \mathcal{D} + \langle *\ {\tt type}\ <noun>\rangle \\
+   
+   \\
+   det \GETS \CALL{GetDeterminant}{group} \\
+   \IF det \in {\mbox(possessives)} \THEN
+       \mathcal{D} = \mathcal{D} + \langle *\ {\tt isRelatedTo}\ <possessor>\rangle \\
+    
+    \IF det \in {\mbox(demonstratives)} \THEN
+        \BEGIN
+        \IF \CALL{Ontology.Check}{\langle<currentSpeaker>\ {\tt focusesOn}\ *\rangle} \THEN 
+            \mathcal{D} = \mathcal{D} + \langle<currentSpeaker>\ {\tt focusesOn}\ *\rangle
+        \ELSE
+            \mathcal{D} = \mathcal{D} + \CALL{AnaphoricMatching}{} %\STMTNUM{4em}{st.anaphoric} \\
+        \END \\
+   \\
+   adjs \GETS \CALL{GetAdjectives}{group} \\
+   \FOREACH adj \in adjs \DO
+   	\BEGIN
+   		\IF adj == ''other'' \THEN 
+   			\BEGIN
+   			id \GETS \CALL{History.GetMatchingConcept}{group} %\STMTNUM{8em}{st.history}\\
+   			\mathcal{D} = \mathcal{D} + \langle *\ {\tt differentFrom}\ <id> \rangle\\
+   			\RETURN{D}\\
+			\END   		
+   		\ELSE
+	     	\mathcal{D} = \mathcal{D} + \langle *\ {\tt hasFeature}\ <adj>\rangle %\STMTNUM{9em}{st.adj} \\
+    \END\\
+    
+   \\  
+   nounCmplts \GETS \CALL{GetNounComplements}{group} \\
+   \FOREACH cmplt \in nounCmplts \DO
+     \mathcal{D} = \mathcal{D} + {\CALL{GenerateDescription}{cmplt}}\\
+   
+   
+   \\  
+   relativeClauses \GETS \CALL{GetSubordinateRelativeClauses}{group} \\
+   \FOREACH relative \in relativeClauses \DO
+   	\BEGIN
+   	 \mathcal{G} \GETS \CALL{GetNominalGroups}{relative} \\
+   	 \FOREACH g \in \mathcal{G} \DO
+     	\mathcal{D} = \mathcal{D} + {\CALL{GenerateDescription}{g}}
+    \END\\
+     
+   \\
+   \RETURN{\mathcal{D}} 
+\ENDPROCEDURE
+\end{pseudocode}
+\normalsize
+
+\small
+\begin{pseudocode}[ruled]{History.GetMatchingConcept}{group}
+\label{algo|History}
+\PROCEDURE{History.GetMatchingConcept}{group}
+\COMMENT{Extract resolved nominal groups from sentences stored in the history}\\
+\mathcal{H} \GETS \CALL{History.GetAllPastIds}{}\\
+\COMMENT{The adjective  "other" is removed before recursively calling this routine} \\
+	\mathcal{G} \GETS \CALL{Ontology.Find}{\CALL{GenerateDescription}{group}} \\ 
+	
+	candidates \GETS \mathcal{H} \cap \mathcal{G}\\
+	\IF \left|{candidates}\right| = 0 \THEN
+    \BEGIN
+      \OUTPUT{\mbox{Couldn't find another object with the same characteristics!}} \\
+      \EXIT \\
+    \END
+   \ELSEIF \left|{candidates}\right| = 1 \THEN
+      id \GETS candidates[0]
+   \ELSE
+   	  id \GETS \CALL{Discrimination}{candidates}\\
+   \RETURN{id}
+\ENDPROCEDURE
+\end{pseudocode}
+\normalsize
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Technical analysis}
@@ -297,9 +348,9 @@ queries, except for the verbs that are currently stored in a dedicated library
 In order to better understand the overall process of the {\sc Dialogs} module
 and its relation with ORO, we next describe the different steps of the approach
 based on three examples. In these examples we assume that some initial facts
-are present in the knowledge base (section~\ref{modeling_real_world} discusses
-how the initial knowledge can be acquired), both in the robot's own model and
-in the human's model.  Since the robot tries to ground a human utterance, all
+are present in the knowledge base (either from initial common-sense knowledge
+or through run-time acquisition), both in the robot's own model and in the
+model of the human.  Since the robot tries to ground a human utterance, all
 queries are sent to the human model in order to interpret it from the human
 perspective.
 
@@ -307,6 +358,7 @@ perspective.
 \label{informational_content_extraction}
 
 \begin{figure}
+    \footnotesize
     \centering
 %	\begin{tabular}{p{0.5\columnwidth} | p{0.5\columnwidth}}}
 	\begin{tabular}{l|l}
@@ -334,6 +386,7 @@ perspective.
 
 	\hline
 	\end{tabular}
+\normalsize
 \caption{First example: content extraction.
 ``$\Rightarrow$'' represents the output of the ontology server.}
 \label{dialog|ex1}
@@ -349,108 +402,18 @@ group \emph{The yellow banana} to an already known concept
 \emph{is big} into a predicate ({\tt hasSize}) to state its semantics.
 
 
-\small
-\begin{pseudocode}[ruled]{GenerateDescription}{group}
-\label{algo|GenerateDescription}
-
-\PROCEDURE{GenerateDescription}{group} 
-   noun \GETS \CALL{GetNoun}{group} \\ 
-   \IF \CALL{Ontology.Lookup}{noun} \in (Instances) \STMTNUM{7.5em}{st.lookup} \THEN
-   		\BEGIN
-		id \GETS \CALL{Ontology.lookup}{noun}\\	
-		\RETURN {\mathcal{D} + \{ *\ {\tt sameAs}\ <id> \}}\\
-		\END
-   \ELSE
-    	\mathcal{D} = \mathcal{D} + \{ *\ {\tt type}\ <noun>\} \\
-   
-   \\
-   det \GETS \CALL{GetDeterminant}{group} \\
-   \IF det \in {\mbox(possessives)} \THEN
-       \mathcal{D} = \mathcal{D} + \{ *\ {\tt isRelatedTo}\ <possessor>\} \\
-    
-    \IF det \in {\mbox(demonstratives)} \THEN
-        \BEGIN
-        \IF \CALL{Ontology.Check}{\{<currentSpeaker>\ {\tt focusesOn}\ *\}} \THEN 
-            \mathcal{D} = \mathcal{D} + \{<currentSpeaker>\ {\tt focusesOn}\ *\}
-        \ELSE
-            \mathcal{D} = \mathcal{D} + \CALL{AnaphoricMatching}{} \STMTNUM{4em}{st.anaphoric} \\
-        \END \\
-   \\
-   adjs \GETS \CALL{GetAdjectives}{group} \\
-   \FOREACH adj \in adjs \DO
-   	\BEGIN
-   		\IF adj == <other> \THEN 
-   			\BEGIN
-   			id \GETS \CALL{History.GetMatchingGroup}{group} \STMTNUM{8em}{st.history}\\
-   			\mathcal{D} = \mathcal{D} + \{ *\ {\tt differentFrom}\ <id> \}\\
-   			\RETURN{D}\\
-			\END   		
-   		\ELSE
-	     	\mathcal{D} = \mathcal{D} + \{ *\ {\tt hasFeature}\ <adj>\} \STMTNUM{9em}{st.adj} \\
-    \END\\
-    
-   \\  
-   nounComplements \GETS \CALL{GetNounComplements}{group} \\
-   \FOREACH nouncmpl \in nounComplements \DO
-     \mathcal{D} = \mathcal{D} + {\CALL{GenerateDescription}{nouncmpl}}\\
-   
-   
-   \\  
-   relativeClauses \GETS \CALL{GetSubordinateRelativeClauses}{group} \\
-   \FOREACH relative \in relativeClauses \DO
-   	\BEGIN
-   	 \mathcal{G} \GETS \CALL{GetNominalGroups}{relative} \\
-   	 \FOREACH g \in \mathcal{G} \DO
-     	\mathcal{D} = \mathcal{D} + {\CALL{GenerateDescription}{g}}
-    \END\\
-     
-   \\
-   \RETURN{\mathcal{D}} 
-\ENDPROCEDURE
-\end{pseudocode}
-\normalsize
-
-\small
-\begin{pseudocode}[ruled]{History.GetMatchingGroup}{group}
-\label{algo|History}
-\PROCEDURE{History.GetMatchingGroup}{group}
-\COMMENT{Extract Nominal group from sentences stored in the history}\\
-\mathcal{H} \GETS \CALL{History.GetAllNominalGoup}{}\\
-\COMMENT{Generate description of the nominal group that is being processed.} \\
-\COMMENT{The adjective  "other" is to be removed before calling this routine} \\
-	\mathcal{G} \GETS \CALL{GenerateDescription}{group} \\ 
-	
-	candidates \GETS \mathcal{H} \cap \mathcal{G}\\
-	\IF \left|{candidates}\right| = 0 \THEN
-    \BEGIN
-      \OUTPUT{\mbox{Couldn't find another object with the same characteristics!}} \\
-      \EXIT \\
-    \END
-   \ELSEIF \left|{candidates}\right| = 1 \THEN
-      id \GETS candidates[0]
-   \ELSE
-   	  id \GETS \CALL{Discrimination}{candidates}\\
-   \RETURN{id}
-\ENDPROCEDURE
-\end{pseudocode}
-\normalsize
-
 To resolve the nominal group \emph{The yellow banana} a set of partial
 statements that describe the concept is generated based on the grammatical
-parsing of the sentence (algorithm~\ref{algo|Resolution}(\ref{res.desc})). The
-parsed tree of each nominal group is translated into statements based on a set
-of rules.  In the example, a banana (\stmt{?obj type Banana}) that is yellow
-(\stmt{?obj hasColor yellow})\footnote{Predicates like \concept{hasColor} or
-\concept{hasSize} that bind \concept{banana\_01} to adjectives are extracted
-from a predefined database of $[Predicate \rightarrow AdjectiveCategory]$, and
-falls back on the generic \concept{hasFeature} predicate if the adjective is
-not known.}.  Based on these partial statements a SPARQL query is sent to the
-ontology server to retrieve possible instances that match the description
-(algorithm~\ref{algo|Resolution}(\ref{res.onto})).
+parsing of the sentence (algorithm~\ref{algo|generatedescription}). The parsed
+tree of each nominal group is translated into statements based on a set of
+rules.  In the example, a banana \stmt{?obj type Banana} that is yellow
+\stmt{?obj hasColor yellow}. Based on these partial statements a SPARQL query is
+sent to the ontology server to retrieve possible instances that match the
+description (algorithm~\ref{algo|Resolution}(\ref{res.onto})).
 
 In this first simple case, the concept \concept{banana\_01} is unambiguously
-matched (since there is only one possible banana) and returned. Finally, we can
-now add the new information provided by the human, \ie the new statement
+matched (since there is only one possible banana) and returned. and we can
+add the new information provided by the human, \ie the new statement
 \stmt{banana\_01 hasSize big}, to the human model in the ontology server.
 
 The translation of \emph{yellow} to \concept{hasColor yellow} is not obvious: in
@@ -470,6 +433,7 @@ imperative mode (an order): ``Give me the banana". The process is described in
 Figure~\ref{dialog|ex2}.
 
 \begin{figure}
+\footnotesize
     \centering
 	\begin{tabular}{l|l}
 	\emph{Initial knowledge} \texttt{human\_01} &
@@ -496,6 +460,7 @@ Figure~\ref{dialog|ex2}.
     	& \stmt{sit\_a3 receivedBy human\_01} \\
 	\end{tabular}
 
+\normalsize
 \caption{Second example: processing an order.}
 \label{dialog|ex2}
 \end{figure}
@@ -508,12 +473,13 @@ order) we need to retain the semantics of the verb and its complements.
 There is no general agreement amongst linguists on a comprehensive list of
 thematic roles. The amount and the granularity of roles varies a lot in the
 literature~\cite{Gutierrez2001}. We thus use a small set of them, which matches
-the relations the robot can actually achieve (we discuss possible extensions in
-the conclusion). For instance, in the second example, the verb \emph{give} has
-three thematic roles: \concept{performedBy}, \concept{actsOnObject} and
+the relations the robot can actually make sense of (\ie that are modelled in
+the planner domain). For instance, in the second example, the verb \emph{give}
+has three thematic roles: \concept{performedBy}, \concept{actsOnObject} and
 \concept{receivedBy}.
 
 \begin{table}
+\footnotesize
 \begin{center}
 \begin{tabular}{lllll}
 \toprule
@@ -548,26 +514,27 @@ three thematic roles: \concept{performedBy}, \concept{actsOnObject} and
 \caption{Main action verbs known to {\sc Dialogs} and associated thematic
 roles. Italics denotes optional roles.}
 \label{table|thematic-roles}
+\normalsize
 \end{table}
 
 The list of actions the robot can plan for (currently \emph{take},
 \emph{place}, \emph{give}, \emph{show}, \emph{hide} and \emph{move}) along with
-possible synonyms (for example, \emph{to pick} and \emph{to take} are set as synonyms of \emph{to
-get}) and their associated thematic roles are stored in a predefined library
-of actions (table~\ref{table|thematic-roles} and figure~\ref{fig|dialog}).
-For each action we identify and store: the role of the subject in
-the sentence (always \concept{performedBy}); the role of the direct object (for
-instance, \concept{actsOnObject}); and the role of each of the indirect objects
-with their optional prepositions (for instance,
+possible synonyms (for example, \emph{to pick} and \emph{to take} are set as
+synonyms of \emph{to get}) and their associated thematic roles are stored in a
+predefined library of actions (table~\ref{table|thematic-roles} and
+figure~\ref{fig|dialog}).  For each action we identify and store: the role of
+the subject in the sentence (always \concept{performedBy}); the role of the
+direct object (for instance, \concept{actsOnObject}); and the role of each of
+the indirect objects with their optional prepositions (for instance,
 \concept{receivedBy})\footnote{Note that in example 2, ``give me the banana'',
 the pronoun ``me'' appears before ``banana'', while it is an indirect
-complement --- ``give it {\bf to me}''. The parser correctly handles these
-cases.}. Moreover, through the ontology we check that each holder of a role is
-semantically consistent. For instance, the action \emph{Give} must have a
-manipulable physical item (\concept{Artifact}) as direct object. Thus, if the
-concept the robot finds for the thematic role \concept{actsOnObject} cannot be
-inferred to be an artifact, the robot goes back to the human saying it does not
-understand.
+complement --- ``give it {\bf to me}''. The parser handles these cases, and
+correctly identify ``me'' as an indirect complement.}. Moreover, we rely on the
+ontology to check that each holder of a role is semantically consistent. For
+instance, the action \emph{Give} must have a manipulable physical item
+(\concept{Artifact}) as direct object. Thus, if the concept the robot finds for
+the thematic role \concept{actsOnObject} cannot be inferred to be an artifact,
+the robot goes back to the human saying it does not understand.
 
 This second example  also shows the pronoun reference resolution: ``me'' is
 replaced by the id of the current speaker, while ``you'' is replaced by
@@ -585,6 +552,7 @@ then decide whether to execute the order or not.
 \label{dialogs:disamb}
 \begin{figure}
     \centering
+    \footnotesize
 	\begin{tabular}{p{7cm}}
 	\emph{Initial knowledge model of} \texttt{human\_01}\\
 	\hline
@@ -663,16 +631,17 @@ then decide whether to execute the order or not.
 
 \caption{Ambiguity resolution: in this example, ``banana'' can refer to the
 yellow banana (\concept{banana\_01}) or the green one (\concept{banana\_02}).
-Discrimination routines handle the disambiguation process.} \label{dialog|ex3}
+Discrimination routines handle the disambiguation process.}
+
+\label{dialog|ex3}
 \end{figure}
 
-This last example (Figure~\ref{dialog|ex3}) shows the resolution of ambiguous
+This last example (figure~\ref{dialog|ex3}) shows the resolution of ambiguous
 concepts. In this case the user refers to ``the banana'' while two instances of
 the \concept{Banana} class exist in the ontology. The robot needs to find out
 to which instance the user is actually referring to. To this end,
-disambiguation routines
-(algorithm~\ref{algo|Resolution}(\ref{st.discrimination})~\cite{Ros2010b}
-\fxwarning{add a link to appropriate section} find differences between the
+disambiguation routines (algorithm~\ref{algo|clarify}, page~\pageref{algo|clarify})
+find differences between the
 instances (in the example, one banana is yellow while the other one is green)
 and build a sentence through the \emph{verbalisation} module to ask the user a
 closed question that will help clarify the ambiguity: ``Is it yellow or
@@ -681,9 +650,8 @@ resulting, augmented, sentence (``The green banana is good") goes again through
 all the interpretation steps. This process is repeated until no ambiguities
 arise.  In the example, the \concept{banana\_02} is finally returned.
 
-If no differences \fxfatal{should we say 'in the human model', even if 
-getDiscriminantForAgent currently doesn't work?} can be found, an open question 
-(``give me more information'') is send to the human.
+If no differences can be found, an open question (``give me more information'')
+is send to the human.
 
 Several other strategies are used in parallel to disambiguate concepts without
 having to ask for more information to the human:
@@ -718,5 +686,24 @@ the \emph{verbalisation} module, and uttered to the human.
 
 
 The next chapter (page~\pageref{chapter|evaluation}) presents several
-experiments that make intensive use of the {\tt Dialogs} module.
+experiments that make use of the {\tt Dialogs} module.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\recap
+
+This chapter presented the {\tt Dialogs} module, a custom Python application
+that parse a subset of the English language and semantically ground it into the
+robot's symbolic knowledge.
+
+The main algorithms have been introduced, and three examples have illustrated
+how affirmative sentences are converted into new assertions and how orders are
+analysed with the help of thematic roles.
+
+The processing of ambiguous sentences has also been presented with several
+disambiguation strategies that take into account the interactors perspectives.
+
+Moving slowly towards the conclusion, the next chapter introduce several paths
+of evaluation, first from a more theoretical perspective, then through several
+experimental results.
 
