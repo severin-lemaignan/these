@@ -27,7 +27,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -43,18 +43,18 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:window-width="1280"
-     inkscape:window-height="972"
+     inkscape:window-height="997"
      id="namedview478"
      showgrid="false"
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:zoom="0.97269043"
-     inkscape:cx="193.47921"
-     inkscape:cy="224.80323"
-     inkscape:window-x="0"
-     inkscape:window-y="24"
+     inkscape:zoom="2.751184"
+     inkscape:cx="186.29237"
+     inkscape:cy="94.036867"
+     inkscape:window-x="1280"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="g4514" />
   <g
@@ -510,6 +510,42 @@
          y="-328.875"
          x="336.46722"
          id="text3307">yellow</text>
+      <text
+         id="text3053"
+         x="179.46935"
+         y="-405.21878"
+         style="font-size:10.32384491px;text-anchor:middle;font-family:Ubuntu">
+        <tspan
+           id="tspan3055"
+           style="font-style:italic;font-weight:bold">type</tspan>
+      </text>
+      <text
+         id="text3057"
+         x="298.39996"
+         y="-405.21878"
+         style="font-size:10.32384491px;text-anchor:middle;font-family:Ubuntu">
+        <tspan
+           id="tspan3059"
+           style="font-style:italic;font-weight:bold">type</tspan>
+      </text>
+      <text
+         id="text3061"
+         x="345.79773"
+         y="-405.21878"
+         style="font-size:10.32384491px;text-anchor:middle;font-family:Ubuntu">
+        <tspan
+           id="tspan3063"
+           style="font-style:italic;font-weight:bold">type</tspan>
+      </text>
+      <text
+         id="text3065"
+         x="384.76279"
+         y="-405.21878"
+         style="font-size:10.32384491px;text-anchor:middle;font-family:Ubuntu">
+        <tspan
+           id="tspan3067"
+           style="font-style:italic;font-weight:bold">type</tspan>
+      </text>
     </g>
   </g>
 </svg>

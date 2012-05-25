@@ -490,6 +490,22 @@ Zolin~\cite{ZolinDLComplexityNavigator} maintains a ``complexity navigator''
 that allows to conveniently explore these relationships and indexes most of the
 literature on that subject.
 
+It can be noted that the relation between expressiveness and reasoning
+complexity is fragile: for instance, adding the following axiom \stmt{farFrom
+disjointProperty near} (that states that two individuals can not be at the
+same time near and far from each other) changes the expressiveness power of
+the ORO Common-Sense ontology (presented at chapter~\ref{chapt|oroserver}
+from $\mathcal{SHOIQ(D)}$ to $\mathcal{SROIQ(D)}$: this seemingly innocuous
+assertion change the complexity class of the whole ontology, and the concept
+satisfiability reasoning problem switches from a {\it NExpTime-complete}
+problem to a {\it NExpTime-hard} problem (\ie, \emph{at least} as hard as the
+hardest problem in {\it NExpTime}).
+
+This ``instability'' has practical consequences on run-time performances on
+the robot because a light alteration of the knowledge structure can lead to
+very noticeable performance drops.
+
+
 \subsubsection{Open World and Close World Assumptions}
 \label{sect|owa-cwa}
 
@@ -651,6 +667,7 @@ storage of these facts in different models, one per agent.
 relations. Wikipedia?}
 
 \paragraph{Representation of time}
+\label{sect|time-representation}
 
 As an agent acting at human-like time scale and dealing with temporal concepts
 (like actions), a robot needs to represent and reason about
@@ -920,6 +937,7 @@ human-like memory organization.
 
 
 \subsubsection{Standard reasoning techniques}
+\label{sect|std-reasoning}
 
 We call \emph{standard reasoning techniques} techniques based on logical
 inference, using resolution algorithms like \emph{forward chaining},
