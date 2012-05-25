@@ -1,4 +1,4 @@
-\chapter{Implementation and Integration in Robots}
+\chapter{Implementation and Integration on Robots}
 \label{chapt|implementation-integration}
 
 \section{A centralised server-based implementation}
@@ -28,11 +28,9 @@ reasoning.
 The ORO server is written in Java 6. This choice is due to widespread use of
 the Java language in the semantic Web community that leads to the fact that
 most of the RDF/OWL API and reasoners are available as Java libraries. As
-mentioned previously, the ORO server relies on the Jena API for OWL
+mentioned previously, the ORO server relies on the Open Jena API for OWL
 manipulation and on the Pellet reasoner for all reasoning tasks. Java was thus
 the best candidate to glue them in a robotic-friendly knowledge base.
-Section~\ref{sect|java-impl} below gives more details on the Java
-implementation of the server.
 
 \subsection{Front-end}
 \label{sect|frontend}
@@ -45,44 +43,31 @@ dedicated robotic middlewares like ROS or YARP is provided by dedicated
 external clients. Section~\ref{sect|interfacing-middlewares} briefly presents
 them.
 
-
-\begin{SaveVerbatim}[frame=single, commandchars=\\\{\}]{PostPrtcl}
-\emph{method}
-\emph{[parameter1]}
-\emph{[parameter2]}
-\emph{[parameter n]}
-#end#
-\end{SaveVerbatim}
-
-\begin{SaveVerbatim}[frame=single, commandchars=\\\{\}]{OkPrtcl}
-ok
-\emph{[return value]}
-#end#
-\end{SaveVerbatim}
-
-\begin{SaveVerbatim}[frame=single, commandchars=\\\{\}]{ErrorPrtcl}
-error
-\emph{[exception name]}
-\emph{[human-readable error]}
-#end#
-\end{SaveVerbatim}
-
-\begin{SaveVerbatim}[frame=single, commandchars=\\\{\}]{EventPrtcl}
-event
-\emph{event id}
-#end#
-\end{SaveVerbatim}
-
 \begin{figure}
 \centering
 
-\subfigure[Client requests]{
-\BUseVerbatim{PostPrtcl}
+\subtable[Client requests]{
+    \begin{tabular}{p{3cm}|p{3cm}|p{3cm}}
+    & {\tt \emph{method name}
+    \emph{[parameter 1]}
+    \emph{[parameter 2]}
+    \emph{[parameter n]}
+    \#end\#} & \\
+    \end{tabular}
 } \\
-\subfigure[Server answers]{
-\BUseVerbatim{OkPrtcl}
-\BUseVerbatim{ErrorPrtcl}
-\BUseVerbatim{EventPrtcl}
+\subtable[Server answers]{
+    \begin{tabular}{|p{3.5cm}|p{5cm}|p{2.5cm}|}
+    {\tt ok \par
+    \emph{[return value]}
+    \#end\#} &
+    {\tt error \par
+    \emph{[exception name]}
+    \emph{[human-readable error]}
+    \#end\#} &
+    {\tt event \par
+    \emph{event id}
+    \#end\#} \\
+    \end{tabular}
 }
 
 \caption{The ORO server protocol. Elements in square brackets are optional.
@@ -92,6 +77,7 @@ to client requests while the {\tt event} message is produced asynchronously.}
 \label{fig|oro-protocol}
 
 \end{figure}
+
 
 When a request is received by the front-end, it is parsed, deserialised and
 dispatched to the module providing the requested service.
@@ -107,28 +93,29 @@ knowledge management. For instance, the \jclass{MemoryModule} is in charge of
 the application of the memory policies. It discards old statements depending on
 the memory class they belong to (short term memory, long term memory, etc.).
 
-Regular modules' services (that are actual Java methods) are invoked by the
+Regular services (\ie that are actual Java methods) are invoked by the
 front-end.  They process the request and interact with the knowledge pool via
 the back-end interface.
 
 \paragraph{Plugins} The server can be easily extended by the mean of
 \emph{plugins}. These are JAR files that are loaded at run-time and have access
 to the exact same internal APIs as regular modules like the event module or the
-categorization module. The creation of new plugins is documented in a tutorial
-available
+categorization module. ORO co;es with a tool that ease the creation of new
+plugins by generating customisable templates. The process is documented in a
+tutorial available
 on-line\footnote{\url{http://www.openrobots.org/wiki/oro-server-plugins}}.
 
 \subsection{Back-end}
 \label{sect|backend}
 
-The back-end consists in a pair \emph{\{facts storage, reasoner\}}. For ORO,
-we make the choice to rely the open-source {\sc Jena} library to store and
+The back-end consists in a pair \emph{\{triples store, reasoner\}}. For ORO,
+we make the choice to rely the open-source {\sc Open Jena} library to store and
 access the RDF graph, in combination with the {\sc Pellet} reasoner. However,
-due to clean separation, other APIs (like the {\sc Manchester OWL-API} and
+due to clean separation, other APIs (like the {\sc Manchester OWL-API}) and
 reasoners (like {\sc Fact++} or {\sc HermiT}) could be used with little changes
-in the back-end.
+in the back-end API.
 
-\subsubsection{Jena}
+\subsubsection{Open Jena}
 \label{sect|jena}
 
 {\sc Jena}~\cite{McBride2002} is a mature library for the semantic Web,
@@ -142,13 +129,13 @@ As stated on its official website\footnote{{\sc Jena} website:
     \item an API for reading, processing and writing RDF data in XML, N-triples
     and Turtle formats;
     \item an ontology API for handling OWL and RDFS ontologies;
-    \item a rule-based inference engine for reasoning with RDF and OWL data
+    \item its own rule-based inference engine for reasoning with RDF and OWL data
     sources;
     \item stores to allow large numbers of RDF triples to be efficiently stored
     on disk;
-    \item a query engine compliant with the latest SPARQL specification
+    \item a query engine compliant with the SPARQL specification
     \item servers to allow RDF data to be published to other applications using
-    a variety of protocols, including SPARQL
+    a variety of protocols, including SPARQL.
 \end{itemize}
 
 \subsubsection{Pellet}
@@ -159,18 +146,16 @@ Clark\&Parsia\footnote{{\sc Pellet} website:
 \url{http://clarkparsia.com/pellet}}.
 
 Pellet supports reasoning with the full expressiveness of OWL-DL
-($\mathcal{SHOIN(D)}$ in Description Logic jargon) and has been extended to
-support the forthcoming OWL 2 specification ($\mathcal{SROIQ(D)}$).
+($\mathcal{SHOIN(D)}$) and OWL 2 ($\mathcal{SROIQ(D)}$).
 
 Pellet provides all the standard inference services that are traditionally
 provided by DL reasoners: consistency checking, concept satisfiability,
-classification and realisation (the most specific classes that an individual
-belongs to). It also supports DL-safe SWRL rule.
-
-\fxwarning{Rephrase this copy-paste from pellet website}
+classification (computation of all the classes the instances belong to) and
+realisation (the most specific classes that a specific individual belongs to).
+It also supports DL-safe SWRL rule.
 
 The use of a reasoner is completely transparent for the modules: the reasoner
-is automatically called when a model changes and classifies it. Thus, queries
+is automatically called when a model changes to classify it. Thus, queries
 to the knowledge models always access both the \emph{asserted} and
 \emph{inferred} sets of statements. As a consequence, the ORO server can be run
 with no reasoner without any visible API change for the modules. They will
@@ -179,17 +164,17 @@ simply manipulate only asserted facts.
 \subsection{API}
 
 As of version 0.8, the ORO server API exposes about 50 methods (some of them
-are besides polymorphic) organised into seven categories: \emph{Base}, \emph{Agents},
-\emph{Administration}, \emph{Concept comparison}, \emph{Events}, \emph{Queries}
-and \emph{Taxonomy walking}.
+are besides polymorphic) organised into seven categories: \emph{Base},
+\emph{Agents}, \emph{Administration}, \emph{Concept comparison}, \emph{Events},
+\emph{Queries} and \emph{Taxonomy walking}.
 
-Partial support for the \emph{Knowledge API} (section~\ref{sect|kb-api}) has
-been added to ORO server 0.8: the newly introduced {\tt revise} method that
-takes a \emph{revision policy} as parameter is a versatile and generic
+Partial support for the \emph{Knowledge API} (section~\ref{sect|knowledge-api})
+has also been added to ORO server 0.8: the newly introduced {\tt revise} method
+that takes a \emph{revision policy} as parameter is a versatile and generic
 mechanism that deprecates {\it de-facto} several methods currently exposed by
-the API. In future releases, the API could in consequence be shortened.
+the API.
 
-The current API is provided in appendix~\ref{chapt|oro-api}.
+The details of the current API is provided in appendix~\ref{chapt|oro-api}.
 
 \subsection{Notes on the Java implementation}
 \label{sect|java-impl}
@@ -211,14 +196,17 @@ instantiate one front-end (\jinterface{IConnector}), one main back-end
 including plugins that are loaded at run-time.
 
 Modules usually also implement the \jinterface{IServiceProvider} interface to
-expose \emph{services} (\jinterface{IService}). These are the actual methods found
-in the server API. Java methods that belongs to the API simply need to be
+expose \emph{services} (\jinterface{IService}). These are the actual methods
+found in the server API. Java methods that belongs to the API simply need to be
 decorated with a \jinterface{@RPCMethod} Java annotation to be automatically
-exposed. Extending the server API is thus simply a matter of annotating any
-Java method with \jinterface{@RPCMethod}. Listing~\ref{code|oro-add} shows one
-example of a service annotated in such a way, the {\tt add} method. This method
-convert a set of strings representing triples into \jinterface{IStatements}, 
-and add them to the triple store with the back-end method \jmeth{oro.add}.
+exposed. Extending the server API is thus simply a matter of annotating almost
+any Java method\footnote{The only constraint being the input and output
+datatypes: currently, primitive types, simple collections and objects with
+explicit serialisation/deserialisation methods are supported.} with
+\jinterface{@RPCMethod}. Listing~\ref{code|oro-add} shows one example of a
+service annotated in such a way, the {\tt add} method. This method convert a
+set of strings representing triples into \jinterface{IStatements}, and add them
+to the triple store with the back-end method \jmeth{oro.add}.
 
 \lstset{language=java}
 \begin{lstlisting}[caption=The {\tt add} method from ORO {\tt BaseModule}, 
@@ -251,32 +239,32 @@ also re-export a large part of the services exposed by the \jclass{BaseModule}
 versions.
 
 This design issue (duplication of certain basic services) is due to the
-historical development of ther ORO server, and must be improved in future
+historical development of the ORO server, and should be improved in future
 versions.
 
 %%%%%%%%%%%%%%%%%
 \section{Bindings to other languages and components}
 \label{sect|interfacing}
 
-To ensure the integration of ORO server in existing robotic architectures, we
+To ensure the integration of the ORO server in existing robotic architectures, we
 have developed several idiomatic language-specific bindings, as well as bridges
 with two widespread robotic middlewares, ROS and YARP.
 
 \subsection{Language bindings}
 \label{sect|bindings}
 
-The main interaction gate with ORO server is its socket interface (as presented
-above, at section~\ref{sect|frontend}). Sockets are light-weight, platform
-independent, and supported by every programming languages.  Developing an
-interface with ORO server in a new language is thus easy.
+The main interaction gate with the ORO server is its socket interface (as
+presented above, at section~\ref{sect|frontend}). Sockets are light-weight,
+platform independent, and supported by every programming languages.  Developing
+an interface with ORO server in a new language is hence relatively easy.
 
 For our own needs, and because they are amongst the most widely used languages,
 bindings for Python and C++ are available by default with ORO server.
 
 The complete Python and C++ API will not be presented here (their
-documentations are available on-line,
-\footnote{\url{http://www.openrobots.org/wiki/oro-server-bindings}}), but we
-present two short example that demonstrate how the knowledge base can be
+documentations are available
+on-line\footnote{\url{http://www.openrobots.org/wiki/oro-server-bindings}}),
+but we present two short example that demonstrate how the knowledge base can be
 integrated in code in a natural way.
 
 \subsubsection{Python}
@@ -291,13 +279,13 @@ the interaction mechanisms with ORO server: model alteration, queries and events
                    label = code|ex-python,
                    morekeywords={as}]
 import time
-from pyoro import Oro, OroServerError
+import pyoro
 
-def onevent(evt):
+def onEvent(evt):
         print("God save the queen! " + evt + " killed Bond!")
 
 try:
-        oro = Oro()
+        oro = pyoro.Oro()
 
         oro += ["Spy rdfs:subClassOf Human", 
                 "bond rdf:type Spy", 
@@ -311,12 +299,13 @@ try:
         for ag in oro["* rdf:type Agent"]:
             print("Agent " + ag + " is here.")
 
-        oro.subscribe(["?a kills bond"], onevent)
+        oro.subscribe(["?a kills bond"], onEvent)
         oro += "pr2 kills bond"
 
         time.sleep(1)
+        # the event should have been triggered
 
-except OroServerError as ose:
+except pyoro.OroServerError as ose:
         print('Oups! An error occured!')
         print(ose)
 
@@ -336,9 +325,9 @@ removing) triples from the ontology is done naturally with the {\tt +=} and
 At line 14, we check that a fact holds, either in the asserted model or in the
 inferred model (in this case, Bond is inferred to be a human because we added
 before that spies are types of humans). Here as well we use a natural idiomatic
-Python syntax.
+Python syntax that creates and executes a SPARQL query behind the scenes.
 
-Line 19 shows how queries can be executed, with a dictionary-like accessor.
+Line 19 shows another way to execute queries, with a dictionary-like accessor.
 Both humans and robots are asserted to be agents in the ORO common-sense
 ontology, thus this query returns a list {\tt [bond, pr2]}.
 
@@ -363,7 +352,7 @@ listing~\ref{code|ex-cpp} presents some examples of its usage.
 #include <set>
 
 #include "liboro/oro.h"
-#include "liboro/oro_library.h"
+#include "liboro/oro_library.h" // static library of ORO concepts
 #include "liboro/socket_connector.h"
 
 using namespace std;
@@ -371,13 +360,13 @@ using namespace oro;
 
 class EventCallback : public OroEventObserver {
     void operator()(const OroEvent& evt) {
-    cout << "Event triggered!" << endl;
+        cout << "Event triggered!" << endl;
     }
 };
   
 int main(void) {
-  set<Concept> result;
   set<string> partial_stmts;
+  set<Concept> result;
   
   SocketConnector connector("localhost", "6969");
   Ontology *oro = Ontology::createWithConnector(connector);
@@ -401,9 +390,9 @@ int main(void) {
   Object table = Object::create(Classes::Table);
 
   Object unknown_object = Object::create();
-  unknown_object.assertThat(Properties::isOnTopOf, table);
+  unknown_object.assertThat(Properties::isOn, table);
   
-  oro->add(Statement("oro:isOnTopOf rdfs:subClassOf oro:isAt"));
+  oro->add(Statement("oro:isOn rdfs:subClassOf oro:isAt"));
   
   Agent myself("myself");
   
@@ -413,7 +402,7 @@ int main(void) {
   //A query involving multiple partial statements
   partial_stmts.insert("?mysterious isAt ?support");
   partial_stmts.insert("?support rdf:type cyc:Table");
-  partial_stmts.insert("oro:myself sees ?mysterious");
+  partial_stmts.insert("myself sees ?mysterious");
   
   oro->find("mysterious", partial_stmts, result);
   
@@ -453,7 +442,7 @@ At line 26 and 27, we create two new instances of agents labeled \emph{Nice
 Robot} and \emph{Young PhD} (the static types {\tt Classes::Robot} and {\tt
 Classes::Human} are generated from the ontology itself by a script).
 
-A first, simple query (line 30 and 31) return a {\tt std::set} of concept IDs.
+A first simple query (line 30 and 31) return a {\tt std::set} of concept IDs.
 
 At line 41, a new object is created. No label is defined, but the
 class is set to be a table. On the contrary, at line 43, we create a generic
@@ -468,12 +457,14 @@ the knowledge base.
 
 C++ objects can also be created by using directly the concept IDs, as shown
 line 48 for the special concept {\tt myself} (an instance always representing
-the robot itself). Some object properties frequently used in the ontology are
+the robot itself).
+
+Some object properties frequently used in the ontology are
 available as methods, as seen lines 50 and 51.
 
 Lines 54 to 58 show a more complex query, involving several partial statements.
 Named variables (like {\tt ?mysterious} or {\tt support}) are used in the
-statements to reference the same entity.
+statements to reference the same entities.
 
 Lastly, lines 65 to 80 show two ways of defining events with a callback functor
 (defined at lines 12-16).
@@ -488,11 +479,11 @@ large amount of symbolic facts.
 
 While convenient in certain cases, language-level interfaces do not usually
 offer the modularity and loose-coupling required by complex robotic
-architectures where tenth of modules, possibly spread over several CPUs, need
-to talk together. The acknowledgement of this issue has led to the development
-over the last ten years of numerous so-called \emph{robotic middlewares} that
-abstract away inter-module communication (at the transports, protocols and
-programming interfaces levels).
+architectures where tenth of modules, possibly spread over several computers,
+need to talk together. The acknowledgement of this issue has led to the
+development over the last ten years of numerous so-called \emph{robotic
+middlewares} that abstract away inter-module communication (at the transports,
+protocols and programming interfaces levels).
 
 We provide with ORO server wrappers for two of the main middlewares currently
 in use in the robotic community, ROS~\cite{Quigley2009} and
@@ -505,9 +496,9 @@ the features of ORO server as a stand-alone ROS/YARP nodes.
 \section{Monitoring and Debugging}
 \label{sect|monitoring}
 
-\subsection{Logging}
+\subsection{Logging and Debugging Tools}
 
-The ORO server offers several levels of logging, from ``almost silent'' to very
+The ORO server offers several levels of logging, from almost silent to very
 verbose. In verbose mode ({\tt debug} level), the server outputs exact incoming
 requests, along with millisecond accurate timestamps.
 
@@ -531,7 +522,10 @@ logical steps that led to the inconsistency.
     \subfigure{}{
         \includegraphics[width=0.5\columnwidth]{implementation/oroview2.png}
         }
-    \caption{Two screenshots of the {\tt oro-view} visualisation tool.}
+
+    \caption{Two screenshots of the {\tt oro-view} visualisation tool. On the
+    left one, an \concept{ActiveConcept} (in yellow) is visible.}
+
     \label{fig|oroview}
 \end{figure}
 
@@ -540,17 +534,17 @@ complex graph structure. In order to present anyway the content of the ontology
 to external observers, we have developed an OpenGL-based dynamic visualiser
 called {\tt oro-view} (figure~\ref{fig|oroview}). This application connects to
 the ORO server and lets the user explore the taxonomy by simply selecting
-concepts on the screen. Nodes are expanded, distributed in a force-oriented
-graph, and further reveal the structure of the ontology. Because {\tt oro-view}
+concepts on the screen. Nodes are then expanded, distributed in a force-directed
+layout, and further reveal the structure of the ontology. Because {\tt oro-view}
 takes on-demand its input from the server, changes in the ontology (new facts
 being added, etc.) are reflected in the viewer when the user refreshes nodes.
 
 {\tt oro-view} also subscribes at start-up to a special event for \emph{active
-concepts} (\ie it monitors new instances of the \concept{ActiveConcept} class).
+concepts} (it monitors new instances of the \concept{ActiveConcept} class).
 Each time an individual is asserted to be an \concept{ActiveConcept}, the
 server triggers back {\tt oro-view} that creates a visual focus on the concept
 (the individual ``pops up''). When displayed during experiments, this provides
-nice-looking visual feedback to external observers. In particular, we made use
+visual feedback to external observers. In particular, we made use
 of this feedback during the public performance of the \emph{Roboscopie} theatre
 play (section~\ref{sect|roboscopie}).
 
@@ -562,91 +556,112 @@ reuse of the ontology graph in publications.
 
 \begin{figure*}[thpb]
   \centering
-  \includegraphics[width=0.9\columnwidth]{integration/architecture_overview.pdf}
-  \caption {Software architecture for a service robot interacting with humans.}
+  \includegraphics[width=\columnwidth]{integration/architecture_overview.pdf}
+
+  \caption {Software architecture of PR2 and Jido, two service robot
+  interacting with humans at LAAS-CNRS.}
+
   \label{fig|archi}
 \end{figure*}
 
-Figure~\ref{fig|archi} presents the organisation of the ``cognitive'' layer of
-the service robots Jido and PR2 as currently in service at LAAS (this
-architecture is described in detail in~\cite{Alami2011}). The sensori-motor
-layer (bottom) is abstracted in SPARK, an intermediate amodal 3D model where
-geometric (and some temporal) reasoning take place~\cite{Sisbot2011}.
+Figure~\ref{fig|archi} presents the organisation of the upper software layer
+(the ``decisional'' or ``cognitive'' layer) of the service robots Jido and PR2
+as currently in service at LAAS (this architecture is described in detail
+in~\cite{Alami2011}). The sensori-motor layer (bottom) is abstracted in SPARK,
+an intermediate amodal 3D model where geometric (and some temporal) reasoning
+take place.
 
 The outcome of the geometric analysis, as well as the result of the dialogue
-processing module ({\sc Dialogs}, are stored in ORO, that acts as a central
-knowledge base. The symbolic knowledge base triggers events that are captured
-by a top-level execution controller (for instance, SHARY~\cite{Warnier2012}).
+processing module ({\sc Dialogs}), are stored in ORO, that plays the role of as
+a central knowledge hub. The symbolic knowledge base triggers events that are
+captured by a top-level execution controller.
 
-The controller can rely on two specialised planners: MHP, the geometric motion
-and manipulation planner~\cite{Sisbot2008, Mainprice2011, Pandey2010} and HATP,
-the symbolic task planner~\cite{Alili2009}.
+In our architecture, the controller can rely on two specialised planners: MHP,
+a geometric motion and manipulation planner~\cite{Sisbot2008, Mainprice2011,
+Pandey2010} and HATP, a symbolic task planner~\cite{Alili2009}.
 
 The dialogue processing module, as well as the symbolic task planner, also use
 the knowledge base to answer questions or initialise the planning domain.
 
-During a typical interaction experiment, the execution controller decides upon
-a plan to execute, requires a plan from the task planner, allocates the actions
-to the human and the robot, communicates the shared plan, and controls and
-monitors its execution. The operation continues until the goal is achieved, is
-declared unachievable or is abandoned by the human.
+During a typical interaction experiment (such an experiment is describe at
+chapter~\ref{chapt|evaluation}), the execution controller decides upon a goal
+to reach, requires a plan from the task planner, allocates the actions to the
+human and the robot, communicates the shared plan to the human, and controls
+and monitors its execution. The operation continues until the goal is achieved,
+is declared unachievable or is abandoned by the human.
 
-Only ORO and Dialogs, as components, are actual direct outcomes of this
-doctoral work. It is however important to present them all here since a
-knowledge base only make sense within a larger architecture, with knowledge
-providers and consumers.  Furthermore, the approach to knowledge management
-introduced by this thesis had a strong influence on the design of the
-communication flows between all these components. Thus, this section introduces
-the software components that have been used in conjunction with ORO (mostly,
-but not only, on the LAAS robots), and details how these components produce,
-exchange and consume symbolic knowledge.
+In this architecture, only ORO and Dialogs (the dialogue processing module that
+we present in the next chapter), as components, are the actual direct outcomes
+of this doctoral work. It is however important to present the other one all
+here as well since a knowledge base only make sense within a larger
+architecture, with knowledge providers and consumers.  Furthermore, the
+approach to knowledge management introduced by this thesis had a strong
+influence on the design of the communication flows between all these
+components. Thus, this section introduces the software components that have
+been used in conjunction with ORO (mostly, but not only, on the LAAS robots),
+and details how these components produce, exchange and consume symbolic
+knowledge.
 
 \subsection{Acquiring and Anchoring Knowledge in the physical world: the SPARK module}
 \label{sect|spark}
 
-\subsubsection{Building an Agent-Aware Symbolic Model of the Environment}
-\label{sect|situ}
-
 Anchoring perceptions in a symbolic model requires perception abilities and
 their symbolic interpretation. In this section we present SPARK (\emph{SPAtial
 Reasoning \& Knowledge}~\cite{Sisbot2011}), a situation assessment reasoner
-that generates relevant symbolic information from the geometry of the
-environment with respect to relations between objects, robots and humans.
+that generates symbolic knowledge from the geometry of the environment with
+respect to relations between objects, robots and humans, also taking into
+account the different perspective that each agent has on the environment.
+
+SPARK can be seen as an amodal geometric model of the environment that serves
+both as basis for the fusion of the perception modalities and as bridge with
+the symbolic layer.
+
+Figure~\ref{fig|spark} shows a screenshot of the SPARK environment side-by-side
+with the real environment. In this example, objects are
+identified and localised through 2D barcodes. The human pose is tracked with
+a Kinect-like device (assisted by motion capture to accurately track the
+head motion, which is required to compute what the human is looking at).
+
+The geometric model is continuously updated at run-time by the robot.
+
+\subsubsection{Building an Agent-Aware Symbolic Model of the Environment}
+\label{sect|situ}
 
 \paragraph{On Perspective Taking} Visual perspective taking refers to the
 ability for visually perceiving the environment from other's point of view.
-This ability allows us to identify the referent in situations when the visual
-perception for one person differs from the other one. In developmental
+This ability allows us to identify the objects in situations where the visual
+perception of one person differs from the other one. In developmental
 psychology, one typical example consists of two similar objects in a room (\eg.
-two balls) where both are visible for the child, but only one is  visible for
+two balls) where both are visible for the child, but only one is visible for
 the adult. Thus, when the adult asks the child to hand over ``the ball'', the
 child is able to correctly identify which ball the adult is referring to (\ie
-the visible one from the adult point of view), without asking~\cite{Moll2006}.
+the one visible from the adult point of view), without asking~\cite{Moll2006}.
 
 Besides, in order to compute a visual perspective, the actual visibility alone
-is not enough. We believe that visual perspective taking ability is not
-restricted to what the other person is seeing in a given moment, but also what
-he \emph{can} see with a minimal effort (moving the eyes or the head). To model
-the potential visibility of an object we compute the visibility ratio while
-turning the head of the agent model towards the object
-(figure~\ref{fig::sparkRepresentations}).
+is not enough. We include not only what the other person sees in a given
+moment, but also what he \emph{can} see with a minimal effort (moving the eyes
+or the head). To model the potential visibility of an object we compute a
+visibility ratio while turning the head of the agent model towards the object
+(figure~\ref{fig::sparkRepresentations},
+page~\pageref{fig::sparkRepresentations}).
 
 Spatial perspective taking refers to the qualitative spatial location of
-objects (or agents) with respect to a frame (\eg the keys on my left).  Based
-on the frame of reference, the description of an object varies. Humans mix
-perspectives frequently during interaction.  This is more effective than
-maintaining a consistent one, either because the (cognitive) cost of switching
-is lower than remaining with the same perspective, or if the cost is about the
-same, because the spatial situation may be easily described from one
-perspective rather than another~\cite{Tversky1999}. Ambiguities arise when one
-speaker refers to an object within a reference system (or changes the reference
-system, \ie, switches perspective) without informing her partner about
-it~\cite{Breazeal2006, Ros2010}. For example, the speaker could ask for the
-``keys on the left''. Since no reference system has been given, the listener
-would not know where exactly to look.  However, asking for ``the keys on your
-left'' gives enough information to the listener to understand where the speaker
-is referring to. On the contrary, when using an exact, unambiguous term of
-reference to describe a location (\eg. ``go north'') no ambiguity arises.
+objects (or agents) with respect to a frame (\eg \emph{the keys on my left}).
+Based on this frame of reference, the description of an object
+varies~\cite{Marin2008}. Humans mix perspectives frequently during interaction.
+This is more effective than maintaining a consistent one, either because the
+(cognitive) cost of switching is lower than remaining with the same
+perspective, or if the cost is about the same, because the spatial situation
+may be more easily described from one perspective rather than
+another~\cite{Tversky1999}. Ambiguities arise when one speaker refers to an
+object within a reference system (or changes the reference system, \ie switches
+perspective) without informing his/her partner about it~\cite{Breazeal2006,
+Ros2010}. For example, the speaker could ask for the ``keys on the left''.
+Since no reference system has been given, the listener would not know where
+exactly to look.  However, asking for ``the keys on your left'' gives enough
+information to the listener to understand where the speaker is referring to. On
+the contrary, when using an exact, unambiguous term of reference to describe a
+location (\eg. ``go north'') no ambiguity arises.
 
 In this work, we use two types of the frames of reference: egocentric (from the
 robot perspective) and addressee-centred (from the human perspective).
@@ -671,27 +686,19 @@ robot perspective) and addressee-centred (from the human perspective).
 
 \end{figure}
 
-Figure~\ref{fig|spark} shows a screenshot of the SPARK environment side-by-side
-with the real environment: as mentioned in the introduction, objects are
-identified and localised through 2D barcodes. The human pose is tracked with
-a Microsoft Kinect device (assisted by motion capture to accurately track the
-head motion, which is required to compute what the human is looking at).
-
-This geometric model is continuously updated at run-time by the robot.
-
 \paragraph{Symbolic locations}
 
 Human commonly refer to the positions of objects with symbolic descriptors
-(like \emph{on}, \emph{next to}...) instead of precise, numeric position. These
-type of descriptors have been studied in the context of language grounding
-(\cite{O'Keefe1999,Matuszek2010,Regier2001,Kelleher2006,Blisard2005}). In this
-work we focus agent-independent symbolic locations and agent-dependent,
+(like \emph{on}, \emph{next to}...) instead of precise, absolute positions.
+These type of descriptors have been studied in the context of language
+grounding \cite{O'Keefe1999,Matuszek2010,Regier2001,Kelleher2006,Blisard2005}.
+In SPARK we focus agent-independent symbolic locations and agent-dependent,
 relative locations.
 
 \paragraph{Agent-independent locations}
 
 We can refer to object locations with respect to other objects in the
-environment, such as \emph{above, next to, in}, etc. In this work we compute
+environment, such as \emph{above, next to, in}, etc. SPARK computes
 three main relations based on the bounding box and centre of mass of the
 objects (fig.~\ref{fig|sprelations}): 
 
@@ -724,8 +731,8 @@ objects (fig.~\ref{fig|sprelations}):
 To ensure the different agent models are up-to-date, all these properties are
 always computed on-line, each time the current state of the world changes.
 
-Table~\ref{facts|sprelations} lists all the symbolic relationships that are
-currently computed by the system.
+Table~\ref{facts|sprelations} lists all the symbolic placement relationships
+that are currently computed by the system.
 
 \begin{table}[h]
     \centering
@@ -760,22 +767,13 @@ While in previous section we listed several \emph{absolute} location predicate,
 many topological relations are directly dependent from the observation point.
 
 The predicate \concept{hasRelativePosition} represents spatial locations
-between agents and objects that are agent dependent.  For example we say ``it
-is on my right, on your left, ...'' We compute these spatial locations by
-dividing the space around the referent (an agent) into $n$ regions based on
-arbitrary angle values relative to the referent orientation.  For example, for
-$n = 4$ we would have the space divided into \emph{front, left, right} and
-\emph{back}. Additionally, two proximity values, \emph{near} and \emph{far},
-may also be considered. The number of regions and proximity values can be
-chosen depending on the context where the interaction takes place.
-
-
-To build an agent-dependent model of the world, \emph{Perspective
-Taking}~\cite{Marin2008} is employed by the reasoner to provide
-the robot with the ability to put itself at the human's place (by moving a
-camera in the geometric model) and to reason about the world from different
-perspectives.
-
+between agents and objects that are agent dependent.  We compute these spatial
+locations by dividing the space around the referent (an agent) into $n$ regions
+based on arbitrary angle values relative to the referent orientation.  For
+example, for $n = 4$ we would have the space divided into \emph{front, left,
+right} and \emph{back}. Additionally, two proximity values, \emph{near} and
+\emph{far}, are also considered. The number of regions and proximity values can
+be chosen depending on the context where the interaction takes place.
 
 Through perspective taking, SPARK computes for each agent a symbolic
 description of the relative positioning of objects in the environment (table
@@ -804,34 +802,24 @@ description of the relative positioning of objects in the environment (table
 \label{sect|grounding_agents}
 
 Building a grounded symbolic model of the physical environment does not suffice
-in general to fully ground the human-robot interaction.
-
-We divide the process of building models for agents into two categories:
-operations related to the assessment of the current situation (for instance,
-\emph{What does the human do? What does he see?}), and operations related to
-the estimation of potential actions (for instance, \emph{Which regions could
-the human reach if I want to hand over an object?}). We call these
-potentialities of action \emph{Mightabilities}.
-
-\paragraph{Agent Capabilities}
+in general to fully ground the human-robot interaction, and a model of the
+current capabilities of the agents surrounding the robot is also required.
 
 There are a number of common properties for a robot and a human related to
 their capabilities in a given situation: they can both reach, grasp, look at,
 point at, etc.: we group them in the \emph{Agent} category, defined as entities
 that can act in the environment and manipulate it.
 
-In this work we focus on the following capabilities from each agent's
-perspective:
+SPARK computes the following capabilities from the perspectives of each agent:
 
 \begin{itemize}
 
 \item \emph{Sees}: An important ability to know about an agent is to predict
-\emph{What can it see?}, \ie what is within its field of view (FOV). A robot being
-able to compute this information can then act accordingly. An example would be
-a clarification scenario where the human is searching for an object and the
-robot is able to infer that he/she is looking for the one that is not visible
-(otherwise the user would not be searching for it).  In
-Figure~\ref{fig::sparkRepresentations}\emph{a} the field of view of a person is
+\emph{What can it see?}, \ie what is within its field of view (FOV). Being able
+to compute this information, the robot can reuse it for instance to infers
+which object a human is searching for (the one that is not currently visible,
+otherwise the user would not be searching for it).  In
+figure~\ref{fig::sparkRepresentations}\emph{a} the field of view of a person is
 illustrated with a grey cone (broader one). While he is able to see the two
 small boxes on the table in front of him, the big box on his right is out of
 his FOV, and therefore, he is not able to see it. 
@@ -852,8 +840,10 @@ outcome of the evaluation will result only in one relation, \ie \stmt{agent\_01
 pointsAt object\_01} since the small one is not visible to the agent.  On the
 contrary, if the small object is in front of the big one, then both objects
 will satisfy the relation, which may generate an ambiguity (which object the
-agent refers to?) that should be solved through higher level reasoning (\eg
-context analysis or clarification through verbal interaction).
+agent refers to?) that is let to be solved by other discrimination algorithms.
+
+To make recognition more robust, these three first capabilities are filtered
+with an hysteresis function at the geometric level.
 
 \item \emph{Reachable}: it allows the robot to estimate the agent's capability
 to reach an object, which is fundamental for task planning. For example, if the
@@ -867,16 +857,17 @@ the teddy bear is reachable, while the bottle is not.
 \end{itemize}
 
 \begin{figure*}[!t]
-	\begin{center}
-	\subfigure[]{
-		\includegraphics[width=0.4\linewidth]{spark/looks.jpg} 
-	}
-	\subfigure[]{
-		\includegraphics[width=0.35\linewidth]{spark/reach.jpg}
-	} 
-	\caption{(a) Field of view (FOV) and the field of attention (FOA) of the human. (b) Different reaching postures for the human.}
-	\label{fig::sparkRepresentations}
-	\end{center}
+    \begin{center}
+    \subfigure[]{
+        \includegraphics[width=0.4\linewidth]{spark/looks.jpg} 
+    }
+    \subfigure[]{
+        \includegraphics[width=0.35\linewidth]{spark/reach.jpg}
+    }
+    \caption{(a) Field of view (FOV) and the field of attention (FOA) of the
+    human. (b) Different reaching postures for the human.}
+    \label{fig::sparkRepresentations}
+    \end{center}
 \end{figure*} 
 
 
@@ -908,7 +899,7 @@ during the agent capabilities analysis phase.
 
 	\caption{List of facts describing the attentional state and the abilities
 	of an agent. \concept{looksAt} is interpreted as an object \emph{being in
-	the field of attention} of an agent. An object is \concept{see}n if it is
+	the field of attention} of an agent. An object is seen if it is
 	visible for the agent without moving the head (\ie, in \emph{field of
 	view}).}
 
@@ -940,14 +931,14 @@ produced and maintained by SPARK related to the general state of the agent.
 
 \subsection{Symbolic Task Planning}
 
-Complex human robot interaction may necessitate a strong reasoning about the
-environment and the capabilities of involved agents: How can they achieve a
-specific goal? What are the required actions to achieve this goal? Which
-actions can be performed by each agent? etc.
+Complex human robot interaction also requires reasoning about the actions the
+agent can perform: How can they achieve a specific goal? What are the required
+actions to achieve this goal? Which actions can be performed by each agent?
+etc.
 
 In the previous sections, we have seen how symbolic knowledge is produced and
 stored from the real physical world. In this section, we present one possible
-way to use these symbolic models of the environment and interacting agents to
+way to use these symbolic models of the environment and the interacting agents to
 produce a plan of actions for a complex goal.
 
 \begin{figure}
@@ -960,26 +951,28 @@ produce a plan of actions for a complex goal.
 
 In order to devise how a given goal can be accomplished, the robot has to
 elaborate a plan,\ie a set of actions to be achieved by the robot and its human
-partners.  This is the role of HATP~\cite{Alili2009} (for Human Aware Task
-Planner, figure~\ref{fig|hatp_console}).  HATP is based on a Hierarchical Task
-Network (HTN) refinement, which performs an iterative task decomposition into
-sub-tasks until reaching atomic actions~\cite{Nau2003}.  The planning domain
-defines a set of methods describing how to decompose a task and can be seen as
-the {\it how-to} knowledge of the robot.  HATP is able to produce plans for the
-robot's actions as well as for the other participants (humans or robots). It
-can be tuned by setting up different costs depending on the actions to apply
-and by taking into account a set of constraints called social rules. This
+partners.  We use in our architecture the HATP planner~\cite{Alili2009} (for
+Human Aware Task Planner, figure~\ref{fig|hatp_console}).  HATP is based on a
+Hierarchical Task Network (HTN) refinement, which performs an iterative task
+decomposition into sub-tasks until reaching atomic actions~\cite{Nau2003}.  The
+planning domain defines a set of methods describing how to decompose a task and
+can be seen as the procedural knowledge of the robot (note that this knowledge
+in stored in the own resources of the planner, not in ORO).  HATP is able to
+produce plans for the robot's actions as well as for the other agents. It can
+be tuned by setting up different costs depending on the actions to apply and by
+taking into account a set of constraints called \emph{social rules}. This
 tuning aims at adapting the robot's behaviour according to the desired level of
 cooperation of the robot.
 
 \paragraph{Agents and action streams} The robot plans not only for itself but
-also for the other agents. The resulting plan, called ``shared plan'' is a set
-of actions that form a stream for each agent involved in the goal achievement.
-Depending on the context, some ``shared plans'' contain causal relations
-between the agents. For example, the second agent needs to wait for the success
-of the first agent's action to be able to start its own action. When the plan
-is performed, causal links induce synchronisation between agents.
-Figure~\ref{plan_hatp1} illustrates a plan with two streams.
+also for the other agents. The planning domain of each agent is instantiated
+from the agent-specific model in the ORO server. The resulting plan, called
+``shared plan'' is a set of actions that form a stream for each agent involved
+in the goal achievement.  Depending on the context, some ``shared plans''
+contain causal relations between the agents. For example, the second agent
+needs to wait for the success of the first agent's action to be able to start
+its own action. When the plan is performed, causal links induce synchronisation
+between agents.  Figure~\ref{plan_hatp1} illustrates a plan with two streams.
 
 \begin{figure}[htbp]
   \centering
@@ -1008,7 +1001,7 @@ deal with:
     \item effort balancing: to adjust the work effort of the agents;
 
     \item wasted time: used to avoid long delays between the actions of the
-    human partner;
+    human partner (figure~\ref{plan_hatp2});
 
     \item intricate links: to limit dependencies between the actions of two or
     more agents.
@@ -1018,14 +1011,9 @@ deal with:
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.8\columnwidth]{integration/hatp_plan2.pdf}
-  \caption{A plan with the wasted time social rule}
+  \caption{Same plan with minimised wasted time.}
   \label{plan_hatp2}
 \end{figure}
-
-Figure~\ref{plan_hatp2} illustrates an alternative plan to the previous one
-(fig.~\ref{plan_hatp1}) if the wasted time social rule is used.  The obtained
-shared plan is the best plan according to a global evaluation of these multiple
-criteria.
 
 \paragraph{Several levels of cooperation} By tuning its costs and adapting its
 social rules, HATP can be used to compute various alternative plans. These
@@ -1054,13 +1042,14 @@ details regarding the integration knowledge base/controller.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.4\columnwidth]{integration/rad.png}
+    \includegraphics[width=0.3\columnwidth]{integration/rad.png}
 
-    \caption{The CSLU Toolkit allows to program behaviours by building a
-    network of connected ``boxes''.}
+    \caption{Example of graphical script produced with the CSLU Toolkit.
+    Behaviours are programmed by building a network of connected ``boxes''.}
 
     \label{fig|rad}
 \end{figure}
+
 The CSLU Toolkit is a rapid application development framework developed at
 Oregon University. It comprise of a suite of tools that enable exploration,
 learning, and research into speech and human-computer interaction via a user
@@ -1082,14 +1071,13 @@ its reasoning infrastructure to add and retrieve concepts.
 RPL-derived framework for rapid development of cognitive robot control programs
 that is developed at the Intelligent Autonomous Systems at TU Munich.
 
+The integration of ORO is seen as an extension to the robot's belief state that
+not only contains abstract identifiers of the internal object representation
+used in plans, but also the semantics and roles of objects in the scenario.
+
 {\sc Cram} automatically updates the ORO server whenever an object enters or
 leaves the field of view with a perception stack based on the \textsc{CoP}
 framework~\cite{Klank2009}.
-
-Therefore, the integration of ORO can be seen as an extension to
-the robot's belief state that not only contains abstract identifiers
-of the internal object representation used in plans, but also the
-semantics and roles of objects in the scenario.
 
 The \emph{Odd One Out} experiment (section~\ref{expe|odd_one_out}) relies on
 {\sc Cram} for the robot control.
@@ -1110,7 +1098,7 @@ the outcome of actions. This allows to partially expose the internal state of
 the execution controller, and enhancing the introspective capabilities of the
 system.
 
-Finally SHARY can also directly interacts with situation assessement and
+Finally SHARY can also directly interacts with situation assessment and
 geometric layers (like the SPARK module), which indirectly influences the ORO
 content. For instance, SHARY can create or delete position hypotheses for
 currently unperceived objects, which in turn are converted into ({\it
@@ -1119,29 +1107,26 @@ de-facto}) hypothetical symbolic beliefs in the knowledge base.
 Section~\ref{sect|expe3} presents an experiment that demonstrates the
 integration between SHARY and ORO.
 
-\paragraph{pyRobots} \label{sect|pyrobots} {\tt pyRobots}
-is not a real execution controller: it comprise a set of
-Python scripts that ease the construction of complex
-scripted interaction. {\tt pyRobots} is based on
-\emph{actions} (high-level tasks like {\tt goto}, {\tt
-pick} or {\tt give}\footnote{The complete list, with
-    documentation, is available online:
-\url{http://www.openrobots.org/wiki/wiki/pyrobots}.})
-that are combined into plans.
+\paragraph{pyRobots} \label{sect|pyrobots} {\tt pyRobots} is not a real
+execution controller: it comprise of a set of Python scripts that ease the
+construction of complex scripted interaction. {\tt pyRobots} is based on
+\emph{actions} (high-level tasks like {\tt goto}, {\tt pick} or {\tt
+give}\footnote{The complete list is available online:
+\url{http://www.openrobots.org/wiki/pyrobots}.}) that are combined into plans.
 
 ORO server is integrated in {\tt pyRobots} via the ORO Python bindings
-(presented section~\ref{sect|python-bindings}). The currently performed action
-is maintained up-to-date in the server, and actions are free to store or
-retrieve facts (for instance, the {\tt pick} task add the fact \stmt{myself
-hasIn{Right|Left}Hand x}, \concept{x} being replaced by the ID of the object
-that is taken.
+(presented at section~\ref{sect|python-bindings}). The action that is currently
+performed, is maintained up-to-date in the server, and actions are free to
+store or retrieve facts (for instance, the {\tt pick} task add the fact
+\stmt{myself hasIn{Right|Left}Hand x}, \concept{x} being replaced by the ID of
+the object that is taken.
 
 Events can also be used by the application designer.
 
 
 \subsection{Integration with natural language processors}
 
-Figure~\ref{fig|dialog-integration} gives a functional overview of the
+Figure~\ref{fig|dialog-integration} gives a functional overview of
 components involved in the situated dialogue grounding.
 
 \begin{figure}
@@ -1169,8 +1154,32 @@ base that we mentioned in the previous paragraph.
 
 Studying the integration of natural language grounding with a symbolic
 knowledge base is one of the focus of the thesis, and the next chapter is
-entierly dedicated to {\sc Dialogs}, a component for situated natural language
+entirely dedicated to {\sc Dialogs}, a component for situated natural language
 processing, and its integration with ORO.
 
 %%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%
+
+\recap
+
+This concludes the chapter~\ref{chapt|implementation-integration}. In this
+chapter, we have first developed some technical and implementation-related
+details, including the software architecture of the ORO server, examples of
+integration with the Python and C++ API, and an overview of the visualisation
+and debugging tools.
+
+The chapter then focused on the actual integration of ORO server in existing
+robotic architecture. We have first presented the software architecture of the
+decisional layer of service robots at LAAS. We have introduced the SPARK module
+for geometric reasoning and symbolic situation assessment and underline its
+perspective taking capabilities.
+
+We have finally presented briefly HATP, a symbolic task planner for human-robot
+cooperative task planning that takes advantage of the ORO server for planning
+initialisation, and mentioned four control environment that have been used with
+ORO.
+
+The next chapter is now dedicated to one specific application of the knowledge
+base: situated natural language grounding.
+
 
