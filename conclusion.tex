@@ -28,18 +28,20 @@ concept may (or may not) be \textit{a priori} available to the robot as a
 pre-loaded ontology (what we previously called the cultural background of the
 robot).
 
-Note also that perception issues have been solved in our experiments by using a tag-based object identification
-method. In section~\ref{informational_content_extraction} we give an example
-where the human says ``the yellow banana is big''. It is assumed in the example
-that the robot already knows about a banana instance that is yellow. In our
-experiments, this kind of knowledge was either hard coded in scenario-specific
-ontologies (\eg \stmt{banana\_01 type Banana} where \concept{banana\_01}
-is the id of the banana's tag) or taught to the robot with prescriptive
-sentences like ``Learn that this is a banana'' while pointing at the banana's
-tag. It would be interesting to extend this approach with automatic classifiers
-(for colour, size, etc.). If the robot later discovers a yellowish and large
-object, an utterance like ``the yellow banana is big'' could be used to assert
-that this object is a banana.  A similar approach focused on the combination of visual perception and communication modalities to achieve visual learning has been 
+Note also that perception issues have been solved in our experiments by using a
+tag-based object identification method. In
+section~\ref{informational_content_extraction} we give an example where the
+human says ``the yellow banana is big''. It is assumed in the example that the
+robot already knows about a banana instance that is yellow. In our experiments,
+this kind of knowledge was either hard coded in scenario-specific ontologies
+(\eg \stmt{banana\_01 type Banana} where \concept{banana\_01} is the id of the
+banana's tag) or taught to the robot with prescriptive sentences like ``Learn
+that this is a banana'' while pointing at the banana's tag. It would be
+interesting to extend this approach with automatic classifiers (for colour,
+size, etc.). If the robot later discovers a yellowish and large object, an
+utterance like ``the yellow banana is big'' could be used to assert that this
+object is a banana.  A similar approach focused on the combination of visual
+perception and communication modalities to achieve visual learning has been
 developed by~\cite{Vrecko2009}.
 
 While the examples we develop are all based on symbols that have a physical
@@ -63,17 +65,16 @@ to~\cite{Jain2009}.
 
 \subsubsection{On Thematic Roles and Action Models}
 
-The current implementation relies on a small, predefined set of action verbs that can
-be recognized from natural language (section~\ref{processing_of_actions}).
-This constraint does not come from the resolution algorithm itself, but
-rather from the difficulty to automatically extract the thematic roles associated
-to a verb. 
-This could be improved by linking a symbolic task
-planner to the \textsc{Dialogs} module to dynamically provide the list of
-actions that the robot can process, \ie actions for which the robot can produce
-a plan. Additionally, we could exploit on-line resources like
-\textsc{VerbNet}~\cite{Kipper2008}, which provides a large machine-processable
-lexicon of English verbs along with their thematic roles.
+The current implementation relies on a small, predefined set of action verbs
+that can be recognized from natural language
+(section~\ref{processing_of_actions}).  This constraint does not come from the
+resolution algorithm itself, but rather from the difficulty to automatically
+extract the thematic roles associated to a verb.  This could be improved by
+linking a symbolic task planner to the \textsc{Dialogs} module to dynamically
+provide the list of actions that the robot can process, \ie actions for which
+the robot can produce a plan. Additionally, we could exploit on-line resources
+like \textsc{VerbNet}~\cite{Kipper2008}, which provides a large
+machine-processable lexicon of English verbs along with their thematic roles.
 
 \subsection{Knowledge and Embodiement}
 
@@ -86,9 +87,9 @@ context.
 Sloman, in~\cite{Sloman2009}, argues however that the strong focus on
 embodiment in the robotics community has hindered progress towards natural
 human-robot interaction. Our approach has hopefully made clear that, similar to
-Beetz et al.~\cite{Beetz2010}, we do not consider embodiment \emph{per se} outside of
-a broader symbolic system, \ie our architecture is not bound to the morphology or
-the low-level sensori-motor capabilities of a specific agent. 
+Beetz et al.~\cite{Beetz2010}, we do not consider embodiment \emph{per se}
+outside of a broader symbolic system, \ie our architecture is not bound to the
+morphology or the low-level sensori-motor capabilities of a specific agent. 
 
 However, we can build a model of the ``human point of view'' because the robot
 perceives the human, and is able to estimate, at least partially, what the
@@ -140,9 +141,6 @@ for human-robot dialogue with our current approach:
 	trying to develop even further towards psychology-inspired experiments.
 
 \end{itemize}
-
-\subsection{Learning}
-\label{sect|discussion-learning}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -269,10 +267,107 @@ domain/range constraints, etc.) encode a large amount of common-sense.
 \label{sect|perspectives}
 
 
-One store, multiple facets: per agent, per memory model, per period of time... <-> microtheories
+Before writing down the final mark of the thesis, we would like to feed the
+reflexion on the future of knowledge and knowledge representation for robots
+(service/companion robots in particular, because they are the ones with the
+most obvious need of symbolic knowledge for living in complex, interactive,
+semantically rich environment, but this also applies to robots in general).
 
-Cf Autonoetic consciousness
+One of the directions that seems both critical and under-studied in our
+community is what we can call \emph{context management} in a broad sense.
+Managing context means at least two things: recognising contexts and
+representing contexts.
 
-Reasoning/consistency requirements only within these facets
+Depending on what context we talk about, recognizing contexts can be relatively
+easy (who is talking to me? where am I?) to difficult (what past experience
+does my interactor implicitly refers to? etc.). One of the main problem we see
+with context identification is that it is a fundamentally \emph{multi-scales}
+system: at every point, several temporal, spatial, social, cultural context
+co-exist and overlap.
 
--> much better temporal resolution by also working on unclassified models
+This lead to the second aspect, context representation. Techniques for
+representation of overlapping pools of knowledge remain to be developed, as
+well as efficient algorithms to retrieve (or discard) such context-related
+pools of knowledge.
+
+The ability to explicitly manage contexts and context switches would endow the
+robot with a cognitive capability similar to what is known as
+\emph{context-dependent memory} in cognitive psychology. This is also related to
+Tulving's \emph{autonoetic consciousness}~\cite{Tulving1985a}: the ability to
+reflect upon its own past or future experiences.
+
+From a technical standpoint, proper context management would mean a transition
+from a monolithic knowledge base to an more modular architecture, with either
+multiple (overlapping) models or \emph{facets} (one per agent, one per place,
+one per period of time, etc.), or maybe a systematic use of reification to
+attach to each \emph{atom} of knowledge (the atom is usually the statement. It
+could maybe be extended to a small set of cohesive statements) one or several
+contexts. The development of modal logic for practical application is also an
+important direction to examine.
+
+Much remain to be done to this regards, starting with a formal analysis of what
+are the relevant contexts for our robots.
+
+\par
+
+Proper management of inconsistent knowledge is another point that seems of
+particular interest. Inconsistencies are mostly considered today as errors
+(modeling issues, perception errors, wrong interpretations of communication, etc.)
+that prevent at best further reasoning, at worst the use of the knowledge base.
+
+However, from a cognitive point of view, logical inconsistencies are a very
+valuable source of knowledge by themselves. We have previously evoked the role
+of cognitive dissonances as an intrinsic motivation factor for knowledge
+acquisition. This can be generalised to many sources of inconsistencies:
+detection of faulty perception and setup of alternative perception strategies,
+start of interactions with other agents to fix a wrong model, etc.
+
+Technical handling of inconsistencies also require to better develop
+applications of techniques like default logics to robotics.
+
+\par
+
+The systematic study of the relations between symbolic and geometric models are
+another large field open to research. While (discrete) symbolic models are
+mostly seen as abstractions of a (continuous) geometric model, this link does
+not need to be unidirectional. Presupposition accommodation is an example of
+{\it a priori} symbolic knowledge that may alter a geometric model. Many more
+of these bidirectional relations remain to be identified.
+
+One overlooked aspect of these links between symbolic and geometric realms is
+the temporal reasoning resolution: one of the challenging task for a robot
+interacting with human relates to action recognition and prediction. While mid-
+to longterm action recognition is a well studied field (\cite{Ghallab1996,
+Johnson2005, Tenorth2011}, early and fine grained action recognition (like
+gesture initiation, back-channel communication -- nodding, social gaze, ... --,
+etc.) that are important for smooth interaction, requires geometric reasoning
+at relatively high temporal resolution that operates within a symbolic context.
+Viewed from a slightly different perspective, better temporal resolution in the
+knowledge stack could lead the way to programming paradigms that are both
+massively event-oriented and semantically grounded.
+
+\par
+
+And maybe our final point, the knowledge-oriented architectures that are being
+build in many robotic research lab around the world have a very specific
+characteristic compared to the efforts of other research communities working on
+the question of knowledge within systems, be it humans, like in cognitive
+psychology, network of computers, like in the semantic web community, or in
+other systems: robots are embodied computers. They act and interact in the
+physical world, and the physical world plays a key role as a communication
+support. At the same time, they are computers, with unlimited access to remote
+sources of knowledge via the Web, either as static database, or through
+exchanges with other robots.
+
+This dual essence, both as embodied organism and disembodied agent, places the
+robot at the crossing of two fundamental approaches to knowledge management:
+either physically and experientially grounded, central, internal to the agent,
+or on the contrary ungrounded, distributed, pervasive. The robot is currently
+the only entity that can merge and take advantage of both. The research efforts
+in these directions have started, foundations have been laid (by relying on
+standard ontologies to bridge the perception and the symbolic models), much
+more remains to be explored.
+
+
+
+
