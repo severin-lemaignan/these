@@ -1,88 +1,30 @@
 \chapter{Evaluation}
 \label{chapt|evaluation}
 
-The evaluation of our work is split in two main sections: first, a formal
-feature comparison with other knowledge representation systems (as presented at
-section~\ref{sect|surveyed-systems}), then a detailed presentation of several
-experimental evaluations that have been conducted during the thesis preparation.
+The evaluation of our work is split in two main sections. First, a formal
+summary and analysis of the features of knowledge representation systems that
+we have presented at section~\ref{sect|surveyed-systems}. We will especially
+underline in this first part of the evaluation the strengths and weaknesses of
+the ORO framework.
+
+Then, we will provide a detailed presentation of the case-studies and
+experimental evaluations that have been conducted during the four years of the
+thesis preparation.
 
 \fxwarning{Do not forget to actually *evaluate* the experiments!}
 
 This two evaluation facets will naturally lead to the conclusion at the next
-chapter, where we will draw scientific and technical perspectives that take
-into account strengths and weaknesses of our contribution.
+chapter, where we will draw scientific and technical perspectives for knowledge
+representation in robotics systems.
 
 %%%%%%%%%%%%%%%%%
-\section{Limits of {\tt oro-server}}
-\label{sect|limits-oroserver}
-
-\subsection{The left-overs: What ORO does not provide?}
-
-\subsubsection{Representation of time}
-
-In the ORO server, knowledge is mostly atemporal: the set of triples stored in
-the server represents the beliefs of the robot \emph{at the current time}. The
-robot represents knowledge about the \emph{here and now}.
-
-One exception previously mentioned: when a statement is attached to a memory
-profile that is not permanent, the statement is reified and the creation
-timestamp is attached to the statement, thus enabling removal after a period of
-time that depends on the memory profile.
-
-Statement reification to store timestamps of creation for all statements is
-technically very easy to do in ORO server, but has not been actually enabled
-because the performance hit (each reified statement produces four triples
-instead of one) was not justified by any current use case of ORO server.
-
-\subsubsection{Representation of uncertainty and likelihood}
-
-The challenge of representing and reasoning under uncertainty has not been
-tackled in ORO server, at least not \emph{within} the current ORO server
-knowledge model. Two reasons explain this absence: the decisional architecture
-developed at LAAS for the robots has not consistent approach to uncertainty
-representation and management, neither at the \emph{symbol production} level
-(\ie SPARK, section~\ref{sect|spark} or {\sc Dialogs},
-section~\ref{sect|dialogs}) or at the symbol comsumption level (execution
-control). Thus, no strong incentive pushed us in this direction. Then, the
-current tools available from the Semantic Web domain to manipulate and reason
-about knowledge do not provide mature support for uncertainty management. Some
-effort do exist (like the {\sc Pronto} reasoner~\cite{Klinov2008}), but this
-does not appear to be a major focus in the currently available tools.
-
-
-\subsubsection{(Non) Monotonic Reasoning}
-\subsubsection{Presupposition accommodation}
-
-\subsubsection{Physics-based reasoning}
-\subsubsection{Planning}
-Making decision based on prediction
-
-\subsubsection{Advanced Memory Models}
-
-\fxwarning{reinforcement, classification not only on the temporality, but also on the semantic content}
-
-\subsubsection{Justification and Resolution of Cognitive Conflicts}
-
-Logical inconsistencies in one ORO's model (or, from a cognitive point of view,
-cognitive conflicts) could be better dealt with: while (partially) provided by
-the Pellet reasoner, and output to the developers for debugging purposes, the
-logical justification of the inconsistency is not really exploited.
-
-
-
-\subsubsection{Relaxation time}
-
-The relaxation time (section~\ref{sect|performances} of ORO for the average
-workloads we have encountered during the experiments is in the range of 100ms.
-The temporal resolution that follows for the symbolic layer, while acceptable
-in most cases, is not satisfactory. In particular, multi-modal interaction
-requires fine grained temporal alignement between modalities~\cite{Li2012}
-which are not possible with the current temporal performances of ORO.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Comparison of {\tt oro-server} with other existing systems}
+\section{Summary of contributions to the Knowledge Representation question}
 \label{sect|evaluation-oroserver}
+
+\fxfatal{Section to reorganize and write!!}
 
 This section tries to summary the various approaches we surveyed in the
 previous sections and to draw some research perspectives. This section does not
@@ -183,6 +125,55 @@ PEIS Ecology & {\sc ResearchCyc} \\
 \label{table|knowledge-sources}
 \end{table}
 
+\subsection{Representation of time}
+
+In the ORO server, knowledge is mostly atemporal: the set of triples stored in
+the server represents the beliefs of the robot \emph{at the current time}. The
+robot represents knowledge about the \emph{here and now}.
+
+One exception previously mentioned: when a statement is attached to a memory
+profile that is not permanent, the statement is reified and the creation
+timestamp is attached to the statement, thus enabling removal after a period of
+time that depends on the memory profile.
+
+Statement reification to store timestamps of creation for all statements is
+technically very easy to do in ORO server, but has not been actually enabled
+because the performance hit (each reified statement produces four triples
+instead of one) was not justified by any current use case of ORO server.
+
+\subsection{Representation of uncertainty and likelihood}
+
+The challenge of representing and reasoning under uncertainty has not been
+tackled in ORO server, at least not \emph{within} the current ORO server
+knowledge model. Two reasons explain this absence: the decisional architecture
+developed at LAAS for the robots has not consistent approach to uncertainty
+representation and management, neither at the \emph{symbol production} level
+(\ie SPARK, section~\ref{sect|spark} or {\sc Dialogs},
+section~\ref{sect|dialogs}) or at the symbol comsumption level (execution
+control). Thus, no strong incentive pushed us in this direction. Then, the
+current tools available from the Semantic Web domain to manipulate and reason
+about knowledge do not provide mature support for uncertainty management. Some
+effort do exist (like the {\sc Pronto} reasoner~\cite{Klinov2008}), but this
+does not appear to be a major focus in the currently available tools.
+
+
+\subsection{(Non) Monotonic Reasoning}
+\subsection{Presupposition accommodation}
+
+\subsection{Advanced Memory Models}
+
+\fxwarning{reinforcement, classification not only on the temporality, but also on the semantic content}
+
+\subsection{Justification and Resolution of Cognitive Conflicts}
+
+Logical inconsistencies in one ORO's model (or, from a cognitive point of view,
+cognitive conflicts) could be better dealt with: while (partially) provided by
+the Pellet reasoner, and output to the developers for debugging purposes, the
+logical justification of the inconsistency is not really exploited.
+
+
+
+
 \subsection{Context Representation}
 
 While several approaches for building contextualized knowledge are proposed in this
@@ -194,10 +185,21 @@ contexts that may be referred to.
 
 \subsection{Performances Analysis}
 
-\paragraph{Cognitive evaluation} The performance evaluation of current tools is
-still mostly system- and scenario-specific (``did my system do the job for my
-task?''), and amongst the surveyed KRS, only few systems proposes an evaluation
-of their performances that could be compared to other system.
+\subsubsection{Relaxation time}
+
+The relaxation time (section~\ref{sect|performances} of ORO for the average
+workloads we have encountered during the experiments is in the range of 100ms.
+The temporal resolution that follows for the symbolic layer, while acceptable
+in most cases, is not satisfactory. In particular, multi-modal interaction
+requires fine grained temporal alignement between modalities~\cite{Li2012}
+which are not possible with the current temporal performances of ORO.
+
+\subsubsection{Cognitive evaluation}
+
+The performance evaluation of current tools is still mostly system- and
+scenario-specific (``did my system do the job for my task?''), and amongst the
+surveyed KRS, only few systems proposes an evaluation of their performances
+that could be compared to other system.
 
 
 \fxwarning{Mention reasoning and expresiveness, cf section oro-server}
@@ -849,7 +851,7 @@ not fully satisfactory.
         the bottom of the picture~\ref{fig|aperitif-video}) leads obviously to
         poor robustness of manipulation tasks.
 
-    \item ...
+    \item ...\fxfatal{Complete that!}
 \end{itemize}
 
 It must be also noted that the second experiment has been originally designed
@@ -885,7 +887,11 @@ is presented in~\cite{Warnier2012}).
 \begin{figure}
     \centering
     \includegraphics[width=0.7\columnwidth]{experiments/cleantable.jpg}
-    \caption{}
+
+    \caption{Snapshot of the film of the ``Clean the Table'' scenario. The
+    physical situation, the SPARK model, and the current step of the plan can
+    be seen.}
+
     \label{fig|cleantable-video}
 \end{figure}
 
@@ -993,23 +999,24 @@ middleware and on {\sc GenoM}, the LAAS own middleware.
 
 \paragraph{What was pre-programmed?}
 
-General behaviour: While the real perception routines were running
+\begin{itemize}
+    \item{\bf General behaviour} While the real perception routines were running
 (see next section), the robot did not have any mean of synchronization with the
 human during the play: each sequence was manually started by one of the
 engineers.
 
-Places on the stage were hard-coded: for instance, the position of the table
+    \item{\bf Predefined positions} Places on the stage were hard-coded: for instance, the position of the table
 was known to the robot from the beginning, so was the position of the entrance
 door, etc.
 
-Postures and manipulation tasks: Manipulation tasks (like grasping
+    \item{\bf Postures and manipulation tasks} Manipulation tasks (like grasping
 the fan or the paper bin) were much simplified: the robot would simply open its
 gripper, and wait for \emph{something} to be detected in its hand. It would
 then simply close the gripper. Likewise, the robot special postures to enter or
 leave the stage with an object in hand (required to avoid collision with the
 door) were all pre-defined.
 
-Speech Understanding: At the end of the play, when Xavier talks to
+    \item{\bf Speech Understanding} At the end of the play, when Xavier talks to
 the robot (\emph{Stop!}, \emph{Look at this phone!}, \emph{Everything is fake},
 etc.), sentences were manually typed in the system. We could have used speech
 recognition as we do in the laboratory, but converting speech to its textual
@@ -1020,14 +1027,17 @@ While what Xavier said was actually processed by the robot (see next section),
 the actions that followed (like looking at the phone, turning the head back to
 the audience,...) were manually triggered.
 
+\end{itemize}
+
 \paragraph{What was autonomously managed by the robot?}
 
-Navigation: All navigation tasks were computed \emph{live} by
+\begin{itemize}
+    \item{\bf Navigation} All navigation tasks were computed \emph{live} by
 PR2, using the ROS navigation stack. The main script just tells the robot to go
 from the engineer desk to the center of the stage for instance. The robot would
 then find a path that avoid obstacle.  
 
-Modeling of the environment: The 3D world that is displayed above the stage
+    \item{\bf Modeling of the environment} The 3D world that is displayed above the stage
 during the show (figure~\ref{fig|spark-roboscopie}) is a live capture of the
 Move3D and SPARK softwares. These softwares are used daily on the robot to
 compute trajectories, symbolic locations, visibility and reachability of
@@ -1046,10 +1056,10 @@ Microsoft Kinect sensor and the {\sc OpenNI} human tracker. In several
 occasion, the robot automatically tracks the human head or the human hands with
 this system.
 
-Speech Understanding: At the end, Xavier talks to the robot. The
+    \item{\bf Speech Understanding} At the end, Xavier talks to the robot. The
 textual version of what he said was fed to the system \emph{as it}. Natural
 language understanding is done by the {\tt Dialogs}
-module~\cite{Lemaignan2011a} and used extensively the {\tt oro-server} knowledge
+module and used extensively the {\tt oro-server} knowledge
 database to make sense of the word in the current context. The result of the
 language processing was then added back to the knowledge base and automatically
 displayed by the {\tt oro-view} OpenGL ontologies viewer.
@@ -1061,6 +1071,8 @@ RED\_PHONE} by taking into account what the human focuses on.
 
 Since the computation of symbolic facts was deactivated, we had to manually add
 several symbolic facts in a so-called scenario-specific ontology.
+
+\end{itemize}
 
 \subsubsection{Significance for HRI}
 
