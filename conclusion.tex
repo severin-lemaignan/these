@@ -255,12 +255,47 @@ Also enables new features: natural language grounding
 
 \subsubsection{Knowledge for interaction}
 
-\subsubsection{Assessment of Symbolic Reasoning}
+\subsubsection{Real-World Symbolic Reasoning}
 
-Few real-world cases of complex reasoning encountered. Yet to be discovered?
+\begin{quote}
 
-But we know for sure that thousand of trivial inferences (inheritance,
-domain/range constraints, etc.) encode a large amount of common-sense.
+    Where to find milk? Milk is a subclass of dairy which is itself a subclass
+    of a perishable goods. The usual storage place for perishable goods is the
+    fridge, so the milk is likely to be found in a fridge.
+
+\end{quote}
+
+This example of reasoning, quoted from Moritz Tenorth, is a good example of
+simple yet non-trivial reasoning. As a matter of fact, very few of such
+reasoning cases where positively identified (and consequently implemented as
+rules in ORO).
+
+The design choices of our architecture partially explain that fact: first, the
+planning task (which is the prototypical reasoning task) is delegated to a
+dedicated, external planner. Then, time is not represented in ORO, and
+consequently no temporal reasoning takes place at this level: action
+recognition or monitoring are handled by other layers, and the underlying
+reasoning tasks are not implemented as explicit symbolic rules in the knowledge
+base.
+
+The experiments we have conducted are also likely to have too simplistic
+semantics to emphasise to let complex reasoning needs to emerge. More
+semantically complex scenarii need to be investigated to better stress the
+expressiveness and inference abilities provided by description logics.
+
+However, it must also be noted that hundred of trivial (from a human point of
+view) inferences (translating inheritance relations, domain/range constraints,
+transitivity, etc.) encode a large amount of common-sense knowledge that would
+be tedious, to say the least, to manually assert. These trivial inferences are
+all the more important that an expressive knowledge representation language is
+used: when a language like OWL allows to directly represent concepts like
+partitions, cardinality restrictions, properties' ranges and domains, it leads
+to a more implicit (because more abstract) description of the vocabulary, that
+in turn requires more underlying reasoning. With the progress in the
+understanding of the relations between expressiveness and (tractable)
+satisfiability, along with the progress of reasoners, more and more of the
+inferences do not need to be explicit anymore, and consequently move behind the
+scenes.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Towards the next generation of Knowledge Representation Systems for Robotics}
