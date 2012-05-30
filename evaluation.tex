@@ -11,33 +11,23 @@ Then, we will provide a detailed presentation of the case-studies and
 experimental evaluations that have been conducted during the four years of the
 thesis preparation.
 
-\fxwarning{Do not forget to actually *evaluate* the experiments!}
-
 This two evaluation facets will naturally lead to the conclusion at the next
 chapter, where we will draw scientific and technical perspectives for knowledge
 representation in robotics systems.
 
-%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Summary of contributions to the Knowledge Representation question}
 \label{sect|evaluation-oroserver}
 
-\fxfatal{Section to reorganize and write!!}
+This section summarises the various approaches that have been surveyed in the
+chapter~\ref{chapt|krs} to identify the main research trends and draw some
+research perspectives from less studied fields.
 
-This section tries to summary the various approaches we surveyed in the
-previous sections and to draw some research perspectives. This section does not
-exactly follow the list of compared features presented in
-section~\ref{sect|features}. We have organized it along four axis: \emph{what
-can be represented?}, \emph{How knowledge is created and grounded?}, \emph{What
-can be done with the knowledge?} and \emph{How to use knowledge in the whole,
-larger robot architecture?}.
-
-Table~\ref{table|contribution-by-systems} proposes a summary of the main scopes
-of \emph{contribution} of the systems we have surveyed. This overview helps to
-identify the main weaknesses of current approaches of knowledge representation
-regarding the long-term goal of \emph{human-level robots}.
+The table~\ref{table|contribution-by-systems} sketches the landscape of current
+research. The main fields of \emph{contribution} for the systems we have
+surveyed are sorted along the different axis, dimensions of knowledge
+representation that we identified.
 
 \begin{landscape}
 \begin{table}\tiny
@@ -98,6 +88,16 @@ or we could not find relevant literature.}
 \end{table}
 \end{landscape}
 
+To comment this table, we propose to base the discussion on some of the
+challenges that McCarthy and Roy have identified on the road to natural
+interaction and, to slightly paraphrase McCarthy, ``human-level robots''.
+
+
+\subsection{Common-sense} 
+
+the ability to \emph{"operate successfully in the common sense informatic
+situation"},
+
 %%%%%%%%%% Underlying knowledge model table %%%%%%%%
 \begin{table}
 \begin{center}
@@ -125,23 +125,16 @@ PEIS Ecology & {\sc ResearchCyc} \\
 \label{table|knowledge-sources}
 \end{table}
 
-\subsection{Representation of time}
 
-In the ORO server, knowledge is mostly atemporal: the set of triples stored in
-the server represents the beliefs of the robot \emph{at the current time}. The
-robot represents knowledge about the \emph{here and now}.
+\subsection{Knowledge Representation based on Logic Formalisms}
 
-One exception previously mentioned: when a statement is attached to a memory
-profile that is not permanent, the statement is reified and the creation
-timestamp is attached to the statement, thus enabling removal after a period of
-time that depends on the memory profile.
+the necessity of relying on mathematical logic, as the most fruitful formalism
+for machine intelligence,
 
-Statement reification to store timestamps of creation for all statements is
-technically very easy to do in ORO server, but has not been actually enabled
-because the performance hit (each reified statement produces four triples
-instead of one) was not justified by any current use case of ORO server.
+\subsection{Management of uncertainty and approximation}
 
-\subsection{Representation of uncertainty and likelihood}
+the ability to deal with \emph{approximate concepts and approximate theories}
+(that would include representing them, and reasoning with them),
 
 The challenge of representing and reasoning under uncertainty has not been
 tackled in ORO server, at least not \emph{within} the current ORO server
@@ -157,12 +150,117 @@ effort do exist (like the {\sc Pronto} reasoner~\cite{Klinov2008}), but this
 does not appear to be a major focus in the currently available tools.
 
 
-\subsection{(Non) Monotonic Reasoning}
-\subsection{Presupposition accommodation}
+\subsection{Non-monotonic reasoning}
 
-\subsection{Advanced Memory Models}
++ what McCarthy calls \emph{Elaboration Tolerance}: the ability to extend
+\emph{on demand} the closed domain of interpretation for a given assertion,
 
-\fxwarning{reinforcement, classification not only on the temporality, but also on the semantic content}
+\subsection{Modeling of contexts}
+
+the ability to formalize and reason about contexts,
+
+Roy + McCarthy
+
+The ORO knowledge base offers some support for the \emph{modeling of context},
+but a lot remains to be done in this respect.
+
+While several approaches for building contextualized knowledge are proposed in
+this paper (symbolic environment interpretation, perspective taking, grounded
+natural language resolution, self-awareness of its own activity), much remains
+to be done for a robot to actually identify its current context as well as
+contexts that may be referred to.
+
+Amongst the other shortcomings of our architecture, neither the \emph{domain of
+validity} nor the context of a fact are represented in a satisfying way (we do
+store some kind of context --the agent's mental model for instance). This
+information is meta-information on the knowledge. While the ORO framework
+allows them through \emph{statement reification}, it does not offer yet a
+convenient way to store them. One obvious limitation that derives from the lack
+of efficient meta-knowledge is the absence of knowledge history.  With ORO, the
+robot always lives in the present.
+
+
+
+\subsection{Reasoning about events and actions}
+
+reasoning about events, and in particular, actions,
+
+\subsection{Introspection}
+
+the capacity of introspection,
+
+\subsection{Decision Making}
+
+and finally, he points the issue of giving computer the right heuristics for
+decision making.
+
+\subsubsection{On Thematic Roles and Action Models}
+
+The current implementation relies on a small, predefined set of action verbs
+that can be recognized from natural language
+(section~\ref{processing_of_actions}).  This constraint does not come from the
+resolution algorithm itself, but rather from the difficulty to automatically
+extract the thematic roles associated to a verb.  This could be improved by
+linking a symbolic task planner to the \textsc{Dialogs} module to dynamically
+provide the list of actions that the robot can process, \ie actions for which
+the robot can produce a plan. Additionally, we could exploit on-line resources
+like \textsc{VerbNet}~\cite{Kipper2008}, which provides a large
+machine-processable lexicon of English verbs along with their thematic roles.
+
+
+\subsection{Cross-modality}
+
+While more modalities (especially, deictic gestures and social gazes) can be
+added, we have actually proposed a \emph{cross-modal representation system}.
+
+\subsection{Grounding} 
+
+One of the main feature of the \textsc{Dialogs} module is its ability to
+interactively ground concepts through disambiguation, bringing the ability for
+the robot to \emph{associate words with perceptual and action categories}.
+
+\subsection{Models granularity}
+
+\emph{Figuring out the right granularity of models} is partially solved by
+supporting both a geometric reasoning level and a purely symbolic level.
+Generally speaking, it appears that complex robotic systems need to operate
+with a dynamic granularity, depending on the task to achieve.
+
+\subsection{Temporal modeling} 
+
+\emph{Temporal modeling} is currently missing in our architecture, and symbolic
+and geometric \emph{planning} is accomplished outside of the knowledge
+representation loop we presented here. We see planning as an essential tool to
+build predictive knowledge, and we are looking into this direction.
+
+In the ORO server, knowledge is mostly atemporal: the set of triples stored in
+the server represents the beliefs of the robot \emph{at the current time}. The
+robot represents knowledge about the \emph{here and now}.
+
+One exception previously mentioned: when a statement is attached to a memory
+profile that is not permanent, the statement is reified and the creation
+timestamp is attached to the statement, thus enabling removal after a period of
+time that depends on the memory profile.
+
+Statement reification to store timestamps of creation for all statements is
+technically very easy to do in ORO server, but has not been actually enabled
+because the performance hit (each reified statement produces four triples
+instead of one) was not justified by any current use case of ORO server.
+
+\subsection{Learning, Representation of Experience}
+
+Since we provide no time management, our system is currently not able to
+\emph{match past (learned) experiences with the current interaction}.  This
+ability is obviously a key step for general action recognition, and seems of
+particular importance for the robot to assess the state of the interaction with
+the human.
+
+\subsection{Perspective-awareness} 
+
+Finally, Roy mentions \emph{the ability to take into account the human
+perspective}: this is probably our main contribution which we are now trying to
+develop even further towards psychology-inspired experiments.
+
 
 \subsection{Justification and Resolution of Cognitive Conflicts}
 
@@ -174,25 +272,17 @@ logical justification of the inconsistency is not really exploited.
 
 
 
-\subsection{Context Representation}
-
-While several approaches for building contextualized knowledge are proposed in this
-paper (symbolic environment interpretation, perspective taking, grounded
-natural language resolution, self-awareness of its own activity), much remains
-to be done for a robot to actually identify its current context as well as
-contexts that may be referred to.
-
-
 \subsection{Performances Analysis}
 
 \subsubsection{Relaxation time}
 
-The relaxation time (section~\ref{sect|performances} of ORO for the average
-workloads we have encountered during the experiments is in the range of 100ms.
-The temporal resolution that follows for the symbolic layer, while acceptable
-in most cases, is not satisfactory. In particular, multi-modal interaction
-requires fine grained temporal alignement between modalities~\cite{Li2012}
-which are not possible with the current temporal performances of ORO.
+The relaxation time (as defined at section~\ref{sect|performances}) of ORO for
+the average workloads we have encountered during the experiments is in the
+range of 100ms.  The temporal resolution that follows for the symbolic layer,
+while acceptable in most cases, is not satisfactory. In particular, multi-modal
+interaction requires fine grained temporal alignement between
+modalities~\cite{Li2012} which are not possible with the current temporal
+performances of ORO.
 
 \subsubsection{Cognitive evaluation}
 
@@ -202,7 +292,18 @@ surveyed KRS, only few systems proposes an evaluation of their performances
 that could be compared to other system.
 
 
-\fxwarning{Mention reasoning and expresiveness, cf section oro-server}
+\fxwarning{Mention reasoning and expressiveness, cf section oro-server}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \section{Experimental evaluation}
 \label{sect|experimental-evaluation}

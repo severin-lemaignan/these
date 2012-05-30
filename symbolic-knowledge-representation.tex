@@ -64,18 +64,30 @@ Finally, we conclude this chapter on symbolic knowledge representation by
 briefly presenting a novel API for knowledge manipulation, jointly designed
 with several other researchers on knowledge representation.
 
-\paragraph{What do we call "knowledge"?}
+\paragraph{What do we call ``knowledge''?}
 \label{sect|on-knowledge}
 
 Since we will discuss at length the concept of knowledge in the context of
 robotics in the coming pages, it is useful to make our terminology explicit.
 
-No general agreement on a definition of ``knowledge'' exists. In our context,
-we call ``knowledge'' \emph{a set of interrelated logical facts that are
-meaningful to the robot executive controller}. By \emph{meaningful} we mean
-that can possibly be interpreted to lead to a purposeful action. We will see
-that our main challenge while designing a cognitive architecture is furthermore
-to make this knowledge as \emph{explicit} as possible.
+Be it in philosophy, cognitive sciences or computer sciences, reaching an
+agreement on a definition of ``knowledge'' seems difficult.
+
+Allen Newell's famous \emph{Knowledge Level}~\cite{Newell1981} can be a
+starting point: for Newell, \emph{knowledge} is a medium between \emph{agents}
+and \emph{goals}, \emph{actions}, \emph{bodies}. Whereas the symbol level deals
+with representation, the knowledge level deals with language, semantics;
+whereas the symbol level deals with inference, the knowledge level deals with
+entailment. We will, at the conclusion of the thesis, give a second look to
+this distinction.
+
+In our robotic context, we define knowledge as a narrower concept, while
+keeping Newell's link to actions: ``knowledge'' is for us  \emph{a set of
+interrelated logical facts that are meaningful to the robot executive
+controller}. By \emph{meaningful} we mean that can possibly be interpreted to
+lead to a purposeful action. We will see that our main challenge while
+designing a cognitive architecture is furthermore to make this knowledge as
+\emph{explicit} as possible.
 
 The relation of \emph{data} and \emph{information} to knowledge is a debated
 epistemology question known as the ``DIKW'' hierarchy question. In this thesis,
@@ -1296,7 +1308,7 @@ tight link to the KRS for domain retrieval and/or resulting plan storage.
 
 Finally, in the context of interaction between several agents, the management
 of \emph{joint intentions} and \emph{joint goals}~\cite{Tomasello2005,
-Bratman2009} are additional aspects that have to be represented and
+Dominey2011} are additional aspects that have to be represented and
 appropriately handled by the planning subsystem.
 
 %An extensive report on task modeling in OWL ontologies in appendix
@@ -1741,13 +1753,43 @@ parameters that lead to different knowledge models.
 \subsubsection{Design Strategy}
 \label{sect|design-strategies}
 
-Ontology engineering has grown into a research field of its own, covering
-formalized methodologies for ontology creation, reuse, modularisation, etc.
+The main challenge of knowledge representation can be summarised as \emph{How to
+model real-world interaction in a symbolic way, processable by the robot to
+make decisions}. We have already introduced the term \emph{grounding} to
+describe the (bi-directional) process of binding percepts to symbols.
 
-The creation
+We have also seen that the instantiation of the knowledge (\ie, the actual,
+practical knowledge available to the robot) comes either from some sort of this
+grounding process, or from knowledge considered as initially grounded for the
+robot: remote semantic databases or initial (common-sense or situation
+specific) knowledge.
 
-Two main approaches are common in the cognitive robotic community:
-\emph{top-down} design and \emph{bottom-up}.
+Two main opposite approaches can drive knowledge instantiation: a
+\emph{top-down} design or a \emph{bottom-up} design.
+
+A bottom-up approach to knowledge instantiation takes the output of sensors as
+the primary source of knowledge: instances of objects, agents, and their
+relations directly result from what is percieved. No abstract, ``more generic
+to more specific'' process takes place.
+
+According to Sloman~\cite{Sloman2007} (and his stance against the
+\emph{``Symbol Grounding meme''}), bottom-up grounding boils down to grounding
+of \emph{somatic} concepts (\ie roughly, the sensori-motor relationships that
+the robot learns from its interaction with the world), which in turn
+constraints the domain of concepts accessible to the robot.
+Steels~\cite{Steels2007} considers this approach to be a solved issue.
+
+Knowledge instantiation can also be approached as a \emph{top-down} activity:
+in natural language grounding, for instance, the robot needs to automatically
+bind an abstract representation (a group of word uttered by a human) to an
+unambiguous, context-dependent, internal concept. This concept may (or may not)
+be \textit{a priori} available to the robot as a pre-loaded ontology (what we
+previously called the cultural background of the robot).
+
+The bottom-up and top-down strategies also reflect how the knowledge structure
+itself is constructed: either by successive classification and refinement of
+percepts, or from generic categories, typically extracted from standard
+upper-ontologies.
 
 \subsubsection{Common-sense and alignment with Standard Upper-ontologies}
 

@@ -685,8 +685,25 @@ refers to) and transformed into the following kind of query: \concept{find ?var
 the \emph{verbalisation} module, and uttered to the human.
 
 
-The next chapter (page~\pageref{chapter|evaluation}) presents several
-experiments that make use of the {\tt Dialogs} module.
+In section~\ref{informational_content_extraction}, above, we give an example
+where the human says ``the yellow banana is big''. It is assumed in the example
+that the robot already knows about a banana instance that is yellow. In our
+experiments, this kind of knowledge was either hard coded in scenario-specific
+ontologies (\eg \stmt{banana\_01 type Banana} where \concept{banana\_01} is the
+ID of the banana's tag) or taught to the robot with prescriptive sentences like
+``Learn that this is a banana'' while pointing at the banana's tag. It would be
+interesting to extend this approach with automatic classifiers (for colour,
+size, etc.). If the robot later discovers a yellowish and large object, an
+utterance like ``the yellow banana is big'' could be used to assert that this
+object is a banana.  A similar approach focused on the combination of visual
+perception and communication modalities to achieve visual learning has been
+developed by~\cite{Vrecko2009}.
+
+Also, while the examples we develop here (and that we illustrate in experiments
+in the next chapter) are all based on symbols that have a physical meaning, the
+system deals equally well with abstract, \emph{exo-somatic}, concepts like
+\emph{Time}, \emph{Event} or \emph{Place}. Demonstrating this in real
+experiments would be an interesting development.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
