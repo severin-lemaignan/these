@@ -261,13 +261,45 @@ Allen Newell's analysis:
 
 \subsection{Lessons learned from the introduction of a symbolic knowledge layer}
 
-Knowledge as a observable, quantifiable, measurable, manipulable resource
+When starting this PhD, we were given \emph{carte blanche} to explore ways to
+explicit knowledge in our robot architecture, to make it one of the robot's
+resources in its own right.
 
-Cognitive Penetrability (Zenon Pylyshyn, http://penta.ufrgs.br/edu/telelab/3/cognitip.htm)
+
+Knowledge as a observable, quantifiable, measurable, manipulable, palpable resource
+
 
 Cognitive observability
 
 Allows for both qualitative and quantitative analysis of the beliefs of the robot
+
+Pylyshyn~\cite{Pylyshyn1989} introduces in 1989 the idea of \emph{cognitive
+penetrability} in the context of the study of possible strong equivalences
+between computational models and the \emph{psychological reality}:
+
+\begin{quote}
+
+    [One of the criterion] relies on the assumption that we can identify
+    certain clear cases of phenomenon that should be accounted for at the
+    knowledge level, that is, in terms of the representations alone, rather
+    than in terms of properties of the cognitive architecture. Phenomena that
+    depend in a rational way on subjects' goals, beliefs, and utilities are a
+    case in point. For example in psychophysics we assume that if a measure
+    (such as a threshold) changes systematically as we change the payoffs (that
+    is, the relative cost of errors of commission and of omission), then the
+    explanation of that change must be given at the knowledge level -- in terms
+    of decision theory -- rather than in terms of properties of sensors or
+    other mechanisms that are part of the architecture. In general showing that
+    certain empirical phenomena are sensitive to goals and beliefs (or what I
+    call \emph{cognitively penetrable}) is prima facie evidence that they
+    should not be attributed to properties of the architecture.}
+
+\end{quote}
+
+The introduction of an explicit \emph{knowledge level} in our architecture
+makes it possible to effectively assess the cognitive penetrability of the
+whole robot behaviours (this is however not new, and traditional BDI
+architectures would also make this claim).
 
 Ease modalities merging ('look at this' -> verbal and deictic, 'give me a
 banana -> fetch banana picturesfrom the Web...)
