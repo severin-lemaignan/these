@@ -199,8 +199,30 @@ cognition-related modules reside at the same level). This is especially visible
 for the dialogue input processing. This component does not simply act as an
 alternative perceptual input to the symbolic database, but also actively
 queries previously acquired knowledge to disambiguate and validate the newly
-created symbolic knowledge, as we will present in detail in the following
-chapter.
+created symbolic knowledge.
+
+Our architecture relates but is to be distinguished from \emph{Beliefs,
+Desires, Intentions} (BDI) architectures. BDI architectures are primarily
+focused on the management of the interaction between knowledge (the beliefs)
+and task representation and execution (the desires and the intentions).
+\fxfatal{relire rapidement le bouquin sur le multi agent + russell  IA sur BDI
+pour pas dire trop de conneries}
+
+This interaction is also central to our approach (as for any cognitive system),
+but task representation and task execution is not seen as a monolithic, central
+function: it is one of the activity of the robot, split between communication
+components (that can acquire desires from interaction agents, amongst other
+things), an execution controller that may decide to take an incoming desire
+into account, that create its own internal goals, and generate and control
+intentions from these goals with the help of a symbolic task planner that has
+also direct access to the knowledge base.
+
+But the architecture is not really focused on this workload, and other
+activities are conducted without being explicitly considered as desires:
+assessment of the situation and the environment, dialogue (including
+performative dialogue that can possibly change the internal state of the robot,
+but does not lead to the creation of desires,  like question answering or
+statement assertion), various background monitoring and recognition tasks, etc.
 
 Regarding the anchoring question, this architecture is bidirectional. The
 components we described provide a \textit{bottom-up} grounding process: SPARK
