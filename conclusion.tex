@@ -1,19 +1,109 @@
-\chapter{Conclusion}
+\chapter{Conclusion: On the Road to the Knowledge-Enabled Robot}
 \label{chapter|conclusion}
+
+The time has now come to reach a conclusion to this work.
+
+We have first proposed a systematic study, build as a typology, of the
+knowledge requirements of modern robotic applications in the context of service
+robotics and human-robot interaction. About fifty concepts or features that
+define altogether what knowledge representation means for robotics have been
+proposed,followed by a review of existing tools and frameworks in the research
+community.
+
+In a second part, we have presented in depth a particular instantiation of a
+knowledge representation and manipulation system that we have called
+\emph{ORO}.  Main features, inner workings, algorithms, implementation of this
+system have been exposed, as well as its integration with several other robot
+components, for geometric reasoning, task planning or control.
+
+The third part of the study has been focused on the processing of situated
+dialogue.  Our approach and associated algorithms leading to the interactive
+grounding of unconstrained verbal communication have been presented and
+illustrated.
+
+One chapter was then dedicated to evaluation. First in term of abstract
+features: based on several challenges that where identified in the artificial
+intelligence community, we have examined how the current systems for knowledge
+management compare. Then in term of experiments and experimental tools, by
+presenting six case-studies and experiments that illustrate how knowledge can
+take place in our robots.
+
+\section{The Palpable Knowledge}
+
+When starting this PhD, we were given \emph{carte blanche} to explore ways to
+explicit knowledge in our robot architecture, to make it one of the robot's
+resources in its own right.
+
+The main goal was to transform the knowledge in the robot from some ubiquitous,
+pervasive, multi-modal and, most importantly, mostly undefined feature of the
+system into an observable, quantifiable, manipulable resource, what we could
+call a \emph{palpable} feature.
+
+This transformation, both from the technical point of view (the ORO server, the
+ontologies, the bindings, etc.), and as a more subtle change in the practises
+related to the development of robotic components, is the main contribution of
+this thesis.
+
+Knowledge is not an abstract concept anymore: it is a set of statements, in
+most cases directly intelligible to the developers, stored in one place. We can
+export them, monitor them, review them, question them.
+
+Communication between the robot's module is now conceived in term of what are
+the \emph{semantics} of the information flows, instead of a simple
+compatibility of interfaces. When defining the frontiers of a robotic
+component, we do not think anymore only in term of ``is the interface complete
+and self-contained'', but also in term of ``is the semantic complete and
+consistent?''. This allow a deeper, more correct modularity: two modules that
+share the same, well-defined semantic can be confidently exchanged. When we
+remove or disable a component (the dialogue processing, the geometric
+reasoning, ...), we know precisely what knowledge will not be available
+anymore.
+
+We call this new property of our robot, that allows for both qualitative and
+quantitative analysis of the beliefs, its \emph{cognitive observability}.
+
+It is somewhat related to the idea of \emph{cognitive penetrability} introduced
+by Pylyshyn~\cite{Pylyshyn1989} in 1989, in the context of the study of
+possible strong equivalences between computational models and the
+\emph{psychological reality}:
+
+\begin{quote}
+
+    [One of the criterion] relies on the assumption that we can identify
+    certain clear cases of phenomenon that should be accounted for at the
+    knowledge level, that is, in terms of the representations alone, rather
+    than in terms of properties of the cognitive architecture. Phenomena that
+    depend in a rational way on subjects' goals, beliefs, and utilities are a
+    case in point. For example in psychophysics we assume that if a measure
+    (such as a threshold) changes systematically as we change the payoffs (that
+    is, the relative cost of errors of commission and of omission), then the
+    explanation of that change must be given at the knowledge level -- in terms
+    of decision theory -- rather than in terms of properties of sensors or
+    other mechanisms that are part of the architecture. In general showing that
+    certain empirical phenomena are sensitive to goals and beliefs (or what I
+    call \emph{cognitively penetrable}) is prima facie evidence that they
+    should not be attributed to properties of the architecture.
+
+\end{quote}
+
+The introduction of an explicit \emph{knowledge level} in our architecture
+makes it possible to effectively assess the cognitive penetrability of the
+whole robot behaviours (this is however not new, and traditional BDI
+architectures would also make this claim).
 
 \section{Knowledge-Oriented Architectures}
 
-We have presented and illustrated in the preceding chapters how knowledge
-streams can be organized within a robotic architecture. Based on the experience
-gained while developing and deploying {\sc ORO}, our ontology-based knowledge
-server, we have presented how symbolic knowledge could be produced from
-perception and geometric reasoning in modules like {\sc SPARK}, a grounded,
-perspective-aware, geometric reasoner. We have seen how symbolic knowledge
-could be reused by different control systems and task planners like {\sc Cram},
-{\sc SHARY}, {\sc pyRobots}, the {\sc CLSU Toolkit} or {\sc HATP} and how they
-take advantage of semantic abstractions provided by knowledge base. We have
-also presented the bidirectional integration of {\sc Dialogs}, a natural
-language processor for English, with the knowledge base.
+We can give a broader look at the knowledge and the streams of knowledge in our
+systems.  Based on the experience gained while developing and deploying {\sc
+ORO}, our ontology-based knowledge server, we have presented how symbolic
+knowledge could be produced from perception and geometric reasoning in modules
+like {\sc SPARK}, a grounded, perspective-aware, geometric reasoner. We have
+seen how symbolic knowledge could be reused by different control systems and
+task planners like {\sc Cram}, {\sc SHARY}, {\sc pyRobots}, the {\sc CLSU
+Toolkit} or {\sc HATP} and how they take advantage of semantic abstractions
+provided by knowledge base. We have also presented the bidirectional
+integration of {\sc Dialogs}, a natural language processor for English, with
+the knowledge base.
 
 Altogether, these components compose an architecture that we call
 \emph{knowledge-oriented}:
@@ -24,8 +114,7 @@ Altogether, these components compose an architecture that we call
     repository of facts, accessible by all modules.} 
 
     \item{Knowledge is represented in a strict formalism (OWL statements) and
-    with a clearly defined vocabulary (stated in the {\tt
-    commonsense.oro.owl} ontology).} 
+    with a clearly defined vocabulary (stated in the common-sense ontology).}
 
     \item{The first two points enable both a loosely-coupled architecture where
     modules can very easily be removed or replaced by other ones as long as
@@ -68,14 +157,15 @@ best subgoal. It becomes then an intention that the robot commits to.
 
 This interaction between knowledge and actions is also central to our approach
 (as for any cognitive system), but task representation and task execution is
-not seen as a monolithic, central function: it is one of the activity of the
-robot, split between communication components (that can acquire desires from
-interaction agents, amongst other things), an execution controller that may
-decide to take an incoming desire into account, that create its own internal
-goals, and generate and control intentions from these goals with the help of a
-symbolic task planner that has also direct access to the knowledge base.
+not seen as a monolithic, central function: it is one of the activities of the
+robot, actually split between communication components (that can acquire
+desires from interaction with agents, amongst other things) and an execution
+controller that may decide to take an incoming desire into account to create
+its own internal goals. The controller generates and controls intentions from
+these goals with the help of a symbolic task planner, that has also direct
+access to the knowledge base.
 
-But the architecture is not really focused on this workload, and other
+The architecture is not only focused on this workload, and other
 activities are conducted without being explicitly considered as desires:
 assessment of the situation and the environment, dialogue (including
 performative dialogue that can possibly change the internal state of the robot,
@@ -97,19 +187,20 @@ scenario with a blind robot and a deaf robot. The blind robot does not see (no
 cameras or alike), but someone can verbally describe a scene to it. On the
 other hand, the deaf robot has a good vision system, but cannot process verbal
 input.  Without any changes to the software architecture that we described,
-supervision modules of both robots would be able to perform equally well (to
-actually implement this imaginary situation, the blind robot would of course
-need \textit{a priori} 3D models of objects talked about to enable planning or
-pick and place actions, and the deaf robot would require at least some gesture
-interpretation to understand orders).
+control modules of both robots could equally perform the same tasks since all
+the knowledge is abstracted and centralised (note that to actually implement
+this imaginary situation, the blind robot would of course need \textit{a
+priori} 3D models of objects talked about to enable planning or pick and place
+actions, and the deaf robot would require at least some gesture interpretation
+to understand orders).
 
-This architecture may also contribute to bridge the gap between robotics and
-psychology: it provides clear entry points to implement some classical
-psychology tests to robots. For instance, we presented experiments focused on issues related
-to perspective taking. By explicitly enabling independent modeling of the
-beliefs of each agent, our architecture is especially well suited to set up
-cognitive and psychological experiments such as the \emph{False-Belief}
-experiment~\cite{Warnier2012a}.
+This architecture may also contribute to bring closer robotics and psychology:
+it provides clear entry points to implement some classical psychology tests to
+robots. For instance, we presented experiments focused on issues related to
+perspective taking. By explicitly enabling independent modeling of the beliefs
+of each agent, our architecture is especially well suited to set up cognitive
+and psychological experiments that involve a theory of mind, such as
+\emph{False-Belief} experiments, as recently presented in~\cite{Warnier2012a}.
 
 
 \subsection{Knowledge and Embodiement}
@@ -120,12 +211,14 @@ with a human. Mainly, because the robot and the human share the same physical
 environment and they perceive each other, we are able to create a mutual
 context.
 
-Sloman, in~\cite{Sloman2009}, argues however that the strong focus on
+Sloman, in~\cite{Sloman2009}, worried however that the strong focus on
 embodiment in the robotics community has hindered progress towards natural
-human-robot interaction. Our approach has hopefully made clear that, similar to
-Beetz et al.~\cite{Beetz2010}, we do not consider embodiment \emph{per se}
-outside of a broader symbolic system, \ie our architecture is not bound to the
-morphology or the low-level sensori-motor capabilities of a specific agent. 
+human-robot interaction by focusing on sub-symbolic physical properties. Our
+approach has hopefully made clear that, similar to Beetz et
+al.~\cite{Beetz2010} and many other researches presented in the thesis, we do
+not consider embodiment \emph{per se} outside of a broader symbolic system, \ie
+our architecture is not bound to the morphology or the low-level sensori-motor
+capabilities of a specific agent. 
 
 However, we can build a model of the ``human point of view'' because the robot
 perceives the human, and is able to estimate, at least partially, what the
@@ -140,57 +233,9 @@ community does not contradict with a formal, highly symbolic approach of the
 representation and decision problems that arise in robotics. 
 
 
-\subsection{Lessons learned from the introduction of a symbolic knowledge layer}
+\subsection{Knowledge for interaction}
 
-When starting this PhD, we were given \emph{carte blanche} to explore ways to
-explicit knowledge in our robot architecture, to make it one of the robot's
-resources in its own right.
-
-
-Knowledge as a observable, quantifiable, measurable, manipulable, palpable resource
-
-
-Cognitive observability
-
-Allows for both qualitative and quantitative analysis of the beliefs of the robot
-
-Pylyshyn~\cite{Pylyshyn1989} introduces in 1989 the idea of \emph{cognitive
-penetrability} in the context of the study of possible strong equivalences
-between computational models and the \emph{psychological reality}:
-
-\begin{quote}
-
-    [One of the criterion] relies on the assumption that we can identify
-    certain clear cases of phenomenon that should be accounted for at the
-    knowledge level, that is, in terms of the representations alone, rather
-    than in terms of properties of the cognitive architecture. Phenomena that
-    depend in a rational way on subjects' goals, beliefs, and utilities are a
-    case in point. For example in psychophysics we assume that if a measure
-    (such as a threshold) changes systematically as we change the payoffs (that
-    is, the relative cost of errors of commission and of omission), then the
-    explanation of that change must be given at the knowledge level -- in terms
-    of decision theory -- rather than in terms of properties of sensors or
-    other mechanisms that are part of the architecture. In general showing that
-    certain empirical phenomena are sensitive to goals and beliefs (or what I
-    call \emph{cognitively penetrable}) is prima facie evidence that they
-    should not be attributed to properties of the architecture.
-
-\end{quote}
-
-The introduction of an explicit \emph{knowledge level} in our architecture
-makes it possible to effectively assess the cognitive penetrability of the
-whole robot behaviours (this is however not new, and traditional BDI
-architectures would also make this claim).
-
-Ease modalities merging ('look at this' -> verbal and deictic, 'give me a
-banana -> fetch banana picturesfrom the Web...)
-
-Also enables new features: natural language grounding
-
-
-\subsubsection{Knowledge for interaction}
-
-\subsubsection{Real-World Symbolic Reasoning}
+\subsection{Real-World Symbolic Reasoning}
 
 \begin{quote}
 
@@ -201,9 +246,9 @@ Also enables new features: natural language grounding
 \end{quote}
 
 This example of reasoning, quoted from Moritz Tenorth, is a good example of
-simple yet non-trivial reasoning. As a matter of fact, very few of such
-reasoning cases where positively identified (and consequently implemented as
-rules in ORO).
+simple yet non-trivial reasoning. As a matter of fact, only very few of such
+reasoning cases where positively identified in our scenarii and experiments
+(and consequently implemented as rules in ORO).
 
 The design choices of our architecture partially explain that fact: first, the
 planning task (which is the prototypical reasoning task) is delegated to a
@@ -214,23 +259,28 @@ reasoning tasks are not implemented as explicit symbolic rules in the knowledge
 base.
 
 The experiments we have conducted are also likely to have too simplistic
-semantics to emphasise to let complex reasoning needs to emerge. More
-semantically complex scenarii need to be investigated to better stress the
-expressiveness and inference abilities provided by description logics.
+semantics to let complex reasoning needs to emerge. Scenarii with more complex
+semantics would be desirable to better stress the expressiveness and inference
+abilities provided by description logics.
 
-However, it must also be noted that hundred of trivial (from a human point of
-view) inferences (translating inheritance relations, domain/range constraints,
-transitivity, etc.) encode a large amount of common-sense knowledge that would
-be tedious, to say the least, to manually assert. These trivial inferences are
-all the more important that an expressive knowledge representation language is
-used: when a language like OWL allows to directly represent concepts like
-partitions, cardinality restrictions, properties' ranges and domains, it leads
-to a more implicit (because more abstract) description of the vocabulary, that
-in turn requires more underlying reasoning. With the progress in the
-understanding of the relations between expressiveness and (tractable)
-satisfiability, along with the progress of reasoners, more and more of the
-inferences do not need to be explicit anymore, and consequently move behind the
-scenes.
+Is reasoning at the knowledge level immature or even superfluous, then? Not so:
+hundreds of trivial (from a human point of view) inferences are continuously
+produced by the system (translating inheritance relations, domain/range
+constraints, transitivity, etc.) and encode a large amount of common-sense
+knowledge that would be tedious, to say the least, to manually assert. These
+trivial inferences are all the more important that an expressive knowledge
+representation language is used: when a language like OWL allows to directly
+represent high-level concepts like partitions, cardinality restrictions,
+properties' ranges and domains, it leads to a more implicit (because more
+abstract) description of the vocabulary that in turn requires more underlying
+reasoning. With the progress in the understanding of the relations between
+expressiveness and (tractable) satisfiability, along with the progress of
+reasoners, more and more of the inferences do not need to be explicit anymore,
+and consequently move behind the scenes.
+
+And we predict that \emph{common-sense encoding} is likely to remain the main
+application of reasoning in our robotic architectures, where reasoning related
+to decision making mostly happen outside the knowledge representation system.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Towards the next generation of Knowledge Representation Systems for Robotics}
@@ -238,21 +288,19 @@ scenes.
 
 In the chapter~\ref{chapt|evaluation}, we have summarised the current state of
 the art in knowledge representation, and we have put it in perspective with
-some mid- or long-term views towards intelligent artifical systems, as
+some mid- or long-term views towards intelligent artificial systems, as
 expressed by McCarthy and Roy.
 
-In this chapter, we have discussed
-
 So, we can now ask the question: what remains to be invented to get the famous
-intelligent robots we dream of?
+``intelligent'' robots we all dream of?
 
 Before writing down the final mark of the thesis, we would like to feed the
 reflexion on the future of knowledge and knowledge representation for robots
 (service/companion robots in particular, because they are the ones with the
 most obvious need of symbolic knowledge for living in complex, interactive,
-semantically rich environment, but this also applies to robots in general). We
-will mention three aspects, amongst many others, that we see as both important
-and difficult questions.
+semantically rich environment, but this certainly applies to other robots as
+well). We will mention three aspects, amongst many others, that we see as both
+important and difficult questions.
 
 First, one of the directions that seems both critical and under-studied in our
 community is what we can call \emph{context management} in a broad sense.
@@ -261,9 +309,9 @@ representing contexts.
 
 Depending on what context we talk about, recognizing contexts can be relatively
 easy (who is talking to me? where am I?) to difficult (what past experience
-does my interactor implicitly refers to? etc.). One of the main problem we see
-with context identification is that it is a fundamentally \emph{multi-scales}
-system: at every point, several temporal, spatial, social, cultural context
+does my interactor implicitly refers to?). One of the main problem we see
+with context identification is that it is a fundamentally \emph{multi-scale}
+problem: at any moment, several temporal, spatial, social, cultural context
 co-exist and overlap.
 
 This lead to the second aspect, context representation. Techniques for
@@ -283,10 +331,10 @@ multiple (overlapping) models or \emph{facets} (one per agent, one per place,
 one per period of time, etc.), or maybe a systematic use of reification to
 attach to each \emph{atom} of knowledge (the atom is usually the statement. It
 could maybe be extended to a small set of cohesive statements) one or several
-contexts. The development of modal logic for practical application is also an
+contexts. The development of modal logic in practical applications is also an
 important direction to examine.
 
-Much remain to be done to this regards, starting with a formal analysis of what
+Much remain to be done to this regard, starting with a formal analysis of what
 are the relevant contexts for our robots.
 
 \par
@@ -294,7 +342,7 @@ are the relevant contexts for our robots.
 Proper management of inconsistent knowledge is another point that seems of
 particular interest. Inconsistencies are mostly considered today as errors
 (modeling issues, perception errors, wrong interpretations of communication, etc.)
-that prevent at best further reasoning, at worst the use of the knowledge base.
+that prevent, at best, further reasoning, at worst, the use of the knowledge base.
 
 However, from a cognitive point of view, logical inconsistencies are a very
 valuable source of knowledge by themselves. We have previously evoked the role
@@ -303,41 +351,47 @@ acquisition. This can be generalised to many sources of inconsistencies:
 detection of faulty perception and setup of alternative perception strategies,
 start of interactions with other agents to fix a wrong model, etc.
 
-Technical handling of inconsistencies also require to better develop
-applications of techniques like default logics to robotics.
+Recognition of inconsistencies between different models (for instance,
+divergences between the mental state of two agents) could also be a fruitful
+motivation for action and interaction for the robot.
+
+To this respect, technical handling of inconsistencies also require more
+research efforts, that include the development of techniques like default logics
+for robotics.
 
 \par
 
 The systematic study of the relations between symbolic and geometric models are
-another large field open to research. While (discrete) symbolic models are
-mostly seen as abstractions of a (continuous) geometric model, this link does
+another broad field open to research. While (discrete) symbolic models are
+usually seen as abstractions of a (continuous) geometric model, this link does
 not need to be unidirectional. Presupposition accommodation is an example of
 {\it a priori} symbolic knowledge that may alter a geometric model. Many more
 of these bidirectional relations remain to be identified.
 
 One overlooked aspect of these links between symbolic and geometric realms is
-the temporal reasoning resolution: one of the challenging task for a robot
-interacting with human relates to action recognition and prediction. While mid-
-to longterm action recognition is a well studied field (\cite{Ghallab1996,
+the temporal reasoning granularity: one of the challenging task for a robot
+interacting with humans relates to action recognition and prediction. While
+mid- to longterm action recognition is a well studied field~\cite{Ghallab1996,
 Johnson2005, Tenorth2011}, early and fine grained action recognition (like
 gesture initiation, back-channel communication -- nodding, social gaze, ... --,
 etc.) that are important for smooth interaction, requires geometric reasoning
-at relatively high temporal resolution that operates within a symbolic context.
-Viewed from a slightly different perspective, better temporal resolution in the
-knowledge stack could lead the way to programming paradigms that are both
-massively event-oriented and semantically grounded.
+at relatively high temporal resolution that is able to operate within a
+symbolic context.  Viewed from a slightly different perspective, better
+temporal resolution in the knowledge stack could lead the way to programming
+paradigms that are massively event-oriented and still semantically grounded.
 
 \par
 
-And maybe our final point, the knowledge-oriented architectures that are being
-build in many robotic research lab around the world have a very specific
-characteristic compared to the efforts of other research communities working on
-the question of knowledge by human systems, like in cognitive psychology, or
-computer-based systems, like in the semantic web community: robots are
-\emph{embodied computers}. They act and interact in the physical world, and the
-physical world plays a key role as a communication support. And at the same
-time, they are computers, with unlimited access to remote sources of knowledge
-via the Web, either as static database, or through exchanges with other robots.
+Our last word will be for the idea embodiment and the research perspectives it
+opens: the knowledge-oriented architectures that are being build in many
+robotic research lab around the world have a very specific characteristic
+compared to the efforts of other research communities working on the question
+of knowledge by human systems, like in cognitive psychology, or computer-based
+systems, like in the semantic web community: robots are \emph{embodied
+computers}. They act and interact in the physical world, and the physical world
+plays a key role as a communication support. And at the same time, they are
+computers, with unlimited access to remote sources of knowledge via the Web,
+either as static database, or through exchanges with other robots.
 
 This dual essence, both as embodied organism and disembodied agent, places the
 robot at the crossing of two fundamental approaches to knowledge management:
