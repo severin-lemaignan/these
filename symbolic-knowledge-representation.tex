@@ -56,7 +56,7 @@ material from diverse fields of cognitive robotics to propose our own
 for service and interactive robotics. About fifty such items are identified,
 defined, and organised in a large set.
 
-We then put into practice this reference by surveying nine systems and
+We then put into practice this reference by surveying eight systems and
 architectures for robots. Their main strengths are underline, in order to
 depict the state of the research in knowledge representation for robots.
 
@@ -243,7 +243,7 @@ definition accompanied by links to relevant literature.
 
 The typology has been built from three main sources: a review of the existing
 literature on that topic that we present in the next section; the survey of
-nine knowledge representation systems already deployed; our own experience,
+eight knowledge representation systems already deployed; our own experience,
 acquired during the thesis preparation with the help of many discussions with
 researchers from both CNRS and TUM, that allowed to interweave two slightly
 different perspectives on knowledge in robotics.
@@ -923,7 +923,8 @@ associated to specific events).
 
 In the larger field of cognitive architectures, the {\sc Soar}
 architecture~\cite{Lehman2006} is one of those that tries to reproduce a
-human-like memory organization.
+human-like memory organization. The GLAIR cognitive architecture also have a
+concept of long term/short term and episodic/semantic memories.
 
 %%%%%%%%%%
 \subsection{Reasoning Techniques}
@@ -1886,7 +1887,6 @@ representation that are adequately (or not) tackled by the existing systems.
 \midrule
 ARMAR/Tapas & Formal & Holzapfel, Waibel \par (Karlsruhe TH) & & & TFS (Typed Feature Structures) & \cite{Holzapfel2008}\\
 CAST Proxies & Ubiquitous & Wyatt, Hawes, Jacobsson, Kruijff (Brimingham Univ., DFKI Saarbrücken) & & & Amodal proxies & \cite{Jacobsson2008} \\
-GLAIR & Formal & Shapiro, Bona \par (Buffalo Univ.) & & & SNePS & \cite{Shapiro2009} \\
 GSM & Structural & Mavridis, Roy \par (MIT MediaLab) & & & & \cite{Mavridis2006} \\
 Ke Jia Project & Formal & Chen et al. \par (Univ. of Science and Technology of China) & \url{www.wrighteagle.org/en} & ASP (Answer Set Programming) & ASP & \cite{Chen2010} \\
 {\sc KnowRob} & Formal & Tenorth, Beetz \par (TU Munich) & \url{ias.in.tum.de/kb/wiki} & {\sc Prolog} & {\sc Prolog} + OWL-DL &  \cite{Tenorth2009a} \\
@@ -1952,12 +1952,13 @@ several implementations on robots, including service robots, do exist, the
 focus of this language is on representation and reasoning about actions and
 situations, and the link with symbolic, abstract knowledge is not explicit.
 
-While classical cognitive architectures like {\sc Soar}~\cite{Lehman2006} or
-{\sc ACT-R} have declarative knowledge modules~\cite{Derbinsky2010} and have
-been recently used on service robots (see {\sc ACT-R/E}~\cite{Kennedy2009} for
-instance), they are also absent from this survey because we did not find much
-references in the literature on knowledge manipulation and representation
-applied to robotic scenarii for these architectures.
+While classical cognitive architectures like {\sc Soar}~\cite{Lehman2006},
+GLAIR~\cite{Shapiro2009} or {\sc ACT-R} have declarative knowledge
+modules~\cite{Derbinsky2010} and have been recently used on service robots (see
+{\sc ACT-R/E}~\cite{Kennedy2009} for instance), they are also absent from this
+survey because we did not find much references in the literature on knowledge
+manipulation and representation applied to real-world robotic scenarii for
+these architectures.
 
 A comprehensive reference on (bio-inspired) cognitive architectures is also
 available from the BICA Society~\ref{BicaCogArch2011}.
@@ -2029,26 +2030,6 @@ In~\cite{Hawes2011}, Hawes et al. also explore \emph{curiosity} mechanisms in
 the context of spatial representations with the robot \emph{Dora}.
 
 \fxwarning{CAST: 2 lines on the experiments}
-
-\subsection{GLAIR}
-\label{sect|glair}
-
-
-While mostly implemented on virtual agents, the GLAIR cognitive architecture by
-Shapiro and Bona~\cite{Shapiro2009} is an architecture explicitly built to
-tackle the grounding issue from the percept to the decision. It is a
-three-layers architecture: a \emph{Knowledge Layer}, a low-level
-\emph{Sensori-Actuator Layer} and an intermediate \emph{Perceptuo-Motor Layer}
-that binds the previous two.  The knowledge layer relies on SNePS, a custom
-knowledge representation language (more expressive than first-order logic), and
-natural language processing capabilities are also available.
-
-The GLAIR project has been only demonstrated in a limited set of
-environments, but exhibits interesting features such as explicit management
-of contexts of facts and memory models (long term/short term,
-episodic/semantic).
-
-\fxfatal{To complete!}
 
 \subsection{GSM}
 \label{sect|gsm}
@@ -2523,7 +2504,7 @@ larger robotic architecture, and finally, features that characterize the
 represented knowledge itself. Each of the fifty concepts has been briefly
 presented with references to the literature.
 
-Finally, we have surveyed nine systems for knowledge representation in service
+Finally, we have surveyed eight systems for knowledge representation in service
 robots and underlined their main strengths.
 
 The next chapter introduces ORO, a tenth KRS that we have designed and
