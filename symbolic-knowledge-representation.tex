@@ -771,14 +771,34 @@ is specifically discussed at section~\ref{sect|planning}.
 
 \subsubsection{Context modeling}
 
-\emph{Knowledge is contextualized information}\fxfatal{Find someone respectable
-how said that :-)}: it is essential for the robot to associate the facts it
-represents to a \emph{context}. The context carries the keys for the
-interpretation of the information. It covers the \emph{domain of validity} of
-the facts, the \emph{common-sense} knowledge required to fill the gaps in the
-representation\fxfatal{give an example}, \fxfatal{What more? -> McCarthy, merge
-with section 2.1.1?}.
+Knowledge is contextualized information: it is essential for the robot to
+associate the facts it represents to a \emph{context}. The context carries the
+keys for the interpretation of the information and set a common ground for
+interaction (and, in particular, communication~\cite{Jakobson1960}). It
+implicitely defines the domain of validity of the facts and carries the
+\emph{common-sense} knowledge required to fill the gaps of the knowledge
+explicitely shared between the agents.
 
+Context is generally difficult to recognise, represent and reuse because it is
+multiform and largely implicit nature. It is also never unique: at a given
+moment, several contexts, at different temporal, spatial, social scales,
+overlap.
+
+In the current literature in robotics and cognitive architectures, the term
+\emph{context} usually simply refers to a set of beliefs that initiate a
+representation (and reasoning) frame: in~\cite{Lemaignan2011a}, the robot
+creates a context of interaction with a specific human by storing in a separate
+model the beliefs of this human and using this knowledge when dialoging with
+the human, the reasoning network is reinitialised in the GLAIR architecture
+when the hypotheses that defined the current situation are not believed
+anymore~\cite{Shapiro2009}.
+
+This acception of \emph{context} is simplistic, and omit the overlapping and
+multi-scale aspects of context modeling.
+
+We see context representation as one of the main challenge of knowledge
+representatio in general, and we will further discuss the importance and issues
+brought by context modeling in the conclusion of the thesis.
 
 \subsubsection{Modality, Contingency and Theory of Mind}
 \label{sect|possible-worlds}
