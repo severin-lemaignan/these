@@ -269,35 +269,34 @@ Natural interaction and cooperation are actually the current (dare we say,
 \emph{interactive manipulation problems}: several agents agree on a (more or
 less implicit) joint goal that requires some sort of cooperation to be
 successfully achieved. This class of problems involves both dialogue and
-manipulation and is often not completely defined at start-up: it requires
+manipulation and they are often not completely defined at start-up: they require
 iterative, interactive resolution (step-by-step process,
 questions-answers,...).
 
 What are the cognitive prerequisites for such a sentence --``Let's make a
 brownie for tonight''-- to be understood by the robot, correctly interpreted in
 the spatial and temporal context of the interaction, and eventually transformed
-into a set of actions? We distinguish~\cite{Lemaignan2012} four successive
-steps:
+into a set of actions? We distinguished four main tasks in~\cite{Lemaignan2012}:
 
 \begin{enumerate}
 
-    \item how to build and maintain a consistent geometric model of the current
-        situation, acquired through perception or deduction from previous
-        perceptions,
+    \item building and maintenance of a consistent geometric model of the
+        current situation, acquired through perception or deduction from
+        previous perceptions,
 
-    \item how to build an unambiguous symbolic representation of concepts
+    \item building of an unambiguous symbolic representation of concepts
         (objects, agents, actions...) underlying the interaction, and practical
         for decision-making processes,
 
-    \item how to establish the joint goal(s), how to build and maintain
+    \item establishing the joint goal(s), building and maintenance of
         iteratively shared (human-robot) plans, 
 
-    \item how to refine and execute the computed plans, and how to monitor
-        those achieved by its human partner?
+    \item refinement and execution of the computed plans, and monitoring of
+        those achieved by the human partner.
 
 \end{enumerate}
 
-This work focuses on the second point: it presents techniques, developed and
+The thesis focuses on the second point: it presents techniques, developed and
 used on several real robots, for the symbolic representation of environment
 models suitable for grounded situation interpretation, decision-making and
 control.
@@ -318,8 +317,9 @@ processes to form a \emph{knowledge-enabled} robotic architecture.
 \end{figure}
 
 
-Figure~\ref{fig|hri-dec} summarises the main aspects of the interaction.
-From the robot perspective, several cognitive skills are involved: dialogue
+\paragraph{Models for the interaction} Figure~\ref{fig|hri-dec} summarises the
+main aspects of the interaction, that are to be translated into models.  From
+the robot perspective, several cognitive skills are involved: dialogue
 processing through verbal and deictic modalities (what does the human say? What
 attitude -- glances, postures, gestures... -- does he express?), acquisition
 and maintenance of one or several models of the environment, not only from the
@@ -350,55 +350,56 @@ of communication proposed by Jakobson in 1960
 main functions involved in a communication, be it verbal or non-verbal. While
 the \emph{channel} and the \emph{code} are the technical side of the
 communication, the \emph{message} in relation with the \emph{context} are
-directly concerned with the question of the \emph{meaning} which itself as
-tight links with the knowledge available to the agent.
+directly concerned with the question of the \emph{meaning}. And the meaning is
+itself tightly bound to the knowledge available to the agent.
 
-The question of the communication between a robot and another agent (in a broad
-way: another robot, an human, but also a remote knowledge base or the robot's
-developer) underlies many of the challenges of knowledge representation: how to
-represent the knowledge I want to exchange, and how to recognize, represent and
-share a context that ensures both the end of the communication channel
-correctly interpret the message. Or, to put it another way: how to ensure the
-\emph{meaning} is correctly carried around while conducting social
-interactions.
+The question of the communication between a robot and another agent
+(\emph{agent} in a broad sense: another robot, a human, but also a remote
+knowledge base or the robot's developer) actually underlies many of the
+challenges of knowledge representation: how to represent the knowledge I want
+to exchange, and how to recognize, represent and share a context that ensures
+that both ends of the communication channel correctly interpret the message.
+Or, to put it another way: how to ensure that the \emph{meaning} is correctly
+carried around while conducting social interactions?
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{The Challenges}
+\section{The challenges}
 \label{sect|challenges}
 
 From the set of questions raised in the previous paragraphs, we can now
 articulate the challenges that are to be tackled in this field of knowledge
-representation for service/companion robotics.
+representation for service or companion robotics.
 
 The first challenge is to... clarify the challenges (!) of knowledge
-representation: we say ``knowledge'', we say ``reasoning'', we say
+representation: we said ``knowledge'', we said ``reasoning'', we said
 ``representation'', but clear definitions are yet to be provided. Numerous
 requirements on what Newell calls the \emph{knowledge level} of intelligent
 agents have emerged from our \emph{Brownie} scenario, but how do they
-articulate? And are they comprehensive?
+articulate? Are they comprehensive?
 
-To further develop what is widely known as the ``cognitive robotics'', we think
+To allow further progresses in the field of cognitive robotics, we think
 it is mandatory to lay down solid theoretical and practical foundations to the
-knowledge needs of service/interactive robots. This is our first challenge.
+knowledge needs of service and interactive robots. This is our first challenge.
 
 The second challenge is more technical: how to build such a
-``knowledge-enabled'' robot? Since many years, research has started to create
-and study so-called cognitive architectures. Robots, as embodied and
-interactive agents, raise specific issues. What are they? Which are the right
-technical approaches? Can we build today such a cognitive system, and if we can
-not, why that? How the abstract idea of knowledge translates into  practical,
-meaningful concepts?
+``knowledge-enabled'' robot? Since many years, researchers create and study
+so-called cognitive architectures, implemented as abstract, computer-based,
+virtual models of the human cognition. Robots, as embodied and interactive
+agents, raise specific issues. What are those? Which are the right technical
+approaches to tackle them? Can we build today such a cognitive system, and if
+we can not, why that? How the abstract idea of knowledge translates into
+practical, meaningful concepts?
 
 Our third challenge relates to the specific question of the human-robot
-interaction: the robot enters the realm of a social individuality. What does
-that mean? Which consequences does that have on our initial knowledge
-challenge? How does it translate into practical issues, like natural language
-understanding?
+interaction. We claim that robots now belong to the realm of social
+individualities. What does that mean? Which consequences does that have on our
+initial knowledge challenge? How does it translate into practical issues, like
+natural language understanding?
 
 All the contributions (summarised in the next section) of this thesis can be
-related to one of these three challenges, and hopefully contribute to the
-advancement of the understanding of these questions.
+related to one of these three challenges, and we hope they contribute to the
+progress towards the understanding of these questions.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -577,7 +578,7 @@ the following sections in that order:
 Hopefully, this quick overview of this work can help you to go in depth into
 the sections relevant to your concerns.
 
-\fxfatal{Re-read these sections to make sure it makes sense}
+\fxwarning{Re-read these sections to make sure it makes sense}
 
 \subsection*{For the patient reader}
 
