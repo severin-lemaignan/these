@@ -106,12 +106,10 @@ and the geometric realms: while AI at its origins was mostly a matter of
 symbolic models, it has been since recognised that not only that the mind is
 not a purely abstract system, disconnected from the physical world, but even
 more, the cognition fundamentally rely on its relation to the physical world
-(so-called \emph{embodied cognition}. Varela\fixme{cite Varela, F. J.,
-Thompson, E., \& Rosch, E. (1991). The embodied mind: cognitive science and
-human experience. Cambridge, Mass.: MIT Press.} is one of the main discoverer
-of these mechanisms, and coined the concept of \emph{enactivism} as the
-theoretical framework that study the links between cognition, embodiment and
-actions).
+(so-called \emph{embodied cognition}. Varela~\cite{Varela1992} is one of the
+main discoverer of these mechanisms, and coined the concept of
+\emph{enactivism} as the theoretical framework that study the links between
+cognition, embodiment and actions).
 
 \emph{Knowledge} is for us an \emph{information interpreted in the cultural and
 social context of the robot}. In practical terms, knowledge is made of
@@ -127,7 +125,7 @@ of other facts previously acquired by the agent.
 Since machines are limited to syntactic (in contrast to semantic)
 processing, we are mostly looking for a syntactic (\ie, based on symbols)
 matching between concepts representations (in our case, sets of alphanumeric
-characters).\fxfatal{il faut sans doute évoquer ici la relation
+characters).\fxnote{il faut sans doute évoquer ici la relation
 sémantique/syntactique que propose Choamsky}.
 
 The \textit{cultural context} is a broad set of common, general facts that are
@@ -157,9 +155,6 @@ made intrinsic to the system?''. This issue has a very practical importance in
 robotic: for a robot to be both endow with a symbolic representational and
 reasoning system, and able to \emph{act} in the physical world, it must ground
 its knowledge.
-
-\fixme{cite Coradeshi}
-
 
 \paragraph{Domain of validity} specifies the scope in which
  information is (believed to be) true. It covers several aspects: temporal,
@@ -436,7 +431,7 @@ to description logics~\cite{Baader2001}. Modal logic allows to represent conveni
 possible worlds and facts like ``the robot knows \emph{that the human knows}
 how to read a recipe''.
 
-\fxfatal{On modal logics, see the remark of McCarthy, in \cite{McCarthy2007}, section 3}
+\fxwarning{On modal logics, see the remark of McCarthy, in \cite{McCarthy2007}, section 3}
 
 \emph{Temporal logic} are designed to represent and manipulate assertions whose
 truth value may vary in time. We introduce one of its key idea (the
@@ -696,8 +691,11 @@ duration\footnote{Other definitions of a situation do exist, notably in the
 context of \emph{situation calculus}~\cite{Levesque1998}, Reiter and Levesque
 consider a situation to be an history of actions.}.
 
-\fxfatal{Discuss time chronicles~\cite{Ghallab1996}}
-\fxfatal{Discuss Allen intervals}
+Numerous techniques to represent and reason about time have been devised.
+Amongst the most significant ones, we can mention Allen's interval
+algebra~\cite{Allen1984} and Ghallab's chronicles~\cite{Ghallab1996}.
+
+ \fxwarning{We could detail more chronicles and allen algebra...}
 
 The concept of \emph{fluent} plays another important role for time
 representation. Fluents are properties (or \emph{conditions}) that change over
@@ -1145,15 +1143,15 @@ For instance, the SWRL rule language, usually associated to the OWL-DL ontology
 language, do not allow non-monotonic reasoning (only so-called DL-safe rules
 are allowed).
 
-\fxfatal{Make clear 'who does not allow non-monotonic-reasoning': logics? rule
+\fxwarning{Make clear 'who does not allow non-monotonic-reasoning': logics? rule
 languages? reasoner?}
 
 One important exception is the \emph{negation as failure} inference rule, as
 implemented by {\sc Prolog} for instance, that allows for non-monotonicity
 within the closed world assumption.
 
-\fxfatal{Give here an example of non-monotonic reasoning with Prolog}
-\fxwarning{Do we mention here Answer Set Programming?}
+\fxwarning{Give here an example of non-monotonic reasoning with Prolog}
+\fxnote{Do we mention here Answer Set Programming?}
 
 A monotonic system does not theoretically allow for knowledge retraction,
 which is an important issue in the robotic context where the world model is
@@ -1161,12 +1159,14 @@ likely to be often altered.  However it is a practical issue only if the
 reasoning process is \emph{continuous} during the whole robot's activity
 lifespan. It is often possible to stop the reasoner, alter the knowledge, and
 restart the inference process on a new domain.
-\fxfatal{Rephrase to emphasize that when new evidences appear, it is anyway often a
-good idea to restart the reasoner.}
 
-\fxfatal{Mention that the 'change of world' issue can also be dealt with appropriate
-time representation.}
-\fxfatal{Mention that probabilistic reasoning lead to implicit non-monotonic reasoning}
+Non-monotonicity can also be partially dealt with with appropriate time
+representation and reasoning (the reasoner then only takes into account
+statements that are set as valid for a given moment).
+
+Finally, probabilistic reasoning also implicitly leads to non-monotonic
+reasoning, by relying on a continuous description of the state of the
+world.
 
 
 \subsubsection{Presupposition Accommodation}
@@ -1349,10 +1349,11 @@ compute symbolic facts from on-demand physics simulation. This requires a tight
 integration between the symbolic model and a geometric model that carries the
 geometries and physical properties of objects.
 
-\subsubsection{Learning}
-\label{sect|learning}
-
-\fxfatal{Learning section to write}
+%%% TODO TODO TODO: Learning!!
+%%%\subsubsection{Learning}
+%%%\label{sect|learning}
+%%%
+%%%\fxfatal{Learning section to write}
 
 %%%%%%%%%%%%%%%%%
 \subsection{Acquiring Knowledge}
