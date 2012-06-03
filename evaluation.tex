@@ -17,7 +17,7 @@ representation in robotics systems.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Summary of contributions to the Knowledge Representation question}
+\section{State of the knowledge representation in robotics}
 \label{sect|evaluation-oroserver}
 
 This section summarises the various approaches that have been surveyed in the
@@ -180,21 +180,16 @@ of efficient meta-knowledge is the absence of knowledge history.  With ORO, the
 robot always lives in the present.
 
 
-
-\subsection{Reasoning about events and actions}
-
-reasoning about events, and in particular, actions,
-
 \subsection{Introspection}
 
 the capacity of introspection,
 
-\subsection{Decision Making}
+\subsection{Decision making}
 
 and finally, he points the issue of giving computer the right heuristics for
 decision making.
 
-\subsubsection{On Thematic Roles and Action Models}
+\subsubsection{On thematic roles and action models}
 
 The current implementation relies on a small, predefined set of action verbs
 that can be recognized from natural language
@@ -247,7 +242,7 @@ technically very easy to do in ORO server, but has not been actually enabled
 because the performance hit (each reified statement produces four triples
 instead of one) was not justified by any current use case of ORO server.
 
-\subsection{Learning, Representation of Experience}
+\subsection{Learning, representation of experience}
 
 Since we provide no time management, our system is currently not able to
 \emph{match past (learned) experiences with the current interaction}.  This
@@ -262,7 +257,7 @@ perspective}: this is probably our main contribution which we are now trying to
 develop even further towards psychology-inspired experiments.
 
 
-\subsection{Justification and Resolution of Cognitive Conflicts}
+\subsection{Justification and resolution of cognitive conflicts}
 
 Logical inconsistencies in one ORO's model (or, from a cognitive point of view,
 cognitive conflicts) could be better dealt with: while (partially) provided by
@@ -272,7 +267,7 @@ logical justification of the inconsistency is not really exploited.
 
 
 
-\subsection{Performances Analysis}
+\subsection{Performances analysis}
 
 \subsubsection{Relaxation time}
 
@@ -415,7 +410,7 @@ experiments on such scenarii, by avoiding the added complexity of processing
 camera images to detect the objects of interest and exploiting the inherent
 knowledge of the simulated world.
 
-\subsubsection{An Experimental Framework}
+\subsubsection{An experimental framework}
 
 Due to its nature, MORSE offers two main advantages compared to experiments on
 a real robot: light-weight deployment and repeatability. MORSE is already used
@@ -429,7 +424,7 @@ component providing a base of facts such as objects' relative placements,
 visibility and reachability by the agents present in the scene. It additionally
 provides a stable state of the world to the motion planners.
 
-\subsection{Case Studies}
+\subsection{Case studies}
 \label{sect|casestudies}
 
 This section reports on three small experiments conducted in the first half of
@@ -454,7 +449,7 @@ Laboratory (a YARP-based architecture), the \textit{Rosie} robot from the
 Technical University of Munich (a ROS-based architecture) and the \textit{Jido}
 robot at LAAS-CNRS (based on the LAAS Pocolibs middleware).
 
-\subsubsection{Knowledge Acquisition: Point \& Learn}
+\subsubsection{Knowledge acquisition: Point \& Learn}
 \label{expe|pointandlearn}
 
 \begin{figure}
@@ -512,7 +507,7 @@ Due to the limitation of the speech recognition software, only a predefined set
 of names or types could be recognized, thus preventing the robot to add
 completely original objects.
 
-\subsubsection{Odd One Out}
+\subsubsection{Odd one out}
 \label{expe|odd_one_out}
 
 \begin{figure}
@@ -611,7 +606,7 @@ low-level perception results by ``closing the loop'' with high-level, symbolic
 knowledge.
 
 
-\subsubsection{The Spy game}
+\subsubsection{The spy game}
 \label{spygame}
 
 This game is based on the traditional children game ``I Spy''. The idea is to
@@ -716,7 +711,7 @@ Figure~\ref{fig|spyGameExample} shows an example of a round game.
 	\label{fig|spyGameExample}
 \end{figure}
 
-\subsection{Interaction Experiments}
+\subsection{Interaction experiments}
 
 Three larger experiments have been also conducted. The first two are focused on
 knowledge representation and verbal interaction: the ``Moving to London''
@@ -731,7 +726,7 @@ involves the SHARY execution controller and the HATP symbolic task planner
 besides ORO and {\sc Dialogs}. In this scenario, the human and the robot try to
 cooperatively remove objects from a table.
 
-\subsubsection{First Interaction Experiment: ``Moving to London'' scenario}
+\subsubsection{First interaction experiment: ``Moving to London'' scenario}
 \label{sect|expe1}
 
 This first experiment is based on the following daily life situation: Tom and
@@ -883,7 +878,7 @@ next to the toolbox.''
 \end{center}
 
 
-\subsubsection{Second Interaction Experiment: ``Aperitif Time''}
+\subsubsection{Second interaction experiment: ``Aperitif Time''}
 \label{sect|expe2}
 
 A similar experiment has been conducted in the appartment environment
@@ -966,7 +961,7 @@ with. A pre-study that was meant to gather example of verbal inputs and
 involving about fifty users has been however conducted. It provides a valuable
 database to exercice and further develop the dialogue management system.
 
-\subsubsection{Third Interaction Experiment: ``Cleaning the Table''}
+\subsubsection{Third interaction experiment: ``Cleaning the Table''}
 \label{sect|expe3}
 
 The third experiment involved a more complex decisional layer where the ORO

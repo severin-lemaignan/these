@@ -1,11 +1,11 @@
-\chapter{Symbolic knowledge representation}
+\chapter{Symbolic Knowledge Representation}
 \label{chapt|krs}
 
 \fxnote{Support material: \emph{What is a knowledge representation} by Davis,
 Shrobe and Szolovits,
 \url{http://groups.csail.mit.edu/medg/ftp/psz/k-rep.html}}
 
-\section{Knowledge and Robotics}
+\section{Knowledge and robotics}
 \label{sect|knowledge}
 
 The idea of \emph{Cognitive Robotics} was coined in the early 1990s by Reiter.
@@ -216,7 +216,7 @@ comprehensive set of cognitive abilities related to knowledge.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{A Typology of Knowledge Representation Requirements for Robotics}
+\section{A typology of knowledge representation requirements for robotics}
 \label{sect|features}
 
 This section now focuses on formalizing the knowledge representation issue: we
@@ -243,7 +243,7 @@ acquired during the thesis preparation with the help of many discussions with
 researchers from both CNRS and TUM, that allowed to interweave two slightly
 different perspectives on knowledge in robotics.
 
-\subsection{Previous Work}
+\subsection{Previous work}
 \label{sect|evaluation-literature}
 
 As said, the typology we propose is in part based on a comprehensive synthesis of
@@ -356,7 +356,7 @@ points, and we indeed integrate them in our typology, in slightly reformulated
 ways.
 
 
-\subsection{What Can be Represented?}
+\subsection{What can be represented?}
 \label{sect|expressiveness}
 
 \begin{scriptsize}
@@ -376,7 +376,7 @@ This first axis of analysis is its intrinsic expressive power. It answers the
 question: what can be possibly represented. When it explicitly exists, the
 \emph{language} of representation plays here an obvious role.
 
-\subsubsection{Main Logic Formalisms}
+\subsubsection{Main logic formalisms}
 
 The main role of a knowledge representation system is to provide an adequate
 representation system to formally store facts and concepts that could be informally
@@ -447,7 +447,7 @@ their own, and practical considerations (especially the availability of
 reasoners efficient enough for on-line use on a robot) often constraint the
 choice of a logical formalism and a level of expressive power.
 
-\subsubsection{Expressive Power}
+\subsubsection{Expressive power}
 
 Logical formalisms each bring a certain level of expressive power. For
 instance, the following classical syllogism can not be represented in
@@ -513,7 +513,7 @@ the robot because a light alteration of the knowledge structure can lead to
 very noticeable performance drops.
 
 
-\subsubsection{Open World and Close World Assumptions}
+\subsubsection{Open world and close world assumptions}
 \label{sect|owa-cwa}
 
 The \emph{close world} (CWA) vs. \emph{open world} (OWA) assumptions name a
@@ -612,7 +612,7 @@ cognitive capabilities (theory of mind, introspection, memory).
 \end{center}
 \end{scriptsize}
 
-\subsubsection{Role Representations}
+\subsubsection{Role representations}
 
 This section discusses strategies and approaches to represent in a knowledge
 model three important \emph{roles}: spatial relations, time and representation
@@ -798,7 +798,7 @@ We see context representation as one of the main challenge of knowledge
 representatio in general, and we will further discuss the importance and issues
 brought by context modeling in the conclusion of the thesis.
 
-\subsubsection{Modality, Contingency and Theory of Mind}
+\subsubsection{Modality, contingency and theory of mind}
 \label{sect|possible-worlds}
 
 Linked to the context representation, but seen from another angle, knowledge
@@ -889,7 +889,7 @@ represented as a simple instantiation of a specific category (for instance, if
 the robot give an object to the human, this state could be represented with the
 triples \setstmt{robot performs action1,action1 isA Give}.
 
-\paragraph{Modelling of the robot capabilities}
+\paragraph{Modeling of the robot capabilities}
 
 A particularly important aspect of introspection relates to the description of
 its own capabilities: which sensors/actuators/computation services exist and
@@ -945,7 +945,7 @@ human-like memory organization. The GLAIR cognitive architecture also have a
 concept of long term/short term and episodic/semantic memories.
 
 %%%%%%%%%%
-\subsection{Reasoning Techniques}
+\subsection{Reasoning techniques}
 \label{sect|reasoning}
 
 \begin{scriptsize}
@@ -1039,7 +1039,7 @@ represented with rules. For instance:
 $\Rightarrow$ \concept{focusesOn(?agt, ?obj)}
 \normalsize
 
-\subsubsection{Dynamic Instantiation and Alteration of the Knowledge Structure}
+\subsubsection{Dynamic instantiation and alteration of the knowledge structure}
 
 The content of a knowledge base is often conveniently divided into a
 \emph{structural part} that defines the conceptualisation of a domain in term
@@ -1102,7 +1102,7 @@ with a purely lazy evaluation strategy for spatial relations).
 
 %\subsubsection{Reasoning with uncertainty}
 
-\subsubsection{(Non) Monotonic Reasoning}
+\subsubsection{(Non) monotonic reasoning}
 
 \emph{Monotonic reasoning} means that addition of new assertions to a knowledge base
 can only extend the set of assertions that can be inferred, while a
@@ -1153,23 +1153,8 @@ within the closed world assumption.
 \fxwarning{Give here an example of non-monotonic reasoning with Prolog}
 \fxnote{Do we mention here Answer Set Programming?}
 
-A monotonic system does not theoretically allow for knowledge retraction,
-which is an important issue in the robotic context where the world model is
-likely to be often altered.  However it is a practical issue only if the
-reasoning process is \emph{continuous} during the whole robot's activity
-lifespan. It is often possible to stop the reasoner, alter the knowledge, and
-restart the inference process on a new domain.
 
-Non-monotonicity can also be partially dealt with with appropriate time
-representation and reasoning (the reasoner then only takes into account
-statements that are set as valid for a given moment).
-
-Finally, probabilistic reasoning also implicitly leads to non-monotonic
-reasoning, by relying on a continuous description of the state of the
-world.
-
-
-\subsubsection{Presupposition Accommodation}
+\subsubsection{Presupposition accommodation}
 \label{sect|presupposition-accommodation}
 
 \emph{Presupposition accommodation}~\cite{VonFintel2008} is the ability for a
@@ -1279,7 +1264,7 @@ The cognitive capability of \emph{justification} is also intimately linked to
 the meta-cognition capability and participates to the overall \emph{cognitive
 observability} of the system.
 
-\subsubsection{Task Planning}
+\subsubsection{Task planning}
 \label{sect|planning}
 
 Symbolic task planning is the ability for a robot to select a sequence of
@@ -1356,7 +1341,7 @@ geometries and physical properties of objects.
 %%%\fxfatal{Learning section to write}
 
 %%%%%%%%%%%%%%%%%
-\subsection{Acquiring Knowledge}
+\subsection{Acquiring knowledge}
 
 \begin{scriptsize}
 \begin{center}
@@ -1539,7 +1524,7 @@ Varadarajan2011}.
     \label{fig|semanticmap}
 \end{figure}
 
-\subsubsection{Intrinsic Motivation and Curiosity}
+\subsubsection{Intrinsic motivation and curiosity}
 
 The reasons for a robot to acquire knowledge are diverse, and usually external
 to the robot itself. It is often driven by the requirements of tasks that the
@@ -1561,7 +1546,7 @@ models, competence based models and morphological models, are surveyed
 in~\cite{Oudeyer2008}.
 
 %%%%%%%%%%%%%%%%%
-\subsection{Practical Integration in Robotic Architectures}
+\subsection{Practical integration in robotic architectures}
 \label{sect|integration-robot}
 
 \begin{scriptsize}
@@ -1772,7 +1757,7 @@ parameters that lead to different knowledge models.
 
 \fxfatal{Knowledge Instantiation: THIS SECTION IS FAR FROM COMPLETE}
 
-\subsubsection{Design Strategy}
+\subsubsection{Design strategy}
 \label{sect|design-strategies}
 
 The main challenge of knowledge representation can be summarised as \emph{How to
@@ -1813,7 +1798,7 @@ itself is constructed: either by successive classification and refinement of
 percepts, or from generic categories, typically extracted from standard
 upper-ontologies.
 
-\subsubsection{Common-sense and alignment with Standard Upper-ontologies}
+\subsubsection{Common-sense and alignment with standard upper-ontologies}
 
 At section~\ref{sect|lod} we have presented how remote knowledge bases are a
 valuable source of knowledge, including common-sense knowledge, that robot can
@@ -1874,7 +1859,7 @@ Other metrics that include the categories of predicates that are used, or the
 computed DL expressiveness, can be more significant (some are presented in
 table~\ref{table|onto-stats}, page~\pageref{table|onto-stats}).
 
-\subsubsection{Self-Knowledge}
+\subsubsection{Self-knowledge}
 
 ``Self-knowledge'' is the term used in psychology to describe the knowledge
 that an individual has, acquires or infers about itself through its
@@ -1886,7 +1871,7 @@ introspective capability that we have previously mentioned
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Existing Systems for Knowledge Representation in Service Robotics}
+\section{Existing systems for knowledge representation in service robotics}
 \label{sect|surveyed-systems}
 
 
@@ -2010,7 +1995,7 @@ those new concepts.
 
 \fxwarning{ARMAR: 2 lines on the experiments}
 
-\subsection{CAST Knowledge model}
+\subsection{CAST knowledge model}
 \label{sect|cast}
 
 CAS (\emph{CoSy Architecture Schema}) Toolkit~\cite{Hawes2007} is a
@@ -2344,7 +2329,7 @@ module can be seamlessly integrated into the PEIS ecosystem.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{An Interface for Knowledge Manipulation in Robotics}
+\section{An interface for knowledge manipulation in robotics}
 \label{sect|knowledge-api}
 
 During the preparation of the thesis, discussions with several people involved
@@ -2355,7 +2340,7 @@ between robotics components.
 This section presents this effort of standardisation that is (partially)
 implemented by the ORO server, presented in the next chapter.
 
-\subsection{Rationale and General Considerations}
+\subsection{Rationale and general considerations}
 
 The original idea comes from the acknowledgement that more and more software
 components for robotics want to store or use symbolic data. Since established
