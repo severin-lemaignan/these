@@ -58,7 +58,7 @@ B -> B5;
 
 
 
-C10 [label="C.9. Learning"];
+//C10 [label="C.9. Learning"];
 C9 [label="C.8. Naive\n physics"];
 C8 [label="C.7. Planning"];
 C7 [label="C.6. Prediction\n and explanation"];
@@ -84,7 +84,7 @@ C -> C7 -> C71;
      C7 -> C74;
 C -> C8;
 C -> C9;
-C -> C10;
+//C -> C10;
 
 D3 [label="D.3 Motivation"];
 D2 [label="D.2 Grounding"];
