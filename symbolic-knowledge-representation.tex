@@ -565,7 +565,7 @@ table?''}). Most logics do not account explicitly for uncertainty. It must be
 either relied on specific logics (like Bayesian logics) or on extensions of
 classical logics.
 
-\fxwarning{To be completed!}
+\fxfatal{Representation of uncertainty: To be completed!}
 
 \subsubsection{Meta-cognition: knowledge on the knowledge}
 
@@ -648,7 +648,16 @@ level: the topology of environments and the placement of physical entities.
 \end{center}
 \end{scriptsize}
 
-\fxwarning{...topology??}
+Topological maps are abstractions of an environment as graphs where nodes
+represent places and edges represent connections between places. Because they
+are symbolic representation, topological maps allow higher-level reasoning
+(such as containment, connectivity, regions) than metric maps.
+
+One important contribution to the building of a coherent representational stack
+for space representation is the Spatial Semantic Hierarchy~\cite{Kuipers2000}
+introduced by Kuipers. It consists in multiple interacting representations of
+space, both qualitative and quantitative, that span from sensor-level
+representation to ontologies of places and regions.
 
 Symbolic representation of entities placement can be absolute or relative. The
 relation \concept{isOn}, for example, leads to absolute statements: the
@@ -694,12 +703,10 @@ consider a situation to be an history of actions.}.
 Numerous techniques to represent and reason about time have been devised.
 Amongst the most significant ones, we can mention Allen's interval
 algebra~\cite{Allen1984} and Ghallab's chronicles~\cite{Ghallab1996}.
-
- \fxwarning{We could detail more chronicles and allen algebra...}
-
-The concept of \emph{fluent} plays another important role for time
-representation. Fluents are properties (or \emph{conditions}) that change over
-time, like $sees(agent1, apple, t)$.\fxwarning{Un peu court... citation?}
+\fxwarning{We could detail more chronicles and allen algebra...}
+The concept of \emph{fluent} also play an important role for time
+representation: fluents are properties (or \emph{conditions}) that change over
+time, like $sees(agent1, apple, t)$.\fxwarning{A bit short... citation?}
 
 We call a system that does not account for time (\ie that permanently lives in
 present) \emph{atemporal}.
@@ -1185,8 +1192,8 @@ on actions and consequences of actions, the \emph{projection task} and the
 \emph{legality task}.
 
 We call \emph{diagnosis} the converse of the projection task: the ability to
-track back the origin of a decision...\fxwarning{To be completed, also with
-explanation}.
+track back the origin of a decision, and \emph{explanation} the more general
+ability to explicit a reasoning or a decision.
 
 \begin{scriptsize}
 \begin{center}
@@ -1218,10 +1225,10 @@ representation system~\cite{Gspandl2011}.
 
 \paragraph{Explanation} Diagnosis is also linked to the \emph{explanation} or
 \emph{justification} capabilities that may be offered by the knowledge
-representation system. The explanation of an entailment is the sequence (or
-set of sequences if several are possible) of reasoning steps that allow to
-reach a conclusion. An explanation can also conversely explain why a statement leads to a
-contradiction.
+representation system. The explanation of an entailment is the sequence (or set
+of sequences if several are possible) of reasoning steps that allow to reach a
+conclusion. An explanation can also conversely explain why a statement leads to
+a contradiction.
 
 The following example shows an explanation for an inconsistency in a particular
 knowledge base: by adding the statement \stmt{robot1 belongsTo human1}, we
@@ -1258,7 +1265,6 @@ Cognitive dissonance is also identified by developmental psychologists like
 Piaget as a motivation factor for a child to progress through the various
 stages of its cognitive development. This has been also studied in
 robotics~\cite{Oudeyer2007}.
-
 
 The cognitive capability of \emph{justification} is also intimately linked to
 the meta-cognition capability and participates to the overall \emph{cognitive
@@ -1405,7 +1411,29 @@ be split into proprioceptive sensing (\ie, sensing of the robot own internal
 state) and exteroceptive sensing (sensing of the robot environment). The
 (physical) introspection capabilities of the robot relies on the former.
 
-\fxwarning{What to say here?}
+Exteroceptive sensing is the most obvious and largely studied mean of knowledge
+acquisition. Traditional sensing devices (IR, cameras, laser-scanners), while
+still present and widely used (navigation based on 2D localization and obstacle
+avoidance is today the standard), are being step-by-step replaced by
+\emph{synthetic sensors}.
+
+These synthetic sensors include post-processing to provide higher-level
+percepts that ease the grounding. The prototypical example of such a device is
+the Kinect sensor. At a first level, it replaces traditional stereo vision
+algorithms by providing a fast, robust depth map. At a second level, it
+provides accurate, real-time tracking recognition and tracking of whole body
+poses of human.
+
+Other examples of such synthetic sensors exist: face recognition, off-the-shelf
+performant SLAM solutions, automatic cluster segmentation in point clouds (with
+the PCL library), etc.
+
+While the progresses of these sensing technologies are remarkable, one field of
+perception remain a very difficult challenge: accurate and generic object
+recognition. Most of the current approaches to object recognition rely on a mix
+of point cloud segmentation and fitting with visual feature recognition
+(SIFT-like algorithms), but it remains a slow and fragile task.
+
 
 \paragraph{Interaction}
 
@@ -1689,7 +1717,7 @@ $\mathcal{Q}^{\mathcal{M}'}$ the (averaged) time to execute a query of
 complexity $\mathcal{C}$ on the KRS. The type $\mathcal{M}$ of model
 alteration is either an ABox modification (addition/removal of an instance) or
 a TBox alteration (addition/removal of a class, a class restriction or a rule).
-Query complexity $\mathcal{C}$ is...\fxwarning{find references}.
+%Query complexity $\mathcal{C}$ is...\fxwarning{find references}.
 
 \emph{Temporal scalability} is defined in term of the nature of the function
 $f^{\mathcal{M}, \mathcal{C}}(\sigma) = \mathcal{R}^{\mathcal{M}}(\sigma) +
@@ -1993,15 +2021,18 @@ provides routines to recognize unknown entities, and propose and interactive
 and iterative verbal process to categorize (including adding new categories)
 those new concepts.
 
-\fxwarning{ARMAR: 2 lines on the experiments}
+\paragraph{Experiments} {\sc Tapas} has been used experimentally in a kitchen
+environment where naive users had to ask the robot for an object and get
+information about another object.
 
 \subsection{CAST knowledge model}
 \label{sect|cast}
 
 CAS (\emph{CoSy Architecture Schema}) Toolkit~\cite{Hawes2007} is a
 comprehensive toolkit aimed at building cognitive architectures for robots
-through a set of interconnected \emph{SA} (\emph{subarchitectures}). The CAS does not
-expose a central knowledge base as seen in other works. It represents instead knowledge as unrooted \emph{proxies}. Those proxies are formally
+through a set of interconnected \emph{SA} (\emph{subarchitectures}). The CAS
+does not expose a central knowledge base as seen in other works. It represents
+instead knowledge as unrooted \emph{proxies}. Those proxies are formally
 defined in \cite{Jacobsson2008} as $p= \langle F_p, u_p \rangle$ where $F_p$ is
 a set of instantiated features (like $\phi^{Colour}_{red}$) and $u_p$ a
 \emph{proxies union} that form an equivalence class corresponding to one
@@ -2023,7 +2054,7 @@ that add new a feature like \emph{"this object is a fruit"}. The learning
 module is called back, and can add this new information to its model.
 
 In the presented implementation, the CAST knowledge model does no allow for
-effectively representing actions or temporal information.\fxfatal{What about
+effectively representing actions or temporal information.\fxwarning{What about
 reasoning? can they retrieve for example 'all proxies for colorful objects'?}
 
 \paragraph{Knowledge Acquisition} Several techniques for knowledge acquisition
@@ -2035,7 +2066,9 @@ of the project.
 In~\cite{Hawes2011}, Hawes et al. also explore \emph{curiosity} mechanisms in
 the context of spatial representations with the robot \emph{Dora}.
 
-\fxwarning{CAST: 2 lines on the experiments}
+\paragraph{Experiments} CAST has been used in several experiments, including
+table-top manipulation (with a focus on language understanding) and more
+recently on the Dora robot~\cite{Hawes2011} for indoor exploration.
 
 \subsection{GSM}
 \label{sect|gsm}
@@ -2119,13 +2152,6 @@ modules (figure~\ref{fig|knowrob} organized around a core reasoning system
 written in Prolog. This core module interfaces through Java/Prolog or
 C/Prolog APIs with external modules.
 
-{\sc KnowRob} offers a mechanism called \emph{computables} that allow to
-evaluate certain predicates by calling external dedicated functions (for
-instance, the valuation of a proposition like \stmt{object1 isOn object2} is
-computed when required by calling a specific geometric reasoning module). In
-combination with Prolog's lazy evaluation strategy, this supports a good
-scalability.
-
 \begin{figure}
     \centering
     \includegraphics[width=0.7\columnwidth]{stateofart/knowrob.pdf}
@@ -2155,19 +2181,25 @@ based on bayesian networks, integration with naive physics reasoning has been
 studied~\cite{Kunze2011a}, automatic parsing of Web resources in semi-natural
 language has been also experimented with~\cite{Nyga2009}.
 
-\paragraph{Grounding} Anchoring of knowledge in the {\sc KnowRob} framework
-relies on...CoP? Semantic Maps~\cite{Blodow2011}.
+\paragraph{Grounding} {\sc KnowRob} offers a mechanism called \emph{computables} that allow to
+evaluate certain predicates by calling external dedicated functions (for
+instance, the valuation of a proposition like \stmt{object1 isOn object2} is
+computed when required by calling a specific geometric reasoning module). In
+combination with Prolog's lazy evaluation strategy, this supports a good
+scalability.
 
-\fxwarning{to complete}
+Computables rely on various subsystem to evaluate. In particular, it relies on
+the CoP framework~\cite{Klank2009} and \emph{semantic maps}~\cite{Blodow2011}
+for the recognition of objects and environment.
 
 %\paragraph{Integration with Decisional Layers} CRAM~\cite{Beetz2010}
 
-\paragraph{Notable Experiments} {\sc KnowRob} has been deployed on several
-scenarii at the Technical University of Munich, on the PR2 robot and on a 2-arm
-custom mobile manipulator in the scope of the ``assistive
-kitchen''~\cite{Beetz2008} project. In these experiments, {\sc KnowRob} has
-been used as central knowledge hub...
-\fxwarning{to complete}
+\paragraph{Experiments} {\sc KnowRob} has been deployed on several scenarii at
+the Technical University of Munich, on the PR2 robot and on a 2-arm custom
+mobile manipulator in the scope of the ``assistive kitchen''~\cite{Beetz2008}
+project. These experiments include retrieval and automated parsing of recipies
+from the Web, retrieval and manipulation of various kitchen tools, cooperation
+between two robots.
 
 \subsection{NKRL}
 \label{sect|nkrl}
@@ -2275,13 +2307,13 @@ KR\&R}, that includes symbolic representation and reasoning.
 the {\sc ResearchCyc} and {\sc CycL} language to represent knowledge. The {\sc CycL} language
 allows to represent first order logic sentences and has extensions for modal logics and higher order logics.
 
-\fxfatal{Is modal logics and higher order logics actually used in PEIS?} 
+\fxwarning{Is modal logics and higher order logics actually used in PEIS?} 
 
 As a system relying on {\sc CycL}, contexts can be expressed as
 \emph{microtheories}: the truth or falsity of a set of statement depends of the
 \emph{microtheory} in which these statements are evaluated.
 
-\fxfatal{OWA/CWA?}
+\fxwarning{OWA/CWA?}
 
 \begin{figure}
 	\centering
@@ -2321,11 +2353,9 @@ The PEIS framework offers through the \emph{PEIS middleware} a practical way to
 insert a new component into the shared \emph{tuple space}.  Thus, the KR\&R
 module can be seamlessly integrated into the PEIS ecosystem.
 
-\paragraph{Experiments}
-\label{sect|peis-expe}
-
-\fxwarning{PEIS experiments: TDB}
-
+\paragraph{Experiments} Experiments involving PEIS take place in a Smart Home
+environment (\emph{PEIS Home}). The implemented case studies explore
+dialogue-based interaction with the robot about known objects.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
