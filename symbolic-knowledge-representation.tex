@@ -2194,18 +2194,17 @@ field~\cite{Sabri2011}. NKRL is not {\it per-se} a knowledge representation
 system, as it is primarily a language. However, it is used as the
 representation and reasoning mechanism for robots by Sabri et al.
 
-\fxwarning{NKRL -> to complete!! (report missing parts to the evaluation table
-as well}
+\paragraph{Knowledge representation} The NKRL language semantics are stored in
+two ontologies: an ontology of concepts $\Omega$ and an ontology of events
+$\Psi$. The ontology of events is made of action or situation templates.
+Templates are a set of predicates (MOVE, PRODUCE, RECEIVE, EXPERIENCE, BEHAVE,
+OWN and EXIST) associated to thematic roles. Grounding and reasoning with NKRL
+is based on template matching.
 
-\paragraph{Intrinsic language features}
-\label{sect|nkrl-intrinsic-features}
-
-Expressiveness...
-
-\paragraph{Integration with physical world and in the robot architecture}
-\label{sect|nkrl-integration}
-
-\ldots seem to be mostly WIP\ldots
+\paragraph{Experiments} The main scenario of development for NKRL-based robots
+is the Smart Home and monitoring of eldery people. Knowledge acquisition
+partially rely on ambient intelligence (RFID, pressure sensors in the chairs,
+etc.). The scenario is still being implementated.
 
 \subsection{OUR-K and OMRKF}
 \label{sect|omrkf}
