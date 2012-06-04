@@ -215,9 +215,7 @@ expressed.
 ORO benefits from this mechanism, and can be configured to use a specific
 language as default. When an language is explicitly selected, the translated
 labels of concepts (when available in the underlying ontology) are used instead
-of the default English ones. Section~\ref{sect|commonsense-i13n} gives more
-details on the current level of internationalisation of the ORO common-sense
-ontology.
+of the default English ones.
 
 Since only the labels (\ie the human-friendly name of the concepts) are subject
 to translation, changing the default language of the ORO server has no semantic
@@ -538,57 +536,20 @@ identifier by its label. This also takes into account the chosen language
 The ORO platform is made of the server that we have presented, and a
 common-sense ontology, the \emph{ORO Common-sense Ontology}.
 
-At start-up, the knowledge model of the ORO server are initialised with a
-configurable sets of initial ontologies that build together the initial pool of
-facts known to the robot. Each time a new model is created (typically when a
-new agent is detected), it get also initialised with the same pool of facts.
-From the point of view of the robot, this ensure that all the different agents
-share the same background knowledge.
+At start-up, the knowledge model of the ORO server is initialised with a
+configurable sets of ontologies that build together the initial pool of facts
+known to the robot: the common-sense ontology and optional, domain dependent
+ontologies.
+
+Each time a new model is created (typically when a new agent is detected), it
+is also initialised with the same pool of facts.  From the point of view of the
+robot, this ensure that all the different agents share the same background
+knowledge.
 
 Usually, the ORO server is started with the common-sense ontology that we
-present in this section, and one scenario-specific ontology that contains in
-most cases the set of individuals with relevant properties needed by the
+present in this section, and one scenario-specific ontology that usually
+contains the set of individuals with relevant properties needed by the
 experiment.
-
-\subsection{Design of the ORO common-sense ontology}
-\label{sect|commonsense-design}
-
-The ORO common-sense ontology has been designed from two requirements: covering
-our experimental needs and conforming as much as possible to the {\sc OpenCyc}
-upper ontology.
-
-This lead to a bidirectional design process: from \emph{bottom-up} regarding
-the choices of concepts to model, \emph{top-down} regarding the top of the
-taxonomy. This upper part of the ontology is pictured on
-figure~\ref{fig|upper_tbox}, and the classes that appear on it belong to the
-{\sc OpenCyc} namespace.
-
-\begin{figure}
-    \centering
-    \includegraphics[scale=0.6]{oro/top_tbox.pdf}
-
-    \caption{The upper part of the ORO common-sense TBox. All these concepts
-    belong to the {\sc OpenCyc} namespace.}
-    
-    \label{fig|upper_tbox}
-\end{figure}
-
-This figure~\ref{fig|upper_tbox} also illustrates the fundamental disjunction
-in the ORO model between \emph{temporal} and \emph{spatial} entities (formally,
-$(TemporalThing \sqcap SpatialThing)^{\mathcal{I}} = \emptyset$, with
-$\mathcal{I}$ the \emph{interpretation} of our model).
-
-\fxwarning{Tell that specialisation of PurposefulActions are added from HATP + Dialogs at runtime}
-\fxwarning{Tell which parts have more details -> focuses of oro}
-
-
-\begin{figure}
-    \centering
-    \includegraphics[scale=0.6]{oro/tangible_things_tbox.pdf}
-    \caption{TBox of the specialisations of \concept{PartiallyTangible}.}
-    \label{fig|tangible_things_tbox}
-\end{figure}
-
 
 \begin{table}
 \begin{center}
@@ -615,13 +576,99 @@ Symmetric properties & 3 \\
 \label{table|onto-stats}
 \end{table}
 
-\fxfatal{This is empty}
-\fxwarning{Mention some rules/class expressions -> bottles, physical supports...}
+The table~\ref{table|onto-stats} gives a first overview of the extend and
+expressive level of the ORO common-sense ontology. While the raw numbers of
+axioms is in no way comparable to large upper ontologies (as presented at
+chapter~\ref{chapt|krs}), the modeling is also more expressive (with the use of
+second order predicates) than the ontologies that are partially or completely
+generated automatically.
 
-\subsection{Internationalisation}
-\label{sect|commonsense-i13n}
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.6]{oro/top_tbox.pdf}
 
-\fxfatal{This is empty}
+    \caption{The upper part of the ORO common-sense TBox. All these concepts
+    belong to the {\sc OpenCyc} namespace.}
+    
+    \label{fig|upper_tbox}
+\end{figure}
+
+The ORO common-sense ontology has been designed from two requirements: covering
+our experimental needs and conforming as much as possible to the {\sc OpenCyc}
+upper ontology.
+
+This lead to a bidirectional design process: from \emph{bottom-up} regarding
+the choices of concepts to model, \emph{top-down} regarding the upper part of the
+taxonomy. This upper part of the ontology is pictured on
+figure~\ref{fig|upper_tbox}. All the classes visible on this figure belong to the
+{\sc OpenCyc} namespace (the {\tt cyc:} prefix is omitted).
+
+By \emph{aligning} the upper part of the ontology on {\sc OpenCyc} (as other
+KRS, like {\sc KnowRob} or PEIS K\&R, did) has multiple advantages. First the
+design of this part of the ontology is generally difficult: it pertains to
+abstract concepts whose mutual relations comes to philosophical debates. The
+upper taxonomy of {\sc OpenCyc} represents a relative consensus, at least
+within the semantic Web community. Then, because it is a well established
+project with numerous links to other on-line databases (like Wikipedia or
+WordNet), the reuse of important {\sc OpenCyc} concepts ensures to a certain
+extend that the knowledge stored by the robot can be shared or extended with
+well-defined semantics. A good example is the concept of \emph{Object}: In
+everyday conversation, an object is a relatively small physical thing, that can
+be typically manipulated. Normally, a human is not considered as an object. In
+{\sc Cyc}, an object has a more precise definition: it is something
+\emph{partially tangible}. That includes obviously the humans, and actually
+many other entities that would not be commonly said to be objects (the Earth
+for instance). Thus the importance of relying on well-defined and standard
+semantics to exchange informations between artificial systems.
+
+This figure~\ref{fig|upper_tbox} also illustrates the fundamental disjunction
+in the ORO model between \emph{temporal} and \emph{spatial} entities (formally,
+$(TemporalThing \sqcap SpatialThing)^{\mathcal{I}} = \emptyset$, with
+$\mathcal{I}$ the \emph{interpretation} of our model).
+
+The class \concept{purposeful action} is the superset of all the actions that
+are voluntarily performed by the robot (or another agent). Subclasses (like
+\concept{Give}, \concept{LookAt}, etc.) are not asserted in the common-sense
+ontology, but are added by the execution controller (in link with the symbolic
+task planner) and the natural language processor based on what is actually
+performable and/or understandable by the robot at run-time.
+
+The tree of figure~\ref{fig|upper_tbox} (this subset of the ontology is indeed
+a tree: this has however not to be the case in general, and, as a matter of
+fact, the TBox of the whole ORO common-sense ontology does not form a tree) is
+not equally developed at lower levels. We have already briefly mentioned the
+developments of the actions. The other important part is the descendants of the
+\concept{partially tangible thing} (what is commonly called an \emph{object}).
+Figure~\ref{fig|tangible_things_tbox} gives more details on this part of the
+ontology.
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.6]{oro/tangible_things_tbox.pdf}
+    \caption{TBox of the specialisations of \concept{PartiallyTangible}.}
+    \label{fig|tangible_things_tbox}
+\end{figure}
+
+This excerpt from the ontology makes the bottom-up design process visible: only
+few types of \emph{partially tangible} things appear, and only subclasses
+relevant to the context of service robotics in an human-like environment are
+present.
+
+Lastly, the ORO common-sense ontology contains several rules and class
+expressions that encode non-trivial inferences.
+
+The definition of the \concept{Bottle} is a case in point. We already gave a
+simplified version, here the complete definition:
+
+\concept{Bottle} $\equiv$ \concept{Container} {\bf and} \concept{Tableware}
+{\bf that} (\concept{hasShape} {\bf value} \concept{cylinderShape} {\bf and}
+\concept{hasCharacteristicDimension} {\bf only} \concept{\em int[>= 0.1, <=
+0.3]})
+
+If a human informs the robot that a given object is indeed a bottle, the robot
+can then infer much more on this object. And if the human affirms that a car is
+a bottle, the robot may question this assertion because of the inconsistent
+size.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

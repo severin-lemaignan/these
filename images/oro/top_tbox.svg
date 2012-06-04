@@ -12,9 +12,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="948.02881"
-   height="332.92969"
-   viewBox="0 0 758.42305 266.34375"
+   width="948.00781"
+   height="386.09375"
+   viewBox="0 0 758.40625 308.875"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.2 r9819"
@@ -27,7 +27,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -43,24 +43,24 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:window-width="1280"
-     inkscape:window-height="972"
+     inkscape:window-height="997"
      id="namedview478"
      showgrid="false"
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:zoom="1.375592"
-     inkscape:cx="468.20764"
-     inkscape:cy="295.05556"
-     inkscape:window-x="0"
-     inkscape:window-y="24"
+     inkscape:zoom="3.8907617"
+     inkscape:cx="315.01833"
+     inkscape:cy="128.42137"
+     inkscape:window-x="1280"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="g4514" />
   <g
      id="graph0"
      class="graph"
-     transform="translate(60.516795,496.53125)">
+     transform="translate(60.5,496.53125)">
     <title
        id="title5">ontology</title>
     <!-- cycSpatialThing -->
@@ -272,8 +272,8 @@
          id="rect4500"
          width="111.52772"
          height="27.641575"
-         x="175.2252"
-         y="-293.72321"
+         x="168.82518"
+         y="-295.52884"
          rx="4.5319586"
          ry="4.5319586" />
       <rect
@@ -415,7 +415,7 @@
            x="133">event</text>
       </g>
       <g
-         transform="translate(96.227945,-180.94143)"
+         transform="translate(89.827945,-182.74705)"
          class="node"
          id="node50">
         <title
@@ -611,7 +611,7 @@
            sodipodi:nodetypes="cccc" />
       </g>
       <g
-         transform="matrix(-0.5576185,0.52458991,-0.52458991,-0.5576185,618.05216,-274.61031)"
+         transform="matrix(-0.5576185,0.52458991,-0.52458991,-0.5576185,611.65216,-275.43279)"
          id="g3597"
          inkscape:export-filename="/home/slemaign/work/architectures/spark/spark2_proposal2/5.png"
          inkscape:export-xdpi="150"
@@ -847,6 +847,47 @@
            sodipodi:nodetypes="cccc"
            inkscape:connector-curvature="0"
            id="path3661"
+           d="m 358.85924,377.45034 -3.28788,-6.42471 -3.90828,6.1292 z"
+           style="fill:#000000;stroke:#000000;stroke-width:2.26223445px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1" />
+      </g>
+      <rect
+         ry="4.5319586"
+         rx="4.5319586"
+         y="-215.57011"
+         x="6.431479"
+         height="27.641575"
+         width="119.84916"
+         id="rect3107"
+         style="color:#000000;fill:#fcaf3e;fill-opacity:1;fill-rule:nonzero;stroke:#f57900;stroke-width:0.53220785;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <g
+         id="g3109"
+         class="node"
+         transform="translate(3.7373965,48.211669)">
+        <title
+           id="title3111">cycAction</title>
+        <text
+           x="62"
+           y="-244.89999"
+           style="font-size:14px;text-anchor:middle;font-family:Ubuntu"
+           id="text3113">purposeful action</text>
+      </g>
+      <g
+         style="display:inline"
+         inkscape:export-ydpi="150"
+         inkscape:export-xdpi="150"
+         inkscape:export-filename="/home/slemaign/work/architectures/spark/spark2_proposal2/5.png"
+         id="g3115"
+         transform="matrix(-0.67444614,-0.36229184,0.36229184,-0.67444614,179.9713,163.39025)">
+        <path
+           style="fill:none;stroke:#000000;stroke-width:2.88090324;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           d="m 354.70567,391.44244 0.64556,-16.43252"
+           id="path3117"
+           inkscape:connector-curvature="0"
+           sodipodi:nodetypes="cc" />
+        <path
+           sodipodi:nodetypes="cccc"
+           inkscape:connector-curvature="0"
+           id="path3119"
            d="m 358.85924,377.45034 -3.28788,-6.42471 -3.90828,6.1292 z"
            style="fill:#000000;stroke:#000000;stroke-width:2.26223445px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1" />
       </g>
