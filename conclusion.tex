@@ -203,7 +203,7 @@ and psychological experiments that involve a theory of mind, such as
 \emph{False-Belief} experiments, as recently presented in~\cite{Warnier2012a}.
 
 
-\subsection*{Knowledge and Embodiement}
+\subsection*{Knowledge and embodiement}
 
 The the experiments that were presented in the previous chapter all illustrate how the
 robot makes use of its embodied nature to establish a meaningful communication
@@ -233,7 +233,7 @@ community does not contradict with a formal, highly symbolic approach of the
 representation and decision problems that arise in robotics. 
 
 
-\subsection*{Real-World Symbolic Reasoning}
+\subsection*{Real-world symbolic reasoning}
 
 \begin{quote}
 
@@ -302,20 +302,33 @@ important and difficult questions.
 
 First, one of the directions that seems both critical and under-studied in our
 community is what we can call \emph{context management} in a broad sense.
-Managing context means at least two things: recognising contexts and
-representing contexts.
+Proper context management should allow the robot to mentally \emph{move around
+its own experiences} to place itself in the mental situation where the
+interpretation of an event, an interaction or a situation makes sense.
+Cognitive functions like episodic memory, theory of mind, projection, diagnosis
+and many other can be seen as special cases of a generic context management
+capability.
 
-Depending on what context we talk about, recognizing contexts can be relatively
+Managing context means at least two things: recognising contexts and
+representing contexts. Depending on what context we talk about, recognizing contexts can be relatively
 easy (who is talking to me? where am I?) to difficult (what past experience
 does my interactor implicitly refers to?). One of the main problem we see
 with context identification is that it is a fundamentally \emph{multi-scale}
 problem: at any moment, several temporal, spatial, social, cultural context
 co-exist and overlap.
 
-This lead to the second aspect, context representation. Techniques for
-representation of overlapping pools of knowledge remain to be developed, as
-well as efficient algorithms to retrieve (or discard) such context-related
-pools of knowledge.
+This lead to the second aspect, context representation. Contexts are currently
+often limited to the current spatial and temporal situation. Some projects
+model offer the possibility to jump in the past or to switch to another agent's
+perspective, but in current approaches, selecting a context always basically
+consists in retrieving a set of beliefs corresponding to a situation, and
+temporarily replacing the current beliefs by those other ones. This misses the
+fact that at a given moment, not one but many contexts co-exist at different
+scales. We do not want to retrieve one monolithic set of beliefs, but instead
+carefully craft a context from several \emph{atomic} contexts. Techniques for
+representation of overlapping pools of knowledge largely remain to be
+developed, as well as efficient algorithms to retrieve (or discard) such
+context-related pools of knowledge.
 
 The ability to explicitly manage contexts and context switches would endow the
 robot with a cognitive capability similar to what is known as
