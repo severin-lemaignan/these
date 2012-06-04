@@ -176,26 +176,33 @@ the robot but not for the human. This object can have at the same time the
 property \concept{isVisible \textit{true}} and \concept{isVisible
 \textit{false}} in two different models).
 
-\paragraph{False beliefs and Theory Of Mind} \label{sect|theory-of-mind}
-
-This feature actually allows us to consider the robot to be endowed with a
-simple \emph{theory of mind}~\cite{Scassellati2002, Warnier2012a}: the robot
-can explicitly model the belief state of its interactors, and expose it to the
-control architecture. In the chapter~\ref{chapt|dialogs},  in the context of
-dialogue understanding, we present how we use this feature to make sense of
-user sentences from his/her point of view.
-
 We present at section~\ref{sect|spark}, page~\pageref{sect|spark}, a 3D
 real-time environment, SPARK, that allows to compute on-line several symbolic
 properties that are dependent on the perspectives.
 
-\paragraph{Context modelling}
+\paragraph{Theory Of Mind and contexts} \label{sect|theory-of-mind}
+
+By maintaining independent mental states for each agent it interacts with, we
+consider the robot to be endowed with a simple \emph{theory of
+mind}~\cite{Scassellati2002}: the robot can explicitly model the beliefs of its
+interactors, it expose them to the control architecture, and the same set of
+cognitive abilities are available on these secondary model as on the main
+model: reasoning, inconsistencies detection, events, etc.
+
+Proper \emph{false beliefs} experiment, similar to the Sally and Ann experiment
+presented in the previous chapter, has been recently conducted with ORO
+by Mathieu Warnier, as reported in~\cite{Warnier2012a}: in this experiment, two
+humans observe a table with several objects, then one leaves while the other
+one moves around some objects. This leads to two different set of beliefs on
+the world, which the robot explicitly stores and updates when necessary (if the
+human comes back and check the table, for instance).
 
 These multiple models can also be viewed as different \emph{interpretive
 frames}, allowing the robot to interpret the same reality from different points
-of view.
-
-\fxwarning{oroserver -> context:to be completed!}
+of view. In this sense, each model carries a context of interaction.  In
+chapter~\ref{chapt|dialogs}, we present how such agent-dependent contexts are
+used by a natural language processor to make sense of user sentences from
+his/her point of view.
 
 \subsubsection{Multi-lingual support}
 \label{sect|multilingual}
