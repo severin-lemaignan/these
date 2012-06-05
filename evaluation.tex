@@ -37,14 +37,14 @@ representation that were identified in chapter~\ref{chapt|krs}.
                                                                                                                                                                                                                                                                                                                                                                                                                   
 \midrule                                                                                                                                                                                                                                                                                                                                                                                                          
                                                                                                                                                                                                                                                                                                                                                                                                                   
-\multirow{4}{*}{\turn{90}{\bf Expressiveness}}                   & Logical formalism & TFS                       & (none)                      & (none)                      & ASP                         & Prolog                             & NKRL language (FOL + some 2nd order extensions) & DL + Horn clauses             & {\sc CycL}                    & DL (OWL)                                      \\
+\multirow{4}{*}{\turn{90}{\bf Expressiveness}}                   & Logical formalism & TFS                       & (none)                      & (none)                      & ASP                         & Prolog                             & NKRL language (FOL + 2nd order extensions)      & DL + Horn clauses             & {\sc CycL}                    & DL (OWL)                                      \\
                                                                            & OWA/CWA &                           &                             &                             & CWA                         & CWA                                &                                                 &                               &                               & OWA                                           \\
                                                               & Modeling uncertainty &                           &                             & ++ (stochastic models)      &                             & {\it+++} ({\it ProbCog} \cite{Jain2009}) & +                                         & + (\emph{candidate} entities) &                               &                                               \\
                                                                     & Meta-cognition &                           &                             &                             &                             & ++                                 & + (transformation rules)                        &                               &                               & ++ (reification, taxonomy walking)            \\
 \hline                                                                                                                                                                                                                                                                                                                                                                                                            
-\multirow{7}{*}{\turn{90}{\bf Representation}}                & Space Representation &                           &                             &                             &                             &                                    &                                                 & ++                            &                               &                                               \\
+\multirow{7}{*}{\turn{90}{\bf Representation}}                & Space Representation &                           &                             &                             &                             &                                    &                                                 & ++                            &                               & ++ ({\em perspective-aware symbolic locations} \cite{Sisbot2011})\\
                                                                & Time representation &                           &                             & ++ (snapshots)              &                             &                                    & ++ (event oriented)                             & +                             &                               &                                               \\
-                                                                    & Actions/Events &                           &                             & ++ (events classifiers)     &                             &                                    & +++ (everything is an event)                    & +++                           &                               &                                               \\
+                                                                    & Actions/Events &                           &                             & ++ (events classifiers)     &                             & ++ (action recognition \cite{Beetz2010a})  & +++ (everything is an event)            & +++                           &                               &                                               \\
                                                                            & Context &                           &                             &                             &                             &                                    & ++ (template matching)                          & ++                            & ++ (microtheories)            &                                               \\
                                                                           & Modality &                           &                             & ++ (recursive model)        &                             &                                    &                                                 &                               &                               & ++ (Theory of Mind \cite{Warnier2012a})       \\
                                                                      & Introspection &                           &                             &                             &                             & + (SRDF \cite{Kunze2011})          &                                                 &                               &                               &                                               \\
@@ -107,7 +107,7 @@ GSM encodes knowledge in an amodal (continuous, geometric) model while
 preserving features that are usually specific of symbolic models (like theory
 of mind or categorical knowledge).
 
-The interleaving of discreet symbolic models with continous geometric models
+The interleaving of discreet symbolic models with continuous geometric models
 remains a major challenge, and techniques vary a lot: besides the CAST proxies
 and the GSM amodal model, most systems directly extract physical attributes of
 the environment to insert them in the symbolic model ({\sc Tapas}, Ke Jia,
@@ -188,40 +188,66 @@ to.
 
 We will further develop this important topic in the conclusion of the thesis.
 
-\subsection{Reasoning about events and actions}
+\subsection{Reasoning about time, events and actions}
 
-reasoning about events, and in particular, actions,
-Amongst the other shortcomings of our architecture, neither the \emph{domain of
-validity} nor the context of a fact are represented in a satisfying way (we do
-store some kind of context --the agent's mental model for instance). This
-information is meta-information on the knowledge. While the ORO framework
-allows them through \emph{statement reification}, it does not offer yet a
-convenient way to store them. One obvious limitation that derives from the lack
-of efficient meta-knowledge is the absence of knowledge history.  With ORO, the
-robot always lives in the present.
+While representation of spatial roles (topology, placement, with or without
+perspective-taking) is well studied and KRS usually integrate with spatial
+perception and reasoning components, time representation and integration in
+knowledge systems is less uniform.
+
+The two main tasks that require time reasoning are task planing and sequence
+recognition (in particular, action recognition). Systems that directly
+integrate task planing (like OUR-K, {\sc KnowRob}) thus have mechanisms (like
+fluents in {\sc KnowRob}) to represent time.
+
+Other approaches include storing snapshots of the knowledge state (like GSM),
+that is used to move back to past mental states (of the robot or of another
+agent).
+
+Integration of these techniques with memory mechanisms (forgetting and
+reinforcement learning) remains to explore.
+
+Temporal modeling is currently absent of ORO, and symbolic and geometric
+planning are accomplished outside of the main knowledge representation
+layer. As a matter of fact, knowledge is mostly atemporal in the ORO server: the
+set of triples stored in the server represents the beliefs of the robot
+\emph{at the current time}. The robot represents knowledge about the \emph{here
+and now}. Dealing with time reasoning is delegated to dedicated tools.
+
+However, ORO does provide a simple implementation of a memory mechanism that
+relies on time: when a statement is attached to a memory profile, the statement
+is reified and the date of creation is stored. This allows to remove the
+statement after a period of time that depends on the memory profile.
+
+Statement reification to store timestamps of creation for all statements is
+technically very easy to do in ORO server, but has not been actually enabled
+because the performance hit (each reified statement produces four triples
+instead of one) was not justified by any current use case of ORO server.
+
+Regarding events, several systems (GSM, NKRL, ORO) have adopted an {\em
+event-oriented} architecture where conditions (or templates) are used to
+trigger decisional and execution processes.
+
+A side note about how thematic roles and action models are initialized in ORO:
+The current implementation relies on a small, predefined set of action verbs
+that can be recognized from natural language
+(section~\ref{processing_of_actions}).  This constraint does not come from the
+resolution algorithm itself, but rather from the difficulty to automatically
+extract the thematic roles associated to a verb. An interesting yet easy to
+implement extension would consist in binding the dialogue processor with the
+symbolic task planner. The task planner could dynamically provide the list of
+actions that the robot can process, \ie actions for which the robot can produce
+a plan. In certain case, it could also validate the understanding of a desire
+by attempting to plan it.
+
+Also, we could exploit on-line resources like
+\textsc{VerbNet}~\cite{Kipper2008}, which provides a large machine-processable
+lexicon of English verbs along with their thematic roles.
 
 
 \subsection{Introspection}
 
 the capacity of introspection,
-
-\subsection{Decision making}
-
-and finally, he points the issue of giving computer the right heuristics for
-decision making.
-
-\subsubsection{On thematic roles and action models}
-
-The current implementation relies on a small, predefined set of action verbs
-that can be recognized from natural language
-(section~\ref{processing_of_actions}).  This constraint does not come from the
-resolution algorithm itself, but rather from the difficulty to automatically
-extract the thematic roles associated to a verb.  This could be improved by
-linking a symbolic task planner to the \textsc{Dialogs} module to dynamically
-provide the list of actions that the robot can process, \ie actions for which
-the robot can produce a plan. Additionally, we could exploit on-line resources
-like \textsc{VerbNet}~\cite{Kipper2008}, which provides a large
-machine-processable lexicon of English verbs along with their thematic roles.
 
 
 \subsection{Grounding a multi-modal environment}
@@ -292,27 +318,6 @@ supporting both a geometric reasoning level and a purely symbolic level.
 Generally speaking, it appears that complex robotic systems need to operate
 with a dynamic granularity, depending on the task to achieve.
 
-\subsection{Temporal modeling} 
-
-\emph{Temporal modeling} is currently missing in our architecture, and symbolic
-and geometric \emph{planning} is accomplished outside of the knowledge
-representation loop we presented here. We see planning as an essential tool to
-build predictive knowledge, and we are looking into this direction.
-
-In the ORO server, knowledge is mostly atemporal: the set of triples stored in
-the server represents the beliefs of the robot \emph{at the current time}. The
-robot represents knowledge about the \emph{here and now}.
-
-One exception previously mentioned: when a statement is attached to a memory
-profile that is not permanent, the statement is reified and the creation
-timestamp is attached to the statement, thus enabling removal after a period of
-time that depends on the memory profile.
-
-Statement reification to store timestamps of creation for all statements is
-technically very easy to do in ORO server, but has not been actually enabled
-because the performance hit (each reified statement produces four triples
-instead of one) was not justified by any current use case of ORO server.
-
 \subsection{Learning, representation of experience}
 
 Since we provide no time management, our system is currently not able to
@@ -324,7 +329,11 @@ the human.
 \subsection{Perspective-awareness} 
 
 Finally, Roy mentions \emph{the ability to take into account the human
-perspective}: this is probably our main contribution which we are now trying to
+perspective}: this cognitive ability, that relies on the representation of
+modalities, is present in ORO and GSM. ORO explicits the perspectives in
+different symbolic mental states
+
+this is probably our main contribution which we are now trying to
 develop even further towards psychology-inspired experiments.
 
 
@@ -336,30 +345,28 @@ the Pellet reasoner, and output to the developers for debugging purposes, the
 logical justification of the inconsistency is not really exploited.
 
 
-
-
-\subsection{Performances analysis}
-
-\subsubsection{Relaxation time}
-
-The relaxation time (as defined at section~\ref{sect|performances}) of ORO for
-the average workloads we have encountered during the experiments is in the
-range of 100ms.  The temporal resolution that follows for the symbolic layer,
-while acceptable in most cases, is not satisfactory. In particular, multi-modal
-interaction requires fine grained temporal alignement between
-modalities~\cite{Li2012} which are not possible with the current temporal
-performances of ORO.
-
-\subsubsection{Cognitive evaluation}
-
-The performance evaluation of current tools is still mostly system- and
-scenario-specific (``did my system do the job for my task?''), and amongst the
-surveyed KRS, only few systems proposes an evaluation of their performances
-that could be compared to other system.
-
-
-\fxwarning{Mention reasoning and expressiveness, cf section oro-server}
-
+% \subsection{Performances analysis}
+% 
+% \subsubsection{Relaxation time}
+% 
+% The relaxation time (as defined at section~\ref{sect|performances}) of ORO for
+% the average workloads we have encountered during the experiments is in the
+% range of 100ms.  The temporal resolution that follows for the symbolic layer,
+% while acceptable in most cases, is not satisfactory. In particular, multi-modal
+% interaction requires fine grained temporal alignement between
+% modalities~\cite{Li2012} which are not possible with the current temporal
+% performances of ORO.
+% 
+% \subsubsection{Cognitive evaluation}
+% 
+% The performance evaluation of current tools is still mostly system- and
+% scenario-specific (``did my system do the job for my task?''), and amongst the
+% surveyed KRS, only few systems proposes an evaluation of their performances
+% that could be compared to other system.
+% 
+% 
+% \fxwarning{Mention reasoning and expressiveness, cf section oro-server}
+% 
 
 
 \subsection{In brief}
