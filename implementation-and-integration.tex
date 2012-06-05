@@ -735,6 +735,7 @@ always computed on-line, each time the current state of the world changes.
 Table~\ref{facts|sprelations} lists all the symbolic placement relationships
 that are currently computed by the system.
 
+\renewcommand{\concept}[1]{{\scriptsize \texttt{#1}}}
 \begin{table}[h]
     \centering
     \begin{tabular}{p{1.5cm}lp{2cm}p{3.7cm}}
@@ -756,6 +757,7 @@ that are currently computed by the system.
 
 \label{facts|sprelations}
 \end{table}
+\renewcommand{\concept}[1]{{\small \texttt{#1}}}
 
 SPARK also compute symbolic facts related to agent independent world dynamics.
 The predicate \concept{isMoving} states, for each tracked entity, whether it is
@@ -780,6 +782,7 @@ Through perspective taking, SPARK computes for each agent a symbolic
 description of the relative positioning of objects in the environment (table
 \ref{facts|relative}).
 
+\renewcommand{\concept}[1]{{\scriptsize \texttt{#1}}}
 \begin{table}[h]
 	\centering
 	    \begin{tabular}{p{1.5cm}lp{2cm}p{3.7cm}}
@@ -797,6 +800,7 @@ description of the relative positioning of objects in the environment (table
 	\caption{List of statements describing relative spatial relationships between objects and agents.}
 	\label{facts|relative}
 \end{table}
+\renewcommand{\concept}[1]{{\small \texttt{#1}}}
 
 
 \subsubsection{Building a model of agents}
@@ -882,6 +886,7 @@ tolerance.
 Tables~\ref{facts|capabilites} summarises the predicates produced by SPARK
 during the agent capabilities analysis phase.
 
+\renewcommand{\concept}[1]{{\scriptsize \texttt{#1}}}
 \begin{table}[h]
 	\centering
 		\begin{tabular}{p{2cm}lp{2cm}p{3.7cm}}
@@ -906,10 +911,12 @@ during the agent capabilities analysis phase.
 
 	\label{facts|capabilites}
 \end{table}
+\renewcommand{\concept}[1]{{\small \texttt{#1}}}
 
 Table~\ref{facts|agentstate} lists the other symbolic facts that are
 produced and maintained by SPARK related to the general state of the agent.
 
+\renewcommand{\concept}[1]{{\scriptsize \texttt{#1}}}
 \begin{table}[h]
 	\centering
 	\begin{tabular}{p{2cm}p{5cm}p{2cm}}
@@ -927,6 +934,7 @@ produced and maintained by SPARK related to the general state of the agent.
 
 	\label{facts|agentstate}
 \end{table}
+\renewcommand{\concept}[1]{{\small \texttt{#1}}}
 
 %%%%%%%%%%%%%%%%%
 
