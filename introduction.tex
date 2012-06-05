@@ -1,61 +1,51 @@
 \chapter{Introduction: Robots, Interaction and Knowledge}
 \label{chapt|introduction}
 
+Nao has been seen playing with autistic children, Justin is able to gently tap
+on the chocolate powder dispenser to prepare a hot chocolate, the PR2 robot(s)
+are taking orders and bring beers and popcorn around the labs, while Rosie
+pours pancake dough on a heater for the afternoon snack: if recent experiments
+conducted in the labs around the world are any indication, service robots are
+leaving the realm of Sci-Fi, dreams and phantasms to become a reality.
 
-This shift requires ``awareness'' of humans.
-
-To make informed decision, the robot needs knowledge about the \emph{tasks},
-the \emph{environment}, the \emph{situational context}.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-List of recent successful \& highly visible robot experiments in human environment:
-\begin{itemize}
-    \item Amener une bierre avec le PR2 (WG)
-    \item Sandwiches/popcorn at TUM
-    \item expe avec Nao -> enfants autistes
-    \item Demo Justin chocolat
-\end{itemize}
-
-\begin{figure}
+\begin{figure}[!h]
     \centering
-    \includegraphics[width=0.7\columnwidth]{intro/everyday_robots.pdf}
-    \caption{Everyday robots}
+    \includegraphics[width=0.8\columnwidth]{intro/everyday_robots.pdf}
+
+    \caption*{Nao, Justin, PR2, Rosie: robots play with children, prepare hot
+    chocolates, serve fresh beers or make pancakes. Still in the labs, not
+    yet with complex interactions with humans. What is missing for them to
+    enter our homes?}
+
     \label{fig|everyday-robots}
 \end{figure}
 
+From technological demos, these robots are now moving to real-world coworkers
+and companions, and they are undoubtedly to knock at our doors in the coming
+years.
 
-Service robotics is leaving the realm of Sci-Fi, dreams and fanstasms to become
-a reality. \fxwarning{find references of predictions "when robots are in our
-homes}. 
+The perceptual layers have moved up from traditional sensing modalities (camera
+images, laser scans) to synthetic pseudo-sensors like face recognition,
+SLAM-based localization, or the Kinect-based human tracker.
 
-Robotics is moving from technological demos to real world coworkers/companions.
+Perceiving and understanding the environment is now a matter of rebuilding an
+internal, amodal, model of the environment, with two interleaved facets: a
+continuous, geometric world on one hand and a discrete, symbolic world on the
+other hand. This, by itself, is sufficient to build efficient, compliant,
+reactive manipulators.
 
-
-Decision making on the robot can not anymore rely on a single or a few
-modalities of interaction.
-
-The perceptual layer has moved up from traditional sensing modalities (camera
-images, laser scans) to synthetic pseudo-sensors like the Kinect-based human
-tracker, face recognition or SLAM-based localization.
-
-Perceiving and understanding the environment is nowadays mainly a matter of
-rebuilding an internal, amodal, model of the environment with two interleaved
-facets: a continuous, geometric world and a discrete, symbolic world.
-
-But perceiving an inanimate environment is not enough: our robots do not live
-anymore in isolation in a world that is tailored to their capabilities. They
-live in the real world, in interaction with other intelligent agents. We want
-them to be endowed with \emph{agency} (the ability to \emph{act} in the world)
-and \emph{social skills}. This implies that the robot is not only able to
-represent inanimate objects, not only able to represent its own mental state,
-but also mental states of other agents, other intelligences. And interaction
-also require communication skills, and social capabilities like perspective
-taking or a theory of mind. Our robots also come to life in a connected world:
-the interactions take place with other physical as well as disembodied agents.
-
-Figure~\ref{fig|cognitive-robots} proposes an organization of research fields
-and projects in robotics along two dimensions, the level of social skills, and
-the level of agency (the ability to \emph{act in the world}).
+But perceiving an inanimate environment is not enough for a companion robot:
+such a robot does not live in isolation in a world that would have been
+tailored to its capabilities. It lives in the real world, in interaction with
+other intelligent agents, and we want it to be endowed with social skills. It
+needs also to become aware of the human, as a physical entity of course, but
+also as a \emph{mindful} entity. This implies that the robot is not only able
+to represent inanimate objects, not only able to represent its own mental
+state, but also able to guess and represent mental states of other agents,
+other intelligences. And interaction requires more, like communication skills
+and social capabilities: agency, perspective taking, theory of mind, not to
+mention the endless mountains of informations available from our connected
+world.
 
 \begin{figure}
     \centering
@@ -64,18 +54,30 @@ the level of agency (the ability to \emph{act in the world}).
     \label{fig|cognitive-robots}
 \end{figure}
 
+Figure~\ref{fig|cognitive-robots} tries to relate socio-cognitive skills and
+acting skills of various domains of robotic research. Our focus in on the
+cognitive robot, and in this work, we postulate that further development of
+such robots rely on the acquisition of even better, richer, more diverse
+cognitive abilities, and that the key of this development lies in a better
+understanding of what \emph{knowledge} means to a robot, and how to represent
+it. The What, and the How of knowledge for robots.
 
+% We detail in a coming section several challenges to be tackled to answer
+% these two questions. But we can already mention two practical targets we hope
+% to address:
+% 
+% \begin{itemize}
+%     \item to loosen the constraints on symbolic modeling of the robot
+%     environment by providing more expressive representation system than
+%     classical databases or fact repositories,
+% 
+%     \item to improve human-robot interaction by explicitly providing to the
+%     machine an interpretation frame, at least partially shared with the human.
+% 
+% \end{itemize}
 
-\begin{itemize}
-    \item to loosen the constraints on symbolic modeling of the robot
-    environment by providing more expressive representation system than
-    classical databases or fact repositories,
-
-    \item to improve human-robot interaction by explicitly providing to the
-    machine an interpretation frame, at least partially shared with the human.
-
-\end{itemize}
-
+We propose to give life to these two questions by narrating a short story of
+two robots and a human...
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -87,7 +89,7 @@ the level of agency (the ability to \emph{act in the world}).
 \begin{figure*}
 	\centering
 	\includegraphics[width=0.9\textwidth]{intro/brownie_scenario.jpg}
-	\caption{An illustration of the scenario}
+	\caption{The {\em Brownie} scenario}
 	\label{fig|scenario}
 \end{figure*}
 
@@ -97,9 +99,9 @@ and challenges of knowledge representation and manipulation for service, social
 and interactive robotics. It underlines the place, the role and the need of
 knowledge in a near-future, everyday situation where several robots and humans
 co-exist and cooperate. This scenario will also be a source of support examples
-for later sections of the thesis. We have emphasised several keywords in the
-description: we will come back to them in chapter~\ref{chapt|krs} to explain
-them formally and relate them to each other.
+for later sections of the thesis. Also, we have emphasised several keywords in
+this description: we will come back to them in chapter~\ref{chapt|krs} to
+explain them formally and relate them to each other.
 
 We entitle our scenario ``the Brownie scenario'' (Figure~\ref{fig|scenario}):
 Robi and Roba are two service robots, that can freely move and pick objects
@@ -137,7 +139,7 @@ what is it used for? what is it made of? etc. We call this knowledge
 \emph{common-sense knowledge} and the robot must be able not only to represent
 it, but also to have access to an initial source (for instance through a
 initial set of facts that are made available at startup, or via access to a
-Web-based knowledge base like Wikipedia, etc.)
+Web-based knowledge base like Wikipedia)
 
 Once bound to the action \emph{make}, this should lead the robot to build and
 represent a \emph{context}: we are in a scenario involving cooking. The context
@@ -154,11 +156,11 @@ relations} to concepts (here, the likely location of the cooking action).
 ``cooking requires a procedure and ingredients'' hints about another important
 feature closely tied on knowledge manipulation: \emph{reasoning}. The robot can
 \emph{infer} that cooking may require a recipe since a procedure and a list of
-ingredients is a pre-requisite of the cooking action, and a recipe may provide
-such a list.  If we omit the ``may'', this is a typical example of first-order
-logic reasoning.  Many other reasoning techniques exist (including
-probabilistic ones -- ones able to deal with the ``may''), we shall illustrate
-some of them later in this scenario.
+ingredients are pre-requisites of the cooking action that may be provided by a
+recipe.  If we omit the ``may'', this is a typical example of first-order logic
+reasoning.  Many other reasoning techniques exist (including probabilistic ones
+-- ones able to deal with the ``may''), we shall illustrate some of them later
+in this scenario.
 
 We mentioned that a recipe often provides a procedure (or a \emph{plan}). The
 robot should be able to store this plan in a way that allows later execution.
@@ -239,11 +241,11 @@ both well suited for machine processing and remain as close as possible to the
 humans own structures and vocabulary), and also to \emph{non-verbal forms of
 communication}, like gestures.
 
-
-Before explain with more details the keywords we have emphasised in the
-scenario, we would like to briefly focus on the challenges specifically related
-to the human-robot interactions. Not only in term of knowledge representation,
-but more broadly in term of specific cognitive capabilities.
+Before explaining with more details in the next chapter the keywords we have
+emphasised in the scenario, we would like to briefly focus on the challenges
+specifically related to the human-robot interactions. Not only in term of
+knowledge representation, but more broadly in term of specific cognitive
+capabilities.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -254,7 +256,7 @@ but more broadly in term of specific cognitive capabilities.
 
 This work comes indeed from researches in the specific context of the
 human-robot interaction, or, to put it another way, in the context of
-interaction for \emph{joint action} with human,  in a \emph{situated}
+interaction for \emph{joint action} with humans,  in a \emph{situated}
 environment (figure~\ref{fig|aperitif}).
 
 \begin{figure}%[!ht] 
@@ -269,7 +271,7 @@ environment (figure~\ref{fig|aperitif}).
     \label{fig|aperitif} 
 \end{figure}
 
-{\em \emph{Let's bake a brownie for tonight!}, proposes Tom. The robots
+{\em ``\emph{Let's bake a brownie for tonight!}'', proposes Tom. The robots
 smoothly prepare all the ingredients, and they start to cook together a
 delicious cake...}
 
@@ -294,9 +296,9 @@ into a set of actions? We distinguished four main tasks in~\cite{Lemaignan2012}:
         current situation, acquired through perception or deduction from
         previous perceptions,
 
-    \item building of an unambiguous symbolic representation of concepts
-        (objects, agents, actions...) underlying the interaction, and practical
-        for decision-making processes,
+    \item building of an unambiguous and complete symbolic representation of
+    concepts (objects, agents, actions...) underlying the interaction, and
+    practical for decision-making processes,
 
     \item establishing the joint goal(s), building and maintenance of
         iteratively shared (human-robot) plans, 
@@ -306,15 +308,14 @@ into a set of actions? We distinguished four main tasks in~\cite{Lemaignan2012}:
 
 \end{enumerate}
 
-The thesis focuses on the second point: it presents techniques, developed and
-used on several real robots, for the symbolic representation of environment
-models suitable for grounded situation interpretation, decision-making and
-control.
-
-The other items are of course equally important to actually perform the
-interaction, and we will also present (and illustrate in experiments) how our
+While each of these items is equally important to actually perform the
+interaction -- and we will present (with illustration from experiments) how our
 knowledge representation system integrates and communicates with other
-processes to form a \emph{knowledge-enabled} robotic architecture.
+processes to form a \emph{knowledge-enabled} robotic architecture --, the
+thesis focuses on the second point: it presents techniques, developed and used
+on several real robots, for the symbolic representation of environment and
+mental models suitable for grounded situation interpretation, decision-making
+and control.
 
 
 \begin{figure}
@@ -324,7 +325,7 @@ processes to form a \emph{knowledge-enabled} robotic architecture.
     \caption{A robot reasoning about human-robot interaction and anticipation
     of human activities: sources of knowledge are multi-modal dialogue and
     observation of the environment and the human activities. The robot ``knows''
-    and reason about it is observed by the human.}
+    and reasons about the fact it is observed by the human.}
 
     \label{fig|hri-dec}
 \end{figure}
@@ -373,7 +374,7 @@ challenges of knowledge representation: how to represent the knowledge I want
 to exchange, and how to recognize, represent and share a context that ensures
 that both ends of the communication channel correctly interpret the message.
 Or, to put it another way: how to ensure that the \emph{meaning} is correctly
-carried around while conducting social interactions?
+conveyed around while conducting social interactions?
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -427,9 +428,10 @@ technical point of view.
 \subsection{Scientific contributions}
 \label{sect|scientific-contributions}
 
-The need of a better understanding of the knowledge needs of robotic
-applications in human, \ie complex, dynamic, semantically-rich, environments,
-is the starting point of our thesis.
+The starting point of our thesis is the feeling that a better understanding of
+the knowledge needs of robotic applications in human, \ie complex, dynamic,
+semantically-rich, environments, would be beneficial to the research in
+cognitive robotic.
 
 Building upon an extensive review of the literature and the formulation of
 several interaction scenarii (that themselves led to experiments on real
@@ -479,7 +481,7 @@ that are detailed in this work.
 
 We also have a scientific contribution on the grounding of human-robot dialogue
 in natural language (chapter~\ref{chapt|dialogs}). We have algorithmically
-formalized a novel grounding process that takes advantage of multi-modal
+formalized a grounding process that takes advantage of multi-modal
 communication (verbal, deictic and immanent) and handles the semantics of
 several more complex language features like quantification. This system also
 has contributions related to the semantic validation of thematic roles and
@@ -490,12 +492,12 @@ interactive disambiguation that takes into account human attentional focus.
 
 
 This thesis has four major technical contributions: the software development of
-\emph{ORO server} as a semantic blackboard dedicated to robotic applications,
-the design of the \emph{ORO ontology} as a domain-specific common-sense
-ontology tailored for service robotic needs, the pervasive integration of a new
-semantic layer into several existing robot architecture, and finally, the
-software development of \emph{Dialogs}, a module for natural language
-grounding.
+the \emph{ORO server} as a semantic blackboard dedicated to robotic
+applications, the design of the \emph{ORO ontology} as a domain-specific
+common-sense ontology tailored for service robotic needs, the pervasive
+integration of a new semantic layer into several existing robot architecture,
+and finally, the software development of \emph{Dialogs}, a module for natural
+language grounding.
 
 The main software contribution of the thesis is the development of an
 open-source, versatile and light-weight knowledge base that stores in a formal
@@ -524,14 +526,14 @@ aligned with the standard {\sc OpenCyc} upper-ontology to guarantee
 interoperability with semantic web resources and other robots.
 
 A third technical contribution is the introduction of a new knowledge-oriented,
-event driven communication model between high-level decisional modules
+event-driven communication model between high-level decisional modules
 (section~\ref{sect|integration}): by introducing the notion of \emph{semantic
 events}, the ORO server enables the development of new executive layers that
 combine reactive behaviour with high-level abstractions: for instance,
 triggering a behaviour when a human looks at the robot while sit, can be
 expressed in our architecture as a single proposition: {\tt subscribe([* type
 Human, * looksAt myself, * isSitting true], behaviour\_callback())}. This
-highly expressive event model opens new ranges of development opportunities for
+highly expressive event model opens a new range of development opportunities for
 decisional modules.
 
 During the preparation of the thesis, we have also developed a new stand-alone
@@ -549,7 +551,7 @@ A last notable software contribution is our involvement in the MORSE simulator
 for academic robotics. We have played a central role in the original design and
 development of the core functionalities of this open-source simulator which is
 now used by over twenty laboratories world-wide. While this project as a whole
-is not directly related to the thesis main domain, we have led the effort
+is not directly related to main topic of the thesis, we have led the effort
 towards effective simulation of human-robot interaction in MORSE. It is briefly
 presented at section~\ref{sect|simulation}.
 
@@ -590,10 +592,8 @@ the following sections in that order:
 
 \end{itemize}
 
-Hopefully, this quick overview of this work can help you to go in depth into
-the sections relevant to your concerns.
-
-\fxfatal{Re-read these sections to make sure it makes sense}
+Hopefully, this quick overview of the work can help you to select sections that
+you may want to visit more in depth.
 
 \subsection*{For the patient reader}
 
