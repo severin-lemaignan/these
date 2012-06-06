@@ -604,7 +604,7 @@ cognitive capabilities (theory of mind, introspection, memory).
 \begin{tikzpicture}[taxonomy]
     \node [taxon] {\bf B. Representation}
             child {node [taxon] {{\bf B.5}. Memory}}
-            child {node [taxon] {{\bf B.4}. Introspection}}
+            child {node [taxon] {{\bf B.4}. Self-knowledge}}
             child {node [taxon] {{\bf B.3}. Modality}}
             child {node [taxon] {{\bf B.2}. Context}}
             child {node [taxon] {{\bf B.1}. Roles}};
@@ -880,14 +880,19 @@ theory of mind for robots.
 
 
 
-\subsubsection{Introspection: Who am I? What can I do?}
+\subsubsection{Self-knowledge: Who am I? What can I do?}
 \label{sect|introspection}
 
-\paragraph{Introspection}
+\paragraph{Self-knowledge}
 
-Introspection is the ability to self-describe: what are my capabilities, what
-is my state (performing some action, idling, etc.), what are my beliefs, what
-are my intentions and my plans?
+\emph{Self-knowledge} is the term used in philosophy and psychology to describe
+the knowledge that an individual has, acquires or infers about itself through
+its experiences. It answers the question ``What am I like?''.
+
+Introspection is the technical meaning to access to self-knowledge by the
+ability to self describe: what are my capabilities, what is my state
+(performing some action, idling, etc.), what are my beliefs, what are my
+intentions and my plans?
 
 Introspection must be distinguished from meta-cognition: While introspection
 may require meta-cognition (for instance to be able to expose its internal
@@ -898,19 +903,19 @@ triples \setstmt{robot performs action1,action1 isA Give}.
 
 \paragraph{Modeling of the robot capabilities}
 
-A particularly important aspect of introspection relates to the description of
-its own capabilities: which sensors/actuators/computation services exist and
-are currently available ?  While at a first level, these descriptions can be
-static (\eg the robot has one laser scanner and two arms), at more advanced
-levels, the description is updated and reflect the current (and possibly past
-and future) state of the robot. Note that these description may also involve
-geometric descriptions (a kinematic chain, the pose of a device, etc.) that may
-be deported outside of the main knowledge base. Efforts trying to formalize,
-maintain and expose the capabilities and state of a robot are not new (and
-ground themselves in work and techniques for self-descriptive remote procedure
-calls in computing science), but take a renewed importance with applications
-for high-level multi-robot cooperation. Recent works in that direction
-include~\cite{Kunze2011}.
+A particularly important aspect of self-knowledge for robots relates to the
+description of its own capabilities: which sensors/actuators/computation
+services exist and are currently available ?  While at a first level, these
+descriptions can be static (\eg the robot has one laser scanner and two arms),
+at more advanced levels, the description is updated and reflect the current
+(and possibly past and future) state of the robot. Note that these description
+may also involve geometric descriptions (a kinematic chain, the pose of a
+device, etc.) that may be deported outside of the main knowledge base. Efforts
+trying to formalize, maintain and expose the capabilities and state of a robot
+are not new (and ground themselves in work and techniques for self-descriptive
+remote procedure calls in computing science), but take a renewed importance
+with applications for high-level multi-robot cooperation. Recent works in that
+direction include~\cite{Kunze2011}.
 
 \subsubsection{Memory}
 \label{sect|memory}

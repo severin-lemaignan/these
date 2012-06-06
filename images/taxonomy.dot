@@ -34,7 +34,7 @@ A -> A4;
 A -> A5;
 
 B5 [label="B.5. Memory"];
-B4 [label="B.4. Introspection"];
+B4 [label="B.4. Self-knowledge"];
 B3 [label="B.3. Modality"];
 B2 [label="B.2. Context"];
 B1 [label="B.1. Roles"];
@@ -118,7 +118,6 @@ E -> E3;
 E -> E4 -> E41;
      E4 -> E42;
 
-F5 [label="F.5 Self-Knowledge"];
 F4 [label="F.4 Metrics"];
 F3 [label="F.3 Granularity"];
 F2 [label="F.2 Common-sense\n and Alignement"];
@@ -128,7 +127,6 @@ F -> F1;
 F -> F2;
 F -> F3;
 F -> F4;
-F -> F5;
 
 }
             
