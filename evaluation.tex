@@ -230,7 +230,7 @@ trigger decisional and execution processes.
 
 A side note about how thematic roles and action models are initialized in ORO:
 The current implementation relies on a small, predefined set of action verbs
-that can be recognized from natural language
+that can be recognised from natural language
 (section~\ref{processing_of_actions}).  This constraint does not come from the
 resolution algorithm itself, but rather from the difficulty to automatically
 extract the thematic roles associated to a verb. An interesting yet easy to
@@ -518,7 +518,7 @@ The first experiment, \emph{Point \& Learn} shows how the structure
 runtime through pointing interaction.
 
 The second experiment, \emph{Odd One Out} shows how the knowledge model can be
-used along with the categorization routines to isolate an ``odd" object, given
+used along with the categorisation routines to isolate an ``odd" object, given
 a simple context.
 
 Lastly, the third case study is an implementation of the \emph{Spy Game} where
@@ -550,7 +550,7 @@ to the robot, and if the robot sees it for the first time, it will ask for its
 name and type.
 
 The object perception module relies on motion capture (VICON system) to
-identify and localize objects. A so-called \textit{primitive detection} module
+identify and localise objects. A so-called \textit{primitive detection} module
 is responsible for updating ORO with the list of objects currently seen by the
 robot as well as their state (moving or not) and their relations to other
 objects (touching or not). On the other end, a human-robot interface based on
@@ -586,7 +586,7 @@ rdf:type Cup]}.
 \end{figure}
 
 Due to the limitation of the speech recognition software, only a predefined set
-of names or types could be recognized, thus preventing the robot to add
+of names or types could be recognised, thus preventing the robot to add
 completely original objects.
 
 \subsubsection{Odd one out}
@@ -695,7 +695,7 @@ This game is based on the traditional children game ``I Spy''. The idea is to
 discover the object or concept one of the participants is thinking of by asking
 questions such as: ``Is it green? Is it a machine? Is it on your left?'', etc.
 When playing, children exploit their knowledge about the world while
-categorizing and describing objects through useful discriminants that allow
+categorising and describing objects through useful discriminants that allow
 them to find out the answer as fast as possible while including perspective
 taking abilities~\cite{Moll2006}.
 
@@ -714,7 +714,7 @@ taking abilities~\cite{Moll2006}.
 The scenario for this game (Figure~\ref{fig|spyGameScenario}) consists on a
 face-to-face interaction where the human thinks of an object present in the
 environment, while the robot queries the human until either discovering the
-object or giving up, if no object was found. A categorization example is
+object or giving up, if no object was found. A categorisation example is
 presented in Figure~\ref{fig|objectsSpyGame}. The game starts with the human
 user giving a first hint (communication is done through a keyboard and screen),
 allowing the robot to start the search filtering those objects that fulfill
@@ -746,7 +746,7 @@ failing (\textit{i.e.} no object found).
 			child {node {Shelf}}};
 \end{tikzpicture}
 \end{scriptsize}
-\caption{Example of object categorization used in the scenario.}
+\caption{Example of object categorisation used in the scenario.}
 \label{fig|objectsSpyGame}			
 \end{figure}
 
@@ -1139,7 +1139,7 @@ each other, by living in a kind of frontier world, where real objects are replac
 by abstract, disembodied counterparts.
 
 Xavier and PR2 share a white, almost empty, stage. To get the robot to see his
-world, Xavier must keep being recognized by the human tracking module that lies
+world, Xavier must keep being recognised by the human tracking module that lies
 on the wall, and must stick everywhere 2D barcodes, instead of real
 objects. The robot can read and identify these barcodes, and while the stage
 gets covered by the tags, the robot constructs for itself a 3D world with the
@@ -1231,7 +1231,7 @@ facts (like {\tt xavier looksAt jacket}, {\tt RED\_PHONE isOn table},...) which
 is not reliable enough to be used on the stage.
 
 The 2D barcodes are actually a key perception mechanism for our PR2. They are
-well identified {\sc ARToolkit} tags used to identify and localize (both for the
+well identified {\sc ARToolkit} tags used to identify and localise (both for the
 position and the orientation) objects surrounding the robot.
 
 Besides, the robot was able to track the human whole-body posture with a

@@ -331,7 +331,7 @@ identifies on the road to a \emph{human-level AI}.
 	extend \emph{on demand} the closed domain of interpretation for a
 	given assertion,
 
-	\item the ability to formalize and reason about contexts,
+	\item the ability to formalise and reason about contexts,
 
 	\item reasoning about events, and in particular, actions,
 
@@ -604,7 +604,7 @@ cognitive capabilities (theory of mind, introspection, memory).
 \begin{tikzpicture}[taxonomy]
     \node [taxon] {\bf B. Representation}
             child {node [taxon] {{\bf B.5}. Memory}}
-            child {node [taxon] {{\bf B.4}. Self-knowledge}}
+            child {node [taxon] {{\bf B.4}. Introspection}}
             child {node [taxon] {{\bf B.3}. Modality}}
             child {node [taxon] {{\bf B.2}. Context}}
             child {node [taxon] {{\bf B.1}. Roles}};
@@ -924,7 +924,7 @@ Memory has been studied at length in the cognitive psychology and
 neuropsychology communities: Atkinson and Shiffrin~\cite{Atkinson1968}
 introduce the idea of \emph{short-term} and \emph{long-term} memory,
 Anderson~\cite{Anderson1976} splits memory into \emph{declarative} (explicit)
-and \emph{procedural} (implicit) memories, Tulving~\cite{Tulving1985} organizes
+and \emph{procedural} (implicit) memories, Tulving~\cite{Tulving1985} organises
 the concepts of \emph{procedural}, \emph{semantic} and \emph{episodic} memories
 into a hierarchy. Short-term memory is refined with the concept of
 \emph{working memory} by Baddeley~\cite{Baddeley2010}
@@ -1127,7 +1127,7 @@ fly. Clearly the axiom must be qualified in some way since penguins, dead birds
 and birds whose feet are encased in concrete can't fly. A careful construction
 of the axiom might succeed in including the exceptions of penguins and dead
 birds, but clearly we can think up as many additional exceptions like birds
-with their feet encased in concrete as we like. Formalized non-monotonic
+with their feet encased in concrete as we like. Formalised non-monotonic
 reasoning provides a way of saying that a bird can fly unless there
 is an abnormal circumstance and reasoning that only the abnormal circumstances
 whose existence follows from the facts being taken into account will be
@@ -1422,7 +1422,7 @@ state) and exteroceptive sensing (sensing of the robot environment). The
 
 Exteroceptive sensing is the most obvious and largely studied mean of knowledge
 acquisition. Traditional sensing devices (IR, cameras, laser-scanners), while
-still present and widely used (navigation based on 2D localization and obstacle
+still present and widely used (navigation based on 2D localisation and obstacle
 avoidance is today the standard), are being step-by-step replaced by
 \emph{synthetic sensors}.
 
@@ -2019,7 +2019,7 @@ Knowledge in {\sc Tapas} exists as procedural knowledge (plans) and declarative
 knowledge. The later is split into \emph{lexical knowledge}, \emph{semantic
 knowledge} and a database of identified objects (with their properties). The
 \emph{lexical knowledge} contains lexical and grammatical informations about
-the objects. The \emph{semantic knowledge} is organized into an ontology
+the objects. The \emph{semantic knowledge} is organised into an ontology
 relying on \emph{typed feature structures} (TFS~\cite{Carpenter1992}, a
 formalism originating from the computational linguistics community, and a
 superset of first-order logic).
@@ -2029,8 +2029,8 @@ generating grammars from properties represented in the ontology to parse and
 understand dialogue.
 
 Another focus is put on handling unknown words and objects. {\sc Tapas}
-provides routines to recognize unknown entities, and propose and interactive
-and iterative verbal process to categorize (including adding new categories)
+provides routines to recognise unknown entities, and propose and interactive
+and iterative verbal process to categorise (including adding new categories)
 those new concepts.
 
 \paragraph{Experiments} {\sc Tapas} has been used experimentally in a kitchen
@@ -2051,7 +2051,7 @@ a set of instantiated features (like $\phi^{Colour}_{red}$) and $u_p$ a
 entity.
 
 A union of proxies forms a global amodal representation of an entity, that can
-be explicitly shared and manipulated. Being not centralized, the knowledge
+be explicitly shared and manipulated. Being not centralised, the knowledge
 model can be qualified of \emph{ubiquitous}. Furthermore, knowledge source in
 the CAS architecture is tightly bound to the on-line grounding process (be it
 grounded in perception or in dialogue). While nothing seems to prevent it, no
@@ -2091,7 +2091,7 @@ interoperability'',  especially in the context of verbal interaction with a
 robot.
 
 GSM does not rely on any formal language but rather on a layered data structure
-(figure~\ref{fig|gsm}) that organizes the surrounding world into agents and
+(figure~\ref{fig|gsm}) that organises the surrounding world into agents and
 relations between agents.  Each agent (any animate or inanimate object) is
 attached to a physical model (made of \emph{body parts} that have properties
 like their position, color, etc.) and a mental model (which is a recursively
@@ -2148,7 +2148,7 @@ system support acquisition of new logical rules at run-time.
 
 \paragraph{Experiments} The Ke Jia robot has been demonstrated in several tasks
 involving human-robot interaction with natural language. These tasks include a
-task with multiple \emph{pick \& carry} that are globally optimized, naive
+task with multiple \emph{pick \& carry} that are globally optimised, naive
 physics reasoning via taught rules or more complex scenarii with the robot
 delivering drinks, taking into account changing and mutually exclusive
 preferences of users.
@@ -2160,7 +2160,7 @@ preferences of users.
 
 {\sc KnowRob}~\cite{Tenorth2009a} is an integrated knowledge management system
 developed at the Technical University of Munich. It is build as a set of
-modules (figure~\ref{fig|knowrob} organized around a core reasoning system
+modules (figure~\ref{fig|knowrob} organised around a core reasoning system
 written in Prolog. This core module interfaces through Java/Prolog or
 C/Prolog APIs with external modules.
 
@@ -2174,7 +2174,7 @@ C/Prolog APIs with external modules.
     \label{fig|knowrob}
 \end{figure}
 
-Extension modules can plug into the system to provide specialized reasoning
+Extension modules can plug into the system to provide specialised reasoning
 capabilities or interfaces to external data sources, \eg to read object
 detections from the vision system. These modules operate on the level of
 instances (ABox).
@@ -2251,7 +2251,7 @@ hierarchies and Horn clauses.
     \centering
     \includegraphics[width=0.5\columnwidth]{stateofart/ourk.pdf}
 
-    \caption{OUR-K organizes knowledge into fives \emph{classes}, each composed
+    \caption{OUR-K organises knowledge into fives \emph{classes}, each composed
     of \emph{levels}. Figure based on~\cite{Lim2011}.}
 
     \label{fig|omrkf}
@@ -2265,7 +2265,7 @@ taxonomy ($cup1 : cup$).
 
 \paragraph{Representation} The environment is represented in OUR-K in the
 $spaces : Model$ knowledge level as a classical three layers mapping (metric,
-topological and semantic maps). Objects (in $objects : Model$) are localized in
+topological and semantic maps). Objects (in $objects : Model$) are localised in
 $spaces : Model$ through Voronoi nodes.
 
 The knowledge class $Context$ proposes an explicit statement of spatial context
@@ -2303,7 +2303,7 @@ KR\&R}, that includes symbolic representation and reasoning.
 
 % More in details:
 % - object identification based on viewpoint independent SIFT features
-% - formalized anchoring system that explicitly match percieved attributes to predicates
+% - formalised anchoring system that explicitly match percieved attributes to predicates
 % - Cyc predicates
 % - ground 12 colors, based on a paper on color perception. Could be useful for us.
 % - idem, they cite a paper on what spatial relations to compute
@@ -2339,8 +2339,8 @@ The PEIS KR\&R system is deeply integrated to the general PEIS Ecology
 interactions between PEIS knowledge processing layers.
 
 \paragraph{Knowledge Acquisition} The primary source for knowledge acquisition
-is perception.  The PEIS ecosystem provides a SIFT-based object recognizer used
-in conjunction with ceiling cameras for object localization.  Other perceptual
+is perception.  The PEIS ecosystem provides a SIFT-based object recogniser used
+in conjunction with ceiling cameras for object localisation.  Other perceptual
 modalities are available (like human tracking, ambient environment monitoring).
 
 A template-based natural language parsing system may also be used to add new
@@ -2348,7 +2348,7 @@ assertions to the system.
 
 The system can ask the human for help to disambiguate between concept names.
 
-\paragraph{Anchoring} Daoutis et al. formalize the issue of anchoring as
+\paragraph{Anchoring} Daoutis et al. formalise the issue of anchoring as
 finding a \emph{predicate grounding relation} $g \subseteq \mathcal{P} \times
 \Phi \times D(\Phi)$, where $\mathcal{P}$ is a set of predicate symbols, $\Phi$
 a set of percept's attributes, and $D(\Phi)$ the domain of these attributes.
@@ -2547,7 +2547,7 @@ comprises of about fifty concepts sorted into six main categories: features
 related to knowledge expressiveness, features related to representation
 techniques, features related to reasoning, features related to acquisition and
 grounding of knowledge, features related to the integration of a KRS into a
-larger robotic architecture, and finally, features that characterize the
+larger robotic architecture, and finally, features that characterise the
 represented knowledge itself. Each of the fifty concepts has been briefly
 presented with references to the literature.
 
