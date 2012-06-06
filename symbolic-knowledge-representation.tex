@@ -587,7 +587,7 @@ table?''}). Most logics do not account explicitly for uncertainty. It must be
 either relied on specific logics (like Bayesian logics) or on extensions of
 classical logics.
 
-\fxfatal{Representation of uncertainty: To be completed!}
+%\fxfatal{Representation of uncertainty: To be completed!}
 
 \subsubsection{Meta-cognition: knowledge on the knowledge}
 
@@ -1796,6 +1796,7 @@ Breazeal2006}.
 \begin{center}
 \begin{tikzpicture}[taxonomy]
     \node [taxon] {\bf F. Knowledge instantiation}
+            child {node [taxon] {{\bf F.4} Granularity}}
             child {node [taxon] {{\bf F.3} Metrics}}
             child {node [taxon] {{\bf F.2} Common-sense and Alignement}}
             child {node [taxon] {{\bf F.1} Design Strategy}};
@@ -1941,6 +1942,8 @@ computational efficiency, conciseness, consistency,} and
 \emph{organizational fitness}. Details and relevant literature can be found
 in Vrande{\v{c}}i{\'c}'s chapter.
 
+\subsubsection{Granularity}
+
 Amongst the characteristics of ontologies, knowledge \emph{granularity}
 qualifies the level of details or refinement of the knowledge stored. The level
 of granularity of a robot's ontology hints on the place of the symbolic layer
@@ -1951,6 +1954,17 @@ robotics. Depending on the representation language, literal values can be
 naturally represented and processed (common case in logic programming language)
 or not (storing numerical value, let alone matrices, in OWL is cumbersome and
 not efficient due to the serialisation to XML).
+
+The issue of the granularity of models can also be partially addressed by
+splitting the knowledge representation into a geometric level (where all
+numerical values are stored) and a purely symbolic level. The communication
+between the two layers is however a complex question.
+
+It must finally be noted that complex robotic systems are likely to use
+different level of the knowledge depending on the task to achieve, and the
+granularity of the knowledge should probably be considered as a dynamic
+property.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Existing systems for knowledge representation in service robotics}

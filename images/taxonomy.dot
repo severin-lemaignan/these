@@ -118,7 +118,8 @@ E -> E3;
 E -> E4 -> E41;
      E4 -> E42;
 
-F4 [label="F.3 Metrics"];
+F4 [label="F.4 Granularity"];
+F3 [label="F.3 Metrics"];
 F2 [label="F.2 Common-sense\n and Alignement"];
 F1 [label="F.1 Design\n Strategy"];
 
