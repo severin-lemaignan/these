@@ -1855,56 +1855,59 @@ values) as well.
 
 Depending on the representation language, literal values can be naturally
 represented and processed (common case in logic programming language) or not
-(storing numerical value, let alone matrices, in OWL is cumbersome).
+(storing numerical value, let alone matrices, in OWL is cumbersome and not efficient due to the serialisation to XML).
 
-\subsubsection{Metrics}
+\subsubsection{Metrics and quality criteria}
 
-Qualitative and quantitative metrics give an insight on the size and
-complexity of ontologies.
+Qualitative and quantitative metrics give an insight on the size and complexity
+of ontologies.
 
 Table~\ref{table|upper_onto_metrics} gives such metrics for five major
 upper-ontologies commonly used in the semantic Web community (taken
-from~\cite{Mascardi2007} and the projects' respective websites).
+from~\cite{Mascardi2007} and the projects' respective websites). It is
+interesting to note the large variations between projects like {\sc DBpedia}
+whose content is automatically generated from Wikipedia, {\sc Cyc} or {\sc
+SUMO}, which are both hand written, but do not adopt the same strategy to
+select the knowledge to represent.
 
-These metrics do not always reflect adequately the \emph{expressive
-complexity}, though: in most of these ontologies with a large amount of terms
-and assertions, taxonomic relations (\concept{isA}) or technical predicates
-(URI, translations, etc.) account for a large part of the assertions, at the
-expense of fine semantic relations.
+These metrics do not reflect adequately the \emph{expressive complexity},
+though: in most of these ontologies with a large amount of terms and
+assertions, taxonomic relations (\concept{isA}) or technical predicates (URI,
+translations, etc.) account for a large part of the assertions, at the expense
+of real semantic relations.
 
 \begin{table}
 \begin{center}
 
 \begin{tabular}{llllll}
 \toprule
-{\bf Project} & {\bf Terms} & {\bf Assertions} \\
+{\bf Project} & {\bf Terms} & {\bf Assertions} (triples) \\
 \midrule
-Cyc & > 300 000 & > 3 000 000 & \\
+{\sc Cyc} & > 300 000 & > 3 000 000 & \\
 YAGO & > 10 000 000 & > 120 000 000 \\
 SUMO & 20 000 & 60 000 \\
-DBPedia (for English) & 1 840 000 & 385 000 000\\
-OpenMind Common Sense (for English) & & 1 000 000\\
+{\sc DBpedia} (for English) & 1 840 000 & 385 000 000\\
+{\sc OpenMind} Common Sense (for English) & & 1 000 000\\
 \bottomrule
 
 \end{tabular}
 \end{center}
-\caption{Size of the ABox for major upper-ontologies.}
+\caption{Raw size of major upper-ontologies.}
 \label{table|upper_onto_metrics}
 \end{table}
 
-Other metrics that include the categories of predicates that are used, or the
+Other metrics that include the type of predicates that are used, or the
 computed DL expressiveness, can be more significant (some are presented in
 table~\ref{table|onto-stats}, page~\pageref{table|onto-stats}).
 
-\subsubsection{Self-knowledge}
+Qualitative evaluation of ontologies is also a well studied field. In Staab's
+{\it Handbook on Ontologies}, Vrande{\v{c}}i{\'c}~\cite{Vrandevcic2009}
+provides a synthesis of qualitative criteria for ontology assessment.  He lists
+eight of them: \emph{accuracy, adaptability, clarity, completeness,
+computational efficiency, conciseness, consistency,} and
+\emph{organizational fitness}. Details and relevant literature can be found
+in Vrande{\v{c}}i{\'c}'s chapter.
 
-``Self-knowledge'' is the term used in psychology to describe the knowledge
-that an individual has, acquires or infers about itself through its
-experiences. It answers the question ``What am I like?''.
-
-For a robot to have at its disposal self-knowledge is closely link to the
-introspective capability that we have previously mentioned
-(section~\ref{sect|introspection})
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
