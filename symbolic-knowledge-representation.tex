@@ -1796,9 +1796,7 @@ Breazeal2006}.
 \begin{center}
 \begin{tikzpicture}[taxonomy]
     \node [taxon] {\bf F. Knowledge instantiation}
-            child {node [taxon] {{\bf F.5} Self-Knowledge}}
-            child {node [taxon] {{\bf F.4} Metrics}}
-            child {node [taxon] {{\bf F.3} Granularity}}
+            child {node [taxon] {{\bf F.3} Metrics}}
             child {node [taxon] {{\bf F.2} Common-sense and Alignement}}
             child {node [taxon] {{\bf F.1} Design Strategy}};
  \end{tikzpicture}
@@ -1810,7 +1808,7 @@ knowledge base: the knowledge instantiation. Here, \emph{instantiation} does
 not only refer to the instantiation of the knowledge structure (what we have
 called the ABox), but also includes the knowledge structure itself (the TBox).
 
-While we have previously mentioned features of knowledge representation system
+While we have previously mentioned features of knowledge representation systems
 that enable the robot to fill its knowledge base with content and alter the
 knowledge structure, most of the systems also come with a certain amount of
 initial knowledge that often includes \emph{common-sense} knowledge (\ie facts
@@ -1821,43 +1819,44 @@ The design strategy, the choice to rely on common-sense knowledge or not, the
 reuse of standard ontologies, the quantity of {\it a priori} knowledge are many
 parameters that lead to different knowledge models.
 
-\fxfatal{Knowledge Instantiation: THIS SECTION IS FAR FROM COMPLETE}
-
 \subsubsection{Design strategy}
 \label{sect|design-strategies}
 
-The main challenge of knowledge representation can be summarised as \emph{How to
-model real-world interaction in a symbolic way, processable by the robot to
-make decisions}. We have already introduced the term \emph{grounding} to
-describe the (bi-directional) process of binding percepts to symbols.
+The main challenge of knowledge representation can be summarised as \emph{How
+to model the real-world state and interactions in a symbolic way, processable
+by the robot to make decisions}. We have already introduced the term
+\emph{grounding} to describe the (bi-directional) process of binding percepts
+to symbols.
 
 We have also seen that the instantiation of the knowledge (\ie, the actual,
-practical knowledge available to the robot) comes either from some sort of this
-grounding process, or from knowledge considered as initially grounded for the
-robot: remote semantic databases or initial (common-sense or situation
-specific) knowledge.
+practical knowledge available to the robot) comes either from some variant of
+perception plus grounding, or from knowledge that the developer considers as
+already meaningful for the robot: remote semantic databases or initial
+(common-sense or situation specific) knowledge.
 
-Two main opposite approaches can drive knowledge instantiation: a
+This translates into two main strategies to drive knowledge instantiation: a
 \emph{top-down} design or a \emph{bottom-up} design.
 
 A bottom-up approach to knowledge instantiation takes the output of sensors as
 the primary source of knowledge: instances of objects, agents, and their
-relations directly result from what is percieved. No abstract, ``more generic
-to more specific'' process takes place.
+relations directly result from what is perceived. No abstract, ``from the more
+generic to the more specific'' process takes place.
 
-According to Sloman~\cite{Sloman2007} (and his stance against the
-\emph{``Symbol Grounding meme''}), bottom-up grounding boils down to grounding
+Steels~\cite{Steels2007} considers this approach to be a solved issue, and
+according to Sloman~\cite{Sloman2007} (and his stance against the
+\emph{``Symbol Grounding meme''}), since bottom-up grounding boils down to grounding
 of \emph{somatic} concepts (\ie roughly, the sensori-motor relationships that
-the robot learns from its interaction with the world), which in turn
-constraints the domain of concepts accessible to the robot.
-Steels~\cite{Steels2007} considers this approach to be a solved issue.
+the robot learns from its interaction with the world), it constrains in an
+unacceptable way the range of concepts accessible to the robot.
 
 Knowledge instantiation can also be approached as a \emph{top-down} activity:
 in natural language grounding, for instance, the robot needs to automatically
-bind an abstract representation (a group of word uttered by a human) to an
+bind an abstract representation (a group of words uttered by a human) to an
 unambiguous, context-dependent, internal concept. This concept may (or may not)
 be \textit{a priori} available to the robot as a pre-loaded ontology (what we
-previously called the cultural background of the robot).
+previously called the cultural background of the robot). In any case, the robot
+must conduct a cognitive process that leads from an abstract concept to a
+concrete entity.
 
 The bottom-up and top-down strategies also reflect how the knowledge structure
 itself is constructed: either by successive classification and refinement of
@@ -1870,26 +1869,31 @@ At section~\ref{sect|lod} we have presented how remote knowledge bases are a
 valuable source of knowledge, including common-sense knowledge, that robot can
 extract.
 
-\subsubsection{Granularity}
+Building {\it a priori} knowledge with a top-down strategy leads to populate
+the upper part of the taxonomy with abstract concepts like \emph{Thing},
+\emph{Time}, \emph{Person}, etc. The organisation of the whole knowledge
+depends on the design of this abstract part of the common-sense knowledge.
 
-The knowledge \emph{granularity} qualifies the level of details or refinement
-of the knowledge stored.
+Different knowledge structures at this level can lead to serious
+misunderstanding: for instance, if one robot considers the concept of a
+\emph{person} as representing some intelligent, possibly disembodied, entity,
+and another robot represents a \emph{person} as a subclass of mammals, their
+models of the world are likely to be conflicting.
 
-...
+To be able to successfully exchange knowledge with other systems (robots,
+databases, natural language parsers, etc.), the common-sense knowledge of
+robots is thus often aligned with a standard upper-ontology.
 
-The storage of literal values is a particular case: while knowledge
-representation systems have been considered until now mostly as symbolic
-systems, they can often represent literal values (in particular, numerical
-values) as well.
-
-Depending on the representation language, literal values can be naturally
-represented and processed (common case in logic programming language) or not
-(storing numerical value, let alone matrices, in OWL is cumbersome and not efficient due to the serialisation to XML).
+Many such upper-ontologies exist (table~\ref{table|upper_onto_metrics} lists
+some of them). While {\sc Cyc} and SUMO are current the main two, many efforts
+take place to make these ontologies compatible with each other (in particular
+by using the {\sc WordNet} thesaurus as intermediate unambiguous source of
+semantics).
 
 \subsubsection{Metrics and quality criteria}
 
-Qualitative and quantitative metrics give an insight on the size and complexity
-of ontologies.
+Qualitative and quantitative metrics give an insight on the size, complexity
+and effectiveness of ontologies used with the robots.
 
 Table~\ref{table|upper_onto_metrics} gives such metrics for five major
 upper-ontologies commonly used in the semantic Web community (taken
@@ -1937,7 +1941,16 @@ computational efficiency, conciseness, consistency,} and
 \emph{organizational fitness}. Details and relevant literature can be found
 in Vrande{\v{c}}i{\'c}'s chapter.
 
-
+Amongst the characteristics of ontologies, knowledge \emph{granularity}
+qualifies the level of details or refinement of the knowledge stored. The level
+of granularity of a robot's ontology hints on the place of the symbolic layer
+in the whole robotic architecture: some systems (like OMRKF~\cite{Suh2007}) go
+as down as storing SIFT features (\ie a large volume of numerical values) in
+the ontology. The storage of literal values is indeed a relevant case for
+robotics. Depending on the representation language, literal values can be
+naturally represented and processed (common case in logic programming language)
+or not (storing numerical value, let alone matrices, in OWL is cumbersome and
+not efficient due to the serialisation to XML).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Existing systems for knowledge representation in service robotics}
