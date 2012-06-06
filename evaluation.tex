@@ -47,7 +47,7 @@ representation that were identified in chapter~\ref{chapt|krs}.
                                                                     & Actions/Events &                           &                             & ++ (events classifiers)     &                             & ++ (action recognition \cite{Beetz2010a})  & +++ (everything is an event)            & +++                           &                               &                                               \\
                                                                            & Context &                           &                             &                             &                             &                                    & ++ (template matching)                          & ++                            & ++ (microtheories)            &                                               \\
                                                                           & Modality &                           &                             & ++ (recursive model)        &                             &                                    &                                                 &                               &                               & ++ (Theory of Mind \cite{Warnier2012a})       \\
-                                                                     & Introspection &                           &                             &                             &                             & + (SRDF \cite{Kunze2011})          &                                                 &                               &                               &                                               \\
+                                                                    & Self-knowledge &                           &                             &                             &                             & + (SRDF \cite{Kunze2011})          &                                                 &                               &                               &                                               \\
                                                                      & Memory models &                           &                             &                             &                             &                                    &                                                 &                               & +                             & +                                             \\
 \hline                                                                                                                                                                                                                                                                                                                                                                                                            
 \multirow{9}{*}{\turn{90}{\bf Reasoning}}                   & Standard FOL reasoning &                           &                             &                             & +++                         & +++                                & + (template matching)                           & +                             & ++                            & ++                                            \\
@@ -87,9 +87,10 @@ or we could not find relevant literature.}
 \end{table}
 \end{landscape}
 
-To comment this table, we propose to base the discussion on some of the
-challenges that McCarthy and Roy have identified on the road to natural
-interaction and, to slightly paraphrase McCarthy, ``human-level robots''.
+To comment this table, we propose select nine topic based on some of the
+challenges that McCarthy and Roy have identified (there are listed at
+section~\ref{sect|evaluation-literature}) on the road to natural interaction
+and, to slightly paraphrase McCarthy, ``human-level robots''.
 
 
 \subsection{Logic formalisms, continuous world}
@@ -245,20 +246,42 @@ Also, we could exploit on-line resources like
 lexicon of English verbs along with their thematic roles.
 
 
-\subsection{Introspection}
+\subsection{Grounding in a multi-modal environment}
 
-the capacity of introspection,
+Symbol grounding remains a focus for most of the developers of cognitive
+architectures for robots, and all the systems we have surveyed implement
+grounding strategies (...it was an inclusion criteria). Most of the systems
+adapt their grounding strategies to the sensing modality, so that grounding can
+not be considered as a single, well delimited process.
 
+Some systems (ORO, GSM) introduce an intermediate step in the grounding process
+by the mean of an amodal model of the environment that aggregates the
+perceptions (or suppositions) in a single place. This enables geometric
+reasoning that takes into account all the perceptual modalities (typically
+required for spatial perspective taking: we need to know where the humans are
+looking at, and also where are the objects), and also improve the observability
+of the system.
 
-\subsection{Grounding a multi-modal environment}
+We note in addition that the development of what we have called ``synthetic
+sensors'' is simplifying the grounding task. The most obvious example is the
+human tracking system provided by the low-cost Kinect device, and now used
+pervasively in the robotics lab. Not only this system segments and computes the
+pose of humans that enter its field of view, but it also tracks them (including
+in case they are partially or completely occluded). This kind of high level
+sensing device does not completely remove the need of grounding one symbolic
+instance of a human with the physical human, but the task is ways simpler than
+it used to be.
 
-While more modalities (especially, deictic gestures and social gazes) can be
-added, we have actually proposed a \emph{cross-modal representation system}.
+Many systems also tackle the difficult question of natural language processing.
+The CAST middleware, in particular, has been used in the European CoSy and CogX
+projects as knowledge base by linguists~\cite{Kruijff2010a}. This demonstrates
+the huge interest for the grounding of verbal interaction within the cognitive
+robotics community, and we are likely to reach important milestones in this
+field in the coming years.
 
-One of the main feature of the \textsc{Dialogs} module is its ability to
-interactively ground concepts through disambiguation, bringing the ability for
-the robot to \emph{associate words with perceptual and action categories}.
-
+Merging more modalities (especially, back-channel communication, deictic
+gestures and social gazes) also sparks a lot of attention, and is becoming more
+and more present as symbolic knowledge available to the control layers.
 
 \subsection{Common-sense}
 
@@ -311,39 +334,58 @@ PEIS Ecology & {\sc ResearchCyc} \\
 Table~\ref{table|knowledge-sources} lists for the systems we have surveyed the
 current sources of common-sense knowledge.
 
-\subsection{Models granularity}
+\subsection{Learning, representation of experience, introspection}
 
-\emph{Figuring out the right granularity of models} is partially solved by
-supporting both a geometric reasoning level and a purely symbolic level.
-Generally speaking, it appears that complex robotic systems need to operate
-with a dynamic granularity, depending on the task to achieve.
+Learning has not been addressed in this work. This is a complex, still emerging
+field, whose exact meaning and perimeter varies a lot. It was difficult to
+synthesise in the KRS taxonomy, and we decided to omit it. We did not either
+really tackled this question in ORO, except in term of knowledge structure
+alteration based on verbal interaction (this is presented in one case-study, in
+the next section).
 
-\subsection{Learning, representation of experience}
+Learning at the level of the knowledge representation system has been explored
+in conjunction with visual perception systems (mentioned for instance, in the
+CAST project, in~\cite{Jakobsson2008}). {\sc KnowRob}, by filling its pool of
+facts from informations automatically extracted from the Web~\ref{Nyga2009},
+can also be considered as a \emph{learning} system (it autonomously acquire
+knowledge). We lack however a formal study of learning strategies and
+techniques at the knowledge representation level.
 
-Since we provide no time management, our system is currently not able to
-\emph{match past (learned) experiences with the current interaction}.  This
-ability is obviously a key step for general action recognition, and seems of
-particular importance for the robot to assess the state of the interaction with
-the human.
+Representation and matching of past experience is a related topic. This ability
+is a key step for general action recognition, and is of particular importance
+for the robot to assess the state of the interaction with the human.
 
-\subsection{Perspective-awareness} 
+While we already mentioned that several systems are able to reason on past
+states, we are not aware of existing implementation of algorithms to reflect on
+past experiences.
+
+This is itself related to introspection and meta-cognition: the shift towards
+explicit knowledge representation examplified in the nine systems we have
+presented, has a major impact on the meta-cognitive capabilities of our robots.
+They can exhibit, manipulate and reason on their internal belief state (what we
+will call in the conclusion the \emph{cognitive observability}). We have still
+to discover all the possibilities that are open by this important cognitive
+ability.
+
+\subsection{Perspective-awareness}
 
 Finally, Roy mentions \emph{the ability to take into account the human
-perspective}: this cognitive ability, that relies on the representation of
-modalities, is present in ORO and GSM. ORO explicits the perspectives in
-different symbolic mental states
+perspective}: this cognitive ability, that relates to the representation of
+different modalities, is present in ORO and GSM. ORO explicits the perspectives
+in different symbolic mental states while GSM recursively stores models for
+each agent.
 
-this is probably our main contribution which we are now trying to
-develop even further towards psychology-inspired experiments.
+We have already explained how perspective awareness enables advanced cognitive
+capabilities like a theory of mind, and this is probably the main contribution
+of this thesis regarding techniques for knowledge representation.
 
 
-\subsection{Justification and resolution of cognitive conflicts}
-
-Logical inconsistencies in one ORO's model (or, from a cognitive point of view,
-cognitive conflicts) could be better dealt with: while (partially) provided by
-the Pellet reasoner, and output to the developers for debugging purposes, the
-logical justification of the inconsistency is not really exploited.
-
+% \subsection{Justification and resolution of cognitive conflicts}
+% 
+% Logical inconsistencies in one ORO's model (or, from a cognitive point of view,
+% cognitive conflicts) could be better dealt with: while (partially) provided by
+% the Pellet reasoner, and output to the developers for debugging purposes, the
+% logical justification of the inconsistency is not really exploited.
 
 % \subsection{Performances analysis}
 % 
@@ -367,13 +409,6 @@ logical justification of the inconsistency is not really exploited.
 % 
 % \fxwarning{Mention reasoning and expressiveness, cf section oro-server}
 % 
-
-
-\subsection{In brief}
-
-- binding the symbolic and geometric models
-- common-sense reasoning
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
