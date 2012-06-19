@@ -34,6 +34,7 @@
 %\renewcommand{\rmdefault}{Ubuntu}
 
 \usepackage{palatino}
+%\usepackage{times}
 
 \usepackage{listings}
 \usepackage{alltt}
@@ -214,6 +215,9 @@ Séverin Lemaignan
 \cleardoublepage
 }
 
+%%% German title page
+\include{titlepage-de}
+
 \maketitle
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -270,9 +274,9 @@ Shakespeare, {\em Hamlet}, Act 1, scene 5, 159–167
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \appendix
-\appendixpage
-\noappendicestocpagenum
 \addappheadtotoc
+\appendixpage
+%\noappendicestocpagenum
 
 % Adjustments headers
 \fancyhead[RO, LE]{Appendix \thechapter --- \bfseries\leftmark}
