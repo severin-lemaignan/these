@@ -50,6 +50,36 @@ modèles, il faut ensuite savoir les mettre en \oe uvre pour donner corps  des
 compétences sociales au premier rang desquelles se trouve la fonction de
 communication.
 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\columnwidth]{intro/grounding_robot.pdf}
+    
+    \caption{Le robot est plongé dans une \emph{situation}. Les source de
+    connaissances sont multiples : dialogue multi-modal, observation de
+    l'environement et des activités de l'homme, capacités internes de planification
+    et de raisonnement symbolique. Le robot raisonne non seulement de son propre
+    point de vue, mais en se projettant à la place des autres agents.}
+
+    \label{fig|hri-dec}
+\end{figure}
+
+La figure~\ref{fig|hri-dec} résume les principaux aspects de l'interaction qui
+nécessitent d'être traduit dans des modèles adaptés au robot. Du point de vue
+du robot, plusieurs compétences cognitives sont impliquées : traitement du
+dialogue (verbal et déictique : regard, posture, gestes...), acquisition et
+maintient de un ou plusieurs modèles de l'environnement (non seulement du point
+de vue du robot, mais aussi des points de vue de chacun des autres agents),
+anticipation (quelles sont les intentions de l'humain ? Puis-je prédire ses
+actions ?), planification et contrôle (comment puis-je progresser vers le but
+?), suivi des activités des autres agents (est-ce que la coopération est
+effective ?) et de l'avancement générale de la tâche.
+
+Chacune de ces capacités cognitives se traduit en contraintes et besoins sur le
+système de représentation de connaissances, comme nous allons le présenter
+un peu après.
+
+
+
 \subsection{Un programme}
 \label{sect|challenges}
 
@@ -127,329 +157,144 @@ matérialise des concepts qui étaient auparavant souvent diffus et ubiquitaires
 Cela nous amène à définir et proposer l'idée d'une architecture \emph{orientée
 connaissance}.
 
+Ce travail propose d'autres contributions scientifiques plus focalisées. Ainsi
+l'architecture sémantique que nous proposons est originale, et introduit de
+nouvelles techniques pour la représentation et la manipulation de connaissance
+pour plusieurs agents simultanément. Ces approches fournissent des outils
+nouveaux pour l'implémentation de mécanismes cognitifs comme la prise de
+perspective ou la théorie de l'esprit chez les robots. Par ailleurs, nous
+proposons plusieurs contributions à l'ancrage sémantique du langage naturel en
+situation. Notre stratégie d'ancrage repose sur une prise en compte
+multi-modale (immanente, verbale et déictique) de l'interaction, et s'appuie
+sur les outils de représentation symbolique des états mentaux des agents que
+nous avons développé.
 
+Cette thèse présente aussi un certain nombre de contributions techniques. La
+principale est le développement de la plateform {\sc Oro} (\emph{OpenRobots
+Ontology}) : il s'agit d'un serveur sémantique dédié aux applications
+robotiques (avec notament une prise en compte des contraintes de performance
+induites par le contrôle des robots) qui expose une interface symbolique
+universelle, facilement intégrable dans les différents composants logiciels du
+robot.
 
+Le serveur ORO est accompagné d'une ontologie développée durant la thèse pour
+les besoins de la robotique de service. Elle fournie une base de connaissances
+générales au robot, facilement étendable, et a comme principales
+caractéristiques d'être \emph{alignée} sur le standard {\sc OpenCyc} et d'avoir
+été conçue de manière pragmatique pour répondre aux besoins concrêts du
+contrôle du robot lors de scénarii d'interactions.
 
+L'approche intégrative que nous avons adoptée, et l'ensemble des outils
+développés à cette fin, constituent une autre contribution technique de cette
+thèse. En particulier, l'introduction et la généralisation dans les étages de
+contrôle de nos robots de l'idée d'\emph{évènements sémantiques} permet une
+programmation réactive expressive et abstraite des contingences de bas-niveau.
+Par exemple, déclencher un comportement spécifique lorsqu'un humain observe le
+robot tout en étant assis s'exprime littéralement sous la forme de l'évènement
+{\tt subscribe([* type Human, * looksAt myself, * isSitting true],
+behaviour\_callback())}.
 
-This work has also several more focused scientific contributions. The
-centralised semantic architecture that we propose is original. While it
-exhibits shortcomings for some cognitive tasks, it also proposes novel
-efficient ways to represent and manipulate knowledge simultaneously for
-multiple agents (chapter~\ref{chapt|oroserver}). Along with the survey of
-current knowledge systems that we have conducted, it effectively completes the
-picture of available designs of knowledge representation systems.
+Une autre contribution logicielle significative est la conception et le
+développement du logiciel {\sc Dialogs}. {\sc Dialogs} est un composant
+d'analyse et de résolution de langage naturel pour l'anglais. En interaction
+avec {\sc Oro}, il analyse grammaticalement et sémantiquement des phrases en
+langage naturel non-contraint, propose une interprétation, et convertit le cas
+échéant la phrase initiale en une série de nouveaux faits symboliques, ajoutés
+à la base de connaissances. Le logiciel inclut des stratégies interactives de
+désambiguïsation, et est accompagné d'une interface utilisateur pour téléphone
+ou tablette Android.
 
-Amongst the cognitive abilities that our developments have enabled, a
-particular scientific focus was led on the acquisition and modeling of
-multiple, agent-dependent symbolic worlds. This opened new perspectives related
-to \emph{perspective-aware} reasoning or \emph{theories of mind} for robots
-that are detailed in this work.
-
-We also have a scientific contribution on the grounding of human-robot dialogue
-in natural language (chapter~\ref{chapt|dialogs}). We have algorithmically
-formalised a grounding process that takes advantage of multi-modal
-communication (verbal, deictic and immanent) and handles the semantics of
-several more complex language features like quantification. This system also
-has contributions related to the semantic validation of thematic roles and
-interactive disambiguation that takes into account human attentional focus.
-
-\subsection{Technical contributions}
-\label{sect|technical-contributions}
-
-
-This thesis has four major technical contributions: the software development of
-the \emph{ORO server} as a semantic blackboard dedicated to robotic
-applications, the design of the \emph{ORO ontology} as a domain-specific
-common-sense ontology tailored for service robotic needs, the pervasive
-integration of a new semantic layer into several existing robot architecture,
-and finally, the software development of \emph{Dialogs}, a module for natural
-language grounding.
-
-The main software contribution of the thesis is the development of an
-open-source, versatile and light-weight knowledge base that stores in a formal
-framework based on first-order logics both the robot's own beliefs and the
-mental models (as perceived by the robot) of every other cognitive agent that
-the robot interacts with (chapters~\ref{chapt|oroserver}
-and~\ref{chapt|implementation-integration}).  This tool, called \emph{ORO}, is
-implemented as a platform/middleware-agnostic server, and exposes to the
-robot's modules several advanced reasoning services (via the integration of
-external reasoners). This software project is now publicly available, used by
-other laboratories, and comes with extensive documentation and bindings for
-several mainstream languages (C++, Python...) and middleware (ROS, YARP).
-
-In parallel of this development, and in collaboration with other developers, we
-have also drafted (and partially implemented) a proposal for a standard API for
-knowledge manipulation that supports the specific needs of robotic applications
-(section~\ref{sect|knowledge-api}).
-
-Coming along with the ORO server, we introduce in this thesis the \emph{ORO
-common-sense ontology} which is a proposal of an upper ontology for service and
-interactive robotics (section~\ref{sect|oro-commonsense}). This ontology
-consists of about two hundred classes, relations and rules that are relevant
-for the modeling of the robot's beliefs and state, and the interactions with
-other agents (humans or robots). This ontology also tries to stay closely
-aligned with the standard {\sc OpenCyc} upper-ontology to guarantee
-interoperability with semantic web resources and other robots.
-
-A third technical contribution is the introduction of a new knowledge-oriented,
-event-driven communication model between high-level decisional modules
-(section~\ref{sect|integration}): by introducing the notion of \emph{semantic
-events}, the ORO server enables the development of new executive layers that
-combine reactive behaviour with high-level abstractions: for instance,
-triggering a behaviour when a human looks at the robot while sit, can be
-expressed in our architecture as a single proposition: {\tt subscribe([* type
-Human, * looksAt myself, * isSitting true], behaviour\_callback())}. This
-highly expressive event model opens a new range of development opportunities for
-decisional modules.
-
-During the preparation of the thesis, we have also developed a new stand-alone
-natural language processor for English language (chapter~\ref{chapt|dialogs}).
-It takes advantage of the different symbolic models exposed by the ORO server
-to analyse, resolve the semantics and ground dialogues. It can process orders,
-questions and positive assertions and translates them into new symbolic facts.
-It includes a custom grammatical parser, a re-verbalization module, several
-discrimination strategies, including interactive ones. The application is
-developed in Python (about 15K lines of code), can be used in real-time on the
-robot, and is accompanied by a speech recognition interface developed as an
-Android application.
-
-A last notable software contribution is our involvement in the MORSE simulator
-for academic robotics. We have played a central role in the original design and
-development of the core functionalities of this open-source simulator which is
-now used by over twenty laboratories world-wide. While this project as a whole
-is not directly related to main topic of the thesis, we have led the effort
-towards effective simulation of human-robot interaction in MORSE. It is briefly
-presented at section~\ref{sect|simulation}.
-
+Une dernière contribution logicielle importante de cette thèse est notre
+participation à la conception et au développement du simulateur de robotique
+{\sc Morse}. Nous sommes en particulier à l'origine d'une large partie de la
+logique interne du simulateur, ainsi que de nombreux éléments liés à la
+simulation d'interaction homme-robot.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Représentation symbolique des connaissances}
 
-\section{Robots for interaction}
-\label{sect|hri-context}
+Le chapitre~\ref{chapter|krs} de la thèse est consacré à l'étude théorique des
+besoins en terme de représentation de connaissances pour la robotique
+interactive de service.
 
-This work comes indeed from researches in the specific context of the
-human-robot interaction, or, to put it another way, in the context of
-interaction for \emph{joint action} with humans,  in a \emph{situated}
-environment (figure~\ref{fig|hri-dec}).
+Nous avons déjà mentionné \og l'étage de la connaissance \fg de
+Newell~\cite{Newell1981} : pour lui, la connaissance est un médium entre des
+\emph{agents} et des \emph{buts}, des \emph{actions} et un \emph{corps}. Là où
+l'étage symbolique manipule des représentations, l'étage de la connaissance
+s'intéresse au langage et à sa sémantique ; là où l'étage symbolique manipule
+des inférences, l'étage des connaissances opère des déductions et tire des
+conséquences.
 
+Dans notre contexte, nous définissons la \emph{connaissance} de manière plus
+restreinte, tout en gardant le lien à l'action : pour nous, la connaissance
+d'un robot est \emph{un ensemble interconnecté de faits logiques qui font sens
+pour l'application de supervision du robot}. Par \emph{faire sens}, nous
+entendons \emph{qui puisse être interprété pour conduire à une action
+volontaire}.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.9\columnwidth]{intro/grounding_robot.pdf}
-    
-    \caption{A robot reasoning about human-robot interaction and anticipation
-    of human activities: sources of knowledge are multi-modal dialogue and
-    observation of the environment and the human activities. The robot ``knows''
-    and reasons about the fact it is observed by the human.}
-
-    \label{fig|hri-dec}
-\end{figure}
-
-
-
-{\em ``\emph{Let's bake a brownie for tonight!}'', proposes Tom. The robots
-smoothly prepare all the ingredients, and they start to cook together a
-delicious cake...}
-
-Natural interaction and cooperation are actually the current (dare we say,
-\emph{short-term}) targets for the human-robot interaction community.  The
-``Brownie scenario'' we presented above belongs to the broad class of
-\emph{interactive manipulation problems}: several agents agree on a (more or
-less implicit) joint goal that requires some sort of cooperation to be
-successfully achieved. This class of problems involves both dialogue and
-manipulation and they are often not completely defined at start-up: they require
-iterative, interactive resolution (step-by-step process,
-questions-answers,...).
-
-What are the cognitive prerequisites for such a sentence --``Let's make a
-brownie for tonight''-- to be understood by the robot, correctly interpreted in
-the spatial and temporal context of the interaction, and eventually transformed
-into a set of actions? We distinguished four main tasks in~\cite{Lemaignan2012}:
-
-\begin{enumerate}
-
-    \item building and maintenance of a consistent geometric model of the
-        current situation, acquired through perception or deduction from
-        previous perceptions,
-
-    \item building of an unambiguous and complete symbolic representation of
-    concepts (objects, agents, actions...) underlying the interaction, and
-    practical for decision-making processes,
-
-    \item establishing the joint goal(s), building and maintenance of
-        iteratively shared (human-robot) plans, 
-
-    \item refinement and execution of the computed plans, and monitoring of
-        those achieved by the human partner.
-
-\end{enumerate}
-
-While each of these items is equally important to actually perform the
-interaction -- and we will present (with illustration from experiments) how our
-knowledge representation system integrates and communicates with other
-processes to form a \emph{knowledge-enabled} robotic architecture --, the
-thesis focuses on the second point: it presents techniques, developed and used
-on several real robots, for the symbolic representation of environment and
-mental models suitable for grounded situation interpretation, decision-making
-and control.
-
-\paragraph{Models for the interaction} Figure~\ref{fig|hri-dec} summarises the
-main aspects of the interaction, that are to be translated into models.  From
-the robot perspective, several cognitive skills are involved: dialogue
-processing through verbal and deictic modalities (what does the human say? What
-attitude -- gaze orientation, postures, gestures... -- does he express?), acquisition
-and maintenance of one or several models of the environment, not only from the
-robot point of view, but also from the other agents' points of view,
-anticipation (what are the intentions of the human? Can I predict and
-anticipate his/her actions?), planning and control (how would I proceed further
-towards the goal?), monitoring of the other agents' activities (do we have an
-effective cooperation?) and the overall progress of the task. 
-
-As we shall see, all these cognitive capabilities also translate into
-requirements on the knowledge representation systems that we want to clarify.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Nous introduisons par ailleurs seconde définition, qui regarde l'idée de
+connaissance sous un autre angle, complémentaire du premier : une connaissance
+pour un robot peut aussi être vue comme \emph{une information interprétée dans
+le contexte culturel et social du robot}. Nous allons être amenés à discuter
+cette idée de contextes culturels et sociaux dans quelques pages.
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Symbolic Knowledge Representation}
-
-
-In that chapter, we have first discussed a definition of \emph{knowledge} in
-our context of service robotics and human-robot interaction. We have presented
-several references from the literature regarding the identification and
-classification of prominent features of knowledge representation systems. 
-
-We have then introduce a comprehensive typology of such features, that
-comprises of about fifty concepts sorted into six main categories: features
-related to knowledge expressiveness, features related to representation
-techniques, features related to reasoning, features related to acquisition and
-grounding of knowledge, features related to the integration of a KRS into a
-larger robotic architecture, and finally, features that characterise the
-represented knowledge itself. Each of the fifty concepts has been briefly
-presented with references to the literature.
-
-Finally, we have surveyed eight systems for knowledge representation in service
-robots and underlined their main strengths.
-
-
-\paragraph{What do we call ``knowledge''?}
-\label{sect|on-knowledge}
-
-Since we will discuss at length the concept of knowledge in the context of
-robotics in the coming pages, it is useful to make our terminology explicit.
-
-Be it in philosophy, cognitive sciences or computer sciences, reaching an
-agreement on a definition of ``knowledge'' seems difficult.
-
-Allen Newell's famous \emph{Knowledge Level}~\cite{Newell1981} can be a
-starting point: for Newell, \emph{knowledge} is a medium between \emph{agents}
-and \emph{goals}, \emph{actions}, \emph{bodies}. Whereas the symbol level deals
-with representation, the knowledge level deals with language, semantics;
-whereas the symbol level deals with inference, the knowledge level deals with
-entailment. We will, at the conclusion of the thesis, give a second look to
-this distinction.
-
-In our robotic context, we define knowledge as a narrower concept, while
-keeping Newell's link to actions: ``knowledge'' is for us  \emph{a set of
-interrelated logical facts that are meaningful to the robot executive
-controller}. By \emph{meaningful} we mean that can possibly be interpreted to
-lead to a purposeful action. We will see that our main challenge while
-designing a cognitive architecture is furthermore to make this knowledge as
-\emph{explicit} as possible.
-
-
-From the perspective of communication, knowledge is for us an information
-\emph{interpreted in the cultural and social contexts} of the robot. This
-translates into three practical features: knowledge is made of statements that
-are \emph{contextualized}, \emph{grounded}, and \emph{limited} to a domain of
-validity. These three features have important consequences for the way a
-knowledge representation and storage system must be designed.
-
-\section{A typology of knowledge representation requirements for robotics}
-\label{sect|features}
-
-This section now focuses on formalizing the knowledge representation issue: we
-aim first at establishing a comprehensive typology and nomenclature
-(figure~\ref{fig|taxo}) of representational needs for robotics in the specific
-context of service robotics, before painting, at
-section~\ref{sect|surveyed-systems}, the current landscape of approaches to the
-knowledge representation problem in the research community. For each such
-``dimensions'' of knowledge representation system, we provide a short
-definition accompanied by links to relevant literature.
+En se basant sur ces définitions, une revue approfondie
+(section~\ref{sect|surveyed-systems}) de la litérature, et des scénarii et
+expériences menées dans deux environnements de recherche (le LAAS-CNRS en
+France, et l'université technique de Münich en Allemagne) , et détaillés dans
+le corps de la thèse, nous proposons une typologie et une nomenclature étendue
+des dimensions d'analyse des système de représentation des connaissances pour
+les robots (figure~\ref{fig|taxo}).
 
 \begin{figure}
         \centering
         \includegraphics[width=1\columnwidth]{taxonomy.pdf}
-        \caption{Taxonomy of the analysis dimensions of knowledge
-        representation systems for service robotics.}
+        \caption{Taxonomie des dimensions d'analyses des systèmes de 
+        représentation de connaissance pour la robotique de service.}
         \label{fig|taxo}
 \end{figure}
 
-The typology has been built from three main sources: a review of the existing
-literature on that topic that we present in the next section; the survey of
-eight knowledge representation systems already deployed; our own experience,
-acquired during the thesis preparation with the help of many discussions with
-researchers from both CNRS and TUM, that allowed to interweave two slightly
-different perspectives on knowledge in robotics.
+Nous ne détaillons pas dans ce résumé la cinquantaine de catégories que nous
+avons identifié. Elles sont présentés, avec une discussion et un certains
+nombre de références bibliographiques, dans la thèse.
 
-\subsection{What can be represented?}
-\label{sect|expressiveness}
+Ces catégories appartiennent à six groupes :
 
-This first axis of analysis is its intrinsic expressive power. It answers the
-question: what can be possibly represented. When it explicitly exists, the
-\emph{language} of representation plays here an obvious role.
+\begin{itemize}
+    
+    \item \textbf{A - Expressivité}: couvre les caractéristiques qui qualifient
+        (et dans certains cas, quantifient) la puissance expressive du système
+        de représentation des connaissances. En font partie entre autre le
+        choix du formalisme logique, la capacité de représenter les
+        incertitudes, ou encore les capacités de meta-cognition.
 
-%%%%%%%%%%
-\subsection{How things are represented?}
-\label{sect|higher-level-domain-representation}
+    \item \textbf{B - Représentation}: regroupe les propriétés liées aux
+        techniques et choix de représentations. Comment représenter le temps,
+        les actions ; quel sens donné à l'idée de contexte ou encore
+        l'utilisation de différentes modalités (au sens de la logique modale :
+        multiples systèmes de représentation parallèles).
 
-We do not discuss in this section the general strategies to construct a
-knowledge model (they will be presented in
-section~\ref{sect|design-strategies}). We focus here on questions that involve
-representational challenges (time, space, context) or require specific
-cognitive capabilities (theory of mind, introspection, memory).
+    \item \textbf{C - Raisonnement}: caractérise les outils permettant au
+        système de raisonner sur ses connaissances. Capacité de prédire, de
+        mener des inférences non-monotones, de planifier...
+    
+    \item \textbf{D - Acquisition}: discute des sources de connaissance du
+        système, aussi bien en terme de technique d'acquisition (via de la
+        perception, de l'interaction,...) qu'en terme d'ancrage.
+    
+    \item \textbf{E - Intégration}: analyse les propriétés du système vis-à-vis
+        de son intégration concrête dans une architecture robotique : quelles
+        interfaces avec les couches basses et hautes, quelles performances,
+        quels outils de débogage, etc.
+    
+    \item \textbf{F - Instantiation}: s'intéresse plus directement à la
+        structure et à la forme de la connaissance stockée dans le système.
 
-
-\subsection{Reasoning techniques}
-
-\subsection{Acquiring knowledge}
-
-\subsection{Practical integration in robotic architectures}
-\label{sect|integration-robot}
-
-
-Knowledge representation systems do not mean anything to robots if they are
-considered in isolation. This section proposes categories of features related
-to the integration of the KRS into a larger software architecture that includes
-perception routines, decision-making processes and actuation control.
-
-We also mention some practical aspects of a real-world system, like
-performances and monitoring tools that come along with the KRS.
-
-\subsection{Knowledge instantiation}
-
-This last branch of our taxonomy looks at the actual \emph{content} of the
-knowledge base: the knowledge instantiation. Here, \emph{instantiation} does
-not only refer to the instantiation of the knowledge structure (what we have
-called the ABox), but also includes the knowledge structure itself (the TBox).
-
-While we have previously mentioned features of knowledge representation systems
-that enable the robot to fill its knowledge base with content and alter the
-knowledge structure, most of the systems also come with a certain amount of
-initial knowledge that often includes \emph{common-sense} knowledge (\ie facts
-that widely known to humans, and hence often implicit: ``to put a cake in the
-oven, one must first open the oven's door'').
-
-The design strategy, the choice to rely on common-sense knowledge or not, the
-reuse of standard ontologies, the quantity of {\it a priori} knowledge are many
-parameters that lead to different knowledge models.
-
+\end{itemize}
 
 \section{Existing systems for knowledge representation in service robotics}
 \label{sect|surveyed-systems}
