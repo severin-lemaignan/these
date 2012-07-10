@@ -241,6 +241,7 @@ pour un robot peut aussi être vue comme \emph{une information interprétée dan
 le contexte culturel et social du robot}. Nous allons être amenés à discuter
 cette idée de contextes culturels et sociaux dans quelques pages.
 
+\subsection{Une typologie des propriétés des systèmes de représentation des connaissances}
 
 En se basant sur ces définitions, une revue approfondie
 (section~\ref{sect|surveyed-systems}) de la litérature, et des scénarii et
@@ -296,152 +297,97 @@ Ces catégories appartiennent à six groupes :
 
 \end{itemize}
 
-\section{Existing systems for knowledge representation in service robotics}
+\subsection{Revue de l'état de l'art}
 \label{sect|surveyed-systems}
 
 
-Table \ref{table|surveyed-systems} lists the knowledge representation
-systems that we have surveyed.
+Nous présentons dans la thèse huit systèmes de représentation de connaissances pour la robotique (table~\ref{table|surveyed-systems}).
 
-We have limited ourselves to systems that
+Ces systèmes ont été sélectionnés parce qu'ils
 \begin{inparaenum} 
-    \item  run on \emph{service robot} (that is, robots that interact with 
-    objects in a semantic-rich environment primarily designed for humans),
-    \item  ground the knowledge in the physical world (physically embedded
-    systems able to assess their environment),
-    \item  are able to merge different knowledge modalities,
-    \item  are able of on-line, dynamic knowledge acquisition and reasoning 
-    (\ie not simple static databases).
+    \item fonctionnent sur des robots de services (c'est à dire des robots qui interagissent dans un environnement sémantiquement riche, et initialement conçu pour l'homme),
+    \item  ancrent leurs connaissances dans le monde physique (ce sont des systèmes physiquement incarnés et capable d'analyser symboliquement leur environnement),
+    \item  sont capable de fusionner différentes modalités de connaissances,
+    \item  sont capable d'acquisition et de raisonnement en ligne (pas de simple base de faits statiques).
 \end{inparaenum}
 
 
-\begin{landscape}
 \begin{table}\scriptsize
 \begin{center}
 
-\begin{tabular}{p{2.2cm}p{1.6cm}p{4cm}lp{2.4cm}p{3.4cm}p{1.5cm}}
+\begin{tabular}{p{2.2cm}p{6cm}p{2cm}}
 \toprule
-{\bf Project} & {\bf Category} & {\bf Authors (Institution)} & {\bf Project homepage} & {\bf Programming language} & {\bf Knowledge model/Logical Formalism} & Main reference \\
+{\bf Projet} & {\bf Auteurs (institution)} & Référence \\
 \midrule
-ARMAR/Tapas & Formal & Holzapfel, Waibel \par (Karlsruhe TH) & & & TFS (Typed Feature Structures) & \cite{Holzapfel2008}\\
-CAST Proxies & Ubiquitous & Wyatt, Hawes, Jacobsson, Kruijff (Brimingham Univ., DFKI Saarbrücken) & & & Amodal proxies & \cite{Jacobsson2008} \\
-GSM & Structural & Mavridis, Roy \par (MIT MediaLab) & & & & \cite{Mavridis2006} \\
-Ke Jia Project & Formal & Chen et al. \par (Univ. of Science and Technology of China) & \url{www.wrighteagle.org/en} & ASP (Answer Set Programming) & ASP & \cite{Chen2010} \\
-{\sc KnowRob} & Formal & Tenorth, Beetz \par (TU Munich) & \url{ias.in.tum.de/kb/wiki} & {\sc Prolog} & {\sc Prolog} + OWL-DL &  \cite{Tenorth2009a} \\
-NKRL & Language & Zarri et al. \par (Paris Est Créteil Univ.) & & NKRL & & \cite{Sabri2011} \\
-%OBOC & KRS & Mendoza & & & & & \cite{Mendoza2005} \\
-OUR-K/OMRKF & Formal & Lim, Suh et al. \par (Hanyang Univ.) & \url{incorl.hanyang.ac.kr/xe} & ? & DL + Horn Clauses &  \cite{Lim2011, Suh2007} \\
-%ORO & KRS & Lemaignan, Alami \par (LAAS-CNRS) & \url{oro.openrobots.org} & {\sc Java} & OWL-DL ({\sc Jena}) & {\sc Pellet} & \cite{Lemaignan2010} \\
-PEIS KR\&R & Formal & Daoutis, Coradeshi, Loutfi, Saffiotti \par (Örebro Univ.) & \url{www.aass.oru.se/~peis} & {\sc C}, {\sc CycL} & CycL (1st and 2nd order logics, modal logics) & \cite{Daoutis2009} \\
-%Golog & Language & Levesque (Toronto Univ.) & & {\sc Prolog} & & & \\
-% & & Varadarajan, Vincze \par (TU Wien) & & & & & \cite{Varadarajan2011} \\ % -> affordances, but no implementation on a robot
-% & & Kaelbling, Lozano-Pérez \par (MIT CSAIL) & & & & & \cite{Kaelbling2011} \\ % -> mostly planning under uncertainty
-% & & Hertzberg (Osnabrück Univ.) \\ % -> affordances, semantic mapping
-% (based on {\sc KnowRob} & & (JSK) \\
+ARMAR/Tapas & Holzapfel, Waibel \par (Karlsruhe TH) & \cite{Holzapfel2008}\\
+CAST Proxies & Wyatt, Hawes, Jacobsson, Kruijff \par (Brimingham Univ., DFKI Saarbrücken) & \cite{Jacobsson2008} \\
+GSM & Mavridis, Roy \par (MIT MediaLab) & \cite{Mavridis2006} \\
+Ke Jia Project & Chen et al. \par (Univ. of Science and Technology of China) & \cite{Chen2010} \\
+{\sc KnowRob} & Tenorth, Beetz \par (TU Munich) & \cite{Tenorth2009a} \\
+NKRL & Zarri et al. \par (Paris Est Créteil Univ.) & \cite{Sabri2011} \\
+OUR-K/OMRKF & Lim, Suh et al. \par (Hanyang Univ.) & \cite{Lim2011, Suh2007} \\
+PEIS KR\&R & Daoutis, Coradeshi, Loutfi, Saffiotti \par (Örebro Univ.) & \cite{Daoutis2009} \\
 
 \bottomrule
 
 \end{tabular}
 \end{center}
 
-\caption{List of surveyed systems. Categories are \emph{Formal} for systems
-that have a formal underlying knowledge representation, \emph{Ubiquitous} for
-systems where knowledge is fully distributed, \emph{Language} for languages
-used as KRS on robots or \emph{Structural} for KRS where knowledge is
-represented as special data structures.}
+\caption{Liste des huit systèmes étudiés.}
 
 \label{table|surveyed-systems}
 \end{table}
-\end{landscape}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{The OpenRobots Ontology Framework}
+\section{L'environnement OpenRobots Ontology}
 
-
-We conclude here this third chapter. This chapter was focused on the functional
-and algorithmic presentation of the ORO server, a \emph{semantic blackboard}
-where robotic modules can write and querying pieces of knowledge.
-
-We have mentioned how multiple mental models can be managed by the server, and
-we have also presented several active services, like the discrimination
-algorithms or the management of the memory.
-
-Finally, we have presented the ORO \emph{common-sense} ontology that provide
-the robot with an initial background knowledge, shared by all the agents.
-
-The next chapter first gives some implementation and technical details about
-the ORO framework, and then present how ORO is integrated with other components
-on real robots. In particular, we detail the integration with the geometric
-reasoning module and the symbolic task planner.
-
-
-
-We have adopted a centralised approach for knowledge management called
-ORO~\cite{Lemaignan2010}. The platform is designed as a central
-knowledge storage service implemented as a server where the robot
-components can add or query statements at run-time. Figure~\ref{fig|oro-overview}
-illustrates the main functional components of ORO.
+Principale contribution logicielle de cette thèse, l'environnement
+\emph{OpenRobots Ontology} (ORO,~\cite{Lemaignan2010}) est un \emph{tableau
+noir sémantique} sur lequel les composants logiciels du robot peuvent écrire et
+lire des éléments de connaissance. La figure~\ref{fig|oro-overview} illustre
+l'organisation des principaux éléments du système. ORO est conçu sur le modèle
+client-serveur, le serveur abritant une base de faits symboliques sous la forme
+d'une ontologie OWL (à travers la bibliothèque {\sc OpenJena}), ainsi qu'un
+raisonneur ({\sc Pellet}) qui classifie (c'est à dire, applique l'ensemble des
+inférences possibles) en continu et de manière transparente la base de faits.
 
 \begin{figure}
 \centering
-  \includegraphics[width=0.75\columnwidth]{oroserver/oro_architecture_functional.pdf}
-  \caption{Overview of the ORO architecture.}
+  \includegraphics[width=0.75\columnwidth]{oroserver/oro_architecture_functional-fr.pdf}
+  \caption{Aperçu fonctionnel de l'architecture d'ORO.}
   \label{fig|oro-overview}
 \end{figure}
 
-At the core, ORO is build around the
-OpenJena\footnote{\url{http://www.openjena.org}} ontology management library,
-connected to the Pellet\footnote{\url{http://clarkparsia.com/pellet}}
-reasoner.
+L'une des particularités importante de ce système est qu'il permet de gérer
+plusieurs modèles symboliques en parallèle. Chacun de ces modèles est
+indépendant et cohérent d'un point de vue logique, ce qui permet de raisonner
+en ce plaçant dans des \emph{perspectives cognitives} différentes sur le monde.
+Ces perspectives peuvent être globalement incohérentes : par exemple, un objet
+peut être visible par le robot, mais invisible pour l'homme. Cet objet aura
+simultanément les propriétés \concept{isVisible \textit{true}} et
+\concept{isVisible \textit{false}} dans deux modèles différents.
 
-A front-end accepts and manages connections to clients. The clients' requests
-are processed by a set of internal modules: basic operations on statements, but
-also higher cognitive and human-robot interaction related features are
-available. External plugins can also be added via a specific extension
-mechanism.
+{\sc Spark} (figure~\ref{fig|spark}) est un environnement 3D temps réel (développé hors du cadre de
+cette thèse) qui permet de calculer en ligne plusieurs propriétés géométriques
+dépendantes de la perspective de chaque agent (on parle de \emph{prise de
+perspective}) et qui nourrit les modèles abrités par ORO avec ces propriétés symboliques.
 
-Besides acting as a facts database, the ORO platform exposes several
-functions: operations on knowledge statements relying on inference (through a
-continuous first-order logic classification process), management of
-\emph{per-agent} symbolic models, categorisation of sets of concepts
-and profiles of memory (that enable the robot to ``forget'' about some facts).
+\begin{figure}
+\centering
+  \includegraphics[width=0.6\columnwidth]{spark/looks.jpg}
 
-ORO also provides an event mechanism that allows components to be triggered
-when specific events occur. A component can for instance subscribe to events
-of kind \setstmt{?agent isVisible true, ?agent type Human}. As soon as the
-perception layer detects a human in the robot's field of view and accordingly
-updates the knowledge base, the executive layer is triggered. The event
-framework also takes advantage of the inference capabilities of ORO. Thus an
-event can be indirectly triggered if its triggering conditions can be
-inferred to be true.
+  \caption{L'environnement 3D dans {\sc Spark}. Dans cet exemple, le logiciel
+  calcule quels objets sont visible pour l'homme à partir de cônes de
+  visibilités et d'attention.}
 
-\subsubsection{Representation of alternative knowledge models}
-\label{sect|alterite}
+  \label{fig|spark}
+\end{figure}
 
-As pictured in Figure~\ref{fig|oro-overview}, ORO stores independent cognitive
-models for each agent it interacts with. When the ORO server actually
-identifies a new agent (or infers that some instance is an agent), it
-automatically creates a new, separate, in-memory OWL model for that agent.
-Then, different robot components, like execution control or situation
-assessment, may store the agents' beliefs in separate, independent models. All
-knowledge processing functions in the robot's primary model are equally
-available in every agent's model, which allows us to store and reason on
-different (and possibly globally inconsistent) models of the world.
-
-Each of these models is independent and logically consistent, enabling
-reasoning on different perspectives of the world that would otherwise be
-considered as globally inconsistent (for instance, an object can be visible for
-the robot but not for the human. This object can have at the same time the
-property \concept{isVisible \textit{true}} and \concept{isVisible
-\textit{false}} in two different models).
-
-We present at section~\ref{sect|spark}, page~\pageref{sect|spark}, a 3D
-real-time environment, SPARK, that allows to compute on-line several symbolic
-properties that are dependent on the perspectives.
+Le fait de maintenir un modèle symbolique indépendant par agent nous permet de considérer le robot doté d'une \emph{théorie de l'esprit} simple.
 
 \paragraph{Theory Of Mind and contexts} \label{sect|theory-of-mind}
 
@@ -466,6 +412,37 @@ of view. In this sense, each model carries a context of interaction.  In
 chapter~\ref{chapt|dialogs}, we present how such agent-dependent contexts are
 used by a natural language processor to make sense of user sentences from
 his/her point of view.
+
+
+
+We have mentioned how multiple mental models can be managed by the server, and
+we have also presented several active services, like the discrimination
+algorithms or the management of the memory.
+
+Finally, we have presented the ORO \emph{common-sense} ontology that provide
+the robot with an initial background knowledge, shared by all the agents.
+
+
+A front-end accepts and manages connections to clients. The clients' requests
+are processed by a set of internal modules: basic operations on statements, but
+also higher cognitive and human-robot interaction related features are
+available. External plugins can also be added via a specific extension
+mechanism.
+
+Besides acting as a facts database, the ORO platform exposes several
+functions: operations on knowledge statements relying on inference (through a
+continuous first-order logic classification process), management of
+\emph{per-agent} symbolic models, categorisation of sets of concepts
+and profiles of memory (that enable the robot to ``forget'' about some facts).
+
+ORO also provides an event mechanism that allows components to be triggered
+when specific events occur. A component can for instance subscribe to events
+of kind \setstmt{?agent isVisible true, ?agent type Human}. As soon as the
+perception layer detects a human in the robot's field of view and accordingly
+updates the knowledge base, the executive layer is triggered. The event
+framework also takes advantage of the inference capabilities of ORO. Thus an
+event can be indirectly triggered if its triggering conditions can be
+inferred to be true.
 
 \subsection{Reasoning techniques}
 
