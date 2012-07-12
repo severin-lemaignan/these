@@ -216,7 +216,7 @@ simulation d'interaction homme-robot.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Représentation symbolique des connaissances}
 
-Le chapitre~\ref{chapter|krs} de la thèse est consacré à l'étude théorique des
+Le chapitre~\ref{chapt|krs} de la thèse est consacré à l'étude théorique des
 besoins en terme de représentation de connaissances pour la robotique
 interactive de service.
 
@@ -338,7 +338,6 @@ PEIS KR\&R & Daoutis, Coradeshi, Loutfi, Saffiotti \par (Örebro Univ.) & \cite{
 \label{table|surveyed-systems}
 \end{table}
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -371,10 +370,12 @@ peut être visible par le robot, mais invisible pour l'homme. Cet objet aura
 simultanément les propriétés \concept{isVisible \textit{true}} et
 \concept{isVisible \textit{false}} dans deux modèles différents.
 
-{\sc Spark} (figure~\ref{fig|spark}) est un environnement 3D temps réel (développé hors du cadre de
-cette thèse) qui permet de calculer en ligne plusieurs propriétés géométriques
-dépendantes de la perspective de chaque agent (on parle de \emph{prise de
-perspective}) et qui nourrit les modèles abrités par ORO avec ces propriétés symboliques.
+{\sc Spark} (figure~\ref{fig|spark}) est un environnement 3D temps réel
+(développé hors du cadre de cette thèse) qui permet de calculer en ligne
+plusieurs propriétés géométriques dépendantes de la perspective de chaque agent
+(on parle de \emph{prise de perspective}) et qui nourrit les modèles abrités
+par ORO avec ces propriétés symboliques (les faits effectivement calculés sont
+présentés au chapitre~\ref{sect|situ}).
 
 \begin{figure}
 \centering
@@ -382,200 +383,148 @@ perspective}) et qui nourrit les modèles abrités par ORO avec ces propriétés
 
   \caption{L'environnement 3D dans {\sc Spark}. Dans cet exemple, le logiciel
   calcule quels objets sont visible pour l'homme à partir de cônes de
-  visibilités et d'attention.}
+  visibilité et d'attention.}
 
   \label{fig|spark}
 \end{figure}
 
-Le fait de maintenir un modèle symbolique indépendant par agent nous permet de considérer le robot doté d'une \emph{théorie de l'esprit} simple.
+Le fait de maintenir un modèle symbolique indépendant par agent nous permet de
+considérer le robot doté d'une \emph{théorie de l'esprit}~\cite{Leslie2000}
+simple : le robot devient capable de représenter les modèles mentaux,
+éventuellement divergents, des autres agents intelligents avec lesquels il
+interagit.
 
-\paragraph{Theory Of Mind and contexts} \label{sect|theory-of-mind}
+Ces modèles multiples peuvent aussi être vus comme autant de \emph{cadres
+d'interprétation} de la connaissance, et donc comme autant d'éléments de
+contexte.
 
-By maintaining independent mental states for each agent it interacts with, we
-consider the robot to be endowed with a simple \emph{theory of
-mind}~\cite{Scassellati2002}: the robot can explicitly model the beliefs of its
-interactors, it expose them to the control architecture, and the same set of
-cognitive abilities are available on these secondary model as on the main
-model: reasoning, inconsistencies detection, events, etc.
+ORO propose d'autres outils cognitifs aux modules du robot : outre son rôle de
+base de fait (qui inclut, come nous l'avons brièvement mentionné, l'ajout, la
+retractaction, la mise à jour de faits symboliques, l'interrogation de la base
+par plusieurs mécanismes de requêtes, des outils de parcours taxonomique --
+classes parentes, instances, propriétés d'un concept, ...), le serveur fournit
+des mécanismes de classification des concepts (à partir d'un ensemble de
+concepts, déterminer la meilleure partition), de discrimination (quelles
+propriétés d'un ensemble de concept permettent de les distinguer de la manière
+la plus efficace) ou encore de mémoire (certains faits peuvent être associés à
+un profil de mémoire déterminant la durée pendant laquelle ils sont gardés).
 
-Proper \emph{false beliefs} experiment, similar to the Sally and Ann experiment
-presented in the previous chapter, has been recently conducted with ORO
-by Mathieu Warnier, as reported in~\cite{Warnier2012a}: in this experiment, two
-humans observe a table with several objects, then one leaves while the other
-one moves around some objects. This leads to two different set of beliefs on
-the world, which the robot explicitly stores and updates when necessary (if the
-human comes back and check the table, for instance).
+\subsection*{Integration dans les architectures robotiques}
 
-These multiple models can also be viewed as different \emph{interpretive
-frames}, allowing the robot to interpret the same reality from different points
-of view. In this sense, each model carries a context of interaction.  In
-chapter~\ref{chapt|dialogs}, we present how such agent-dependent contexts are
-used by a natural language processor to make sense of user sentences from
-his/her point of view.
+ORO a été intégré dans plusieurs architectures robotiques (les expériences
+présentées au chapitre~\ref{sect|experimental-evaluation} en témoignent
+précisément).
 
+D'un point de vue architectural, la principale contribution de notre système
+est le mécanisme évènementiel \emph{au niveau sémantique} qu'il introduit. Un
+exemple d'évènement sémantique a déjà été fournit précédemment : les composants
+de supervision du robot peuvent demander à être notifiés lorsque certaines
+conditions logiques sont vérifiées par ORO (comme la présence d'un fait
+correspondant à l'exemple {\tt [* type Human, * looksAt myself, * isSitting
+true]} que nous proposions ci-dessus). Le sous-système s'inscrivant à un tel
+évènement accède de manière indirecte et abstraite aux modules de perception
+(qui détectent la présence d'un homme et sa posture) tout en bénéficiant le cas
+échéant et de manière transparente des capacités de raisonnement symbolique de
+la base de fait.
 
+\begin{figure*}[thpb]
+  \centering
+  \includegraphics[width=\columnwidth]{integration/architecture_overview-fr.pdf}
 
-We have mentioned how multiple mental models can be managed by the server, and
-we have also presented several active services, like the discrimination
-algorithms or the management of the memory.
+  \caption {Schéma de l'architecture logicielle déployée sur les robots PR2 et
+  Jido, deux robots de services interagissant avec des hommes au LAAS-CNRS. Le
+  serveur ORO apparait en vert, au milieu.}
 
-Finally, we have presented the ORO \emph{common-sense} ontology that provide
-the robot with an initial background knowledge, shared by all the agents.
+  \label{fig|archi}
+\end{figure*}
 
+Comme l'illustre la figure~\ref{fig|archi}, l'intégration de ORO ne se limite
+pas aux modules de supervision. Nous avons déjà mentionné le module de
+raisonnement géométrique {\sc Spark} qui calcule et fournit un ensemble de fait
+symbolique issus de l'analyse de l'environement du robot. ORO fournit aussi le
+modèle symbolique du monde et des croyances des agents au planificateur
+symbolique de tâche {\sc Hatp}, et joue un rôle clé dans le traitement de la
+langue naturelle.
 
-A front-end accepts and manages connections to clients. The clients' requests
-are processed by a set of internal modules: basic operations on statements, but
-also higher cognitive and human-robot interaction related features are
-available. External plugins can also be added via a specific extension
-mechanism.
-
-Besides acting as a facts database, the ORO platform exposes several
-functions: operations on knowledge statements relying on inference (through a
-continuous first-order logic classification process), management of
-\emph{per-agent} symbolic models, categorisation of sets of concepts
-and profiles of memory (that enable the robot to ``forget'' about some facts).
-
-ORO also provides an event mechanism that allows components to be triggered
-when specific events occur. A component can for instance subscribe to events
-of kind \setstmt{?agent isVisible true, ?agent type Human}. As soon as the
-perception layer detects a human in the robot's field of view and accordingly
-updates the knowledge base, the executive layer is triggered. The event
-framework also takes advantage of the inference capabilities of ORO. Thus an
-event can be indirectly triggered if its triggering conditions can be
-inferred to be true.
-
-\subsection{Reasoning techniques}
-
-\subsubsection{Standard inference services}
-\subsubsection{Grounding, classification and discrimination algorithms}
-\subsubsection{Memory}
-\subsubsection{Knowledge structure alteration and learning}
+Le traitement du dialogue, longuement détaillé dans le corps de la thèse au
+chapitre~\ref{chapt|dialogs}, repose sur une interaction forte avec la base de
+connaissances : ORO sert non seulement à stocker le résultat de l'analyse de
+l'interaction verbale (comme l'expression un désir, ou une nouvelle assertion
+sur le monde), mais surtout à fournir le modèle de connaissance nécessaire à
+\emph{l'ancrage} sémantique des phrases. Ainsi, une phrase comme \og
+Apporte-moi le livre \fg prête à confusion dès que deux livres sont présents
+dans la scène. Le module de traitement du dialogue traite l'ambiguité en
+vérifiant dans ORO quels objets sont effectivement connus de l'homme, quels
+sont ceux qui sont visibles, et le cas échéant, formule une question en se
+basant sur les proprités discriminantes de l'ensemble des livres présents.
 
 
-
-\section{Knowledge instantiation: the OpenRobots Common-Sense Ontology}
+\subsection*{Instantiation de la connaissance : l'ontologie OpenRobots Common-Sense}
 \label{sect|oro-commonsense}
 
-The ORO platform is made of the server that we have presented, and a
-common-sense ontology, the \emph{ORO Common-sense Ontology}.
-
-At start-up, the knowledge model of the ORO server is initialised with a
-configurable sets of ontologies that build together the initial pool of facts
-known to the robot: the common-sense ontology and optional, domain dependent
-ontologies.
-
-Each time a new model is created (typically when a new agent is detected), it
-is also initialised with the same pool of facts.  From the point of view of the
-robot, this ensure that all the different agents share the same background
-knowledge.
-
-Usually, the ORO server is started with the common-sense ontology that we
-present in this section, and one scenario-specific ontology that usually
-contains the set of individuals with relevant properties needed by the
-experiment.
+La plateforme ORO est composée du serveur que nous venons de présenté et d'une
+ontologie dite de \emph{sens commun} (\emph{common-sense}) qui sert de base de
+connaissances \textit{a priori} au robot.
 
 \begin{figure}
     \centering
     \includegraphics[scale=0.6]{oro/top_tbox.pdf}
 
-    \caption{The upper part of the ORO common-sense TBox. All these concepts
-    belong to the {\sc OpenCyc} namespace.}
-    
+    \caption{Extrait de la partie supérieure de l'ontologie common-sense de
+    ORO. Tous ces concepts appartiennent à l'espace de nommage de l'ontologie
+    mère {\sc OpenCyc}.}
+
     \label{fig|upper_tbox}
 \end{figure}
 
-The ORO common-sense ontology has been designed from two requirements: covering
-our experimental needs and conforming as much as possible to the {\sc OpenCyc}
-upper ontology.
+Cette ontologie a été conçue sur la base de deux principes : couvrir nos
+besoins expérimentaux, et se conformer autant que possible à l'ontologie
+standard {\sc OpenCyc} afin de garantir une inter-opérabilité du modèle de
+connaissance du robot sur le long terme.
 
-This lead to a bidirectional design process: from \emph{bottom-up} regarding
-the choices of concepts to model, \emph{top-down} regarding the upper part of the
-taxonomy. This upper part of the ontology is pictured on
-figure~\ref{fig|upper_tbox}. All the classes visible on this figure belong to the
-{\sc OpenCyc} namespace (the {\tt cyc:} prefix is omitted).
+Ceci nous a conduit à un processus de développement bidirectionel :
+\textit{bottom-up} en ce qui concerne le choix des concepts à modéliser,
+\textit{top-down} en ce qui concerne la partie supérieure de la taxonomie comme
+illustré dans la figure~\ref{fig|upper_tbox}.
 
-This figure~\ref{fig|upper_tbox} also illustrates the fundamental disjunction
-in the ORO model between \emph{temporal} and \emph{spatial} entities (formally,
-$(TemporalThing \sqcap SpatialThing)^{\mathcal{I}} = \emptyset$, with
-$\mathcal{I}$ the \emph{interpretation} of our model).
+Cette même figure fait par ailleurs apparaitre une disjonction fondamentale
+dans le modèle des connaissances induit par ORO entre entités
+\emph{temporelles} et \emph{spatiales}.
 
-The class \concept{purposeful action} is the superset of all the actions that
-are voluntarily performed by the robot (or another agent). Subclasses (like
-\concept{Give}, \concept{LookAt}, etc.) are not asserted in the common-sense
-ontology, but are added by the execution controller (in link with the symbolic
-task planner) and the natural language processor based on what is actually
-performable and/or understandable by the robot at run-time.
+Le chapitre~\ref{sect|oro-commonsense} de la thèse entre dans certains détails
+du modèle de connaissance que nous n'abordons pas dans ce résumé.
 
-...mention thqt other pqrts like objects qre much more refined.
+\section{Évaluation expérimentale}
 
-Lastly, the ORO common-sense ontology contains several rules and class
-expressions that encode non-trivial inferences.
 
-The definition of the \concept{Bottle} is a case in point. We already gave a
-simplified version, here the complete definition:
+This chapter was focused on the evaluation, from two different perspectives.
 
-\concept{Bottle} $\equiv$ \concept{Container} {\bf and} \concept{Tableware}
-{\bf that} (\concept{hasShape} {\bf value} \concept{cylinderShape} {\bf and}
-\concept{hasCharacteristicDimension} {\bf only} \concept{\em int[>= 0.1, <=
-0.3]})
+First, we have presented a large table that summarises how the main features
+and requirements of knowledge representation systems identified at
+chapter~\ref{chapt|krs} are matched by the existing implementations. We have
+discussed the successes and limits of the current state of the art based on a
+list of high-level requirements established from McCarthy and Roy proposals
+towards more advanced artificial cognition.
 
-If a human informs the robot that a given object is indeed a bottle, the robot
-can then infer much more on this object. And if the human affirms that a car is
-a bottle, the robot may question this assertion because of the inconsistent
-size.
+Amongst the fields that are identified as requiring more research efforts,
+non-monotonic representations, explaining of the mental state and the mental
+processes, and context representation represent largely open challenges.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Integration in the robot architecture}
-\label{sect|integration}
+Then, we have presented several experimental frameworks and experiments.
 
-\begin{figure*}[thpb]
-  \centering
-  \includegraphics[width=\columnwidth]{integration/architecture_overview.pdf}
+MORSE, a simulator with strong HRI capabilities has been briefly presented.
+Three case-studies demonstrating the classification and learning capabilities
+of ORO have been then introduced. Three larger experiments, involving verbal
+interaction, task planning and execution control have been then presented and
+explained.
 
-  \caption {Software architecture of PR2 and Jido, two service robot
-  interacting with humans at LAAS-CNRS.}
+Finally, we have mentioned the Roboscopie theatre performance as an unusual
+experimental setup, targeted at a general public audience. We see it as a way
+to materialize and discuss the relationships between the robots and the humans,
+and to address these questions ``in the open'', outside of the closed frame of
+the laboratory.
 
-  \label{fig|archi}
-\end{figure*}
 
-Figure~\ref{fig|archi} presents the organisation of the upper software layer
-(the ``decisional'' or ``cognitive'' layer) of the service robots Jido and PR2
-as currently in service at LAAS (this architecture is described in detail
-in~\cite{Alami2011}). The sensori-motor layer (bottom) is abstracted in SPARK,
-an intermediate amodal 3D model where geometric (and some temporal) reasoning
-take place.
 
-The outcome of the geometric analysis, as well as the result of the dialogue
-processing module ({\sc Dialogs}), are stored in ORO, that plays the role of as
-a central knowledge hub. The symbolic knowledge base triggers events that are
-captured by a top-level execution controller.
-
-In our architecture, the controller can rely on two specialised planners: MHP,
-a geometric motion and manipulation planner~\cite{Sisbot2008, Mainprice2011,
-Pandey2010} and HATP, a symbolic task planner~\cite{Alili2009}.
-
-The dialogue processing module, as well as the symbolic task planner, also use
-the knowledge base to answer questions or initialise the planning domain.
-
-During a typical interaction experiment (such an experiment is describe at
-chapter~\ref{chapt|evaluation}), the execution controller decides upon a goal
-to reach, requires a plan from the task planner, allocates the actions to the
-human and the robot, communicates the shared plan to the human, and controls
-and monitors its execution. The operation continues until the goal is achieved,
-is declared unachievable or is abandoned by the human.
-
-In this architecture, only ORO and Dialogs (the dialogue processing module that
-we present in the next chapter), as components, are the actual direct outcomes
-of this doctoral work. It is however important to present the other one all
-here as well since a knowledge base only make sense within a larger
-architecture, with knowledge providers and consumers.  Furthermore, the
-approach to knowledge management introduced by this thesis had a strong
-influence on the design of the communication flows between all these
-components. Thus, this section introduces the software components that have
-been used in conjunction with ORO (mostly, but not only, on the LAAS robots),
-and details how these components produce, exchange and consume symbolic
-knowledge.
 
 
